@@ -1,0 +1,44 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UserService {
+
+  /*
+  baseUrl :
+  The Url where the Angular App will go when some of it's functions
+  will be fired
+  See examples below
+   */
+  private baseUrl = 'http://172.31.254.61:8080/api/users';
+  constructor(private http: HttpClient) { }
+
+  // CreateUser is called with a user parameter
+  createUser(user: Object): Observable<Object> {
+    /*
+    Angular will return what http://localhost:8080/api/users/create
+    will send back to it.
+
+    Angular request here is :
+    In http, do a post on the Url http://localhost:8080/api/users/create with the body parameter
+    user
+     */
+    return this.http.post(`${this.baseUrl}` + `/create`, user);
+  }
+
+  // getUsersList is called with no parameter
+  getUsersList(): Observable<any> {
+    /*
+    Angular will return what http://localhost:8080/api/users
+    will send back to it.
+
+    Angular request here is :
+    In http, do a get on the Url http://localhost:8080/api/users with no body parameter
+     */
+    return this.http.get(`${this.baseUrl}`);
+  }
+
+}
