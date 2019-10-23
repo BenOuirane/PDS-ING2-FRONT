@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
 })
 
 /*
-Here, we give some attributes to the html page,
+Here, we give some attributes to the html page
+(app.component.html),
 we can call them with {xxx} on the html code
  */
 export class AppComponent {

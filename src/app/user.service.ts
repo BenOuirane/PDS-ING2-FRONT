@@ -13,18 +13,24 @@ export class UserService {
   will be fired
   See examples below
    */
+  // Uncomment the first line and comment the second line if you test in localhost
+  // Keep the second line uncommented before you push your code on git
+
+  //private baseUrl = 'http://localhost:8080/api/users';
   private baseUrl = 'http://172.31.254.61:8080/api/users';
+
   constructor(private http: HttpClient) { }
 
   // CreateUser is called with a user parameter
   createUser(user: Object): Observable<Object> {
     /*
-    Angular will return what http://localhost:8080/api/users/create
+    Angular will return what baseUrl
     will send back to it.
 
     Angular request here is :
-    In http, do a post on the Url http://localhost:8080/api/users/create with the body parameter
-    user
+    In http, do a post on the Url
+    http://{localhost} or {172.31.254.61}:8080/api/users/create
+    with the body parameter user
      */
     return this.http.post(`${this.baseUrl}` + `/create`, user);
   }
@@ -32,11 +38,13 @@ export class UserService {
   // getUsersList is called with no parameter
   getUsersList(): Observable<any> {
     /*
-    Angular will return what http://localhost:8080/api/users
+    Angular will return what baseUrl
     will send back to it.
 
     Angular request here is :
-    In http, do a get on the Url http://localhost:8080/api/users with no body parameter
+    In http, do a get on the Url
+    http://{localhost} or {172.31.254.61}:8080/api/users/create
+    with no body parameter
      */
     return this.http.get(`${this.baseUrl}`);
   }
