@@ -11,10 +11,18 @@ import { UsersListComponent } from '../users-list/users-list.component';
 })
 export class UserDetailsComponent implements OnInit {
 
+  /*
+  * Here we say that, when this component will be called
+  * we will put a user on input, see line 5 on user-list.component.html
+  */
   @Input() user: User;
 
   constructor(private userService: UserService, private listComponent: UsersListComponent) { }
 
+  /*
+  * Here we don't 'talk' with the back as this component is only made
+  * to display a user
+  */
   ngOnInit() {
   }
 
