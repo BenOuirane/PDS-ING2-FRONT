@@ -1,5 +1,6 @@
 <h3>Ajout d'un utilisateur</h3>
 <!-- If we just created a user, the first container is hidden and the second is not; this attribute is on the component.ts -->
+<!-- If submitted is at true on the create-user component, then we will have hidden=true -->
 <div [hidden]="submitted" class="form-add">
 
   <!-- When we will submit the form, onSubmit() will be fired -->
@@ -19,6 +20,7 @@
   </form>
 </div>
 
+<!-- If submitted is at false on the create-user component, then we will have hidden=nottrue so hidden=true -->
 <div [hidden]="!submitted" class="form-submitted">
   <h4>Votre utilisateur a bien été ajouté</h4>
   <!-- When we will want to add an new User after we just added one, newUser() is launched-->

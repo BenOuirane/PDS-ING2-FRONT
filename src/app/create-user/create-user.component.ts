@@ -23,7 +23,7 @@ export class CreateUserComponent implements OnInit {
   }
 
   /*
-  * Made to reboot some attributes
+  * Made to 'reboot' some attributes
   */
   newUser(): void {
     this.submitted = false;

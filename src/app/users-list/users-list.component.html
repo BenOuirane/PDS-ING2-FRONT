@@ -1,6 +1,7 @@
 <h3>Utilisateurs</h3>
 
 <!-- Foreach User, user-details will be called with the user parameter -> user-details.component.ts -->
+<!-- See Directives on Angular -->
 <div *ngFor="let user of users | async" style="width: 300px;">
   <user-details [user]='user'></user-details>
 </div>
