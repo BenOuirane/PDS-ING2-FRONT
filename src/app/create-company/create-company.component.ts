@@ -30,7 +30,8 @@ export class CreateCompanyComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-        this.save; 
+        this.save;
+        
     }
 
 
