@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Company } from '../company';
+import { CompanyService } from '../company.service';
 
 @Component({
   selector: 'app-create-company',
@@ -7,9 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateCompanyComponent implements OnInit {
 
-  constructor() { }
+    company: Company = new Company();
 
-  ngOnInit() {
-  }
+    submitted = false; 
+
+    constructor(private companyService: CompanyService) { }
+
+    ngOnInit() {
+     }
+
+    newCompany(): void {
+        this.submitted = false;
+        this.company = new Company();
+    }
+
+    save() {
+        this.companyService.createCompany(this.company);
+        this.company = new Company();
+    }
+
+    onSubmit() {
+        this.submitted = true;
+        this.save; 
+    }
+
+
+
 
 }
