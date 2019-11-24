@@ -2,8 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\app"
+    "\\src\\app",
+    "\\src\\app\\create-company",
+    "\\src\\app\\create-user",
+    "\\src\\app\\users-list"
   ],
-  "SelectedNode": "\\src\\app\\app-routing.module.ts",
+  "SelectedNode": "\\src\\app\\company.service.ts",
   "PreviewInSolutionExplorer": false
 }

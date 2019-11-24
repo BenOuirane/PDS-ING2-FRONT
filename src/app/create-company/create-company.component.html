@@ -7,8 +7,8 @@
   <form (ngSubmit)="onSubmit()">
     <div class="form-group form-add-group">
       <label for="name">Nom </label>
-      <!-- ngModel = user.firstname -> Made to say that the field contains the user's firstname -->
-      <input type="text" class="form-control" id="firstname" required [(ngModel)]="user.firstname" name="name">
+      <!-- ngModel = company.name -> Made to say that the field contains the user's firstname -->
+      <input type="text" class="form-control" id="name" required [(ngModel)]="company.name" name="name">
     </div>
 
     <button type="submit" class="form-button">Ajouter</button>
