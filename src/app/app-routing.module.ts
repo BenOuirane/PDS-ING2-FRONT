@@ -15,7 +15,7 @@ If he goes on 'http://{localhost} or {172.31.254.61}:4200/',
 we redirect him to the route '/user that calls the UsersListComponent'
  */
 const routes: Routes = [
-  { path: '', redirectTo: 'company', pathMatch: 'full' },
+  { path: '', redirectTo: 'addCompany', pathMatch: 'full' },
   { path: 'user', component: UsersListComponent },
   { path: 'add', component: CreateUserComponent },
   { path: 'company', component: CompanyListComponent },
