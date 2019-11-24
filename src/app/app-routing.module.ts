@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UsersListComponent } from './users-list/users-list.component';
 import { CreateUserComponent } from './create-user/create-user.component';
-
+import { CreateCompanyComponent } from './create-company/create-company.component';
+import { CompanyListComponent } from './company-list/company-list.component';
 /*
 The routing module :
 An array contains all the routes where the client could go
@@ -17,6 +18,9 @@ const routes: Routes = [
   { path: '', redirectTo: 'user', pathMatch: 'full' },
   { path: 'user', component: UsersListComponent },
   { path: 'add', component: CreateUserComponent },
+  { path: 'company', component: CompanyListComponent },
+  { path: 'addCompany', component: CreateCompanyComponent },
+
 ];
 
 @NgModule({
