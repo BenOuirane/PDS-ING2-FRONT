@@ -16,10 +16,17 @@ export class UsersListComponent implements OnInit {
 
   constructor(private userService: UserService) { }
 
+  /*
+  * When we arrive on this component page
+  * reloadData will be called
+  */
   ngOnInit() {
     this.reloadData();
   }
 
+  /*
+  * getUsersList() from user.service.ts will be called
+  */
   reloadData() {
     this.users = this.userService.getUsersList();
   }

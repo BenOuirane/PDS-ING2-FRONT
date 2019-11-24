@@ -1,9 +1,13 @@
 <h3>Ajout d'un utilisateur</h3>
 <!-- If we just created a user, the first container is hidden and the second is not; this attribute is on the component.ts -->
+<!-- If submitted is at true on the create-user component, then we will have hidden=true -->
 <div [hidden]="submitted" class="form-add">
+
+  <!-- When we will submit the form, onSubmit() will be fired -->
   <form (ngSubmit)="onSubmit()">
     <div class="form-group form-add-group">
       <label for="firstname">Prénom</label>
+      <!-- ngModel = user.firstname -> Made to say that the field contains the user's firstname -->
       <input type="text" class="form-control" id="firstname" required [(ngModel)]="user.firstname" name="firstname">
     </div>
 
@@ -12,7 +16,6 @@
       <input type="text" class="form-control" id="lastname" required [(ngModel)]="user.lastname" name="lastname">
     </div>
 
-
     <button type="submit" class="form-button">Ajouter</button>
   </form>
 </div>
@@ -20,7 +23,9 @@
   <button type="visualize" class="form-button">Visualiser</button>
 </div>
 
+<!-- If submitted is at false on the create-user component, then we will have hidden=nottrue so hidden=true -->
 <div [hidden]="!submitted" class="form-submitted">
   <h4>Votre utilisateur a bien été ajouté</h4>
+  <!-- When we will want to add an new User after we just added one, newUser() is launched-->
   <button class="btn btn-success form-button" (click)="newUser()">Ajouter un nouvel utilisateur</button>
 </div>
