@@ -13,8 +13,8 @@ export class CompanyService {
     constructor(private http: HttpClient) { }
 
     createCompany(company: Company): Observable<Object> {
-        console.log(this.baseUrl + `/company / create`);
-        return this.http.post(`${this.baseUrl}` + `/company/create`, company);
+        console.log(this.baseUrl + `/company/create`);
+        return this.http.put(`${this.baseUrl}` + `/company/create`, company);
         
     }
 
