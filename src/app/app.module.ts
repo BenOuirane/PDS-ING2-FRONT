@@ -8,6 +8,9 @@ import { UsersListComponent } from './users-list/users-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { CompanyListComponent } from './company-list/company-list.component';
+import { CompanyDetailsComponent } from './company-details/company-details.component';
+import { CreateCompanyComponent } from './create-company/create-company.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +18,9 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     CreateUserComponent,
     UsersListComponent,
     UserDetailsComponent,
+    CompanyListComponent,
+    CompanyDetailsComponent,
+    CreateCompanyComponent,
   ],
   imports: [
     BrowserModule,
