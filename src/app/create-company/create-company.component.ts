@@ -24,13 +24,13 @@ export class CreateCompanyComponent implements OnInit {
     }
 
     save() {
-        this.companyService.createCompany(this.company);
+        this.companyService.createCompany(this.company).subscribe(data => console.log(data), error => console.log(error));
         this.company = new Company();
     }
 
     onSubmit() {
         this.submitted = true;
-        this.save;
+        this.save();
         
     }
 

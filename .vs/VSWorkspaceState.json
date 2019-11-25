@@ -7,6 +7,6 @@
     "\\src\\app\\create-user",
     "\\src\\app\\users-list"
   ],
-  "SelectedNode": "\\src\\app\\company.service.ts",
+  "SelectedNode": "\\src\\app\\create-company\\create-company.component.ts",
   "PreviewInSolutionExplorer": false
 }
