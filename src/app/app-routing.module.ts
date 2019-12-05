@@ -20,13 +20,17 @@ we redirect him to the route '/user that calls the UsersListComponent'
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'home', component: UsersListComponent, canActivate: [AuthGuard] },
+  { path: 'home/:id', component: UsersListComponent, canActivate: [AuthGuard] },
   { path: 'add', component: CreateUserComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes),
+    RouterModule.forChild(routes)
+  ]
+  ,
   exports: [RouterModule]
 })
 

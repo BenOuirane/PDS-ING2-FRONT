@@ -20,6 +20,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     UsersListComponent,
     UserDetailsComponent,
     LoginComponent,
+    
   ],
   imports: [
     BrowserModule,

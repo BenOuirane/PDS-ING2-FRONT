@@ -19,7 +19,8 @@ export class AppComponent {
 
   user: User = new User();
 
-  constructor(private router: Router) { }
+
+  constructor(private router: Router) {}
 
   logout() {
     localStorage.removeItem('user');
@@ -28,7 +29,7 @@ export class AppComponent {
   
 
   authenticated() {
-    this.user= JSON.parse(localStorage.getItem('user'));
-    return this.user;
+    this.user = JSON.parse(localStorage.getItem('user'));
+    return localStorage.getItem('user');
   }
 }

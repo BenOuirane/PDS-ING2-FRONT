@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.user) { 
-        this.router.navigate(['home']);
+    if (localStorage.getItem('user')) { 
+        this.router.navigate(['home', this.logedUser.id]);
     }
   }
 
@@ -30,8 +30,9 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(this.user)
       .subscribe(data => {
         localStorage.setItem('user', JSON.stringify(data));
+        this.logedUser = JSON.parse(localStorage.getItem('user'));
         this.error = null;
-        this.router.navigate(['home']);
+        this.router.navigate(['home', this.logedUser.id ]);
       }
       , error => {
         this.error="Impossible de se connecter, vérifiez vos identifiants";

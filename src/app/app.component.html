@@ -11,14 +11,14 @@
         <ul id="menu-menu-head" class="navbar-nav ml-auto">
             <li id="menu-item-204"
                 class="menu-item">
-                <a href="#" aria-current="page">Compte de {{ user.username }}</a></li>
+                <a href="toDo" aria-current="page">Compte de {{ user.username }}</a></li>
             <li id="menu-item-204"
                 class="menu-item">
-                <a href="#" aria-current="page">Accueil</a></li>
+                <a href="toDo" aria-current="page">Accueil</a></li>
             <li id="menu-item-201" class="menu-item"><a
-                    href="#">Objets</a></li>
+                    href="toDo">Objets</a></li>
             <li id="menu-item-202" class="menu-item"><a
-                    href="#">Notifications</a></li>
+                    href="toDo">Notifications</a></li>
             <li *ngIf="authenticated()" id="menu-item-202" class="menu-item"><a
                 href="" (click)="logout()">Déconnexion</a></li>
         </ul>
