@@ -8,8 +8,10 @@ import { UsersListComponent } from './users-list/users-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { UserDetailsComponent } from './user-details/user-details.component';
-import { MapMockComponent } from './map-mock/map-mock.component';
-import { AgmCoreModule } from '@agm/core';
+
+
+import { LoginComponent } from './login/login.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -17,23 +19,18 @@ import { AgmCoreModule } from '@agm/core';
     CreateUserComponent,
     UsersListComponent,
     UserDetailsComponent,
-    MapMockComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     HttpClientModule,
-    BrowserModule,
-    FormsModule,
-    AgmCoreModule.forRoot({
-      // please get your own API key here:
-      // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
-      apiKey: 'AIzaSyAvcDy5ZYc2ujCS6TTtI3RYX5QmuoV8Ffw'
-    })
   ],
   providers: [],
   bootstrap: [AppComponent]
   
 })
-export class AppModule { }
+export class AppModule { 
+}

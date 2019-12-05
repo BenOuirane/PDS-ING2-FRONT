@@ -1,0 +1,41 @@
+.login-form {
+    background-image: linear-gradient(to bottom right, purple, darkblue);
+    padding: 50px;
+    border-radius: 16px;
+    margin: auto 0;
+    color: white;
+    box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.7);
+    font-weight: 600;
+    margin-left: 50%;
+    transform: translate(-50%);
+}
+.form-button {
+    margin-top: 20px;
+    background-color:
+    #27bae6;
+    border-color:
+    #27bae6;
+    transition: 1s;
+    font-weight: 600;
+    border-radius: 15px;
+    margin-left: 50%;
+    transform: translate(-50%);
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border: none;
+    padding-left: 15px;
+    padding-right: 15px;
+    color:white;
+
+    &:hover {
+        background-color:
+        #fff;
+        border-color:
+        #fff;
+        color:#27bae6; 
+    }
+}
+
+.error-message {
+    padding-top: 30px;
+}

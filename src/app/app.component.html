@@ -1,9 +1,27 @@
-<div class="navbar">
-  <h1>{{title}}</h1>
-  <h3>{{description}}</h3>
-  <nav>
-    <a routerLink="user" class="btn btn-primary active" role="button" routerLinkActive="active">Utilisateurs</a>
-    <a routerLink="add" class="btn btn-primary active" role="button" routerLinkActive="active">Ajouter un utilisateur</a>
-  </nav>
-  <router-outlet></router-outlet>
-</div>
+<nav *ngIf="authenticated()" class="navbar navbar-expand-md fixed-top navbar-light" id="navbarBox">
+    <a class="navbar-brand" href="#">
+        <img src="logo.png"
+            alt="Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+        <ul id="menu-menu-head" class="navbar-nav ml-auto">
+            <li id="menu-item-204"
+                class="menu-item">
+                <a href="#" aria-current="page">Compte de {{ user.username }}</a></li>
+            <li id="menu-item-204"
+                class="menu-item">
+                <a href="#" aria-current="page">Accueil</a></li>
+            <li id="menu-item-201" class="menu-item"><a
+                    href="#">Objets</a></li>
+            <li id="menu-item-202" class="menu-item"><a
+                    href="#">Notifications</a></li>
+            <li *ngIf="authenticated()" id="menu-item-202" class="menu-item"><a
+                href="" (click)="logout()">Déconnexion</a></li>
+        </ul>
+    </div>
+</nav>
+<router-outlet></router-outlet>

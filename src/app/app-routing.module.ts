@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UsersListComponent } from './users-list/users-list.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import {LoginComponent} from "./login/login.component";
+import { AuthGuard } from "./helpers/AuthGuard";
+import {User} from "./user";
 
 /*
 The routing module :
@@ -13,10 +16,13 @@ and will take care of the rest of the client request
 If he goes on 'http://{localhost} or {172.31.254.61}:4200/',
 we redirect him to the route '/user that calls the UsersListComponent'
  */
+
+
 const routes: Routes = [
-  { path: '', redirectTo: 'user', pathMatch: 'full' },
-  { path: 'user', component: UsersListComponent },
-  { path: 'add', component: CreateUserComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'home', component: UsersListComponent, canActivate: [AuthGuard] },
+  { path: 'add', component: CreateUserComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
@@ -24,4 +30,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class AppRoutingModule { }
+export class AppRoutingModule {
+  
+ }
