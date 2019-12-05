@@ -1,0 +1,24 @@
+
+<section class="container d-flex align-items-center min-vh-100">
+    <div class="login-form">
+
+        <!-- When we will submit the form, onSubmit() will be fired -->
+        <form ngNativeValidate (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+          <div class="form-group form-add-group">
+            <label for="username">Nom d'utilisateur {{logedUser.firstname}}</label>
+            <input type="text" class="form-control" id="username" name="username" [(ngModel)]="user.username" formControlName="username" required>
+          </div>
+      
+          <div class="form-group form-add-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" class="form-control" id="password" name="password"  [(ngModel)]="user.password" formControlName="password" required>
+          </div>
+      
+          <button type="submit" class="form-button">Connexion</button>
+          <div class="error-message" *ngIf="error">
+            <span>{{error}}</span>
+          </div>
+        </form>
+      </div>
+      
+</section>
