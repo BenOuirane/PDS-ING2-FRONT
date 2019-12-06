@@ -1,1 +1,87 @@
-<p>send-notification works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2><img src="../../assets/send.png" alt="">Envoi d'une notification</h2>
+        </div>
+
+        <div class="col-12">
+            <div class="row form_intro">
+                <div class="col-12 col-md-5">
+                    <label for="notification_type">Choisir un type de la notification</label>
+                    <select class="form-control" id="notification_type" (change)='notificationTypeChange()'>
+                        <option value="empty">Selectionnez une option</option>
+                        <option value="text_notification" selected>Notification textuelle</option>
+                        <option value="medicine_notification">Rappel de médicament</option>
+                        <option value="object_notification">Notification en rapport avec un objet</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-2 text-center">
+                    <h4>Ou bien</h4>
+                </div>
+                <div class="col-12 col-md-5">
+                    <label for="notification_full_type">Choisir un notification pré-remplie</label>
+                    <select class="form-control" id="notification_full_type" (change)='notificationFullTypeChange()'>
+                        <option value="empty">Selectionnez une option</option>
+                        <option value="hello">Bonjour !</option>
+                        <option value="hot">Rappel canicule</option>
+                        <option value="disease">Rappel épidémie</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <form id="text_notification" class="form_notificaiton">
+                <h4>Notification textuelle</h4>
+
+                <div class="form-group">
+                    <label for="select_receiver">Selectionner un/des destinataire/s</label>
+                    <select multiple class="form-control" id="select_receiver" required>
+                        <option value="all">Tous</option>
+                        <!-- foreach with value = id, innerHtml : firstname lastname - id -->
+                        <option value="23">Michel - 23</option>
+                        <option value="15">Toto - 15</option>
+                        <option value="29">Tota - 29</option>
+                        <option value="34">Titi - 34</option>
+                    </select>
+                    <small id="selectHelp" class="form-text text-muted">
+                        Pour selectionner plusieurs destinataires, maintenez Ctrl et cliquez sur les
+                        destinataires
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Titre de la notification</label>
+                    <input type="text" class="form-control" id="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea type="text" rows="4" class="form-control" id="message" required></textarea>
+                </div>
+
+                <div id="object_field" class="form-group custom_field">
+                    <label for="object">Objet lié</label>
+                    <select class="form-control" id="object" required>
+                        <option value="empty">Selectionnez une option</option>
+                        <!-- foreach with value = id, innerHtml : name - id -->
+                        <option value="23">Lumière - 23</option>
+                        <option value="15">Four - 15</option>
+                    </select>
+                </div>
+
+                <div id="medicine_field" class="form-group custom_field">
+                    <label for="medicine">Médicament lié</label>
+                    <select class="form-control" id="medicine" required>
+                        <option value="empty">Selectionnez une option</option>
+                        <!-- foreach with value = name, innerHtml : name -->
+                        <option value="dolipranne">Dolipranne</option>
+                        <option value="fervex">Fervex</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary sending_button">Envoyer</button>
+            </form>
+        </div>
+    </div>
+</div>
