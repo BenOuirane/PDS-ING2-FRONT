@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UsersListComponent } from './users-list/users-list.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { SendNotificationComponent } from './send-notification/send-notification.component';
 import {LoginComponent} from "./login/login.component";
 import { AuthGuard } from "./helpers/AuthGuard";
 import {User} from "./user";
@@ -21,6 +22,7 @@ we redirect him to the route '/user that calls the UsersListComponent'
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home/:id', component: UsersListComponent, canActivate: [AuthGuard] },
+  { path: 'notification/:id', component: SendNotificationComponent },
   { path: 'add', component: CreateUserComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
 ];

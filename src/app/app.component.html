@@ -14,11 +14,11 @@
                 <a href="toDo" aria-current="page">Compte de {{ user.username }}</a></li>
             <li id="menu-item-204"
                 class="menu-item">
-                <a href="toDo" aria-current="page">Accueil</a></li>
+                <a [routerLink]="['home', user.id ]" aria-current="page">Accueil</a></li>
             <li id="menu-item-201" class="menu-item"><a
                     href="toDo">Objets</a></li>
-            <li id="menu-item-202" class="menu-item"><a
-                    href="toDo">Notifications</a></li>
+            <li id="menu-item-202" class="menu-item"><a [routerLink]="['notification', user.id ]" 
+                    >Envoyer une notification</a></li>
             <li *ngIf="authenticated()" id="menu-item-202" class="menu-item"><a
                 href="" (click)="logout()">Déconnexion</a></li>
         </ul>

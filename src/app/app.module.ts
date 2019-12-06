@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { LoginComponent } from './login/login.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { SendNotificationComponent } from './send-notification/send-notification.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     UsersListComponent,
     UserDetailsComponent,
     LoginComponent,
+    SendNotificationComponent,
     
   ],
   imports: [
