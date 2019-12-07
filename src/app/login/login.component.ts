@@ -22,7 +22,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('user')) { 
-        this.router.navigate(['home', this.logedUser.id]);
+      this.logedUser = JSON.parse(localStorage.getItem('user'));
+      console.log("TOOT");
+        this.router.navigate(['/home', this.logedUser.id]);
     }
   }
 
@@ -32,7 +34,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('user', JSON.stringify(data));
         this.logedUser = JSON.parse(localStorage.getItem('user'));
         this.error = null;
-        this.router.navigate(['home', this.logedUser.id ]);
+        this.router.navigate(['/home', this.logedUser.id ]);
       }
       , error => {
         this.error="Impossible de se connecter, vérifiez vos identifiants";

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Notification } from "../notification";
+import { User } from '../user';
+import { NotificationService } from '../notification.service';
 declare var $: any;
 
 @Component({
@@ -8,7 +12,15 @@ declare var $: any;
 })
 export class SendNotificationComponent implements OnInit {
 
-  constructor() { }
+  notification : Notification;
+  notificationForm : FormGroup;
+  user : User = new User();
+  response : string;
+
+  constructor(private notificationService: NotificationService) {
+    this.notificationForm = this.createFormGroup();
+    this.notification = new Notification();
+   }
 
   toggleFields(notificationType) {
     $(".custom_field").css("display", "none");
@@ -60,7 +72,42 @@ export class SendNotificationComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.response = null;
   }
+
+  onSubmit() {
+    this.user = JSON.parse(localStorage.getItem('user'));
+
+    console.log($("#message").val());
+    console.log($("#select_receiver").val());
+    console.log($("#title").val());
+    console.log(this.user.id);
+
+    this.notification.message = $("#message").val();
+    this.notification.receiver = $("#select_receiver").val();
+    this.notification.title = $("#title").val();
+    this.notification.sender = this.user.id;
+
+    this.notificationService.createNotification(this.notification).subscribe(
+      data => {
+        console.log(data),
+        this.response = "La notification va être envoyer sous peu. Merci à vous."
+        $("#title").val("");
+        $("#message").val("");
+        $("#select_receiver").val("");
+      }, 
+      error => {
+        console.log(error),
+        this.response = "Un problème est survenu, veuillez rééssayer plus tard."
+      });
+  }
+
+  createFormGroup() {
+    return new FormGroup({
+      receiverId: new FormControl('', [Validators.required]),
+      title: new FormControl('', [Validators.required]),
+      message: new FormControl('', [Validators.required]),
+    });
+  } 
 
 }

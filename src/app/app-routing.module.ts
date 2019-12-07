@@ -22,7 +22,7 @@ we redirect him to the route '/user that calls the UsersListComponent'
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home/:id', component: UsersListComponent, canActivate: [AuthGuard] },
-  { path: 'notification/:id', component: SendNotificationComponent },
+  { path: 'notification/:id', component: SendNotificationComponent, canActivate: [AuthGuard] },
   { path: 'add', component: CreateUserComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
 ];
