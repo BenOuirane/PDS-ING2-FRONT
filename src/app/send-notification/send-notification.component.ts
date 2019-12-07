@@ -30,6 +30,8 @@ export class SendNotificationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.limitTime();
+
     this.userService.getResidents("RESIDENT").subscribe(
       data => {
         this.residentsString = JSON.stringify(data);
@@ -136,6 +138,12 @@ export class SendNotificationComponent implements OnInit {
       }
 
     }
+  }
+
+  limitTime() {
+    var today = new Date();
+    var now = today.getHours() + ":" + today.getMinutes();
+    $("#time_notification").attr("min", now);
   }
 
 }

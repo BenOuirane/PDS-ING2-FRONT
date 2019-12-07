@@ -34,7 +34,8 @@
         </div>
 
         <div class="col-12">
-            <form id="text_notification" class="form_notificaiton" ngNativeValidate (ngSubmit)="onSubmit()" [formGroup]="notificationForm">
+            <form id="text_notification" class="form_notificaiton" ngNativeValidate (ngSubmit)="onSubmit()"
+                [formGroup]="notificationForm">
                 <h4>Notification textuelle</h4>
 
                 <div class="form-group">
@@ -49,12 +50,13 @@
 
                 <div class="form-group">
                     <label for="title">Titre de la notification<span> *</span></label>
-                    <input type="text" class="form-control" id="title" required  formControlName="title">
+                    <input type="text" class="form-control" id="title" required formControlName="title">
                 </div>
 
                 <div class="form-group">
                     <label for="message">Message<span> *</span></label>
-                    <textarea type="text" rows="4" class="form-control" id="message" required  formControlName="message"></textarea>
+                    <textarea type="text" rows="4" class="form-control" id="message" required
+                        formControlName="message"></textarea>
                 </div>
 
                 <div id="object_field" class="form-group custom_field">
@@ -68,13 +70,22 @@
                 </div>
 
                 <div id="medicine_field" class="form-group custom_field">
-                    <label for="medicine">Médicament lié<span> *</span></label>
-                    <select class="form-control" id="medicine" required>
-                        <option value="empty">Selectionnez une option</option>
-                        <!-- foreach with value = name, innerHtml : name -->
-                        <option value="dolipranne">Dolipranne</option>
-                        <option value="fervex">Fervex</option>
-                    </select>
+                    <div class="row">
+                    <div class="col-12 col-md-6">
+                        <label for="time_notification">Heure de la prise<span> *</span></label>
+                        <input type="time" class="form-control" id="time_notification" required>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <label for="medicine">Médicament lié<span> *</span></label>
+                        <select class="form-control" id="medicine" required>
+                            <option value="empty">Selectionnez une option</option>
+                            <!-- foreach with value = name, innerHtml : name -->
+                            <option value="dolipranne">Dolipranne</option>
+                            <option value="fervex">Fervex</option>
+                        </select>
+                    </div>
+                </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary sending_button">Envoyer</button>
