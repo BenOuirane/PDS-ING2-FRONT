@@ -40,6 +40,10 @@ export class UserService {
     return this.http.put(`${this.baseUrl}` + `/user/login`, user);
   }
 
+  getResidents(role: string) {
+    return this.http.put(`${this.baseUrl}` + `/users/`, role);
+  }
+
   // getUsersList is called with no parameter
   getUsersList(): Observable<any> {
     /*

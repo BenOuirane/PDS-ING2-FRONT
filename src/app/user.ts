@@ -7,4 +7,5 @@ export class User {
   lastname: string;
   username: string;
   password: string;
+  role: string;
 }
