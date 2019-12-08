@@ -6,6 +6,7 @@ import { SendNotificationComponent } from './send-notification/send-notification
 import {LoginComponent} from "./login/login.component";
 import { AuthGuard } from "./helpers/AuthGuard";
 import {User} from "./user";
+import { RoleGuard } from './helpers/RoleGuard';
 
 /*
 The routing module :
@@ -22,8 +23,7 @@ we redirect him to the route '/user that calls the UsersListComponent'
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home/:id', component: UsersListComponent, canActivate: [AuthGuard] },
-  { path: 'notification/:id', component: SendNotificationComponent, canActivate: [AuthGuard] },
-  { path: 'add', component: CreateUserComponent, canActivate: [AuthGuard] },
+  { path: 'notification/:id', component: SendNotificationComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'login', component: LoginComponent },
 ];
 
