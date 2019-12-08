@@ -3,4 +3,5 @@ export class Notification {
     title: string;
     message: string;
     receiver: number;
+    type: string;
   }

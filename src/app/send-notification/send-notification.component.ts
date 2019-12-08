@@ -16,12 +16,18 @@ declare var $: any;
 })
 export class SendNotificationComponent implements OnInit {
 
+  notificationForm: FormGroup;
+
   notification: Notification;
   user: User = new User();
-  notificationForm: FormGroup;
+  
   response: string;
+
   residents: User[];
   residentsString: string;
+
+  message : string;
+  notificationType : string;
 
   constructor(private notificationService: NotificationService, private userService: UserService) {
     this.notificationForm = this.createFormGroup();
@@ -37,28 +43,27 @@ export class SendNotificationComponent implements OnInit {
         this.residentsString = JSON.stringify(data);
         this.residents = JSON.parse(this.residentsString);
 
-        let optionList = $("#select_receiver");
-
         this.residents.forEach(option =>
-          optionList.add(
+          $("#select_receiver").add(
             $('#select_receiver').append('<option value="' + option.id + '">' + option.firstname + ' ' + option.lastname + '</option>')
           )
         )
       },
       error => {
         console.log(error),
-          this.response = "Un problème pour récupérer les résidents est survenu, veuillez réessayer plus tard."
+        this.response = "Un problème pour récupérer les résidents est survenu, veuillez réessayer plus tard."
       });
   }
 
   onSubmit() {
     this.user = JSON.parse(localStorage.getItem('user'));
 
-    this.notification.message = $("#message").val();
+    this.notification.message = this.getMessage();
     this.notification.receiver = $("#select_receiver").val();
     this.notification.title = $("#title").val();
     this.notification.sender = this.user.id;
-
+    this.notification.type = this.notificationType;
+    
     this.notificationService.createNotification(this.notification).subscribe(
       data => {
         this.response = "La notification va être envoyée sous peu. Merci à vous."
@@ -70,6 +75,20 @@ export class SendNotificationComponent implements OnInit {
         console.log(error),
           this.response = "Un problème est survenu, veuillez réessayer plus tard."
       });
+  }
+
+  getMessage() {
+    if ($("#notification_type").val() == "medicine_notification"){
+      this.notificationType = "MEDICINE"
+      this.message = $("#message").val() + "<br>Pour le médicament : " + $("#medicine").val() + "<br>A : " + $("#time_notification").val();
+    } else if ($("#notification_type").val() == "object_notification"){
+      this.notificationType = "OBJECT"
+      this.message = $("#message").val() + "<br>Pour l'objet : " + $("#object").val();
+    } else {
+      this.notificationType = "TEXT"
+      this.message = $("#message").val();
+    }
+    return this.message;
   }
 
 

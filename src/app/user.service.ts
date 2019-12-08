@@ -40,7 +40,7 @@ export class UserService {
     return this.http.put(`${this.baseUrl}` + `/user/login`, user);
   }
 
-  getResidents(role: string) {
+  getResidents(role: string): Observable<Object> {
     return this.http.put(`${this.baseUrl}` + `/users/`, role);
   }
 

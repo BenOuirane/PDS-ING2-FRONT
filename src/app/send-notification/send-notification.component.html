@@ -42,10 +42,6 @@
                     <label for="select_receiver">Selectionner un destinataire<span> *</span></label>
                     <select class="form-control" id="select_receiver" required formControlName="receiverId">
                     </select>
-                    <small id="selectHelp" class="form-text text-muted">
-                        Pour selectionner plusieurs destinataires, maintenez Ctrl et cliquez sur les
-                        destinataires
-                    </small>
                 </div>
 
                 <div class="form-group">
@@ -60,8 +56,8 @@
                 </div>
 
                 <div id="object_field" class="form-group custom_field">
-                    <label for="object">Objet lié<span> *</span></label>
-                    <select class="form-control" id="object" required>
+                    <label for="object">Objet lié</label>
+                    <select class="form-control" id="object">
                         <option value="empty">Selectionnez une option</option>
                         <!-- foreach with value = id, innerHtml : name - id -->
                         <option value="23">Lumière - 23</option>
@@ -72,13 +68,13 @@
                 <div id="medicine_field" class="form-group custom_field">
                     <div class="row">
                     <div class="col-12 col-md-6">
-                        <label for="time_notification">Heure de la prise<span> *</span></label>
-                        <input type="time" class="form-control" id="time_notification" required>
+                        <label for="time_notification">Heure de la prise</label>
+                        <input type="time" class="form-control" id="time_notification">
                     </div>
 
                     <div class="col-12 col-md-6">
-                        <label for="medicine">Médicament lié<span> *</span></label>
-                        <select class="form-control" id="medicine" required>
+                        <label for="medicine">Médicament lié</label>
+                        <select class="form-control" id="medicine">
                             <option value="empty">Selectionnez une option</option>
                             <!-- foreach with value = name, innerHtml : name -->
                             <option value="dolipranne">Dolipranne</option>
