@@ -29,19 +29,17 @@ export class AppComponent {
   }
 
   request() {
+    this.numberNotification = 0;
+    
     this.notificationService.getNotification(this.user.id).subscribe(
       data => {
-        this.numberNotification = 0;
         this.notificationsString = JSON.stringify(data);
         this.newNotifications = JSON.parse(this.notificationsString);
-        console.log(data)
         this.newNotifications.forEach(notification => {
-          console.log(notification.state);
           if(notification.state == "PENDING") {
             this.numberNotification = this.numberNotification + 1;
           }
         });
-        console.log(this.numberNotification);
       },
       error => {
         console.log(error); 
@@ -52,7 +50,7 @@ export class AppComponent {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
     
-    timer(0, 2000).subscribe(() => {
+    timer(0, 10000).subscribe(() => {
       this.request();
     });
 

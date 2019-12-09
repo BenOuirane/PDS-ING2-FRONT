@@ -5,4 +5,5 @@ export class Notification {
     receiver: number;
     type: string;
     state: string;
+    customData: string;
   }

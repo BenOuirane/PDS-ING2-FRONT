@@ -22,6 +22,7 @@ export class SendNotificationComponent implements OnInit {
   residentsString: string;
   message: string;
   notificationType: string;
+  notificationData: string;
 
   constructor(private notificationService: NotificationService, private userService: UserService) {
     this.notificationForm = this.createFormGroup();
@@ -52,11 +53,13 @@ export class SendNotificationComponent implements OnInit {
   onSubmit() {
     this.user = JSON.parse(localStorage.getItem('user'));
 
-    this.notification.message = this.getMessage();
+    this.notificationFields();
+    this.notification.message = $("#message").val();
     this.notification.receiver = $("#select_receiver").val();
     this.notification.title = $("#title").val();
     this.notification.sender = this.user.id;
     this.notification.type = this.notificationType;
+    this.notification.customData = this.notificationData;
     
     this.notificationService.createNotification(this.notification).subscribe(
       data => {
@@ -80,18 +83,17 @@ export class SendNotificationComponent implements OnInit {
     });
   }
 
-  getMessage() {
+  notificationFields() {
     if ($("#notification_type").val() == "medicine_notification"){
       this.notificationType = "MEDICINE"
-      this.message = $("#message").val() + ". Pour le médicament : " + $("#medicine").val() + ". A : " + $("#time_notification").val();
+      this.notificationData = $("#medicine").val() + "," + $("#time_notification").val();
     } else if ($("#notification_type").val() == "object_notification"){
       this.notificationType = "OBJECT"
-      this.message = $("#message").val() + ". Pour l'objet : " + $("#object").val();
+      this.notificationData = $("#object").val()
     } else {
       this.notificationType = "TEXT"
-      this.message = $("#message").val();
+      this.notificationData = "None"
     }
-    return this.message;
   }
 
   notificationTypeChange() {

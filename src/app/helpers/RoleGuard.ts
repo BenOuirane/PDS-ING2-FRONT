@@ -14,7 +14,7 @@ export class RoleGuard implements CanActivate {
         this.user = JSON.parse(localStorage.getItem('user'));
 
         if (!this.user || this.user.role != expectedRole) {
-          this.router.navigate(['home', this.user.id]);
+          this.router.navigate(['home']);
           return false;
         }
         return true;

@@ -12,14 +12,12 @@ import { timer } from 'rxjs';
 })
 export class GetNotificationsComponent implements OnInit {
 
-  notification: Notification;
-  user: User = new User();
   notifications: Notification[];
   
-  constructor(private notificationService: NotificationService, private appComponent : AppComponent) {}
+  constructor(private appComponent : AppComponent) {}
 
   ngOnInit() {
-    timer(5, 2000).subscribe(x => {
+    timer(3, 2000).subscribe(x => {
       this.notifications = this.appComponent.newNotifications;
     });
   }

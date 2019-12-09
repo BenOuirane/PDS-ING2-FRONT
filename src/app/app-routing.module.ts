@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UsersListComponent } from './users-list/users-list.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
-import {LoginComponent} from "./login/login.component";
+import { LoginComponent } from "./login/login.component";
 import { AuthGuard } from "./helpers/AuthGuard";
 import { RoleGuard } from './helpers/RoleGuard';
 import { GetNotificationsComponent } from './get-notifications/get-notifications.component';
@@ -21,9 +21,9 @@ we redirect him to the route '/user that calls the UsersListComponent'
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'home/:id', component: UsersListComponent, canActivate: [AuthGuard] },
-  { path: 'notification/:id', component: SendNotificationComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
-  { path: 'notifications/:id', component: GetNotificationsComponent, canActivate: [RoleGuard], data: { expectedRole: 'RESIDENT'}},
+  { path: 'home', component: UsersListComponent, canActivate: [AuthGuard] },
+  { path: 'notification', component: SendNotificationComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+  { path: 'notifications', component: GetNotificationsComponent, canActivate: [RoleGuard], data: { expectedRole: 'RESIDENT'}},
   { path: 'login', component: LoginComponent },
 ];
 
