@@ -64,6 +64,7 @@ export class SendNotificationComponent implements OnInit {
         $("#title").val("");
         $("#message").val("");
         $("#select_receiver").val("");
+        
       },
       error => {
         console.log(error),
@@ -82,10 +83,10 @@ export class SendNotificationComponent implements OnInit {
   getMessage() {
     if ($("#notification_type").val() == "medicine_notification"){
       this.notificationType = "MEDICINE"
-      this.message = $("#message").val() + "<br>Pour le médicament : " + $("#medicine").val() + "<br>A : " + $("#time_notification").val();
+      this.message = $("#message").val() + ". Pour le médicament : " + $("#medicine").val() + ". A : " + $("#time_notification").val();
     } else if ($("#notification_type").val() == "object_notification"){
       this.notificationType = "OBJECT"
-      this.message = $("#message").val() + "<br>Pour l'objet : " + $("#object").val();
+      this.message = $("#message").val() + ". Pour l'objet : " + $("#object").val();
     } else {
       this.notificationType = "TEXT"
       this.message = $("#message").val();

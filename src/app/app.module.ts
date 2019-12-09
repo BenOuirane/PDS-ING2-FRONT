@@ -11,6 +11,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { SendNotificationComponent } from './send-notification/send-notification.component';
+import { GetNotificationsComponent } from './get-notifications/get-notifications.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SendNotificationComponent } from './send-notification/send-notification
     UserDetailsComponent,
     LoginComponent,
     SendNotificationComponent,
+    GetNotificationsComponent,
     
   ],
   imports: [

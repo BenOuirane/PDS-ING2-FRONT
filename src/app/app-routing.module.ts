@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UsersListComponent } from './users-list/users-list.component';
-import { CreateUserComponent } from './create-user/create-user.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
 import {LoginComponent} from "./login/login.component";
 import { AuthGuard } from "./helpers/AuthGuard";
-import {User} from "./user";
 import { RoleGuard } from './helpers/RoleGuard';
+import { GetNotificationsComponent } from './get-notifications/get-notifications.component';
 
 /*
 The routing module :
@@ -24,6 +23,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home/:id', component: UsersListComponent, canActivate: [AuthGuard] },
   { path: 'notification/:id', component: SendNotificationComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+  { path: 'notifications/:id', component: GetNotificationsComponent, canActivate: [RoleGuard], data: { expectedRole: 'RESIDENT'}},
   { path: 'login', component: LoginComponent },
 ];
 

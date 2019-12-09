@@ -1,0 +1,24 @@
+<section class="container">
+    
+    <div class="row">
+        <div class="col-12">
+                <h2><img src="../../assets/notif.png" alt="">Notifications</h2>
+        </div>
+        <div class="col-12">
+            <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col" class="col-2">Titre</th>
+                        <th scope="col" class="col-6">Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let notification of notifications">
+                        <th scope="row" class="col-2">{{ notification.title }}</th>
+                        <td class="col-6">{{ notification.message }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</section>
