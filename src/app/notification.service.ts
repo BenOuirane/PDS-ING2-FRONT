@@ -9,8 +9,6 @@ import { Notification } from "./notification"
 export class NotificationService {
 
   private baseUrl = 'http://localhost:8080/api';
-  newNotifications: number;
-  notification: Notification[];
 
   constructor(private http: HttpClient, private router: Router) {
   }
@@ -29,15 +27,10 @@ export class NotificationService {
   }
 
   getNotification(userId: number){
-    /*
-    Angular will return what baseUrl
-    will send back to it.
-
-    Angular request here is :
-    In http, do a post on the Url
-    http://{localhost} or {172.31.254.61}:8080/api/users/create
-    with the body parameter user
-     */
     return this.http.put(`${this.baseUrl}` + `/notifications/list`, userId);
+  }
+
+  updateNotificationState(userId: number){
+    return this.http.put(`${this.baseUrl}` + `/notifications/update`, userId);
   }
 }

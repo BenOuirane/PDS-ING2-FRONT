@@ -28,30 +28,28 @@ export class AppComponent {
     this.numberNotification = 0;
   }
 
-  request() {
-    this.numberNotification = 0;
-    
-    this.notificationService.getNotification(this.user.id).subscribe(
-      data => {
-        this.notificationsString = JSON.stringify(data);
-        this.newNotifications = JSON.parse(this.notificationsString);
-        this.newNotifications.forEach(notification => {
-          if(notification.state == "PENDING") {
-            this.numberNotification = this.numberNotification + 1;
-          }
-        });
-      },
-      error => {
-        console.log(error); 
-      }
-    );
-  }
-
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
-    
+
     timer(0, 10000).subscribe(() => {
-      this.request();
+      this.numberNotification = 0;
+
+      this.user = JSON.parse(localStorage.getItem('user'));
+
+      this.notificationService.getNotification(this.user.id).subscribe(
+        data => {
+          this.notificationsString = JSON.stringify(data);
+          this.newNotifications = JSON.parse(this.notificationsString);
+          this.newNotifications.forEach(notification => {
+            if (notification.state == "PENDING") {
+              this.numberNotification = this.numberNotification + 1;
+            }
+          });
+        },
+        error => {
+          console.log(error);
+        }
+      );
     });
 
   }
@@ -60,7 +58,7 @@ export class AppComponent {
     localStorage.removeItem('user');
     this.router.navigate(['login']);
   }
-  
+
   authenticated() {
     this.user = JSON.parse(localStorage.getItem('user'));
     return localStorage.getItem('user');
