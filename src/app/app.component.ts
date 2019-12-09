@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import {User} from "./user";
+import { User } from "./user";
 
 @Component({
   selector: 'app-root',
@@ -14,11 +14,8 @@ Here, we give some attributes to the html page
 we can call them with {xxx} on the html code
  */
 export class AppComponent {
-  title = 'Application Angular FrontEnd';
-  description = 'Ceci est un test d\'application FrontEnd en Angular comminiquant avec un BackEnd en Spring.';
 
   user: User = new User();
-
 
   constructor(private router: Router) {}
 
@@ -27,7 +24,6 @@ export class AppComponent {
     this.router.navigate(['login']);
   }
   
-
   authenticated() {
     this.user = JSON.parse(localStorage.getItem('user'));
     return localStorage.getItem('user');

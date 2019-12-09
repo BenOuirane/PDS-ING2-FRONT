@@ -1,8 +1,5 @@
-
 <section class="container d-flex align-items-center min-vh-100">
     <div class="login-form">
-
-        <!-- When we will submit the form, onSubmit() will be fired -->
         <form ngNativeValidate (ngSubmit)="onSubmit()" [formGroup]="loginForm">
           <div class="form-group form-add-group">
             <label for="username">Nom d'utilisateur {{logedUser.firstname}}</label>
@@ -15,10 +12,9 @@
           </div>
       
           <button type="submit" class="form-button">Connexion</button>
-          <div class="error-message" *ngIf="error">
-            <span>{{error}}</span>
-          </div>
         </form>
+        <div class="error-message" *ngIf="error">
+          <span>{{error}}</span>
+        </div>
       </div>
-      
 </section>

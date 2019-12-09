@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from "../user";
-import {UserService} from "../user.service";
 import { Router } from '@angular/router';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { User } from "../user";
+import { UserService } from "../user.service";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   user: User = new User();
   logedUser: User = new User();
-  error : string;
+  error: string;
   loginForm: FormGroup;
 
   constructor(private userService: UserService, private router: Router) { 
@@ -23,25 +23,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('user')) { 
       this.logedUser = JSON.parse(localStorage.getItem('user'));
-      console.log("TOOT");
-        this.router.navigate(['/home', this.logedUser.id]);
+      this.router.navigate(['/home', this.logedUser.id]);
     }
   }
 
-  login() {
-    this.userService.loginUser(this.user)
-      .subscribe(data => {
-        localStorage.setItem('user', JSON.stringify(data));
-        this.logedUser = JSON.parse(localStorage.getItem('user'));
-        this.error = null;
-        this.router.navigate(['/home', this.logedUser.id ]);
-      }
-      , error => {
-        this.error="Impossible de se connecter, vérifiez vos identifiants";
-        console.log(error); 
-      });
-
-    this.user = new User();
+  onSubmit() {
+    this.login();
   }
 
   createFormGroup() {
@@ -51,11 +38,18 @@ export class LoginComponent implements OnInit {
     });
   } 
 
-  /*
-  * When we click on 'Submit', this is launched, see save() function
-  */
-  onSubmit() {
-    this.login();
+  login() {
+    this.userService.loginUser(this.user).subscribe(
+        data => {
+          localStorage.setItem('user', JSON.stringify(data));
+          this.logedUser = JSON.parse(localStorage.getItem('user'));
+          this.error = null;
+          this.router.navigate(['/home', this.logedUser.id ]);
+        },
+        error => {
+          console.log(error); 
+          this.error= "Impossible de se connecter, vérifiez vos identifiants";
+        }
+      );
   }
-
 }
