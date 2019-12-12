@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from "@angular/forms";
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { UsersListComponent } from './users-list/users-list.component';
@@ -27,6 +28,7 @@ import { GetNotificationsComponent } from './get-notifications/get-notifications
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

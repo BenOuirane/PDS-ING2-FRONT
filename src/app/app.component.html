@@ -3,13 +3,13 @@
         <img src="logo.png"
             alt="Logo">
     </a>
+    <div *ngIf="numberNotification > 0" class="newNotification">{{ numberNotification }} <img src="../../assets/notif.png" alt=""></div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon" (click)="showMenu()"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbar" (window:resize)="toggleHeaderStyle()" (window:scroll)="toggleHeaderStyle()">
         <ul id="menu-menu-head" class="navbar-nav ml-auto">
-            <li *ngIf="numberNotification > 0" id="menu-item-204" class="menu-item">Vous avez {{ numberNotification }} notifications non lues</li>
             <li id="menu-item-204"
                 class="menu-item">
                 <a href="toDo" aria-current="page">Compte de {{ user.username }}</a></li>
