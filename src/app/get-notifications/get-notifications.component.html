@@ -8,7 +8,13 @@
                 <div class="col-12 col-md-4">
                     <span>Titre :</span> {{ notification.title }}
                     <br>
-                    <span>Date :</span> {{ notification.date }}
+                    <div *ngIf="notification.type == 'MEDICINE'">
+                        <span>Heure de prise :</span> {{ split(notification.customData,1) }}<br>
+                        <span>Médicament :</span> {{ split(notification.customData,0) }}
+                    </div>
+                    <div *ngIf="notification.type == 'OBJECT'">
+                        <span>Objet lié :</span> {{ notification.customData }}<br>
+                    </div>
                 </div>
                 <div class="col-11 col-md-7">
                     <span>Message :</span> {{ notification.message }}

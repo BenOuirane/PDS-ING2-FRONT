@@ -31,9 +31,12 @@ export class GetNotificationsComponent implements OnInit {
        }, 5000);
     });
 
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = JSON.parse(localStorage.getItem('user')); 
+  }
 
-    
+  split(string, nb) {
+    var array = string.split(',');
+    return array[nb];
   }
 
 }
