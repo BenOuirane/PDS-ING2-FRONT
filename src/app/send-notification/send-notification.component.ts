@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 import { Notification } from "../notification";
 import { User } from '../user';
+
 import { NotificationService } from '../notification.service';
 import { UserService } from "../user.service";
 
@@ -18,8 +20,8 @@ export class SendNotificationComponent implements OnInit {
   notification: Notification;
   user: User = new User();
   response: string;
-  residents: User[];
   residentsString: string;
+  residents: User[];
   message: string;
   notificationType: string;
   notificationData: string;
@@ -53,7 +55,17 @@ export class SendNotificationComponent implements OnInit {
   onSubmit() {
     this.user = JSON.parse(localStorage.getItem('user'));
 
-    this.notificationFields();
+    if ($("#notification_type").val() == "medicine_notification"){
+      this.notificationType = "MEDICINE"
+      this.notificationData = $("#medicine").val() + "," + $("#time_notification").val();
+    } else if ($("#notification_type").val() == "object_notification"){
+      this.notificationType = "OBJECT"
+      this.notificationData = $("#object").val()
+    } else {
+      this.notificationType = "TEXT"
+      this.notificationData = "None"
+    }
+
     this.notification.message = $("#message").val();
     this.notification.receiver = $("#select_receiver").val();
     this.notification.title = $("#title").val();
@@ -81,19 +93,6 @@ export class SendNotificationComponent implements OnInit {
       title: new FormControl('', [Validators.required]),
       message: new FormControl('', [Validators.required]),
     });
-  }
-
-  notificationFields() {
-    if ($("#notification_type").val() == "medicine_notification"){
-      this.notificationType = "MEDICINE"
-      this.notificationData = $("#medicine").val() + "," + $("#time_notification").val();
-    } else if ($("#notification_type").val() == "object_notification"){
-      this.notificationType = "OBJECT"
-      this.notificationData = $("#object").val()
-    } else {
-      this.notificationType = "TEXT"
-      this.notificationData = "None"
-    }
   }
 
   notificationTypeChange() {

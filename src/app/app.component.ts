@@ -1,9 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from "./user";
 import { timer } from 'rxjs';
 import { Notification } from "./notification"
 import { NotificationService } from "./notification.service";
+
+declare var $: any;
 
 @Component({
   selector: 'app-root',
@@ -11,11 +13,6 @@ import { NotificationService } from "./notification.service";
   styleUrls: ['./app.component.scss'],
 })
 
-/*
-Here, we give some attributes to the html page
-(app.component.html),
-we can call them with {xxx} on the html code
- */
 
 export class AppComponent {
 
@@ -29,6 +26,8 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    this.toggleHeaderStyle();
+
     this.user = JSON.parse(localStorage.getItem('user'));
 
     timer(0, 10000).subscribe(() => {
@@ -52,6 +51,28 @@ export class AppComponent {
       );
     });
 
+  }
+
+  toggleHeaderStyle() {
+    if ($(window).scrollTop() > 64) {
+        $('#navbarBox').css("height", "80px");
+    } else {
+        $('#navbarBox').css("height", "100px");
+    }
+
+    if ($(window).width() < 768) {
+        if(!$('.navbar-collapse').hasClass("collapsed-menu")) {
+            $('.navbar-collapse').addClass("collapsed-menu");
+        }
+    } else {
+        if($('.navbar-collapse').hasClass("collapsed-menu")) {
+            $('.navbar-collapse').removeClass("collapsed-menu");
+        }
+    }
+  }
+
+  showMenu() {
+    $('#navbar').toggleClass("show");
   }
 
   logout() {

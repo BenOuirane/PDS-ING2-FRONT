@@ -28,7 +28,18 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.login();
+    this.userService.loginUser(this.user).subscribe(
+      data => {
+        localStorage.setItem('user', JSON.stringify(data));
+        this.logedUser = JSON.parse(localStorage.getItem('user'));
+        this.error = null;
+        this.router.navigate(['/home']);
+      },
+      error => {
+        console.log(error); 
+        this.error= "Impossible de se connecter, vérifiez vos identifiants";
+      }
+    );
   }
 
   createFormGroup() {
@@ -38,18 +49,4 @@ export class LoginComponent implements OnInit {
     });
   } 
 
-  login() {
-    this.userService.loginUser(this.user).subscribe(
-        data => {
-          localStorage.setItem('user', JSON.stringify(data));
-          this.logedUser = JSON.parse(localStorage.getItem('user'));
-          this.error = null;
-          this.router.navigate(['/home']);
-        },
-        error => {
-          console.log(error); 
-          this.error= "Impossible de se connecter, vérifiez vos identifiants";
-        }
-      );
-  }
 }

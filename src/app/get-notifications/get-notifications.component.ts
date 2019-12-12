@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NotificationService } from '../notification.service';
-import { Notification } from "../notification";
-import { AppComponent } from '../app.component'
 import { timer } from 'rxjs';
+import { AppComponent } from '../app.component'
+
 import { User } from "../user";
+import { Notification } from "../notification";
+
+import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'app-get-notifications',
