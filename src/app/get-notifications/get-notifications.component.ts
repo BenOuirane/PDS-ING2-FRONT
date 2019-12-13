@@ -20,9 +20,11 @@ export class GetNotificationsComponent implements OnInit {
   constructor(private notificationService: NotificationService, private appComponent: AppComponent) { }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('user')); 
+
     timer(2, 2000).subscribe(x => {
       this.notifications = this.appComponent.newNotifications;
-
+      
     setTimeout(() => {  
         this.notificationService.updateNotificationState(this.user.id).subscribe(
           error => {
@@ -31,7 +33,7 @@ export class GetNotificationsComponent implements OnInit {
        }, 5000);
     });
 
-    this.user = JSON.parse(localStorage.getItem('user')); 
+    
   }
 
   split(string, nb) {
