@@ -12,6 +12,9 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 
 import { LoginComponent } from './login/login.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { HomeComponent } from './home/home.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,9 @@ import {ReactiveFormsModule} from "@angular/forms";
     UsersListComponent,
     UserDetailsComponent,
     LoginComponent,
+    SearchBarComponent,
+    HomeComponent,
+    FooterComponent,
     
   ],
   imports: [

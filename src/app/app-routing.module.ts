@@ -6,6 +6,7 @@ import {LoginComponent} from "./login/login.component";
 import { AuthGuard } from "./helpers/AuthGuard";
 import {User} from "./user";
 import { RoleGuard } from './helpers/RoleGuard';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 /*
 The routing module :
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'home/:id', component: UsersListComponent, canActivate: [AuthGuard] },
   { path: 'add', component: CreateUserComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'} },
   { path: 'login', component: LoginComponent },
+  { path: 'search', component: SearchBarComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}}
 ];
 
 @NgModule({

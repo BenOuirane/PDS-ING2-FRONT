@@ -53,4 +53,17 @@ export class UserService {
      */
     return this.http.get(`${this.baseUrl}` + `/users`);
   }
+
+  getUsersById(): Observable<any> {
+    /*
+    Angular will return what baseUrl
+    will send back to it.
+
+    Angular request here is :
+    In http, do a get on the Url
+    http://{localhost} or {172.31.254.61}:8080/api/users/create
+    with no body parameter
+     */
+    return this.http.get(`http://172.31.254.61:8080/api/` + `/referential_resident2`);
+  }
 }
