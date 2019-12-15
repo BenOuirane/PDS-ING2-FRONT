@@ -27,23 +27,24 @@ export class GetNotificationsComponent implements OnInit {
       data => {
         this.notificationsString = JSON.stringify(data);
         this.notifications = JSON.parse(this.notificationsString);
-    });
-
-    timer(2, 2000).subscribe(x => {
-      console.log(this.appComponent.newNotifications);
-      this.notifications = this.appComponent.newNotifications;
-
-      this.notifications.forEach(notification => {
-        if (notification.state == "PENDING") {
-          setTimeout(() => {
-            this.notificationService.updateNotificationState(this.user.id).subscribe(
-              error => {
-                console.log(error);
-              })
-          }, 5000);
-        }
       });
 
+    timer(2, 2000).subscribe(x => {
+      if (window.location.href.includes('notification')) {
+        console.log(this.appComponent.newNotifications);
+        this.notifications = this.appComponent.newNotifications;
+
+        this.notifications.forEach(notification => {
+          if (notification.state == "PENDING") {
+            setTimeout(() => {
+              this.notificationService.updateNotificationState(this.user.id).subscribe(
+                error => {
+                  console.log(error);
+                })
+            }, 5000);
+          }
+        });
+      }
     });
   }
 
