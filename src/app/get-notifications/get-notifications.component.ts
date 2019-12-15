@@ -15,25 +15,36 @@ import { NotificationService } from '../notification.service';
 export class GetNotificationsComponent implements OnInit {
 
   notifications: Notification[];
+  notificationsString: string;
   user: User = new User();
 
   constructor(private notificationService: NotificationService, private appComponent: AppComponent) { }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('user')); 
+    this.user = JSON.parse(localStorage.getItem('user'));
 
-    timer(2, 2000).subscribe(x => {
-      this.notifications = this.appComponent.newNotifications;
-      
-    setTimeout(() => {  
-        this.notificationService.updateNotificationState(this.user.id).subscribe(
-          error => {
-            console.log(error);
-          })
-       }, 5000);
+    this.notificationService.getNotification(this.user.id).subscribe(
+      data => {
+        this.notificationsString = JSON.stringify(data);
+        this.notifications = JSON.parse(this.notificationsString);
     });
 
-    
+    timer(2, 2000).subscribe(x => {
+      console.log(this.appComponent.newNotifications);
+      this.notifications = this.appComponent.newNotifications;
+
+      this.notifications.forEach(notification => {
+        if (notification.state == "PENDING") {
+          setTimeout(() => {
+            this.notificationService.updateNotificationState(this.user.id).subscribe(
+              error => {
+                console.log(error);
+              })
+          }, 5000);
+        }
+      });
+
+    });
   }
 
   split(string, nb) {

@@ -9,10 +9,10 @@
                     <span>Titre :</span> {{ notification.title }}
                     <br>
                     <div *ngIf="notification.type == 'MEDICINE'">
-                        <span>Heure de prise :</span> {{ split(notification.customData,1) }}<br>
-                        <span>Médicament :</span> {{ split(notification.customData,0) }}
+                        <span  *ngIf="split(notification.customData,1) != 'empty'">Heure de prise :</span> {{ split(notification.customData,1) }}<br>
+                        <span *ngIf="split(notification.customData,0) != 'empty'">Médicament :</span> {{ split(notification.customData,0) }}
                     </div>
-                    <div *ngIf="notification.type == 'OBJECT'">
+                    <div *ngIf="notification.type == 'OBJECT' && notification.customData">
                         <span>Objet lié :</span> {{ notification.customData }}<br>
                     </div>
                 </div>
