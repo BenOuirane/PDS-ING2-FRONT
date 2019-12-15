@@ -11,8 +11,8 @@ export class UserService {
   // /!\ Uncomment the first line and comment the second line if you test in localhost /!\
   // /!\ Keep the second line uncommented before you push your code on git /!\
 
-  private baseUrl = 'http://localhost:8080/api';
-  //private baseUrl = 'http://172.31.254.61:8080/api/users';
+  //private baseUrl = 'http://localhost:8080/api';
+  private baseUrl = 'http://172.31.254.61:8080/api';
 
   constructor(private http: HttpClient, private router: Router) { }
 
