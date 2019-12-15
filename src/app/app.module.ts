@@ -15,6 +15,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
+import { UpdateDatamockComponent } from './update-datamock/update-datamock.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { FooterComponent } from './footer/footer.component';
     SearchBarComponent,
     HomeComponent,
     FooterComponent,
+    UpdateDatamockComponent,
     
   ],
   imports: [

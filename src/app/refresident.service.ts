@@ -43,4 +43,12 @@ export class refresidentService {
     return this.http.post(this.baseUrl+ '/generate_referential_position', null, httpOption);
     }
 
+    updatePositionData(): Observable<any>{
+      let header = new HttpHeaders({'Content-Type': 'application/json'})
+      let httpOption = {
+          headers: header
+        };
+      console.log('service update position');
+      return this.http.post(this.baseUrl+ '/update_referential_position', null, httpOption);
+      }
 }
