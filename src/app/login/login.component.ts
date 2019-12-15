@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('user')) { 
       this.logedUser = JSON.parse(localStorage.getItem('user'));
-      this.router.navigate(['/home']);
+      window.location.href = "/home";
     }
   }
 
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('user', JSON.stringify(data));
         this.logedUser = JSON.parse(localStorage.getItem('user'));
         this.error = null;
-        this.router.navigate(['/home']);
+        window.location.href = "/home";
       },
       error => {
         console.log(error); 

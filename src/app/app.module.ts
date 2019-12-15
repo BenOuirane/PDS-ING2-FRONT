@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
-import { UsersListComponent } from './users-list/users-list.component';
+import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
 import { GetNotificationsComponent } from './get-notifications/get-notifications.component';
@@ -16,7 +16,7 @@ import { GetNotificationsComponent } from './get-notifications/get-notifications
 @NgModule({
   declarations: [
     AppComponent,
-    UsersListComponent,
+    HomeComponent,
     LoginComponent,
     SendNotificationComponent,
     GetNotificationsComponent,

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from "./user";
 import { timer } from 'rxjs';
+import { User } from "./user";
 import { Notification } from "./notification"
 import { NotificationService } from "./notification.service";
 
@@ -12,8 +12,6 @@ declare var $: any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-
-
 export class AppComponent {
 
   user: User = new User();
@@ -28,29 +26,32 @@ export class AppComponent {
   ngOnInit() {
     this.toggleHeaderStyle();
 
-    this.user = JSON.parse(localStorage.getItem('user'));
-
-    timer(0, 10000).subscribe(() => {
-      this.numberNotification = 0;
+    if(!window.location.href.includes('login')) {
 
       this.user = JSON.parse(localStorage.getItem('user'));
+      if(this.user.role == 'RESIDENT'){
 
-      this.notificationService.getNotification(this.user.id).subscribe(
-        data => {
-          this.notificationsString = JSON.stringify(data);
-          this.newNotifications = JSON.parse(this.notificationsString);
-          this.newNotifications.forEach(notification => {
-            if (notification.state == "PENDING") {
-              this.numberNotification = this.numberNotification + 1;
+        timer(0, 10000).subscribe(() => {
+          this.numberNotification = 0;
+          this.notificationService.getNotification(this.user.id).subscribe(
+            data => {
+              this.notificationsString = JSON.stringify(data);
+              this.newNotifications = JSON.parse(this.notificationsString);
+              this.newNotifications.forEach(notification => {
+                if (notification.state == "PENDING") {
+                  this.numberNotification = this.numberNotification + 1;
+                }
+              });
+            },
+            error => {
+              console.log(error);
             }
-          });
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    });
+          );
+        });
 
+      }
+    }
+    
   }
 
   toggleHeaderStyle() {
@@ -77,7 +78,7 @@ export class AppComponent {
 
   logout() {
     localStorage.removeItem('user');
-    this.router.navigate(['login']);
+    window.location.href = "/login";
   }
 
   authenticated() {

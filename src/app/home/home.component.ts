@@ -6,11 +6,11 @@ import { User } from '../user';
 import {log} from "util";
 
 @Component({
-  selector: 'users-list',
-  templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.scss']
+  selector: 'home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class UsersListComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   users: Observable<User[]>;
 
