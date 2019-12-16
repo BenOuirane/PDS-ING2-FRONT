@@ -25,6 +25,7 @@ export class SendNotificationComponent implements OnInit {
   message: string;
   notificationType: string;
   notificationData: string;
+  receiver: User;
 
   constructor(private notificationService: NotificationService, private userService: UserService) {
     this.notificationForm = this.createFormGroup();
@@ -66,10 +67,17 @@ export class SendNotificationComponent implements OnInit {
       this.notificationData = "None"
     }
 
+    this.residents.forEach(option => {
+      if (option.id == $("#select_receiver").val()) {
+        this.receiver = option;
+      }
+    }
+    )
+
     this.notification.message = $("#message").val();
-    this.notification.receiver = $("#select_receiver").val();
+    this.notification.receiver = this.receiver;
     this.notification.title = $("#title").val();
-    this.notification.sender = this.user.id;
+    this.notification.sender = this.user;
     this.notification.type = this.notificationType;
     this.notification.customData = this.notificationData;
     

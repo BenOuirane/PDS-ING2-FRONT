@@ -33,7 +33,7 @@ export class AppComponent {
 
         timer(0, 10000).subscribe(() => {
           this.numberNotification = 0;
-          this.notificationService.getNotification(this.user.id).subscribe(
+          this.notificationService.getNotification(this.user).subscribe(
             data => {
               this.notificationsString = JSON.stringify(data);
               this.newNotifications = JSON.parse(this.notificationsString);
