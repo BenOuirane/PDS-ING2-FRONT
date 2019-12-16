@@ -6,6 +6,8 @@ import { GetNotificationsComponent } from './get-notifications/get-notifications
 import { LoginComponent } from "./login/login.component";
 import { AuthGuard } from "./helpers/AuthGuard";
 import { RoleGuard } from './helpers/RoleGuard';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { UpdateDatamockComponent } from './update-datamock/update-datamock.component';
 
 
 const routes: Routes = [
@@ -14,6 +16,8 @@ const routes: Routes = [
   { path: 'notification', component: SendNotificationComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'notifications', component: GetNotificationsComponent, canActivate: [RoleGuard], data: { expectedRole: 'RESIDENT'}},
   { path: 'login', component: LoginComponent },
+  { path: 'search', component: SearchBarComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+  { path: 'updatedata', component: UpdateDatamockComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}}
 ];
 
 @NgModule({

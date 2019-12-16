@@ -1,6 +1,7 @@
 <nav *ngIf="authenticated()" class="navbar navbar-expand-md fixed-top navbar-light" id="navbarBox">
     <a class="navbar-brand" [routerLink]="['home']">
         <img src="./assets/logo.png"
+
             alt="Logo">
     </a>
     <div *ngIf="numberNotification > 0" class="newNotification">{{ numberNotification }} <img src="../../assets/notif.png" alt=""></div>
