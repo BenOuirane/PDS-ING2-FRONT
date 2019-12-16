@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from "../user";
-import {UserService} from "../user.service";
 import { Router } from '@angular/router';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { User } from "../user";
+import { UserService } from "../user.service";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   user: User = new User();
   logedUser: User = new User();
-  error : string;
+  error: string;
   loginForm: FormGroup;
 
   constructor(private userService: UserService, private router: Router) { 
@@ -22,24 +22,24 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('user')) { 
-        this.router.navigate(['home', this.logedUser.id]);
+      this.logedUser = JSON.parse(localStorage.getItem('user'));
+      window.location.href = "/home";
     }
   }
 
-  login() {
-    this.userService.loginUser(this.user)
-      .subscribe(data => {
+  onSubmit() {
+    this.userService.loginUser(this.user).subscribe(
+      data => {
         localStorage.setItem('user', JSON.stringify(data));
         this.logedUser = JSON.parse(localStorage.getItem('user'));
         this.error = null;
-        this.router.navigate(['home', this.logedUser.id ]);
-      }
-      , error => {
-        this.error="Impossible de se connecter, vérifiez vos identifiants";
+        window.location.href = "/home";
+      },
+      error => {
         console.log(error); 
-      });
-
-    this.user = new User();
+        this.error= "Impossible de se connecter, vérifiez vos identifiants";
+      }
+    );
   }
 
   createFormGroup() {
@@ -48,12 +48,5 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', [Validators.required]),
     });
   } 
-
-  /*
-  * When we click on 'Submit', this is launched, see save() function
-  */
-  onSubmit() {
-    this.login();
-  }
 
 }
