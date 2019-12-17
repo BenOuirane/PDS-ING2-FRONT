@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { refresidentService } from '../refresident.service';
 import { refresident } from '../refresident';
+import { positionService } from '../position.service'
 //import { User } from '../user';
 
  
@@ -19,7 +20,8 @@ export class SearchBarComponent implements OnInit {
   filteredOptions: Observable<string[]>;
  @ViewChild('searchInput', {static: false}) searchInput : ElementRef<HTMLInputElement>;
 
-  constructor(private refresidentService: refresidentService) {
+  constructor(private refresidentService: refresidentService, private positionService: positionService) {
+    
 
 console.log("start")
     // console.log(this.reloadDataById());
@@ -58,7 +60,14 @@ console.log("start")
   }
 
   createdata(){
-    console.log("create");
+    console.log("create ref position");
+    this.refresidentService.createPositionData().subscribe(response => {
+      console.log(response);
+    });
+  }
+
+  createpositiondata(){
+    console.log("create positions ");
     this.refresidentService.createPositionData().subscribe(response => {
       console.log(response);
     });

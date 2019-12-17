@@ -25,6 +25,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.toggleHeaderStyle();
+<<<<<<< HEAD
 
     if(!window.location.href.includes('login')) {
 
@@ -34,6 +35,17 @@ export class AppComponent {
         timer(0, 10000).subscribe(() => {
           this.numberNotification = 0;
           this.notificationService.getNotification(this.user.id).subscribe(
+=======
+
+    if(!window.location.href.includes('login')) {
+
+      this.user = JSON.parse(localStorage.getItem('user'));
+      if(this.user.role == 'RESIDENT'){
+
+        timer(0, 10000).subscribe(() => {
+          this.numberNotification = 0;
+          this.notificationService.getNotification(this.user).subscribe(
+>>>>>>> master
             data => {
               this.notificationsString = JSON.stringify(data);
               this.newNotifications = JSON.parse(this.notificationsString);
@@ -48,12 +60,21 @@ export class AppComponent {
             }
           );
         });
+<<<<<<< HEAD
 
       }
     }
     
   }
 
+=======
+
+      }
+    }
+    
+  }
+
+>>>>>>> master
   toggleHeaderStyle() {
     if ($(window).scrollTop() > 64) {
         $('#navbarBox').css("height", "80px");

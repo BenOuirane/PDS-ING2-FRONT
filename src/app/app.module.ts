@@ -2,28 +2,27 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { AppComponent } from './app.component';
-import { CreateUserComponent } from './create-user/create-user.component';
-import { UsersListComponent } from './users-list/users-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { UserDetailsComponent } from './user-details/user-details.component';
+import { ReactiveFormsModule } from "@angular/forms";
+import { CommonModule } from '@angular/common';
 
-
-import { LoginComponent } from './login/login.component';
-import {ReactiveFormsModule} from "@angular/forms";
-import { SearchBarComponent } from './search-bar/search-bar.component';
+import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { SendNotificationComponent } from './send-notification/send-notification.component';
+import { GetNotificationsComponent } from './get-notifications/get-notifications.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 import { FooterComponent } from './footer/footer.component';
 import { UpdateDatamockComponent } from './update-datamock/update-datamock.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateUserComponent,
-    UsersListComponent,
-    UserDetailsComponent,
+    HomeComponent,
     LoginComponent,
+    SendNotificationComponent,
+    GetNotificationsComponent,
     SearchBarComponent,
     HomeComponent,
     FooterComponent,
@@ -36,6 +35,7 @@ import { UpdateDatamockComponent } from './update-datamock/update-datamock.compo
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
