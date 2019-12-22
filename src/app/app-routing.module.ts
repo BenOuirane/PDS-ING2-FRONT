@@ -6,6 +6,8 @@ import { LoginComponent } from "./login/login.component";
 import { AuthGuard } from "./helpers/AuthGuard";
 import { RoleGuard } from './helpers/RoleGuard';
 import { GetNotificationsComponent } from './get-notifications/get-notifications.component';
+import { CreateCandidateComponent } from './create-candidate/create-candidate.component';
+
 
 /*
 The routing module :
@@ -25,6 +27,7 @@ const routes: Routes = [
   { path: 'notification', component: SendNotificationComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'notifications', component: GetNotificationsComponent, canActivate: [RoleGuard], data: { expectedRole: 'RESIDENT'}},
   { path: 'login', component: LoginComponent },
+  { path: 'add', component: CreateCandidateComponent },
 ];
 
 @NgModule({

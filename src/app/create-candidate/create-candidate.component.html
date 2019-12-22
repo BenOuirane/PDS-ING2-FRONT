@@ -1,0 +1,118 @@
+
+
+<div class="container">
+    <div class="row">
+        <div class="text-center border border-light p-5">
+            <div class="col-12">
+                <div class="row form_intro">
+         
+                
+          <!-- form subscription -->
+          
+<form class="text-center border border-light p-5"   (ngSubmit)="postCandidate()"  >
+
+    <h2 class="bold"   class="text-uppercase"  style="text-shadow: 2px 2px  #87CEFA; color: #000033" > 
+   <img src="../../assets/in.png" alt="" width= 120px  height=120px >
+    <b> Subscribe </b>  </h2>
+    <br>
+    <h4 style="color: #00004d"  >
+      <b>Please fill-in the following form.</b>  
+    <br>
+    <b>It's fast and easy.</b>
+    </h4>
+     <br>
+      <!-- FirstName -->
+      <div class="form-group">
+       
+        <small id="firstnameHelp" class="form-text text-muted">Put your FirstName please.</small>
+            <input type="text" class="form-control" id="firstname"  name="firstname" [(ngModel)]="candidate.firstname"  
+            aria-describedby="lastnamelHelp"  placeholder=" FirstName "  />
+            <div class="col-10" *ngIf="candidateError?.firstname">
+              <span class="text text-danger">
+                {{candidateError.firstname}}
+              </span>
+    
+            </div>
+          </div>
+     
+    <!-- LastName -->
+    <div class="form-group">   
+      
+      <small id="lastnameHelp" class="form-text text-muted">Put your LastName please.</small>
+           <input type="text"  class="form-control"  id="lastname"  name="lastname"   [(ngModel)]="candidate.lastname"  
+            aria-describedby="lastnamelHelp" placeholder=" LastName "  /> 
+            <div class="col-10" *ngIf="candidateError?.lastname">
+              <span class="text text-danger">
+                {{candidateError.lastname}}
+              </span>
+
+            </div> 
+           
+          </div>
+          
+    <!-- Email -->
+    <div class="form-group">
+      <small id="emailHelp" class="form-text text-muted">Put your email address please.</small>
+        <input type="email" class="form-control" id="e_mail" name="e_mail"  [(ngModel)]="candidate.mail" 
+        aria-describedby="emailHelp" placeholder="you@example.com" />
+        <div class="col-10" *ngIf="candidateError?.mail">
+          <span class="text text-danger">
+            {{candidateError.mail}}
+          </span>
+
+        </div>
+      </div>
+       
+    <!-- Birth_day-->
+    <div class="form-group">
+      <small id="birth_dayHelp" class="form-text text-muted">Put your Birth_date please.</small>
+            <input type="date" class="form-control" id="birth_date"  name="birth_date"   [(ngModel)]="candidate.birth_date" 
+            aria-describedby="birthHelp" placeholder="Enter Birth_date" />
+            <div class="col-10" *ngIf="candidateError?.birth_date">
+              <span class="text text-danger">
+                {{candidateError.birth_date}}
+              </span>
+    
+            </div>
+          </div>
+        
+    <!-- Sexe -->
+    <div class="form-group">   
+      <small id="sexeHelp" class="form-text text-muted">Choise your sexe  please.</small> 
+        <select class="form-control" id="sexe"  name="sexe"  [(ngModel)]="candidate.sexe" >
+          <option>Selectionner </option>
+          <option value= "Woman">Woman</option>
+          <option value= "Man">Man</option>
+        </select>
+        <div class="col-10" *ngIf="candidateError?.sexe">
+          <span class="text text-danger">
+            {{candidateError.sexe}}
+          </span>
+
+        </div>
+    </div>
+         <br>
+    <!-- Sign in button -->
+  
+   
+  <button type="submit" value="postCandidate"  class="btn btn-outline-primary btn-lg btn-block" >Sign in</button>
+</form>
+<div class="alert alert-danger col-10" *ngIf="candidateExist">
+  A Candidate already exist !
+</div>
+<div class="alert alert-success col-10" *ngIf="isCreated">
+Congratulation your account was created !
+</div>
+
+<!-- fin form subscription -->
+
+ 
+
+
+
+
+ </div>
+ </div>
+    </div>
+  </div>
+</div>
