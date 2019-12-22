@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { User } from "./user";
+import { Observable } from 'rxjs';
+import { Notification } from "./notification";
 
 @Injectable({
   providedIn: 'root'
@@ -10,20 +12,20 @@ import { User } from "./user";
 export class NotificationService {
 
   //private baseUrl = 'http://localhost:8080/api';
-  private baseUrl = 'http://localhost:8080/api';
+  private baseUrl = 'http://172.31.254.61:8080/api';
 
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  createNotification(notification: Object){
+  createNotification(notification: Notification){
     return this.http.put(`${this.baseUrl}` + `/notification/create`, notification);
   }
 
-  getNotification(user: User){
-    return this.http.put(`${this.baseUrl}` + `/notifications/list`, user);
+  getNotifications(user: User): Observable<Array<Notification>>{
+    return this.http.put<Array<Notification>>(`${this.baseUrl}` + `/notifications/list`, user);
   }
 
-  updateNotificationState(user: User){
-    return this.http.put(`${this.baseUrl}` + `/notifications/update`, user);
+  updateNotificationState(user: User): Observable<Array<Notification>> {
+    return this.http.put<Array<Notification>>(`${this.baseUrl}` + `/notifications/update`, user);
   }
 }
