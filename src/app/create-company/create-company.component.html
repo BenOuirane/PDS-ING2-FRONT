@@ -1,0 +1,23 @@
+<h3>Ajout d'une entreprise</h3>
+<!-- If we just created a user, the first container is hidden and the second is not; this attribute is on the component.ts -->
+<!-- If submitted is at true on the create-user component, then we will have hidden=true -->
+<div [hidden]="submitted" class="form-add">
+
+  <!-- When we will submit the form, onSubmit() will be fired -->
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group form-add-group">
+      <label for="name">Nom </label>
+      <!-- ngModel = company.name -> Made to say that the field contains the user's firstname -->
+      <input type="text" class="form-control" id="name" required [(ngModel)]="company.name" name="name">
+    </div>
+
+    <button type="submit" class="form-button">Ajouter</button>
+  </form>
+</div>
+
+<!-- If submitted is at false on the create-user component, then we will have hidden=nottrue so hidden=true -->
+<div [hidden]="!submitted" class="form-submitted">
+  <h4>Votre entreprise a bien été ajouté</h4>
+  <!-- When we will want to add an new User after we just added one, newUser() is launched-->
+  <button class="btn btn-success form-button" (click)="newCompany()">Ajouter une nouvelle compagnie</button>
+</div>

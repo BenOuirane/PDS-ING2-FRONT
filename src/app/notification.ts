@@ -1,8 +1,10 @@
+import { User } from './user';
+
 export class Notification {
-    sender: number;
+    sender: User;
     title: string;
     message: string;
-    receiver: number;
+    receiver: User;
     type: string;
     state: string;
     customData: string;

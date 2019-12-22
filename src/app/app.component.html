@@ -1,25 +1,28 @@
 <nav *ngIf="authenticated()" class="navbar navbar-expand-md fixed-top navbar-light" id="navbarBox">
-    <a class="navbar-brand" href="#">
-        <img src="logo.png"
+    <a class="navbar-brand" [routerLink]="['home']">
+        <img src="./assets/logo.png"
+
             alt="Logo">
     </a>
+    <div *ngIf="numberNotification > 0" class="newNotification">{{ numberNotification }} <img src="../../assets/notif.png" alt=""></div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
         aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon" (click)="showMenu()"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbar">
+    <div class="collapse navbar-collapse" id="navbar" (window:resize)="toggleHeaderStyle()" (window:scroll)="toggleHeaderStyle()">
         <ul id="menu-menu-head" class="navbar-nav ml-auto">
-            <li *ngIf="numberNotification > 0" id="menu-item-204" class="menu-item">Vous avez {{ numberNotification }} notifications non lues</li>
             <li id="menu-item-204"
                 class="menu-item">
-                <a href="toDo" aria-current="page">Compte de {{ user.username }}</a></li>
+                <span>Compte de {{ user.username }}</span></li>
             <li id="menu-item-204"
                 class="menu-item">
                 <a [routerLink]="['home']" aria-current="page">Accueil</a></li>
-            <li id="menu-item-201" class="menu-item"><a
-                    href="toDo">Objets</a></li>
+            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['search']" 
+                >Recherche de résident</a></li>
             <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['notification']" 
                     >Envoyer une notification</a></li>
+            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'RESIDENT'"><a [routerLink]="['object']" 
+                        >Mes Objets connectés</a></li>
             <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'RESIDENT'"><a [routerLink]="['notifications']" 
                         >Notifications</a></li>
 

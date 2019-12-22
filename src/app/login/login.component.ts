@@ -23,12 +23,23 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('user')) { 
       this.logedUser = JSON.parse(localStorage.getItem('user'));
-      this.router.navigate(['/home']);
+      window.location.href = "/home";
     }
   }
 
   onSubmit() {
-    this.login();
+    this.userService.loginUser(this.user).subscribe(
+      data => {
+        localStorage.setItem('user', JSON.stringify(data));
+        this.logedUser = JSON.parse(localStorage.getItem('user'));
+        this.error = null;
+        window.location.href = "/home";
+      },
+      error => {
+        console.log(error); 
+        this.error= "Impossible de se connecter, vérifiez vos identifiants";
+      }
+    );
   }
 
   createFormGroup() {
@@ -38,18 +49,4 @@ export class LoginComponent implements OnInit {
     });
   } 
 
-  login() {
-    this.userService.loginUser(this.user).subscribe(
-        data => {
-          localStorage.setItem('user', JSON.stringify(data));
-          this.logedUser = JSON.parse(localStorage.getItem('user'));
-          this.error = null;
-          this.router.navigate(['/home']);
-        },
-        error => {
-          console.log(error); 
-          this.error= "Impossible de se connecter, vérifiez vos identifiants";
-        }
-      );
-  }
 }

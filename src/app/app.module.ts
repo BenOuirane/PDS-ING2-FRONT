@@ -5,30 +5,43 @@ import { HttpModule } from '@angular/http';
 
 
 
-import { AppComponent } from './app.component';
-import { CreateUserComponent } from './create-user/create-user.component';
-import { UsersListComponent } from './users-list/users-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { UserDetailsComponent } from './user-details/user-details.component';
-import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { CommonModule } from '@angular/common';
+
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
 import { GetNotificationsComponent } from './get-notifications/get-notifications.component';
+<<<<<<< HEAD
 import { CreateCandidateComponent } from './create-candidate/create-candidate.component';
 import {CandidateService} from './candidate_services/candidate.service';
 import { from } from 'rxjs';
+=======
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { FooterComponent } from './footer/footer.component';
+import { UpdateDatamockComponent } from './update-datamock/update-datamock.component';
+import { ObjectComponent } from './object/object.component';
+>>>>>>> origin
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateUserComponent,
-    UsersListComponent,
-    UserDetailsComponent,
+    HomeComponent,
     LoginComponent,
     SendNotificationComponent,
     GetNotificationsComponent,
+<<<<<<< HEAD
     CreateCandidateComponent,
+=======
+    SearchBarComponent,
+    HomeComponent,
+    FooterComponent,
+    UpdateDatamockComponent,
+    ObjectComponent,
+>>>>>>> origin
     
   ],
   imports: [
@@ -37,13 +50,18 @@ import { from } from 'rxjs';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+<<<<<<< HEAD
     HttpModule,
    
   ],
   providers: [
     CandidateService,
+=======
+    CommonModule,
+>>>>>>> origin
   ],
   bootstrap: [AppComponent]
+  
 })
 export class AppModule { 
 }
