@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import { User } from "./user";
+import { Observable } from 'rxjs';
+import { Notification } from "./notification";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,15 +16,15 @@ export class NotificationService {
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  createNotification(notification: Object){
+  createNotification(notification: Notification){
     return this.http.put(`${this.baseUrl}` + `/notification/create`, notification);
   }
 
-  getNotification(userId: number){
-    return this.http.put(`${this.baseUrl}` + `/notifications/list`, userId);
+  getNotifications(user: User): Observable<Array<Notification>>{
+    return this.http.put<Array<Notification>>(`${this.baseUrl}` + `/notifications/list`, user);
   }
 
-  updateNotificationState(userId: number){
-    return this.http.put(`${this.baseUrl}` + `/notifications/update`, userId);
+  updateNotificationState(user: User): Observable<Array<Notification>> {
+    return this.http.put<Array<Notification>>(`${this.baseUrl}` + `/notifications/update`, user);
   }
 }

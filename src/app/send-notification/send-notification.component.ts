@@ -20,7 +20,6 @@ export class SendNotificationComponent implements OnInit {
   notification: Notification;
   user: User = new User();
   response: string;
-  residentsString: string;
   residents: User[];
   message: string;
   notificationType: string;
@@ -35,11 +34,9 @@ export class SendNotificationComponent implements OnInit {
   ngOnInit() {
     this.limitTime();
 
-    this.userService.getResidents("RESIDENT").subscribe(
+    this.userService.getUsersByRole("RESIDENT").subscribe(
       data => {
-        this.residentsString = JSON.stringify(data);
-        this.residents = JSON.parse(this.residentsString);
-
+        this.residents = data;
         this.residents.forEach(option =>
           $("#select_receiver").add(
             $('#select_receiver').append('<option value="' + option.id + '">' + option.firstname + ' ' + option.lastname + '</option>')
