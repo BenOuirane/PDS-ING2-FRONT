@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+
+
 
 import { AppComponent } from './app.component';
 import { CreateUserComponent } from './create-user/create-user.component';
@@ -12,6 +15,9 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { SendNotificationComponent } from './send-notification/send-notification.component';
 import { GetNotificationsComponent } from './get-notifications/get-notifications.component';
+import { CreateCandidateComponent } from './create-candidate/create-candidate.component';
+import {CandidateService} from './candidate_services/candidate.service';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -22,6 +28,7 @@ import { GetNotificationsComponent } from './get-notifications/get-notifications
     LoginComponent,
     SendNotificationComponent,
     GetNotificationsComponent,
+    CreateCandidateComponent,
     
   ],
   imports: [
@@ -30,8 +37,12 @@ import { GetNotificationsComponent } from './get-notifications/get-notifications
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    HttpModule,
+   
   ],
-  providers: [],
+  providers: [
+    CandidateService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
