@@ -15,6 +15,7 @@ import { GetNotificationsComponent } from './get-notifications/get-notifications
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { FooterComponent } from './footer/footer.component';
 import { UpdateDatamockComponent } from './update-datamock/update-datamock.component';
+import { ObjectComponent } from './object/object.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { UpdateDatamockComponent } from './update-datamock/update-datamock.compo
     HomeComponent,
     FooterComponent,
     UpdateDatamockComponent,
+    ObjectComponent,
     
   ],
   imports: [
