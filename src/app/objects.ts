@@ -6,5 +6,4 @@ export class Objects {
     macAddress : String;
     ipAddress : String;
     objectType : String;
-    rooms : Room;
 }

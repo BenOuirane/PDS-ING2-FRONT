@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Objects } from './objects'; 
+import { Observable } from 'rxjs';
+import { Lampe } from './lampe';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +15,8 @@ export class LampeService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getlampe(objects: Objects){
-    return this.http.put(`${this.baseUrl}` + `/lamp/list`, objects);
+  getlampe(objects: Objects) : Observable<Array<Lampe>>{
+    return this.http.put<Array<Lampe>>(`${this.baseUrl}` + `/lamp/list`, objects);
   }
 
 }

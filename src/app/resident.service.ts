@@ -16,8 +16,8 @@ export class ResidentService {
   
   constructor(private http: HttpClient, private router: Router) { }
 
-  getResident(user: User) : Observable<Resident>{
-    return this.http.put<Resident>(`${this.baseUrl}` + `/Resident/singleton`, user);
+  getResident(user: User): Observable<Resident>{
+    return this.http.put<Resident>(`${this.baseUrl}` + `/resident/singleton`, user);
   }
 
 }

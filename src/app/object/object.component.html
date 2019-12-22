@@ -1,22 +1,18 @@
-<p>object works!</p>
-<p>object works!</p>
-<p>object works!</p>
-<p>object works!</p>
-<p>object works!</p>
-<p>object works!</p>
-<p>object works!</p>
-<p>object works!</p>
-<p>object works!</p>
-<p>object works!</p>
-<p>object works!</p>
+<section class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>Mes objets connectés</h2>
+        </div>
+        <div class="col-12" *ngIf="dataloaded">
+            <div *ngIf="lamps">
+                <h2><img src="../../assets/lampe.jpg" alt="">Lampe</h2>
+                <div class="row" *ngFor="let lampe of lamps; index as i">
+                   <h5>Lampe {{ i + 1}} :</h5> <br>
+                        <p>Couleur : {{ lampe.color }}</p>
+                        <p>Statut : {{ lampe.status }}</p>
+                </div>
+            </div>
+        </div>
 
-<p>object works!</p>
-<p>object works!</p>
-<p>object works!</p>
-<p>object works!</p>
-
-
-<p>object works!</p>
-<p>object works!</p>
-<p>object works!</p>
-
+    </div>
+</section>
