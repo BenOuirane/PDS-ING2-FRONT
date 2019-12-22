@@ -13,7 +13,7 @@ export class LampeService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getNotification(objects: Objects){
+  getlampe(objects: Objects){
     return this.http.put(`${this.baseUrl}` + `/lamp/list`, objects);
   }
 
