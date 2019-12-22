@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User } from "./user";
+import { Resident } from './resident';
+import { Observable } from 'rxjs';
+import { Room } from "./room";
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +16,8 @@ export class ResidentService {
   
   constructor(private http: HttpClient, private router: Router) { }
 
-  getResident(user: User){
-    return this.http.put(`${this.baseUrl}` + `//Resident/singleton`, user);
+  getResident(user: User) : Observable<Resident>{
+    return this.http.put<Resident>(`${this.baseUrl}` + `/Resident/singleton`, user);
   }
 
 }
