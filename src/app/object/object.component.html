@@ -10,8 +10,8 @@
                     <h5>Vos lampes - {{ i + 1}} :</h5>
 
                     <ul style="list-style-type:square;">
-                        <li>Couleur : <span *ngIf="lampe.color === 'WHITE'">Blanche</span></li>
                         <li >Status : <span *ngIf="lampe.status">Allumées</span> <span *ngIf="!lampe.status">Éteint</span></li>
+                        <li>Couleur : <span *ngIf="lampe.color === 'WHITE'">Blanche</span></li>
                         <li>Allumées à : {{ lampe.hourOn | date: "hh:mm a"}}</li>
                         <li>Éteintes à : {{ lampe.hourOff | date: "hh:mm a"}}</li>
                         <li>Intensité : {{ lampe.intensity }}%</li>
@@ -28,6 +28,17 @@
                         <li>Température effective : {{ oven.effectiveTemp}}°C</li>
                         <span *ngIf="oven.scheduleTime != null"><li>Heure de lancement : {{ oven.scheduleTime | date: "hh:mm a"}}</li></span>
                         <li>Mode : {{ oven.mode}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div *ngIf="shutters">
+                <h2><img src="../../assets/volet.jpeg" alt="">Volet</h2>
+                <div class="row" *ngFor="let shutter of shutters; index as i">
+                    <h5>Votre volet - {{ i + 1}} :</h5>
+                    <ul style="list-style-type:square;">
+                        <li >Status : <span *ngIf="shutter.status">Ouvert</span> <span *ngIf="!shutter.status">Fermé</span></li>
+                        <li>Ouvrir à : {{ shutter.hourOn | date: "hh:mm a"}}</li>
+                        <li>Fermé à : {{ shutter.hourOff | date: "hh:mm a"}}</li>
                     </ul>
                 </div>
             </div>

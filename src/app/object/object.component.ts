@@ -5,6 +5,7 @@ import { Room } from '../room';
 import { Objects } from '../objects';
 import { ObjectService } from '../object.service';
 import { LampeService } from '../lampe.service';
+import { ShutterService } from '../shutter.service';
 import { OvenService } from '../oven.service';
 import { Lampe } from '../lampe';
 import { MethodCall } from '@angular/compiler';
@@ -12,6 +13,7 @@ import { TestBed } from '@angular/core/testing';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { Oven } from '../oven';
+import { Shutter } from '../shutter';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -28,12 +30,13 @@ export class ObjectComponent implements OnInit {
   objects : Objects[] = new Array<Objects>();
   lamps : Lampe[] = new Array<Lampe>();
   ovens : Oven[] = new Array<Oven>();
+  shutters : Shutter[] = new Array<Shutter>();
   dataloaded : boolean = false;
   LampStatus : boolean = false;
 
 
 
-  constructor(private residentService: ResidentService, private objectService: ObjectService, private lampeService : LampeService, private ovenService : OvenService) { }
+  constructor(private residentService: ResidentService, private objectService: ObjectService, private lampeService : LampeService, private ovenService : OvenService, private shutterService : ShutterService) { }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -53,13 +56,21 @@ export class ObjectComponent implements OnInit {
                       console.log(data);
                     }
                   ); break; 
-                case 'OVEN' : console.log(object); 
+                case 'OVEN' : 
                 this.ovenService.getOven(object).subscribe(
                   data => {
                     this.ovens = data; 
                     console.log(data);
                   }
                 ); break; 
+
+                case 'SHUTTER' : 
+                  this.shutterService.getshutter(object).subscribe(
+                    data => {
+                      this.shutters = data; 
+                      console.log(data);
+                    } 
+                  ); break;
 
                 default : 
                 break;
