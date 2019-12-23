@@ -6,14 +6,14 @@ import { Objects } from '../objects';
 import { ObjectService } from '../object.service';
 import { LampeService } from '../lampe.service';
 import { ShutterService } from '../shutter.service';
+import { AlarmClockService } from '../alarm-clock.service';
 import { OvenService } from '../oven.service';
 import { Lampe } from '../lampe';
-import { MethodCall } from '@angular/compiler';
-import { TestBed } from '@angular/core/testing';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { Oven } from '../oven';
 import { Shutter } from '../shutter';
+import { AlarmClock } from '../alarm-clock';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -30,13 +30,14 @@ export class ObjectComponent implements OnInit {
   objects : Objects[] = new Array<Objects>();
   lamps : Lampe[] = new Array<Lampe>();
   ovens : Oven[] = new Array<Oven>();
+  alarmClocks : AlarmClock[] = new Array<AlarmClock>();
   shutters : Shutter[] = new Array<Shutter>();
   dataloaded : boolean = false;
   LampStatus : boolean = false;
 
 
 
-  constructor(private residentService: ResidentService, private objectService: ObjectService, private lampeService : LampeService, private ovenService : OvenService, private shutterService : ShutterService) { }
+  constructor(private residentService: ResidentService, private objectService: ObjectService, private lampeService : LampeService, private ovenService : OvenService, private shutterService : ShutterService, private alarmClockService : AlarmClockService) { }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -71,6 +72,14 @@ export class ObjectComponent implements OnInit {
                       console.log(data);
                     } 
                   ); break;
+
+                case 'ALARMCLOCK' : 
+                    this.alarmClockService.getAlarmClock(object).subscribe(
+                      data => {
+                        this.alarmClocks = data; 
+                        console.log(data);
+                      }
+                    )
 
                 default : 
                 break;

@@ -10,7 +10,8 @@
                     <h5>Vos lampes - {{ i + 1}} :</h5>
 
                     <ul style="list-style-type:square;">
-                        <li >Status : <span *ngIf="lampe.status">Allumées</span> <span *ngIf="!lampe.status">Éteint</span></li>
+                        <li>Status : <span *ngIf="lampe.status">Allumées</span> <span
+                                *ngIf="!lampe.status">Éteint</span></li>
                         <li>Couleur : <span *ngIf="lampe.color === 'WHITE'">Blanche</span></li>
                         <li>Allumées à : {{ lampe.hourOn | date: "hh:mm a"}}</li>
                         <li>Éteintes à : {{ lampe.hourOff | date: "hh:mm a"}}</li>
@@ -23,10 +24,13 @@
                 <div class="row" *ngFor="let oven of ovens; index as i">
                     <h5>Votre four - {{ i + 1}} :</h5>
                     <ul style="list-style-type:square;">
-                        <li >Status : <span *ngIf="oven.status">Allumées</span> <span *ngIf="!oven.status">Éteint</span></li>
+                        <li>Status : <span *ngIf="oven.status">Allumées</span> <span *ngIf="!oven.status">Éteint</span>
+                        </li>
                         <li>Température programmée : {{ oven.programTemp}}°C</li>
                         <li>Température effective : {{ oven.effectiveTemp}}°C</li>
-                        <span *ngIf="oven.scheduleTime != null"><li>Heure de lancement : {{ oven.scheduleTime | date: "hh:mm a"}}</li></span>
+                        <span *ngIf="oven.scheduleTime != null">
+                            <li>Heure de lancement : {{ oven.scheduleTime | date: "hh:mm a"}}</li>
+                        </span>
                         <li>Mode : {{ oven.mode}}</li>
                     </ul>
                 </div>
@@ -36,9 +40,26 @@
                 <div class="row" *ngFor="let shutter of shutters; index as i">
                     <h5>Votre volet - {{ i + 1}} :</h5>
                     <ul style="list-style-type:square;">
-                        <li >Status : <span *ngIf="shutter.status">Ouvert</span> <span *ngIf="!shutter.status">Fermé</span></li>
+                        <li>Status : <span *ngIf="shutter.status">Ouvert</span> <span
+                                *ngIf="!shutter.status">Fermé</span></li>
                         <li>Ouvrir à : {{ shutter.hourOn | date: "hh:mm a"}}</li>
                         <li>Fermé à : {{ shutter.hourOff | date: "hh:mm a"}}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div *ngIf="alarmClocks">
+                <h2><img src="../../assets/AlarmClock.jpg" alt="">Réveil</h2>
+                <div class="row" *ngFor="let alarmClock of alarmClocks; index as i">
+                    <h5>Votre réveil - {{ i + 1}} :</h5>
+                    <ul style="list-style-type:square;">
+                        <li>Heure actuelle : {{ alarmClock.time | date: "hh:mm a"}}</li>
+                        <li>Status du Réveil : <span *ngIf="alarmClock.alarmStatus">ON</span> <span
+                                *ngIf="!alarmClock.alarmStatus">OFF</span></li>
+                        <li>Heure du réveil : {{ alarmClock.time | date: "hh:mm a"}}</li>
+                        <li>Status du Réveil : <span *ngIf="alarmClock.radioStatus">ON</span> <span
+                                *ngIf="!alarmClock.radioStatus">OFF</span></li>
+                        <li>Fréquence Radio : {{alarmClock.radioHrz | number}}</li>
                     </ul>
                 </div>
             </div>
