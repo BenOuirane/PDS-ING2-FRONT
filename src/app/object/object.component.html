@@ -67,7 +67,7 @@
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Mode</td>
-                                    <td class="col-6">{{ oven.mode}}</td>
+                                    <td class="col-6"><span *ngIf="oven.mode === 'FAN'">Chaleur tournante</span></td>
                                 </tr>
                             </table>
                         </div>
