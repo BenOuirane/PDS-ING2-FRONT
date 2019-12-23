@@ -7,6 +7,7 @@ import { ObjectService } from '../object.service';
 import { LampeService } from '../lampe.service';
 import { ShutterService } from '../shutter.service';
 import { AlarmClockService } from '../alarm-clock.service';
+import { CoffeeMachineService } from '../coffee-machine.service';
 import { OvenService } from '../oven.service';
 import { Lampe } from '../lampe';
 import { registerLocaleData } from '@angular/common';
@@ -14,6 +15,8 @@ import localeFr from '@angular/common/locales/fr';
 import { Oven } from '../oven';
 import { Shutter } from '../shutter';
 import { AlarmClock } from '../alarm-clock';
+import { CoffeeMachine } from '../coffeeMachine';
+
 
 registerLocaleData(localeFr, 'fr');
 
@@ -31,13 +34,15 @@ export class ObjectComponent implements OnInit {
   lamps : Lampe[] = new Array<Lampe>();
   ovens : Oven[] = new Array<Oven>();
   alarmClocks : AlarmClock[] = new Array<AlarmClock>();
+  coffeeMachines : CoffeeMachine[] = new Array<CoffeeMachine>();
   shutters : Shutter[] = new Array<Shutter>();
   dataloaded : boolean = false;
   LampStatus : boolean = false;
 
 
 
-  constructor(private residentService: ResidentService, private objectService: ObjectService, private lampeService : LampeService, private ovenService : OvenService, private shutterService : ShutterService, private alarmClockService : AlarmClockService) { }
+
+  constructor(private residentService: ResidentService, private objectService: ObjectService, private lampeService : LampeService, private ovenService : OvenService, private shutterService : ShutterService, private alarmClockService : AlarmClockService, private coffeeMachineService : CoffeeMachineService) { }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -79,7 +84,16 @@ export class ObjectComponent implements OnInit {
                         this.alarmClocks = data; 
                         console.log(data);
                       }
-                    )
+                    ); break; 
+                
+                case 'COFFEEMACHINE' : 
+                this.coffeeMachineService.getCoffeeMachine(object).subscribe(
+                  data => {
+                    this.coffeeMachines = data; 
+                    console.log(data);
+                  }
+                ); break; 
+
 
                 default : 
                 break;

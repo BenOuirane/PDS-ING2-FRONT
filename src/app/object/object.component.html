@@ -1,4 +1,5 @@
 <section class="container">
+
     <div class="row">
         <div class="col-12">
             <h2>Mes objets connectés</h2>
@@ -63,6 +64,22 @@
                     </ul>
                 </div>
             </div>
+
+            <div *ngIf="coffeeMachines">
+                <h2><img src="../../assets/coffeeMachine.jpg" alt="">Machine à café</h2>
+                <div class="row" *ngFor="let coffeeMachine of coffeeMachines; index as i">
+                    <h5>Votre machine à café - {{ i + 1}} :</h5>
+                        <ul style="list-style-type:square;">
+                            <li>Nombre de capsule restante : {{ coffeeMachine.nbCapsule }}</li>
+                            <li>Ma machine à café est : <span *ngIf="coffeeMachine.status">Allumée</span> <span
+                                    *ngIf="!coffeeMachine.status">Éteinte</span></li>
+                            <li>Mon café sera prêt à : {{ coffeeMachine.scheduleCoffee | date: "hh:mm a"}}</li>
+                            <li>Niveau d'eau de ma machine : {{coffeeMachine.waterLevel}} Litre</li>
+                        </ul>
+                </div>
+            </div>
+
+
         </div>
 
     </div>

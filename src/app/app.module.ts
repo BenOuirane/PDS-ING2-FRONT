@@ -28,7 +28,7 @@ import { ObjectComponent } from './object/object.component';
     HomeComponent,
     FooterComponent,
     UpdateDatamockComponent,
-    ObjectComponent,
+    ObjectComponent
     
   ],
   imports: [
