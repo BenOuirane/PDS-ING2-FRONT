@@ -16,6 +16,8 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { FooterComponent } from './footer/footer.component';
 import { UpdateDatamockComponent } from './update-datamock/update-datamock.component';
 import { ObjectComponent } from './object/object.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { ObjectComponent } from './object/object.component';
     HomeComponent,
     FooterComponent,
     UpdateDatamockComponent,
-    ObjectComponent
+    ObjectComponent,
+    
     
   ],
   imports: [
@@ -38,6 +41,8 @@ import { ObjectComponent } from './object/object.component';
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
+    MatTabsModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     { 

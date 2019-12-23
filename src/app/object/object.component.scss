@@ -3,6 +3,19 @@
 }
 
 img {
-    height: 120px;
+    height: 200px;
     margin-right: 30px;
+}
+
+mat-tab-body > div {
+    overflow: none;
+}
+
+.my-custom-row {
+    display: flex;
+    flex-wrap: wrap
+}
+
+table tr td:nth-child(1) {
+    border-right: 1px solid black
 }
