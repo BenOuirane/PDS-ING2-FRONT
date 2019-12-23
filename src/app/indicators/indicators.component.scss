@@ -1,0 +1,69 @@
+
+
+textarea {
+  resize: none;
+}
+
+input, textarea, select {
+  box-shadow: none;
+}
+
+
+.container {
+  margin-top: 30px;
+  color: #151515;
+  border-radius: 16px;
+}
+
+h2 {
+  text-align: center;
+  font-weight: 600;
+}
+
+.response {
+  padding-bottom: 40px;
+  color: purple;
+  font-weight: 600;
+}
+
+form {
+  padding-top: 30px;
+
+  &_intro {
+    align-items: center;
+    padding-top: 50px;
+    padding-bottom: 35px;
+
+    h4 {
+      font-weight: 200;
+      color: purple;
+      padding-top: 20px;
+
+    }
+
+    select {
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+  }
+}
+
+
+h2 {
+  padding-bottom: 20px;
+  color: #002f5a;
+}
+
+h4 {
+
+  padding-bottom: 20px;
+  color: #002f5a;
+  padding-top:2px;
+}
+
+
+.clickable{
+  cursor: pointer;
+}
+
