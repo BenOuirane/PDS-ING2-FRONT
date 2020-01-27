@@ -1,0 +1,185 @@
+<section class="container">
+
+    <mat-tab-group *ngIf="dataloaded">
+        <mat-tab label="Lampe" *ngIf="lamps">
+            <div class="my-custom-row">
+                <div class="col-6"><img src="../../assets/lampe.jpg" alt=""></div>
+                <div class="col-6">
+                    <ng-container *ngFor="let lampe of lamps; index as i">
+                        <h5 style="padding-left:20%;">Lampe - {{ i + 1}} :</h5>
+                        <div class="row">
+                            <table width="90%">
+                                <tr class="col-12">
+                                    <td class="col-6">Status</td>
+                                    <td class="col-6"><span *ngIf="lampe.status">Allumées</span> <span
+                                            *ngIf="!lampe.status">Éteint</span></td>
+                                </tr>
+                                <tr class="col-12">
+                                    <td class="col-6">Couleur</td>
+                                    <td class="col-6"><span *ngIf="lampe.color === 'WHITE'">Blanche</span></td>
+                                </tr>
+                                <tr class="col-12">
+                                    <td class="col-6">Allumées à</td>
+                                    <td class="col-6">{{ lampe.hourOn | date: "hh:mm a"}}</td>
+                                </tr>
+                                <tr class="col-12">
+                                    <td class="col-6">Éteintes à</td>
+                                    <td class="col-6">{{ lampe.hourOff | date: "hh:mm a"}}</td>
+                                </tr>
+                                <tr class="col-12">
+                                    <td class="col-6">Intensité</td>
+                                    <td class="col-6">{{ lampe.intensity }}%</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </ng-container>
+
+                </div>
+            </div>
+
+
+        </mat-tab>
+        
+        <mat-tab label="Four" *ngIf="ovens">
+            <div class="my-custom-row">
+                <div class="col-6"><img src="../../assets/oven.jpg" alt=""></div>
+                <div class="col-6">
+                    <ng-container *ngFor="let oven of ovens; index as i">
+                        <h5 style="padding-left:20%;">Four - {{ i + 1}} :</h5>
+                        <div class="row">
+                            <table width="90%">
+                                <tr class="col-12">
+                                    <td class="col-6">Status</td>
+                                    <td class="col-6"><span *ngIf="oven.status">Allumées</span> <span *ngIf="!oven.status">Éteint</span></td>
+                                </tr>
+                                <tr class="col-12">
+                                    <td class="col-6">Température programmée</td>
+                                    <td class="col-6">{{ oven.programTemp}}°C</td>
+                                </tr>
+                                <tr class="col-12">
+                                    <td class="col-6">Température effective</td>
+                                    <td class="col-6">{{ oven.effectiveTemp}}°C</td>
+                                </tr>
+                                <tr class="col-12">
+                                    <td class="col-6">Heure de lancement</td>
+                                    <td class="col-6"><span *ngIf="oven.scheduleTime == null">Non Renseigné</span> <span *ngIf="oven.scheduleTime != null">{{ oven.scheduleTime | date: "hh:mm a"}}</span></td>
+                                </tr>
+                                <tr class="col-12">
+                                    <td class="col-6">Mode</td>
+                                    <td class="col-6"><span *ngIf="oven.mode === 'FAN'">Chaleur tournante</span></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </ng-container>
+
+                </div>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="Volet" *ngIf="shutters"> 
+            <div class="my-custom-row">
+                <div class="col-6"><img src="../../assets/volet.jpeg" alt=""></div>
+                <div class="col-6">
+                    <ng-container *ngFor="let shutter of shutters; index as i">
+                        <h5 style="padding-left:20%;">Volet - {{ i + 1}} :</h5>
+                        <div class="row">
+                            <table width="90%">
+                                <tr class="col-12">
+                                    <td class="col-6">Status</td>
+                                    <td class="col-6"><span *ngIf="shutter.status">Ouvert</span> <span
+                                        *ngIf="!shutter.status">Fermé</span></td>
+                                </tr>
+                                <tr class="col-12">
+                                    <td class="col-6">Ouvrir à </td>
+                                    <td class="col-6">{{ shutter.hourOn | date: "hh:mm a"}}</td>
+                                </tr>
+                                <tr class="col-12">
+                                    <td class="col-6">Fermé à</td>
+                                    <td class="col-6">{{ shutter.hourOff | date: "hh:mm a"}}</td>
+                                </tr>
+                                
+                            </table>
+                        </div>
+                    </ng-container>
+
+                </div>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="Réveil" *ngIf="alarmClocks"> 
+            <div class="my-custom-row">
+                <div class="col-6"><img src="../../assets/AlarmClock.jpg" alt=""></div>
+                <div class="col-6">
+                    <ng-container *ngFor="let alarmClock of alarmClocks; index as i">
+                        <h5 style="padding-left:20%;">Réveil - {{ i + 1}} :</h5>
+                        <div class="row">
+                            <table width="90%">
+                                <tr class="col-12">
+                                    <td class="col-6">Heure actuelle</td>
+                                    <td class="col-6">{{ alarmClock.time | date: "hh:mm a"}}</td>
+                                </tr>
+                                <tr class="col-12">
+                                    <td class="col-6">Statut réveil </td>
+                                    <td class="col-6"><span *ngIf="alarmClock.alarmStatus">ON</span> <span
+                                        *ngIf="!alarmClock.alarmStatus">OFF</span></td>
+                                </tr>
+                                <tr class="col-12">
+                                    <td class="col-6">Sonnerie à </td>
+                                    <td class="col-6">{{ alarmClock.time | date: "hh:mm a"}}</td>
+                                </tr>
+                                <tr class="col-12">
+                                    <td class="col-6">Statut radio </td>
+                                    <td class="col-6"><span *ngIf="alarmClock.radioStatus">ON</span> <span
+                                        *ngIf="!alarmClock.radioStatus">OFF</span></td>
+                                </tr>
+                                <tr class="col-12">
+                                    <td class="col-6">Fréquence Radio</td>
+                                    <td class="col-6">{{alarmClock.radioHrz | number}}</td>
+                                </tr>
+                                
+                                
+                            </table>
+                        </div>
+                    </ng-container>
+
+                </div>
+            </div>
+        </mat-tab>
+
+
+        <mat-tab label="Machine à café" *ngIf="coffeeMachines"> 
+            <div class="my-custom-row">
+                <div class="col-6"><img src="../../assets/coffeeMachine.jpg" alt=""></div>
+                <div class="col-6">
+                    <ng-container *ngFor="let coffeeMachine of coffeeMachines; index as i">
+                        <h5 style="padding-left:20%;">Machine à café - {{ i + 1}} :</h5>
+                        <div class="row">
+                            <table width="90%">
+                                <tr class="col-12">
+                                    <td class="col-6">Status </td>
+                                    <td class="col-6"><span *ngIf="coffeeMachine.status">Allumée</span> <span
+                                        *ngIf="!coffeeMachine.status">Éteinte</span></td>
+                                </tr>
+                                <tr class="col-12">
+                                    <td class="col-6">Nombre de capsule restante </td>
+                                    <td class="col-6">{{ coffeeMachine.nbCapsule }}</td>
+                                </tr>
+                                <tr class="col-12">
+                                    <td class="col-6">Mon café sera prêt à</td>
+                                    <td class="col-6">{{ coffeeMachine.scheduleCoffee | date: "hh:mm a"}}</td>
+                                </tr>
+                                <tr class="col-12">
+                                    <td class="col-6">Niveau d'eau de ma machine</td>
+                                    <td class="col-6">{{coffeeMachine.waterLevel}} Litre</td>
+                                </tr>
+                               
+                            </table>
+                        </div>
+                    </ng-container>
+
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</section>

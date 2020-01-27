@@ -17,7 +17,6 @@ export class AppComponent {
   user: User = new User();
   numberNotification: number;
   newNotifications: Notification[];
-  notificationsString: string;
 
   constructor(private router: Router, private notificationService: NotificationService) {
     this.numberNotification = 0;
@@ -25,30 +24,18 @@ export class AppComponent {
 
   ngOnInit() {
     this.toggleHeaderStyle();
-<<<<<<< HEAD
+
 
     if(!window.location.href.includes('login')) {
 
       this.user = JSON.parse(localStorage.getItem('user'));
       if(this.user.role == 'RESIDENT'){
-
         timer(0, 10000).subscribe(() => {
           this.numberNotification = 0;
-          this.notificationService.getNotification(this.user.id).subscribe(
-=======
+          this.notificationService.getNotifications(this.user).subscribe(
 
-    if(!window.location.href.includes('login')) {
-
-      this.user = JSON.parse(localStorage.getItem('user'));
-      if(this.user.role == 'RESIDENT'){
-
-        timer(0, 10000).subscribe(() => {
-          this.numberNotification = 0;
-          this.notificationService.getNotification(this.user).subscribe(
->>>>>>> master
             data => {
-              this.notificationsString = JSON.stringify(data);
-              this.newNotifications = JSON.parse(this.notificationsString);
+              this.newNotifications = data;
               this.newNotifications.forEach(notification => {
                 if (notification.state == "PENDING") {
                   this.numberNotification = this.numberNotification + 1;
@@ -60,21 +47,12 @@ export class AppComponent {
             }
           );
         });
-<<<<<<< HEAD
 
       }
     }
     
   }
 
-=======
-
-      }
-    }
-    
-  }
-
->>>>>>> master
   toggleHeaderStyle() {
     if ($(window).scrollTop() > 64) {
         $('#navbarBox').css("height", "80px");

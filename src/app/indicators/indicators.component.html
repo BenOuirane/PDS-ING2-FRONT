@@ -1,0 +1,57 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<div class="container">
+  <div class="primo">
+
+  </div>
+
+  <div class="align-items-center">
+    <form (ngSubmit)="onGetResidence()">
+      <h4>Sélectionnez l'indicateur à calculer</h4>
+    <div class="primo col-md-5">
+      <select class="form-control" id="notification_type" >
+        <option value="empty">Selectionnez un indicateur</option>
+        <option value="text_notification" selected>Taux d'occupation des résidences</option>
+      </select>
+    </div>
+    <div class="primo col-md-5">
+
+        <button type="submit" class="btn btn-primary">
+          Calculer
+        </button>
+    </div>
+    </form>
+  </div>
+
+  <div class="panel">
+    <div class="panel-heading">
+      <br/>
+      <br/>
+      <div class="panel-body">
+        <table class="table table-bordered" *ngIf="residence">
+          <thead>
+          <tr class = "info">
+            <th>ID Résidence</th>
+            <th>Nom </th>
+            <th>Nombre de résidents</th>
+            <th>Taux d'occupation </th>
+          </tr>
+          </thead>
+        <tbody >
+          <tr *ngFor="let r of residence">
+            <td>{{r.idResidence}}</td>
+            <td>{{r.name}}</td>
+            <td>{{r.numberOfResident}}</td>
+            <td>{{r.numberOfResident/150 | number}}</td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +22,12 @@ export class UserService {
     return this.http.post(`${this.baseUrl}` + `/users/create`, user);
   }
 
-  loginUser(user: Object): Observable<Object> {
-    return this.http.put(`${this.baseUrl}` + `/user/login`, user);
+  loginUser(user: Object): Observable<User> {
+    return this.http.put<User>(`${this.baseUrl}` + `/user/login`, user);
   }
 
-  getResidents(role: string): Observable<Object> {
-    return this.http.put(`${this.baseUrl}` + `/users/`, role);
+  getUsersByRole(role: string): Observable<Array<User>> {
+    return this.http.put<Array<User>>(`${this.baseUrl}` + `/users/`, role);
   }
 
   // getUsersList is called with no parameter

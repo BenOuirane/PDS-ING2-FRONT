@@ -23,17 +23,14 @@ export class GetNotificationsComponent implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
 
-    this.notificationService.getNotification(this.user).subscribe(
+    this.notificationService.getNotifications(this.user).subscribe(
       data => {
-        this.notificationsString = JSON.stringify(data);
-        this.notifications = JSON.parse(this.notificationsString);
+        this.notifications = data;
       });
 
     timer(2, 2000).subscribe(x => {
       if (window.location.href.includes('notification')) {
-        console.log(this.appComponent.newNotifications);
         this.notifications = this.appComponent.newNotifications;
-
         this.notifications.forEach(notification => {
           if (notification.state == "PENDING") {
             setTimeout(() => {
