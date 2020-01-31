@@ -40,7 +40,7 @@ export class SendNotificationComponent implements OnInit {
         this.residents = data;
         this.residents.forEach(option =>
           $("#select_receiver").add(
-            $('#select_receiver').append('<option value="' + option.id + '">' + option.firstname + ' ' + option.lastname + '</option>')
+            $('#select_receiver').append('<option value="' + option.id + '">' + option.id + '</option>')
           )
         )
       },
