@@ -2,10 +2,10 @@
 
     <mat-tab-group *ngIf="dataloaded">
         <mat-tab label="Lampe" *ngIf="lamps.length > 0">
-            <div class="my-custom-row">
-                <div class="col-6"><img src="../../assets/lampe.jpg" alt=""></div>
-                <div class="col-6">
-                    <ng-container *ngFor="let lampe of lamps; index as i">
+            <ng-container *ngFor="let lampe of lamps; index as i">
+                <div class="my-custom-row mt-5">
+                    <div class="col-6"><img src="../../assets/lampe.jpg" alt=""></div>
+                    <div class="col-6">
                         <h5 style="padding-left:20%;">Lampe - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
@@ -16,7 +16,7 @@
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Couleur</td>
-                                    <td class="col-6"><span *ngIf="lampe.color === 'WHITE'">Blanche</span></td>
+                                    <td class="col-6"><span>{{colorOnChange(lampe.color)}}</span></td>
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Allumées à</td>
@@ -33,16 +33,61 @@
                             </table>
                         </div>
 
-                    </ng-container>
-
+                    </div>
                 </div>
-            </div>
+                <div class="my-custom-row mt-5"><div class="col-12"><hr width="85%" color="blue"> </div>
+                    <h5>
+                        Paramètres :
+                    </h5>
+                    <table width="90%">
+                        <tr class="col-12">
+                            <td class="col-6">Status</td>
+                            <td class="col-6">
+                                <mat-slide-toggle [checked]="lampe.status"></mat-slide-toggle>
+                            </td>
+                        </tr>
 
+                        <tr class="col-12">
+                            <td class="col-6">Couleur</td>
+                            <td class="col-6">
+                                <mat-select [(value)]="lampe.color">
+                                    <mat-option value="WHITE">Blanche</mat-option>
+                                    <mat-option value="BLUE">Bleue</mat-option>
+                                    <mat-option value="YELLOW">Jaune</mat-option>
+                                    <mat-option value="GREEN">Verte</mat-option>
+                                </mat-select>
+                            </td>
+                        </tr>
 
+                        <tr class="col-12">
+                            <td class="col-6">Allumées à</td>
+                            <td class="col-6">
+                                <input type="button" [ngxTimepicker]="picker" value="{{lampe.hourOn}}">
+                                <ngx-material-timepicker #picker></ngx-material-timepicker>
+                                {{'Hours: ' + lampe.hourOn | date: "hh:mm a"}}
+                            </td>
+                        </tr>
+
+                        
+                      
+                        <tr class="col-12">
+                            <td class="col-6">Intensité</td>
+                            <td class="col-6">
+                                <mat-slider thumbLabel [displayWith]="formatLabel" min="10" max="100" step="10"
+                                    [value]="lampe.intensity"></mat-slider>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-center mt-5">
+                    <button mat-raised-button>Valider</button>
+                </div>
+
+            </ng-container>
         </mat-tab>
-        
+
         <mat-tab label="Four" *ngIf="ovens.length > 0">
-            <div class="my-custom-row">
+            <div class="my-custom-row mt-5">
                 <div class="col-6"><img src="../../assets/oven.jpg" alt=""></div>
                 <div class="col-6">
                     <ng-container *ngFor="let oven of ovens; index as i">
@@ -51,7 +96,8 @@
                             <table width="90%">
                                 <tr class="col-12">
                                     <td class="col-6">Status</td>
-                                    <td class="col-6"><span *ngIf="oven.status">Allumées</span> <span *ngIf="!oven.status">Éteint</span></td>
+                                    <td class="col-6"><span *ngIf="oven.status">Allumées</span> <span
+                                            *ngIf="!oven.status">Éteint</span></td>
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Température programmée</td>
@@ -63,7 +109,9 @@
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Heure de lancement</td>
-                                    <td class="col-6"><span *ngIf="oven.scheduleTime == null">Non Renseigné</span> <span *ngIf="oven.scheduleTime != null">{{ oven.scheduleTime | date: "hh:mm a"}}</span></td>
+                                    <td class="col-6"><span *ngIf="oven.scheduleTime == null">Non Renseigné</span> <span
+                                            *ngIf="oven.scheduleTime != null">{{ oven.scheduleTime | date: "hh:mm a"}}</span>
+                                    </td>
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Mode</td>
@@ -77,8 +125,8 @@
             </div>
         </mat-tab>
 
-        <mat-tab label="Volet" *ngIf="shutters.length > 0"> 
-            <div class="my-custom-row">
+        <mat-tab label="Volet" *ngIf="shutters.length > 0">
+            <div class="my-custom-row mt-5">
                 <div class="col-6"><img src="../../assets/volet.jpeg" alt=""></div>
                 <div class="col-6">
                     <ng-container *ngFor="let shutter of shutters; index as i">
@@ -88,7 +136,7 @@
                                 <tr class="col-12">
                                     <td class="col-6">Status</td>
                                     <td class="col-6"><span *ngIf="shutter.status">Ouvert</span> <span
-                                        *ngIf="!shutter.status">Fermé</span></td>
+                                            *ngIf="!shutter.status">Fermé</span></td>
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Ouvrir à </td>
@@ -98,7 +146,7 @@
                                     <td class="col-6">Fermé à</td>
                                     <td class="col-6">{{ shutter.hourOff | date: "hh:mm a"}}</td>
                                 </tr>
-                                
+
                             </table>
                         </div>
                     </ng-container>
@@ -107,8 +155,8 @@
             </div>
         </mat-tab>
 
-        <mat-tab label="Réveil" *ngIf="alarmClocks.length > 0"> 
-            <div class="my-custom-row">
+        <mat-tab label="Réveil" *ngIf="alarmClocks.length > 0">
+            <div class="my-custom-row mt-5">
                 <div class="col-6"><img src="../../assets/AlarmClock.jpg" alt=""></div>
                 <div class="col-6">
                     <ng-container *ngFor="let alarmClock of alarmClocks; index as i">
@@ -122,7 +170,7 @@
                                 <tr class="col-12">
                                     <td class="col-6">Statut réveil </td>
                                     <td class="col-6"><span *ngIf="alarmClock.alarmStatus">ON</span> <span
-                                        *ngIf="!alarmClock.alarmStatus">OFF</span></td>
+                                            *ngIf="!alarmClock.alarmStatus">OFF</span></td>
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Sonnerie à </td>
@@ -131,14 +179,14 @@
                                 <tr class="col-12">
                                     <td class="col-6">Statut radio </td>
                                     <td class="col-6"><span *ngIf="alarmClock.radioStatus">ON</span> <span
-                                        *ngIf="!alarmClock.radioStatus">OFF</span></td>
+                                            *ngIf="!alarmClock.radioStatus">OFF</span></td>
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Fréquence Radio</td>
                                     <td class="col-6">{{alarmClock.radioHrz | number}}</td>
                                 </tr>
-                                
-                                
+
+
                             </table>
                         </div>
                     </ng-container>
@@ -148,8 +196,8 @@
         </mat-tab>
 
 
-        <mat-tab label="Machine à café" *ngIf="coffeeMachines.length > 0"> 
-            <div class="my-custom-row">
+        <mat-tab label="Machine à café" *ngIf="coffeeMachines.length > 0">
+            <div class="my-custom-row mt-5">
                 <div class="col-6"><img src="../../assets/coffeeMachine.jpg" alt=""></div>
                 <div class="col-6">
                     <ng-container *ngFor="let coffeeMachine of coffeeMachines; index as i">
@@ -159,7 +207,7 @@
                                 <tr class="col-12">
                                     <td class="col-6">Status </td>
                                     <td class="col-6"><span *ngIf="coffeeMachine.status">Allumée</span> <span
-                                        *ngIf="!coffeeMachine.status">Éteinte</span></td>
+                                            *ngIf="!coffeeMachine.status">Éteinte</span></td>
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Nombre de capsule restante </td>
@@ -173,7 +221,7 @@
                                     <td class="col-6">Niveau d'eau de ma machine</td>
                                     <td class="col-6">{{coffeeMachine.waterLevel}} Litre</td>
                                 </tr>
-                               
+
                             </table>
                         </div>
                     </ng-container>
