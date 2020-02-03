@@ -1,7 +1,7 @@
 <section class="container">
 
     <mat-tab-group *ngIf="dataloaded">
-        <mat-tab label="Lampe" *ngIf="lamps">
+        <mat-tab label="Lampe" *ngIf="lamps.length > 0">
             <div class="my-custom-row">
                 <div class="col-6"><img src="../../assets/lampe.jpg" alt=""></div>
                 <div class="col-6">
@@ -41,7 +41,7 @@
 
         </mat-tab>
         
-        <mat-tab label="Four" *ngIf="ovens">
+        <mat-tab label="Four" *ngIf="ovens.length > 0">
             <div class="my-custom-row">
                 <div class="col-6"><img src="../../assets/oven.jpg" alt=""></div>
                 <div class="col-6">
@@ -77,7 +77,7 @@
             </div>
         </mat-tab>
 
-        <mat-tab label="Volet" *ngIf="shutters"> 
+        <mat-tab label="Volet" *ngIf="shutters.length > 0"> 
             <div class="my-custom-row">
                 <div class="col-6"><img src="../../assets/volet.jpeg" alt=""></div>
                 <div class="col-6">
@@ -107,7 +107,7 @@
             </div>
         </mat-tab>
 
-        <mat-tab label="Réveil" *ngIf="alarmClocks"> 
+        <mat-tab label="Réveil" *ngIf="alarmClocks.length > 0"> 
             <div class="my-custom-row">
                 <div class="col-6"><img src="../../assets/AlarmClock.jpg" alt=""></div>
                 <div class="col-6">
@@ -148,7 +148,7 @@
         </mat-tab>
 
 
-        <mat-tab label="Machine à café" *ngIf="coffeeMachines"> 
+        <mat-tab label="Machine à café" *ngIf="coffeeMachines.length > 0"> 
             <div class="my-custom-row">
                 <div class="col-6"><img src="../../assets/coffeeMachine.jpg" alt=""></div>
                 <div class="col-6">
