@@ -1,7 +1,7 @@
 <section class="container">
 
     <mat-tab-group *ngIf="dataloaded">
-          <!-- Manage infos of Lamps-->
+        <!-- Manage infos of Lamps-->
         <mat-tab label="Lampe" *ngIf="lamps.length > 0">
             <ng-container *ngFor="let lampe of lamps; index as i">
                 <div class="my-custom-row mt-5">
@@ -55,20 +55,22 @@
                         <tr class="col-12">
                             <td class="col-6">Couleur</td>
                             <td class="col-6">
-                                <mat-select [(value)]="selected">
-                                    <mat-label><span>{{colorOnChange(lampe.color)}}</span></mat-label>
-                                    <mat-option value="WHITE">Blanche</mat-option>
-                                    <mat-option value="BLUE">Bleue</mat-option>
-                                    <mat-option value="YELLOW">Jaune</mat-option>
-                                    <mat-option value="GREEN">Verte</mat-option>
-                                </mat-select>
+                                <mat-form-field>
+                                    <mat-select [ngModel]="lampe.color">
+                                        <mat-option value="WHITE">Blanche</mat-option>
+                                        <mat-option value="BLUE">Bleue</mat-option>
+                                        <mat-option value="YELLOW">Jaune</mat-option>
+                                        <mat-option value="GREEN">Verte</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </td>
                         </tr>
 
                         <tr class="col-12">
                             <td class="col-6">Allumées à</td>
                             <td class="col-6">
-                                <input type="button" [ngxTimepicker]="picker" value="{{ lampe.hourOn | date: &quot;hh:mm a&quot;}}">
+                                <input type="button" [ngxTimepicker]="picker"
+                                    value="{{ lampe.hourOn | date: &quot;hh:mm a&quot;}}">
                                 <ngx-material-timepicker #picker></ngx-material-timepicker>
                                 {{'Hours: ' + lampe.hourOn | date: "hh:mm a"}}
                             </td>
@@ -77,7 +79,8 @@
                         <tr class="col-12">
                             <td class="col-6">Éteintes à</td>
                             <td class="col-6">
-                                <input type="button" [ngxTimepicker]="picker2" value="{{ lampe.hourOff | date: &quot;hh:mm a&quot;}}">
+                                <input type="button" [ngxTimepicker]="picker2"
+                                    value="{{ lampe.hourOff | date: &quot;hh:mm a&quot;}}">
                                 <ngx-material-timepicker #picker2></ngx-material-timepicker>
                                 {{'Hours: ' + lampe.hourOff | date: "hh:mm a"}}
                             </td>
@@ -93,7 +96,7 @@
                     </table>
                 </div>
                 <!-- Get user object-->
-                <div class="d-flex justify-content-center mt-5">
+                <div class="d-flex justify-content-center mt-5 mb-5">
                     <button mat-raised-button (click)="buildLamp()">Valider</button>
                 </div>
 

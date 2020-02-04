@@ -27,10 +27,9 @@ import { UpdateDatamockComponent } from './update-datamock/update-datamock.compo
 import { ObjectComponent } from './object/object.component';
 import {
   MatTabsModule, MatSelectModule, MatSliderModule,
-  MatSlideToggleModule, MatButtonModule
+  MatSlideToggleModule, MatButtonModule, MatFormFieldModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 
 
 @NgModule({
@@ -60,7 +59,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatSlideToggleModule,
     BrowserAnimationsModule,
     NgxMaterialTimepickerModule, 
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule
   ],
   providers: [
     CandidateService,
