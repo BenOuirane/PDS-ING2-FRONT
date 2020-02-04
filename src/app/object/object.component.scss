@@ -19,3 +19,15 @@ mat-tab-body > div {
 table tr td:nth-child(1) {
     border-right: 1px solid black
 }
+
+table tr td:nth-child(2) {
+    padding-left: 30px;
+}
+
+table tr td {
+    width: 50%;
+}
+
+form {
+    width: 100%;
+}

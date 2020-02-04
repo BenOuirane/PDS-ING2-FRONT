@@ -5,12 +5,12 @@ export class Lampe {
     status : Boolean;
     hourOn : String;
     hourOff : String;
-    intensity : String;
+    intensity : number;
     color : String;
     colorUsine : String;
     statusUsine : Boolean;
     hourOnUsine : String;
     hourOffUsine : String;
-    intensityUsine : String;
+    intensityUsine : number;
     object : Objects;
 }
