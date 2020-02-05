@@ -1,5 +1,5 @@
 import { User } from './user';
-import { Room } from './room'; 
+import { Rooms } from './room'; 
 import { Residence } from './residence';
 
 
@@ -8,7 +8,7 @@ export class Resident {
     firstName: String; 
     lastName: String; 
     age: number; 
-    room : Room; 
+    room : Rooms; 
     user : User; 
     residence: Residence;
   }

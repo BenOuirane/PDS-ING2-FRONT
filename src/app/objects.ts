@@ -1,4 +1,4 @@
-import { Room } from './room'; 
+import { Rooms } from './room'; 
 
 export class Objects {
     id : number; 
@@ -6,4 +6,5 @@ export class Objects {
     macAddress : String;
     ipAddress : String;
     objectType : String;
+    rooms : Rooms; 
 }

@@ -12,5 +12,5 @@ export class Lampe {
     hourOnUsine : String;
     hourOffUsine : String;
     intensityUsine : number;
-    object : Objects;
+    objects : Objects;
 }

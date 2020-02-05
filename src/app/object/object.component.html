@@ -38,13 +38,21 @@
                 </div>
                 <!-- Manage params for Lamps-->
                 <div class="my-custom-row mt-5">
-                    <form [formGroup]="checkoutForm" (ngSubmit)="buildLamp()">
+                    <form [formGroup]="checkoutFormLamp" (ngSubmit)="buildLamp()">
                         <div class="col-12">
                             <hr width="85%" color="blue">
                         </div>
                         <h5>
                             Paramètres :
                         </h5>
+                        <input hidden #idLamp formControlName="idLamp" [ngModel]="lampe.idLamp">
+                        <input hidden #objects formControlName="objects" [ngModel]="lampe.objects">
+                        <input hidden #colorUsine formControlName="colorUsine" [ngModel]="lampe.colorUsine">
+                        <input hidden #hourOffUsine formControlName="hourOffUsine" [ngModel]="lampe.hourOffUsine">
+                        <input hidden #hourOnUsine formControlName="hourOnUsine" [ngModel]="lampe.hourOnUsine">
+                        <input hidden #intensityUsine formControlName="intensityUsine" [ngModel]="lampe.intensityUsine">
+                        <input hidden #statusUsine formControlName="statusUsine" [ngModel]="lampe.statusUsine">
+                        <input hidden #rooms formControlName="rooms" [ngModel]="lampe.rooms">
                         <table width="90%">
                             <tr>
                                 <td>Status</td>
@@ -95,11 +103,12 @@
                                 </td>
                             </tr>
                         </table>
+                        <!-- SUBMIT LAMP-->
+                        <div class="d-flex justify-content-center mt-5 mb-5">
+                            <button mat-raised-button type="submit">Valider</button>
+                        </div>
+
                     </form>
-                </div>
-                <!-- Get user object-->
-                <div class="d-flex justify-content-center mt-5 mb-5">
-                    <button mat-raised-button type="submit">Valider</button>
                 </div>
 
             </ng-container>

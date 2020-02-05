@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { ResidentService } from '../resident.service';
-import { Room } from '../room';
+import { Rooms } from '../room';
 import { Objects } from '../objects';
 import { ObjectService } from '../object.service';
 import { LampeService } from '../lampe.service';
@@ -16,6 +16,8 @@ import { Oven } from '../oven';
 import { Shutter } from '../shutter';
 import { AlarmClock } from '../alarm-clock';
 import { CoffeeMachine } from '../coffeeMachine';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Timestamp } from 'rxjs/internal/operators/timestamp';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -28,7 +30,7 @@ registerLocaleData(localeFr, 'fr');
 export class ObjectComponent implements OnInit {
 
   user: User = new User();
-  room: Room = new Room();
+  room: Rooms = new Rooms();
   roomString: string;
   objects: Objects[] = new Array<Objects>();
   lamps: Lampe[] = new Array<Lampe>();
@@ -38,12 +40,20 @@ export class ObjectComponent implements OnInit {
   shutters: Shutter[] = new Array<Shutter>();
   dataloaded: boolean = false;
   LampStatus: boolean = false;
-  
+  checkoutFormLamp;
+  test: boolean;
 
 
 
 
-  constructor(private residentService: ResidentService, private objectService: ObjectService, private lampeService: LampeService, private ovenService: OvenService, private shutterService: ShutterService, private alarmClockService: AlarmClockService, private coffeeMachineService: CoffeeMachineService) { }
+  constructor(private residentService: ResidentService,
+    private objectService: ObjectService,
+    private lampeService: LampeService,
+    private ovenService: OvenService,
+    private shutterService: ShutterService,
+    private alarmClockService: AlarmClockService,
+    private coffeeMachineService: CoffeeMachineService,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -52,7 +62,6 @@ export class ObjectComponent implements OnInit {
       data => {
         this.room = data.room;
         this.objects = this.room.objects;
-
         this.objects.forEach(object => {
           switch (object.objectType) {
             case 'LAMP':
@@ -103,23 +112,42 @@ export class ObjectComponent implements OnInit {
 
       }, error => console.log(error)
     );
+
+    this.initForm();
   }
- 
+
+  private initForm(): void {
+    this.checkoutFormLamp = this.formBuilder.group({
+      idLamp: Number,
+      status: Boolean,
+      hourOn: String,
+      hourOff: String,
+      intensity: Number,
+      color: String,
+      colorUsine: String,
+      statusUsine: Boolean,
+      hourOnUsine: String,
+      hourOffUsine: String,
+      intensityUsine: Number,
+      objects: Objects
+    });
+  }
+
   //Used to get automaticaly the right color 
-  colorOnChange(value: string) : string {
-    let color: string = ''; 
+  colorOnChange(value: string): string {
+    let color: string = '';
     switch (value) {
       case 'WHITE':
-          color = 'Blanche'
+        color = 'Blanche'
         break;
       case 'BLUE':
-          color = 'Bleue'
+        color = 'Bleue'
         break;
-        case 'GREEN':
-          color = 'Verte'
+      case 'GREEN':
+        color = 'Verte'
         break;
-        case 'YELLOW':
-          color = 'Jaune'
+      case 'YELLOW':
+        color = 'Jaune'
         break;
 
       default:
@@ -135,5 +163,17 @@ export class ObjectComponent implements OnInit {
     }
 
     return value;
+  }
+
+  buildLamp() {
+    console.log("buildLamp : ", this.checkoutFormLamp.value);
+    /*this.lampeService.updateLamp(this.checkoutFormLamp.value).subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log(err);
+      }
+    );*/
   }
 }
