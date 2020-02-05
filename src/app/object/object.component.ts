@@ -16,7 +16,7 @@ import { Oven } from '../oven';
 import { Shutter } from '../shutter';
 import { AlarmClock } from '../alarm-clock';
 import { CoffeeMachine } from '../coffeeMachine';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder} from '@angular/forms';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
 
 
@@ -61,54 +61,63 @@ export class ObjectComponent implements OnInit {
     this.residentService.getResident(this.user).subscribe(
       data => {
         this.room = data.room;
-        this.objects = this.room.objects;
-        this.objects.forEach(object => {
-          switch (object.objectType) {
-            case 'LAMP':
-              this.lampeService.getlampe(object).subscribe(
-                data => {
-                  this.lamps = data;
-                  console.log(data);
-                }
-              ); break;
-            case 'OVEN':
-              this.ovenService.getOven(object).subscribe(
-                data => {
-                  this.ovens = data;
-                  console.log(data);
-                }
-              ); break;
+       
+        this.objectService.getObject(this.room).subscribe(
+          data => {
+            this.objects = data;
+            this.objects.forEach(object => {
+             
 
-            case 'SHUTTER':
-              this.shutterService.getshutter(object).subscribe(
-                data => {
-                  this.shutters = data;
-                  console.log(data);
-                }
-              ); break;
+              switch (object.objectType) {
+                case 'LAMP':
+                  this.lampeService.getlampe(object).subscribe(
+                    data => {
+                      this.lamps = data;
+                      console.log(data);
+                    }
+                  ); break;
+                case 'OVEN':
+                  this.ovenService.getOven(object).subscribe(
+                    data => {
+                      this.ovens = data;
+                      console.log(data);
+                    }
+                  ); break;
 
-            case 'ALARMCLOCK':
-              this.alarmClockService.getAlarmClock(object).subscribe(
-                data => {
-                  this.alarmClocks = data;
-                  console.log(data);
-                }
-              ); break;
+                case 'SHUTTER':
+                  this.shutterService.getshutter(object).subscribe(
+                    data => {
+                      this.shutters = data;
+                      console.log(data);
+                    }
+                  ); break;
 
-            case 'COFFEEMACHINE':
-              this.coffeeMachineService.getCoffeeMachine(object).subscribe(
-                data => {
-                  this.coffeeMachines = data;
-                  console.log(data);
-                }
-              ); break;
+                case 'ALARMCLOCK':
+                  this.alarmClockService.getAlarmClock(object).subscribe(
+                    data => {
+                      this.alarmClocks = data;
+                      console.log(data);
+                    }
+                  ); break;
+
+                case 'COFFEEMACHINE':
+                  this.coffeeMachineService.getCoffeeMachine(object).subscribe(
+                    data => {
+                      this.coffeeMachines = data;
+                      console.log(data);
+                    }
+                  ); break;
 
 
-            default:
-              break;
+                default:
+                  break;
+              }
+              this.dataloaded = true;
+            })
           }
-          this.dataloaded = true;
-        })
+        );
+
+
 
       }, error => console.log(error)
     );
@@ -167,13 +176,13 @@ export class ObjectComponent implements OnInit {
 
   buildLamp() {
     console.log("buildLamp : ", this.checkoutFormLamp.value);
-    /*this.lampeService.updateLamp(this.checkoutFormLamp.value).subscribe(
+    this.lampeService.updateLamp(this.checkoutFormLamp.value).subscribe(
       data => {
         console.log(data);
       },
       err => {
         console.log(err);
       }
-    );*/
+    );
   }
 }
