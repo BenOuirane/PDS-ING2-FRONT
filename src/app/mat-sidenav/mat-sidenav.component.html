@@ -1,0 +1,30 @@
+    <mat-sidenav-container>
+    <mat-sidenav #navigationSideBar mode="over" opened="false">
+        <mat-nav-list>
+            <button class="side-menu-button" mat-icon-button aria-label="icon-button with a home icon" 
+                (click)="openHomeView()">
+                <div fxLayout="column" fxLayoutAlign="center center">
+                    <mat-icon aria-label="Homepage icon" class="material-icons color_white" fontSet="fas"
+                        fontIcon="fa-home"></mat-icon>
+                    <span class="icon-label">Home</span>
+                </div>
+            </button>
+         
+            <button class="side-menu-button" mat-icon-button aria-label="icon-button with a eye icon" *ngIf="isAledUser()"
+                (click)="openReportingView()">
+                <div fxLayout="column" fxLayoutAlign="center center">
+                    <mat-icon aria-label="Aled position Reporting View icon" class="material-icons color_white" fontSet="fas"
+                        fontIcon="fa-file-download"></mat-icon>
+                    <span class="icon-label">Reporting</span>
+                </div>
+            </button>
+        
+
+        </mat-nav-list>
+    </mat-sidenav>
+
+<mat-sidenav-content class="outer-flex-box">
+    <router-outlet></router-outlet>
+    <appfooter [navigationKey]= "navigationKey"></appfooter>
+</mat-sidenav-content>
+</mat-sidenav-container>
