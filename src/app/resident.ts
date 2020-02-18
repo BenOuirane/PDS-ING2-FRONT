@@ -1,5 +1,7 @@
 import { User } from './user';
 import { Room } from './room'; 
+import { Residence } from './residence';
+
 
 export class Resident {
     idResident: number; 
@@ -8,4 +10,5 @@ export class Resident {
     age: number; 
     room : Room; 
     user : User; 
+    residence: Residence;
   }
