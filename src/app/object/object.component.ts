@@ -193,6 +193,7 @@ export class ObjectComponent implements OnInit {
     this.lampeService.updateLamp(this.checkoutFormLamp.value).subscribe(
       data => {
         console.log(data);
+        window.location.reload();
       },
       err => {
         console.log(err);
@@ -205,6 +206,7 @@ export class ObjectComponent implements OnInit {
     this.shutterService.updateShutter(this.checkoutFormShutter.value).subscribe(
       data => {
         console.log(data);
+        window.location.reload();
       },
       err => {
         console.log(err);
