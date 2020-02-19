@@ -18,6 +18,7 @@ import { AlarmClock } from '../alarm-clock';
 import { CoffeeMachine } from '../coffeeMachine';
 import { FormBuilder} from '@angular/forms';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
+import { AmazingTimePickerService } from 'amazing-time-picker';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -44,9 +45,6 @@ export class ObjectComponent implements OnInit {
   checkoutFormShutter; 
   test: boolean;
 
-
-
-
   constructor(private residentService: ResidentService,
     private objectService: ObjectService,
     private lampeService: LampeService,
@@ -54,11 +52,18 @@ export class ObjectComponent implements OnInit {
     private shutterService: ShutterService,
     private alarmClockService: AlarmClockService,
     private coffeeMachineService: CoffeeMachineService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private atp: AmazingTimePickerService) { }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
 
+    this.getResidentService();
+
+    this.initForm();
+  }
+
+  private getResidentService(): void{
     this.residentService.getResident(this.user).subscribe(
       data => {
         this.room = data.room;
@@ -117,13 +122,8 @@ export class ObjectComponent implements OnInit {
             })
           }
         );
-
-
-
       }, error => console.log(error)
     );
-
-    this.initForm();
   }
 
   private initForm(): void {
@@ -154,7 +154,6 @@ export class ObjectComponent implements OnInit {
     });
 
   }
-
 
   //Used to get automaticaly the right color 
   colorOnChange(value: string): string {
@@ -189,16 +188,17 @@ export class ObjectComponent implements OnInit {
   }
 
   buildLamp() {
-    console.log("buildLamp : ", this.checkoutFormLamp.value);
-    this.lampeService.updateLamp(this.checkoutFormLamp.value).subscribe(
-      data => {
-        console.log(data);
-        window.location.reload();
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    console.log("hourOff : ", this.checkoutFormLamp.value.hourOff);
+    console.log("hourOff time : ", this.checkoutFormLamp.value.hourOff.time);
+    // this.lampeService.updateLamp(this.checkoutFormLamp.value).subscribe(
+    //   data => {
+    //     console.log(data);
+    //     this.getResidentService();
+    //   },
+    //   err => {
+    //     console.log(err);
+    //   }
+    // );
   }
 
   buildShutter() {
@@ -214,5 +214,16 @@ export class ObjectComponent implements OnInit {
     );
   }
 
+  selectChanged(event){
+    
+    console.log("event", event);
+  }
 
+  open() {
+    const amazingTimePicker = this.atp.open();
+    amazingTimePicker.afterClose().subscribe(time => {
+      console.log(time);
+      
+    });
+  }
 }

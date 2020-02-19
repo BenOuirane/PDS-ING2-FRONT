@@ -1,5 +1,6 @@
 <section class="container">
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
     <mat-tab-group *ngIf="dataloaded">
         <!-- Manage infos of Lamps-->
         <mat-tab label="Lampe" *ngIf="lamps.length > 0">
@@ -78,19 +79,26 @@
 
                             <tr>
                                 <td>Allumées à</td>
-                                <td class="col-6">
-                                    <input matInput #hourOn formControlName="hourOn" type="button"
-                                        [ngxTimepicker]="picker" value="{{lampe.hourOn | date: 'hh:mm a'}}">
-                                    <ngx-material-timepicker #picker></ngx-material-timepicker>
+                                <td class="col-6" [ngClass]="stateOn.value ? 'visible' : 'invisible'">
+                                    <span (click)="open()"><i class="material-icons" md-36>schedule</i></span>
+                                </td>
+                                <td>
+                                    <mat-slide-toggle #stateOn (toggleChange)="stateOn.value = !stateOn.value"
+                                        [checked]="lampe.hourOn != null"></mat-slide-toggle>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td>Éteintes à</td>
+                                <td class="col-6" [ngClass]="stateOff.value ? 'visible' : 'invisible'">
+                                    <!-- <input type="time" atp-time-picker value="20:55" theme="dark" locale='fr' arrowStyle="{'background': 'red', 'color': 'white'}"/> -->
+                                    <span (click)="open()"><i class="material-icons" md-36>schedule</i></span> 
+
+                                    
+                                </td>
                                 <td>
-                                    <input matInput #hourOff formControlName="hourOff" type="button"
-                                        [ngxTimepicker]="picker2" value="{{lampe.hourOff | date: 'hh:mm a'}}">
-                                    <ngx-material-timepicker #picker2></ngx-material-timepicker>
+                                    <mat-slide-toggle #stateOff (toggleChange)="stateOff.value = !stateOff.value"
+                                        [checked]="lampe.hourOff != null"></mat-slide-toggle>
                                 </td>
                             </tr>
 
