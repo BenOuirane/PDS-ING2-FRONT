@@ -15,14 +15,15 @@ import { CoffeeMachineHistoryService } from '../historyService/coffee-machine-hi
 })
 export class HistoryComponent implements OnInit {
 
-  id: number;
+  objectId: number;
   objectType: string;
+  objectTypeString: string;
   histories: History[] = new Array<History>();
 
-  constructor(private activatedroute : ActivatedRoute, private lampHistoryService: LampHistoryService, private ovenHistoryService: OvenHistoryService, private shutterHistoryService: ShutterHistoryService, private alarmClockHistoryService: AlarmClockHistoryService, private coffeeMachineHistoryService: CoffeeMachineHistoryService) { }
+  constructor(private activatedroute: ActivatedRoute, private lampHistoryService: LampHistoryService, private ovenHistoryService: OvenHistoryService, private shutterHistoryService: ShutterHistoryService, private alarmClockHistoryService: AlarmClockHistoryService, private coffeeMachineHistoryService: CoffeeMachineHistoryService) { }
 
   ngOnInit() {
-    this.id = parseInt(this.activatedroute.snapshot.paramMap.get("id"));
+    this.objectId = parseInt(this.activatedroute.snapshot.paramMap.get("id"));
     this.objectType = this.activatedroute.snapshot.paramMap.get("type");
     this.getHistory();
   }
@@ -30,47 +31,47 @@ export class HistoryComponent implements OnInit {
   getHistory() {
     switch (this.objectType) {
       case 'lamp':
-        this.lampHistoryService.getLampHistory(this.id).subscribe(
+        this.objectTypeString = "Lampe";
+        this.lampHistoryService.getHistory(this.objectId).subscribe(
           data => {
             this.histories = data;
-            console.log(data);
           }
         ); break;
       case 'oven':
-        this.ovenHistoryService.getOvenHistory(this.id).subscribe(
+        this.objectTypeString = "Four";
+        this.ovenHistoryService.getHistory(this.objectId).subscribe(
           data => {
             this.histories = data;
-            console.log(data);
           }
         ); break;
 
       case 'shutter':
-        this.shutterHistoryService.getShutterHistory(this.id).subscribe(
+        this.objectTypeString = "Volet";
+        this.shutterHistoryService.getHistory(this.objectId).subscribe(
           data => {
             this.histories = data;
-            console.log(data);
           }
         ); break;
 
       case 'alarmClock':
-        this.alarmClockHistoryService.getAlarmClockHistory(this.id).subscribe(
+        this.objectTypeString = "Réveil";
+        this.alarmClockHistoryService.getHistory(this.objectId).subscribe(
           data => {
             this.histories = data;
-            console.log(data);
           }
         ); break;
 
       case 'coffeeMachine':
-        this.coffeeMachineHistoryService.getCoffeeMachineHistory(this.id).subscribe(
+        this.objectTypeString = "Machine à café" ;
+        this.coffeeMachineHistoryService.getHistory(this.objectId).subscribe(
           data => {
             this.histories = data;
-            console.log(data);
           }
-        ); 
+        );
         break;
       default:
         break;
-  }
+    }
   }
 
 }
