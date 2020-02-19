@@ -51,7 +51,7 @@ export class ObjectComponent implements OnInit {
     this.residentService.getResident(this.user).subscribe(
       data => {
         this.room = data.room;
-        this.objects = this.room.objects;
+        //this.objects = this.room.objects;
 
         this.objects.forEach(object => {
           switch (object.objectType) {

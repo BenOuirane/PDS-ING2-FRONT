@@ -30,6 +30,8 @@ import {
   MatSlideToggleModule, MatButtonModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ObjectMapComponent } from './object-map/object-map.component';
+import { HistoryComponent } from './history/history.component';
 
 
 
@@ -45,7 +47,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeComponent,
     FooterComponent,
     UpdateDatamockComponent,
-    ObjectComponent
+    ObjectComponent,
+    ObjectMapComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,

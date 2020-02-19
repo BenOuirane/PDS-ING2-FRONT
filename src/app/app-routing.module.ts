@@ -24,7 +24,8 @@ we redirect him to the route '/user that calls the UsersListComponent'
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { UpdateDatamockComponent } from './update-datamock/update-datamock.component';
 import { ObjectComponent } from './object/object.component'; 
-
+import { ObjectMapComponent } from './object-map/object-map.component'; 
+import { HistoryComponent } from './history/history.component'; 
 
 
 
@@ -40,8 +41,9 @@ const routes: Routes = [
   { path: 'add', component: CreateCandidateComponent },
 
   { path: 'search', component: SearchBarComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
-  { path: 'updatedata', component: UpdateDatamockComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}}
-
+  { path: 'updatedata', component: UpdateDatamockComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+  { path: 'map', component: ObjectMapComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+  { path: 'history/:type/:id', component: HistoryComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
 ];
 
 @NgModule({
