@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { ResidentService } from '../resident.service';
-import { Rooms } from '../room';
+import { Room } from '../room';
 import { Objects } from '../objects';
 import { ObjectService } from '../object.service';
 import { LampeService } from '../lampe.service';
@@ -16,8 +16,6 @@ import { Oven } from '../oven';
 import { Shutter } from '../shutter';
 import { AlarmClock } from '../alarm-clock';
 import { CoffeeMachine } from '../coffeeMachine';
-import { FormBuilder} from '@angular/forms';
-import { Timestamp } from 'rxjs/internal/operators/timestamp';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -30,7 +28,7 @@ registerLocaleData(localeFr, 'fr');
 export class ObjectComponent implements OnInit {
 
   user: User = new User();
-  room: Rooms = new Rooms();
+  room: Room = new Room();
   roomString: string;
   objects: Objects[] = new Array<Objects>();
   lamps: Lampe[] = new Array<Lampe>();
@@ -40,21 +38,12 @@ export class ObjectComponent implements OnInit {
   shutters: Shutter[] = new Array<Shutter>();
   dataloaded: boolean = false;
   LampStatus: boolean = false;
-  checkoutFormLamp;
-  checkoutFormShutter; 
-  test: boolean;
+  
 
 
 
 
-  constructor(private residentService: ResidentService,
-    private objectService: ObjectService,
-    private lampeService: LampeService,
-    private ovenService: OvenService,
-    private shutterService: ShutterService,
-    private alarmClockService: AlarmClockService,
-    private coffeeMachineService: CoffeeMachineService,
-    private formBuilder: FormBuilder) { }
+  constructor(private residentService: ResidentService, private objectService: ObjectService, private lampeService: LampeService, private ovenService: OvenService, private shutterService: ShutterService, private alarmClockService: AlarmClockService, private coffeeMachineService: CoffeeMachineService) { }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -62,115 +51,75 @@ export class ObjectComponent implements OnInit {
     this.residentService.getResident(this.user).subscribe(
       data => {
         this.room = data.room;
-       
-        this.objectService.getObject(this.room).subscribe(
-          data => {
-            this.objects = data;
-            this.objects.forEach(object => {
-             
+        //this.objects = this.room.objects;
 
-              switch (object.objectType) {
-                case 'LAMP':
-                  this.lampeService.getlampe(object).subscribe(
-                    data => {
-                      this.lamps = data;
-                      console.log(data);
-                    }
-                  ); break;
-                case 'OVEN':
-                  this.ovenService.getOven(object).subscribe(
-                    data => {
-                      this.ovens = data;
-                      console.log(data);
-                    }
-                  ); break;
+        this.objects.forEach(object => {
+          switch (object.objectType) {
+            case 'LAMP':
+              this.lampeService.getlampe(object).subscribe(
+                data => {
+                  this.lamps = data;
+                  console.log(data);
+                }
+              ); break;
+            case 'OVEN':
+              this.ovenService.getOven(object).subscribe(
+                data => {
+                  this.ovens = data;
+                  console.log(data);
+                }
+              ); break;
 
-                case 'SHUTTER':
-                  this.shutterService.getshutter(object).subscribe(
-                    data => {
-                      this.shutters = data;
-                      console.log(data);
-                    }
-                  ); break;
+            case 'SHUTTER':
+              this.shutterService.getshutter(object).subscribe(
+                data => {
+                  this.shutters = data;
+                  console.log(data);
+                }
+              ); break;
 
-                case 'ALARMCLOCK':
-                  this.alarmClockService.getAlarmClock(object).subscribe(
-                    data => {
-                      this.alarmClocks = data;
-                      console.log(data);
-                    }
-                  ); break;
+            case 'ALARMCLOCK':
+              this.alarmClockService.getAlarmClock(object).subscribe(
+                data => {
+                  this.alarmClocks = data;
+                  console.log(data);
+                }
+              ); break;
 
-                case 'COFFEEMACHINE':
-                  this.coffeeMachineService.getCoffeeMachine(object).subscribe(
-                    data => {
-                      this.coffeeMachines = data;
-                      console.log(data);
-                    }
-                  ); break;
+            case 'COFFEEMACHINE':
+              this.coffeeMachineService.getCoffeeMachine(object).subscribe(
+                data => {
+                  this.coffeeMachines = data;
+                  console.log(data);
+                }
+              ); break;
 
 
-                default:
-                  break;
-              }
-              this.dataloaded = true;
-            })
+            default:
+              break;
           }
-        );
-
-
+          this.dataloaded = true;
+        })
 
       }, error => console.log(error)
     );
-
-    this.initForm();
   }
-
-  private initForm(): void {
-    this.checkoutFormLamp = this.formBuilder.group({
-      idLamp: Number,
-      status: Boolean,
-      hourOn: String,
-      hourOff: String,
-      intensity: Number,
-      color: String,
-      colorUsine: String,
-      statusUsine: Boolean,
-      hourOnUsine: String,
-      hourOffUsine: String,
-      intensityUsine: Number,
-      objects: Objects
-    });
-
-    this.checkoutFormShutter = this.formBuilder.group({
-      idShutter : Number,      
-      hourOn : String,
-      hourOff : String,
-      status : Boolean,
-      hourOnUsine : String,
-      hourOffUsine : String,
-      statusUsine : Boolean,
-      object : Objects
-    });
-
-  }
-
-
+ 
   //Used to get automaticaly the right color 
-  colorOnChange(value: string): string {
-    let color: string = '';
+  colorOnChange(value: string) : string {
+    let color: string = ''; 
     switch (value) {
       case 'WHITE':
-        color = 'Blanche'
+          color = 'Blanche'
         break;
       case 'BLUE':
-        color = 'Bleue'
+          color = 'Bleue'
         break;
-      case 'GREEN':
-        color = 'Verte'
+        case 'GREEN':
+          color = 'Verte'
         break;
-      case 'YELLOW':
-        color = 'Jaune'
+        case 'YELLOW':
+          color = 'Jaune'
         break;
 
       default:
@@ -187,32 +136,4 @@ export class ObjectComponent implements OnInit {
 
     return value;
   }
-
-  buildLamp() {
-    console.log("buildLamp : ", this.checkoutFormLamp.value);
-    this.lampeService.updateLamp(this.checkoutFormLamp.value).subscribe(
-      data => {
-        console.log(data);
-        window.location.reload();
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  }
-
-  buildShutter() {
-    console.log("buildShutter : ", this.checkoutFormShutter.value);
-    this.shutterService.updateShutter(this.checkoutFormShutter.value).subscribe(
-      data => {
-        console.log(data);
-        window.location.reload();
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  }
-
-
 }

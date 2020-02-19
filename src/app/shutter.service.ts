@@ -18,11 +18,4 @@ export class ShutterService {
   getshutter(objects: Objects) : Observable<Array<Shutter>>{
     return this.http.put<Array<Shutter>>(`${this.baseUrl}` + `/shutter/list`, objects);
   }
-
-  updateShutter(shutter: Shutter): Observable<boolean> {
-    console.log("updateShutter is call"); 
-    return this.http.put<boolean>(`${this.baseUrl}` + `/shutter/updateParam`, shutter);
-    
-  }
-
 }

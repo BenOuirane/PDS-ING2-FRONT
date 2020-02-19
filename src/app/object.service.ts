@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Rooms } from './room';
+import { Room } from './room';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Objects } from './objects';
@@ -15,7 +15,7 @@ export class ObjectService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getObject(room : Rooms) : Observable<Array<Objects>>{
+  getObject(room : Room) : Observable<Array<Objects>>{
     return this.http.put<Array<Objects>>(`${this.baseUrl}` + `/object/list`, room);
   }
 }

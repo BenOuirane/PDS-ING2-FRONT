@@ -27,11 +27,12 @@ import { UpdateDatamockComponent } from './update-datamock/update-datamock.compo
 import { ObjectComponent } from './object/object.component';
 import {
   MatTabsModule, MatSelectModule, MatSliderModule,
-  MatSlideToggleModule, MatButtonModule, MatFormFieldModule
+  MatSlideToggleModule, MatButtonModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ObjectMapComponent } from './object-map/object-map.component';
 import { HistoryComponent } from './history/history.component';
+
 
 
 @NgModule({
@@ -63,8 +64,7 @@ import { HistoryComponent } from './history/history.component';
     MatSlideToggleModule,
     BrowserAnimationsModule,
     NgxMaterialTimepickerModule, 
-    MatButtonModule,
-    MatFormFieldModule
+    MatButtonModule
   ],
   providers: [
     CandidateService,

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { User } from "./user";
 import { Resident } from './resident';
 import { Observable } from 'rxjs';
-import { Rooms } from "./room";
+import { Room } from "./room";
 
 @Injectable({
   providedIn: 'root'
