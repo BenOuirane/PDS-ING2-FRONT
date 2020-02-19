@@ -14,7 +14,7 @@ export class ShutterHistoryService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getShutterHistory(id: Number) : Observable<Array<History>>{
+  getHistory(id: Number) : Observable<Array<History>>{
     return this.http.put<Array<History>>(`${this.baseUrl}` + `/history/shutter`, id);
   }
 }

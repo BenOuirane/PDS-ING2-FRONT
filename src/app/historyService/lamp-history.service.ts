@@ -14,7 +14,7 @@ export class LampHistoryService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getLampHistory(id: Number) : Observable<Array<History>>{
+  getHistory(id: Number) : Observable<Array<History>>{
     return this.http.put<Array<History>>(`${this.baseUrl}` + `/history/lamp`, id);
   }
 }

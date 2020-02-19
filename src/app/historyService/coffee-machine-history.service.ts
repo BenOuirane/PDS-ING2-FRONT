@@ -14,7 +14,7 @@ export class CoffeeMachineHistoryService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getCoffeeMachineHistory(id: Number) : Observable<Array<History>>{
-    return this.http.put<Array<History>>(`${this.baseUrl}` + `/history/CoffeeMachine`, id);
+  getHistory(id: Number) : Observable<Array<History>>{
+    return this.http.put<Array<History>>(`${this.baseUrl}` + `/history/coffeeMachine`, id);
   }
 }

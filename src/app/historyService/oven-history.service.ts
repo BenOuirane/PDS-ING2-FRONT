@@ -14,7 +14,7 @@ export class OvenHistoryService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getOvenHistory(id: Number) : Observable<Array<History>>{
+  getHistory(id: Number) : Observable<Array<History>>{
     return this.http.put<Array<History>>(`${this.baseUrl}` + `/history/oven`, id);
   }
 }
