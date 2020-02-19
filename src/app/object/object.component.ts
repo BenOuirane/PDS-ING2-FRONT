@@ -41,6 +41,7 @@ export class ObjectComponent implements OnInit {
   dataloaded: boolean = false;
   LampStatus: boolean = false;
   checkoutFormLamp;
+  checkoutFormShutter; 
   test: boolean;
 
 
@@ -140,7 +141,20 @@ export class ObjectComponent implements OnInit {
       intensityUsine: Number,
       objects: Objects
     });
+
+    this.checkoutFormShutter = this.formBuilder.group({
+      idShutter : Number,      
+      hourOn : String,
+      hourOff : String,
+      status : Boolean,
+      hourOnUsine : String,
+      hourOffUsine : String,
+      statusUsine : Boolean,
+      object : Objects
+    });
+
   }
+
 
   //Used to get automaticaly the right color 
   colorOnChange(value: string): string {
@@ -185,4 +199,18 @@ export class ObjectComponent implements OnInit {
       }
     );
   }
+
+  buildShutter() {
+    console.log("buildShutter : ", this.checkoutFormShutter.value);
+    this.shutterService.updateShutter(this.checkoutFormShutter.value).subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+
 }
