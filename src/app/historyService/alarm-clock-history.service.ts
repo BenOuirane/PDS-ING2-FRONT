@@ -14,7 +14,7 @@ export class AlarmClockHistoryService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getHistory(id: Number) : Observable<Array<History>>{
-    return this.http.put<Array<History>>(`${this.baseUrl}` + `/history/alarmClock`, id);
+  getAlarmClockHistory(id: Number) : Observable<Array<History>>{
+    return this.http.put<Array<History>>(`${this.baseUrl}` + `/history/AlarmClock`, id);
   }
 }

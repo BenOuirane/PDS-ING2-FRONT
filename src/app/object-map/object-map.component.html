@@ -31,7 +31,7 @@
                     </div>
 
                     <div id="room-summary-full"> 
-                        <h5>Résumé de la chambre {{ activeRoom.roomNumber }}</h5>
+                        <h5>Résumé de la chambre</h5>
                         <div class="col-12" *ngIf="numberOfObjects > 0">Nombre d'objets : {{ numberOfObjects }}</div>
                         <div class="col-12" *ngIf="numberOfObjects == 0">Aucun object dans cette chambre</div>
                     </div>
@@ -44,7 +44,7 @@
         <div class="col-12" label="lamps">
             <div class="row" *ngFor="let lamp of lamps; index as i">
                 <div class="col-12 col-md-6">
-                    <h5 style="text-align: center;">Lampe - {{ lamp.objects.id }} :</h5>
+                    <h5 style="text-align: center;">Lampe n°{{ i + 1}} :</h5>
                     <div>Status : 
                         <span *ngIf="lamp.status">Allumées</span> 
                         <span *ngIf="!lamp.status">Éteint</span>
@@ -73,7 +73,7 @@
         <div class="col-12" label="Shutters">
             <div class="row" *ngFor="let shutter of shutters; index as i">
                 <div class="col-12 col-md-6">
-                    <h5 style="text-align: center;">Volet - {{ shutter.objects.id }} :</h5>
+                    <h5 style="text-align: center;">Volet n°{{ i + 1}} :</h5>
                     <div>Status : 
                         <span *ngIf="shutter.status">Ouvert</span> 
                         <span *ngIf="!shutter.status">Fermé</span>
@@ -96,7 +96,7 @@
         <div class="col-12" label="CoffeeMachines">
             <div class="row" *ngFor="let coffeeMachine of coffeeMachines; index as i">
                 <div class="col-12 col-md-6">
-                    <h5 style="text-align: center;">Machine à café - {{ coffeeMachine.objects.id }} :</h5>
+                    <h5 style="text-align: center;">Machine à café n°{{ i + 1}} :</h5>
                     <div>Status : 
                         <span *ngIf="coffeeMachine.status">Allumée</span> 
                         <span *ngIf="!coffeeMachine.status">Eteinte</span>
@@ -122,7 +122,7 @@
         <div class="col-12" label="AlarmClocks">
             <div class="row" *ngFor="let alarmClock of alarmClocks; index as i">
                 <div class="col-12 col-md-6">
-                    <h5 style="text-align: center;">Réveil - {{ alarmClock.objects.id }} :</h5>
+                    <h5 style="text-align: center;">Réveil n°{{ i + 1}} :</h5>
                     <div>Statut de l'alarme : 
                         <span *ngIf="alarmClock.status">Réveil programmé</span> 
                         <span *ngIf="!alarmClock.status">Réveil non programmé</span>
@@ -149,7 +149,7 @@
         <div class="col-12" label="Ovens">
             <div class="row" *ngFor="let oven of ovens; index as i">
                 <div class="col-12 col-md-6">
-                    <h5 style="text-align: center;">Four - {{ oven.objects.id }} :</h5>
+                    <h5 style="text-align: center;">Four n°{{ i + 1}} :</h5>
                     <div>Statut : 
                         <span *ngIf="oven.status">Allumé</span> 
                         <span *ngIf="!oven.status">Eteint</span>

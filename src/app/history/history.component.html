@@ -1,11 +1,11 @@
 <section class="container">
     <div class="row">
         <div class="col-12">
-                <h2>{{ objectTypeString }} - {{ objectId }}</h2>
+                <h2>Utilisation {{ objectType }}</h2>
         </div>
         <div class="col-12" >
             <div class="row">
-                <table class="table" *ngIf="histories.length > 0">
+                <table class="table">
                     <thead>
                         <tr>
                         <th scope="col">Action</th>
@@ -15,44 +15,12 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let history of histories">
-                        <td> 
-                            <span *ngIf="history.columnData == 'intensity'">
-                                Intensité
-                            </span>
-                            <span *ngIf="history.columnData == 'color'">
-                                Couleur
-                            </span>
-                            <span *ngIf="history.columnData == 'alarm' || history.columnData == 'schedule_coffee'">
-                                Programmation
-                            </span>
-                            <span *ngIf="history.columnData == 'capsules'">
-                                Commande de capsules
-                            </span>
-                            <span *ngIf="history.columnData == 'radio'">
-                                Fréquence radio
-                            </span>
-                            <span *ngIf="history.columnData == 'action'">
-                                Action
-                            </span>
-                            <span *ngIf="history.columnData == 'power'">
-                                Mise en route
-                            </span>
-                        </td>
-                        <td>
-                            <span *ngIf="history.columnData == 'alarm' || history.columnData == 'schedule_coffee'">
-                                {{ history.data | date : "short" }}
-                            </span>
-                            <span *ngIf="history.columnData != 'alarm' && history.columnData != 'schedule_coffee'">
-                                {{ history.data }}
-                            </span>
-                        </td>
+                        <td>{{ history.columnData }}</td>
+                        <td>{{ history.data }}</td>
                         <td>{{ history.messageTimestamp | date : "short" }}</td>
                         </tr>
                     </tbody>
                 </table>
-                <div *ngIf="histories.length == 0">
-                    Aucun historique pour cet objet :(
-                </div>
             </div>   
         </div>
        
