@@ -28,6 +28,7 @@ import { UpdateDatamockComponent } from './update-datamock/update-datamock.compo
 import { ObjectComponent } from './object/object.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MapPrototypeComponent } from './map-prototype/map-prototype.component';
 
 
 
@@ -46,7 +47,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FooterComponent,
     UpdateDatamockComponent,
     ObjectComponent,
-
+    MapPrototypeComponent,
     
     
   ],

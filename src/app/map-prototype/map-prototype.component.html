@@ -1,37 +1,46 @@
-<p>map-prototype works!</p>
-<!DOCTYPE html>
-<html>
-	<head>		
-		<title>Map</title>
-	</head>
-	<body>
-	<!--	<div style="width:50px; height:50px; background-color:red"></div>
-		<div style="width:50px; height:50px; background-color:blue"></div>
-		<div style="width:50px; height:50px; background-color:green"></div> -->
 
-<div class="blended_grid">
-	  <div class="Cuinse & Restaurant">
-	  </div>
-	  <div class="TT">
-	 	  <div class="Chambre 1">
-	 	  </div>
-	 	  <div class="Chambre 2">
-	 	  </div>
-	 	  <div class="Chambre 3">
-	 	  </div>
-	  </div>
-	  <div class="Séjour commun">
-	  </div>
-	  <div class="Chambre 4">
-	  </div>
-	  <div class="Chambre 6">
-	  </div>
-	  <div class="Aqua Piscine">
-	  </div>
-	  <div class="Chambre 5">
-	  </div>
+<form class="form-inline md-form mr-auto mb-4">
+	<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+	<button class="btn btn-elegant btn-rounded btn-sm my-0" type="submit">Search</button>
+	<div *ngIf="patientSearchResult.length==0" class="alert alert-info text-center w-50 m-auto" role="alert">Aucun patient trouvé ! </div>
+  </form>
+
+<div class="cont col">
+
+	<div class="d-flex flex-row mb-2 b-5 ">
+		<div class=chambre>Chambre 1</div>
+		<div class=chambre>Chambre 2</div>
+		<div class=chambre>Chambre 3</div>
+		<div class=chambre>Chambre 4</div>
+		<div class=chambre>Chambre 5</div>
+		<div class=chambre>Chambre 6</div>
+		<div class=chambre>Chambre 7</div>
+		
+	</div>
+
+	<div class="d-flex flex-row mt-2 mb-2">
+		<!--<ng-container *ngFor="let area of areas | paginate : { itemsPerPage: 10, currentPage: p}; trackBy: identifyItem" 
+		class="flex-fill" (click)="getAreaDetails(area.id)" >1</ng-container>-->
+		<div class="cuisine flex-fill">Forum</div>
+		<div class="cuisine flex-fill">Lumen</div>
+		<div class="restaurant flex-fill">Aqua</div>
+		<div class="sallesport flex-fill">Forest Hill</div>
+		<div class="cuisine flex-fill">Savane</div>
+		<div class="cuisine flex-fill">Amazonie</div>
+		<div class="cuisine flex-fill">Jungle</div>
+		
+	</div>
+
+	<div class="d-flex mt-2">
+		<div class="salle flex-fill">Multimedia</div>
+		<div class="salle flex-fill">Evergreen</div>
+		<div class="salle flex-fill">Terra</div>
+		<div class="salle flex-fill">Champagne</div>
+		<div class="salle flex-fill">Pulse</div>
+	</div>
+	  
 </div>
-</body>
-</html>
-	</body>
-</html>
+<ng-template #messageTmpl>
+	<h4 class="text-center mb-4">Vue synthètique des patients</h4>
+	<div class="alert alert-info text-center w-50 m-50 m-auto" role="alert">Veuillez utiliser le button en haut <i class ="material-icons">rechercher</i></div>
+</ng-template>
