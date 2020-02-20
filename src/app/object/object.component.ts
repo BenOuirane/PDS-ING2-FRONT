@@ -41,7 +41,9 @@ export class ObjectComponent implements OnInit {
   shutters: Shutter[] = new Array<Shutter>();
   dataloaded: boolean = false;
   LampStatus: boolean = false;
-  
+  checkoutFormLamp;
+  checkoutFormShutter; 
+  test: boolean;
 
   constructor(private residentService: ResidentService,
     private objectService: ObjectService,
@@ -112,7 +114,7 @@ export class ObjectComponent implements OnInit {
             default:
               break;
           }
-        );
+        })
       }, error => console.log(error)
     );
   }
