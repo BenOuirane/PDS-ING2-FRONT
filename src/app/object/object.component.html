@@ -79,11 +79,11 @@
 
                             <tr>
                                 <td>Allumées à</td>
-                                <td class="col-6" [ngClass]="stateOn.value ? 'visible' : 'invisible'">
-                                    <span (click)="open()"><i class="material-icons" md-36>schedule</i></span>
+                                <td class="col-6" [ngClass]="lampe.hourOn != null || stateOn.value ? 'visible' : 'invisible'">
+                                    <span (click)="openOn(lampe.hourOn)"><mat-icon md-36>schedule</mat-icon></span> {{checkoutFormLamp.value.hourOn | date : 'hh:mm a'}}{{checkoutFormLamp.value.hourOn === 'false' ? lampe.hourOn : '' }}
                                 </td>
                                 <td>
-                                    <mat-slide-toggle #stateOn (toggleChange)="stateOn.value = !stateOn.value"
+                                    <mat-slide-toggle #stateOn (toggleChange)="stateOn.value = !stateOn.value; "
                                         [checked]="lampe.hourOn != null"></mat-slide-toggle>
                                 </td>
                             </tr>
@@ -92,7 +92,7 @@
                                 <td>Éteintes à</td>
                                 <td class="col-6" [ngClass]="stateOff.value ? 'visible' : 'invisible'">
                                     <!-- <input type="time" atp-time-picker value="20:55" theme="dark" locale='fr' arrowStyle="{'background': 'red', 'color': 'white'}"/> -->
-                                    <span (click)="open()"><i class="material-icons" md-36>schedule</i></span> 
+                                    <span (click)="openOff(lampe.hourOff)"><mat-icon md-36>schedule</mat-icon></span> {{checkoutFormLamp.value.hourOff | date : 'hh:mm a'}}{{checkoutFormLamp.value.hourOff ? '' :  lampe.hourOff}}
 
                                     
                                 </td>
@@ -166,7 +166,12 @@
                     <h5>
                         Paramètres :
                     </h5>
+
+                    <!-- <input hidden #idShutter formControlName="idShutter" [ngModel]="shutter.idShutter"> -->
+                    <!-- <input hidden #idShutter formControlName="idShutter" [ngModel]="shutter.idShutter"> -->
+
                 </div>
+
             </ng-container>
         </mat-tab>
 

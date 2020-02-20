@@ -142,6 +142,9 @@ export class ObjectComponent implements OnInit {
       objects: Objects
     });
 
+    this.checkoutFormLamp.value.hourOn = 'false';
+    this.checkoutFormLamp.value.hourOff = 'false';
+
     this.checkoutFormShutter = this.formBuilder.group({
       idShutter : Number,      
       hourOn : String,
@@ -188,17 +191,17 @@ export class ObjectComponent implements OnInit {
   }
 
   buildLamp() {
-    console.log("hourOff : ", this.checkoutFormLamp.value.hourOff);
-    console.log("hourOff time : ", this.checkoutFormLamp.value.hourOff.time);
-    // this.lampeService.updateLamp(this.checkoutFormLamp.value).subscribe(
-    //   data => {
-    //     console.log(data);
-    //     this.getResidentService();
-    //   },
-    //   err => {
-    //     console.log(err);
-    //   }
-    // );
+    console.log("this.checkoutFormLamp.value", this.checkoutFormLamp.value);
+    
+     this.lampeService.updateLamp(this.checkoutFormLamp.value).subscribe(
+       data => {
+         console.log(data);
+         this.getResidentService();
+       },
+       err => {
+         console.log(err);
+       }
+     );
   }
 
   buildShutter() {
@@ -214,16 +217,50 @@ export class ObjectComponent implements OnInit {
     );
   }
 
-  selectChanged(event){
+  openOn(timestamp: string) {
+
+    console.log("this.checkoutFormLamp.value.hourOn", this.checkoutFormLamp.value.hourOn);
     
-    console.log("event", event);
+    let time = new Date(timestamp);
+    
+    const amazingTimePicker = this.atp.open({
+      time: time.toTimeString()
+    });
+    amazingTimePicker.afterClose().subscribe(time => {
+      
+      let hourOn = this.commonDate(time);
+      this.checkoutFormLamp.value.hourOn = hourOn;
+    });
+
+    return this.checkoutFormLamp.value.hourOn;
   }
 
-  open() {
-    const amazingTimePicker = this.atp.open();
-    amazingTimePicker.afterClose().subscribe(time => {
-      console.log(time);
-      
+  openOff(timestamp: string) {    
+    let time = new Date(timestamp);
+    
+    const amazingTimePicker = this.atp.open({
+      time: time.toTimeString()
     });
+    amazingTimePicker.afterClose().subscribe(time => {
+      
+      let hourOff = this.commonDate(time);
+      this.checkoutFormLamp.value.hourOff = hourOff;
+    });
+
+    return this.checkoutFormLamp.value.hourOff;
+  }
+
+  private commonDate(time: string): number  {
+    console.log(time);
+      let split = time.split(':');
+      let hours = Number.parseInt(split[0]);
+      let minutes = Number.parseInt(split[1]);
+
+      let myDate = new Date();
+      myDate.setHours(hours);
+      myDate.setMinutes(minutes);
+
+      console.log("myDate", myDate.getTime());
+      return myDate.getTime();
   }
 }
