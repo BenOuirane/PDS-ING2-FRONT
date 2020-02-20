@@ -4,6 +4,7 @@ import { NgModule, LOCALE_ID, ErrorHandler } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 //import { HttpModule } from '@angular/http';
+import { AmazingTimePickerModule } from 'amazing-time-picker';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,7 +28,7 @@ import { UpdateDatamockComponent } from './update-datamock/update-datamock.compo
 import { ObjectComponent } from './object/object.component';
 import {
   MatTabsModule, MatSelectModule, MatSliderModule,
-  MatSlideToggleModule, MatButtonModule
+  MatSlideToggleModule, MatButtonModule, MatFormFieldModule, MatIconModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ObjectMapComponent } from './object-map/object-map.component';
@@ -64,7 +65,10 @@ import { HistoryComponent } from './history/history.component';
     MatSlideToggleModule,
     BrowserAnimationsModule,
     NgxMaterialTimepickerModule, 
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    AmazingTimePickerModule,
+    MatIconModule
   ],
   providers: [
     CandidateService,

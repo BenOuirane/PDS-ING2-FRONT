@@ -16,6 +16,9 @@ import { Oven } from '../oven';
 import { Shutter } from '../shutter';
 import { AlarmClock } from '../alarm-clock';
 import { CoffeeMachine } from '../coffeeMachine';
+import { FormBuilder} from '@angular/forms';
+import { Timestamp } from 'rxjs/internal/operators/timestamp';
+import { AmazingTimePickerService } from 'amazing-time-picker';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -40,14 +43,25 @@ export class ObjectComponent implements OnInit {
   LampStatus: boolean = false;
   
 
-
-
-
-  constructor(private residentService: ResidentService, private objectService: ObjectService, private lampeService: LampeService, private ovenService: OvenService, private shutterService: ShutterService, private alarmClockService: AlarmClockService, private coffeeMachineService: CoffeeMachineService) { }
+  constructor(private residentService: ResidentService,
+    private objectService: ObjectService,
+    private lampeService: LampeService,
+    private ovenService: OvenService,
+    private shutterService: ShutterService,
+    private alarmClockService: AlarmClockService,
+    private coffeeMachineService: CoffeeMachineService,
+    private formBuilder: FormBuilder,
+    private atp: AmazingTimePickerService) { }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
 
+    this.getResidentService();
+
+    this.initForm();
+  }
+
+  private getResidentService(): void{
     this.residentService.getResident(this.user).subscribe(
       data => {
         this.room = data.room;
@@ -98,13 +112,40 @@ export class ObjectComponent implements OnInit {
             default:
               break;
           }
-          this.dataloaded = true;
-        })
-
+        );
       }, error => console.log(error)
     );
   }
- 
+
+  private initForm(): void {
+    this.checkoutFormLamp = this.formBuilder.group({
+      idLamp: Number,
+      status: Boolean,
+      hourOn: String,
+      hourOff: String,
+      intensity: Number,
+      color: String,
+      colorUsine: String,
+      statusUsine: Boolean,
+      hourOnUsine: String,
+      hourOffUsine: String,
+      intensityUsine: Number,
+      objects: Objects
+    });
+
+    this.checkoutFormShutter = this.formBuilder.group({
+      idShutter : Number,      
+      hourOn : String,
+      hourOff : String,
+      status : Boolean,
+      hourOnUsine : String,
+      hourOffUsine : String,
+      statusUsine : Boolean,
+      object : Objects
+    });
+
+  }
+
   //Used to get automaticaly the right color 
   colorOnChange(value: string) : string {
     let color: string = ''; 
@@ -135,5 +176,45 @@ export class ObjectComponent implements OnInit {
     }
 
     return value;
+  }
+
+  buildLamp() {
+    console.log("hourOff : ", this.checkoutFormLamp.value.hourOff);
+    console.log("hourOff time : ", this.checkoutFormLamp.value.hourOff.time);
+    // this.lampeService.updateLamp(this.checkoutFormLamp.value).subscribe(
+    //   data => {
+    //     console.log(data);
+    //     this.getResidentService();
+    //   },
+    //   err => {
+    //     console.log(err);
+    //   }
+    // );
+  }
+
+  buildShutter() {
+    console.log("buildShutter : ", this.checkoutFormShutter.value);
+    this.shutterService.updateShutter(this.checkoutFormShutter.value).subscribe(
+      data => {
+        console.log(data);
+        window.location.reload();
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  selectChanged(event){
+    
+    console.log("event", event);
+  }
+
+  open() {
+    const amazingTimePicker = this.atp.open();
+    amazingTimePicker.afterClose().subscribe(time => {
+      console.log(time);
+      
+    });
   }
 }

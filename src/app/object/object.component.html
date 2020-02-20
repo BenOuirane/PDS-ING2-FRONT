@@ -1,5 +1,6 @@
 <section class="container">
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
     <mat-tab-group *ngIf="dataloaded">
         <mat-tab label="Lampe" *ngIf="lamps.length > 0">
             <ng-container *ngFor="let lampe of lamps; index as i">
@@ -35,52 +36,86 @@
 
                     </div>
                 </div>
-                <div class="my-custom-row mt-5"><div class="col-12"><hr width="85%" color="blue"> </div>
-                    <h5>
-                        Paramètres :
-                    </h5>
-                    <table width="90%">
-                        <tr class="col-12">
-                            <td class="col-6">Status</td>
-                            <td class="col-6">
-                                <mat-slide-toggle [checked]="lampe.status"></mat-slide-toggle>
-                            </td>
-                        </tr>
+                <!-- Manage params for Lamps-->
+                <div class="my-custom-row mt-5">
+                    <form [formGroup]="checkoutFormLamp" (ngSubmit)="buildLamp()">
+                        <div class="col-12">
+                            <hr width="85%" color="blue">
+                        </div>
+                        <h5>
+                            Paramètres :
+                        </h5>
+                        <input hidden #idLamp formControlName="idLamp" [ngModel]="lampe.idLamp">
+                        <input hidden #objects formControlName="objects" [ngModel]="lampe.objects">
+                        <input hidden #colorUsine formControlName="colorUsine" [ngModel]="lampe.colorUsine">
+                        <input hidden #hourOffUsine formControlName="hourOffUsine" [ngModel]="lampe.hourOffUsine">
+                        <input hidden #hourOnUsine formControlName="hourOnUsine" [ngModel]="lampe.hourOnUsine">
+                        <input hidden #intensityUsine formControlName="intensityUsine" [ngModel]="lampe.intensityUsine">
+                        <input hidden #statusUsine formControlName="statusUsine" [ngModel]="lampe.statusUsine">
+                        <input hidden #rooms formControlName="rooms" [ngModel]="lampe.objects.rooms">
+                        <table width="90%">
+                            <tr>
+                                <td>Status</td>
+                                <td>
+                                    <mat-slide-toggle #status formControlName="status" [ngModel]="lampe.status">
+                                    </mat-slide-toggle>
+                                </td>
+                            </tr>
 
-                        <tr class="col-12">
-                            <td class="col-6">Couleur</td>
-                            <td class="col-6">
-                                <mat-select [(value)]="lampe.color">
-                                    <mat-option value="WHITE">Blanche</mat-option>
-                                    <mat-option value="BLUE">Bleue</mat-option>
-                                    <mat-option value="YELLOW">Jaune</mat-option>
-                                    <mat-option value="GREEN">Verte</mat-option>
-                                </mat-select>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>Couleur</td>
+                                <td>
+                                    <mat-form-field>
+                                        <mat-select #color formControlName="color" [ngModel]="lampe.color">
+                                            <mat-option value="WHITE">Blanche</mat-option>
+                                            <mat-option value="BLUE">Bleue</mat-option>
+                                            <mat-option value="YELLOW">Jaune</mat-option>
+                                            <mat-option value="GREEN">Verte</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
 
-                        <tr class="col-12">
-                            <td class="col-6">Allumées à</td>
-                            <td class="col-6">
-                                <input type="button" [ngxTimepicker]="picker" value="{{lampe.hourOn}}">
-                                <ngx-material-timepicker #picker></ngx-material-timepicker>
-                                {{'Hours: ' + lampe.hourOn | date: "hh:mm a"}}
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>Allumées à</td>
+                                <td class="col-6" [ngClass]="stateOn.value ? 'visible' : 'invisible'">
+                                    <span (click)="open()"><i class="material-icons" md-36>schedule</i></span>
+                                </td>
+                                <td>
+                                    <mat-slide-toggle #stateOn (toggleChange)="stateOn.value = !stateOn.value"
+                                        [checked]="lampe.hourOn != null"></mat-slide-toggle>
+                                </td>
+                            </tr>
 
-                        
-                      
-                        <tr class="col-12">
-                            <td class="col-6">Intensité</td>
-                            <td class="col-6">
-                                <mat-slider thumbLabel [displayWith]="formatLabel" min="10" max="100" step="10"
-                                    [value]="lampe.intensity"></mat-slider>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="d-flex justify-content-center mt-5">
-                    <button mat-raised-button>Valider</button>
+                            <tr>
+                                <td>Éteintes à</td>
+                                <td class="col-6" [ngClass]="stateOff.value ? 'visible' : 'invisible'">
+                                    <!-- <input type="time" atp-time-picker value="20:55" theme="dark" locale='fr' arrowStyle="{'background': 'red', 'color': 'white'}"/> -->
+                                    <span (click)="open()"><i class="material-icons" md-36>schedule</i></span> 
+
+                                    
+                                </td>
+                                <td>
+                                    <mat-slide-toggle #stateOff (toggleChange)="stateOff.value = !stateOff.value"
+                                        [checked]="lampe.hourOff != null"></mat-slide-toggle>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Intensité</td>
+                                <td>
+                                    <mat-slider #intensity formControlName="intensity" thumbLabel
+                                        [displayWith]="formatLabel" min="10" max="100" step="10"
+                                        [ngModel]="lampe.intensity"></mat-slider>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- SUBMIT LAMP-->
+                        <div class="d-flex justify-content-center mt-5 mb-5">
+                            <button mat-raised-button type="submit">Valider</button>
+                        </div>
+
+                    </form>
                 </div>
 
             </ng-container>
