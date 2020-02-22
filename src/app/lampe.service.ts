@@ -24,5 +24,5 @@ export class LampeService {
     return this.http.put<boolean>(`${this.baseUrl}` + `/lamp/updateParam`, lampe);
     
   }
-
+ 
 }
