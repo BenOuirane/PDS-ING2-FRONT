@@ -4,8 +4,8 @@ import { NgModule, LOCALE_ID, ErrorHandler } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 //import { HttpModule } from '@angular/http';
-
-
+import { AmazingTimePickerModule } from 'amazing-time-picker';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -19,17 +19,23 @@ import { SendNotificationComponent } from './send-notification/send-notification
 import { GetNotificationsComponent } from './get-notifications/get-notifications.component';
 
 import { CreateCandidateComponent } from './create-candidate/create-candidate.component';
-import {CandidateService} from './candidate_services/candidate.service';
+import { CandidateService } from './candidate_services/candidate.service';
 import { from } from 'rxjs';
 
 import { SearchBarComponent } from './layouts/search-bar/search-bar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { UpdateDatamockComponent } from './layouts/update-datamock/update-datamock.component';
 import { ObjectComponent } from './object/object.component';
-import {MatTabsModule} from '@angular/material/tabs';
+import {
+  MatTabsModule, MatSelectModule, MatSliderModule,
+  MatSlideToggleModule, MatButtonModule, MatFormFieldModule, MatIconModule
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MapPrototypeComponent } from './layouts/map-prototype/map-prototype.component';
 import { FavoriteFiltersComponent } from './layouts/favorite-filters/favorite-filters.component';
+
+import { ObjectMapComponent } from './object-map/object-map.component';
+import { HistoryComponent } from './history/history.component';
 
 
 
@@ -40,18 +46,21 @@ import { FavoriteFiltersComponent } from './layouts/favorite-filters/favorite-fi
     LoginComponent,
     SendNotificationComponent,
     GetNotificationsComponent,
-
     CreateCandidateComponent,
-
     SearchBarComponent,
     HomeComponent,
     FooterComponent,
     UpdateDatamockComponent,
     ObjectComponent,
+ 
     MapPrototypeComponent,
     FavoriteFiltersComponent,
     
     
+
+    ObjectMapComponent,
+    HistoryComponent
+
   ],
   imports: [
     BrowserModule,
@@ -61,19 +70,25 @@ import { FavoriteFiltersComponent } from './layouts/favorite-filters/favorite-fi
     HttpClientModule,
     //HttpModule,
     MatTabsModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatSlideToggleModule,
     BrowserAnimationsModule,
-   
+    NgxMaterialTimepickerModule, 
+    MatButtonModule,
+    MatFormFieldModule,
+    AmazingTimePickerModule,
+    MatIconModule
   ],
   providers: [
     CandidateService,
     CommonModule,
-    
-    { 
-       provide: LOCALE_ID, useValue: "fr-FR"
+    {
+      provide: LOCALE_ID, useValue: "fr-FR"
     }
- ],
+  ],
   bootstrap: [AppComponent]
-  
+
 })
-export class AppModule { 
+export class AppModule {
 }

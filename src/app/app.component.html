@@ -29,7 +29,8 @@
                         >Notifications</a></li>
 
                         <li  ><a  href="add" >candidate </a></li>
-
+            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['objects']" 
+                >Monitorer les objets</a></li>
             <li *ngIf="authenticated()" id="menu-item-202" class="menu-item"><a
                 href="" (click)="logout()">Déconnexion</a></li>
 
