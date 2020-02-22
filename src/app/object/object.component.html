@@ -2,6 +2,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
     rel="stylesheet">
     <mat-tab-group *ngIf="dataloaded">
+        <!-- Manage infos of Lamps-->
         <mat-tab label="Lampe" *ngIf="lamps.length > 0">
             <ng-container *ngFor="let lampe of lamps; index as i">
                 <div class="my-custom-row mt-5">
@@ -10,24 +11,15 @@
                         <h5 style="padding-left:20%;">Lampe - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
-                                <tr class="col-12">
-                                    <td class="col-6">Status</td>
-                                    <td class="col-6"><span *ngIf="lampe.status">Allumées</span> <span
+                                <tr>
+                                    <td>Status</td>
+                                    <td><span *ngIf="lampe.status">Allumées</span> <span
                                             *ngIf="!lampe.status">Éteint</span></td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Couleur</td>
-                                    <td class="col-6"><span>{{colorOnChange(lampe.color)}}</span></td>
+                                <tr>
+                                    <td>Couleur</td>
+                                    <td><span>{{colorOnChange(lampe.color)}}</span></td>
                                 </tr>
-<<<<<<< HEAD
-                                <tr class="col-12">
-                                    <td class="col-6">Allumées à</td>
-                                    <td class="col-6">{{ lampe.hourOn | date: "hh:mm a"}}</td>
-                                </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Éteintes à</td>
-                                    <td class="col-6">{{ lampe.hourOff | date: "hh:mm a"}}</td>
-=======
                                 <tr>
                                     <td>Allumées à</td>
                                     <td>
@@ -41,11 +33,10 @@
                                       <span *ngIf="lampe.hourOff; else elseBlock">{{ lampe.hourOff | date: "hh:mm a"}}</span>
                                       <ng-template #elseBlock>Non paramétré</ng-template>
                                     </td>
->>>>>>> aled_41_lampFrt
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Intensité</td>
-                                    <td class="col-6">{{ lampe.intensity }}%</td>
+                                <tr>
+                                    <td>Intensité</td>
+                                    <td>{{ lampe.intensity }}%</td>
                                 </tr>
                             </table>
                         </div>
@@ -137,10 +128,10 @@
         </mat-tab>
 
         <mat-tab label="Four" *ngIf="ovens.length > 0">
-            <div class="my-custom-row mt-5">
-                <div class="col-6"><img src="../../assets/oven.jpg" alt=""></div>
-                <div class="col-6">
-                    <ng-container *ngFor="let oven of ovens; index as i">
+            <ng-container *ngFor="let oven of ovens; index as i">
+                <div class="my-custom-row mt-5">
+                    <div class="col-6"><img src="../../assets/oven.jpg" alt=""></div>
+                    <div class="col-6">
                         <h5 style="padding-left:20%;">Four - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
@@ -169,12 +160,9 @@
                                 </tr>
                             </table>
                         </div>
-                    </ng-container>
-
-<<<<<<< HEAD
+                    </div>
                 </div>
-            </div>
-=======
+
                 <!-- Manage params for shutters-->
                 <div class="my-custom-row mt-5">
                     <div class="col-12">
@@ -190,14 +178,13 @@
                 </div>
 
             </ng-container>
->>>>>>> aled_41_lampFrt
         </mat-tab>
 
         <mat-tab label="Volet" *ngIf="shutters.length > 0">
-            <div class="my-custom-row mt-5">
-                <div class="col-6"><img src="../../assets/volet.jpeg" alt=""></div>
-                <div class="col-6">
-                    <ng-container *ngFor="let shutter of shutters; index as i">
+            <ng-container *ngFor="let shutter of shutters; index as i">
+                <div class="my-custom-row mt-5">
+                    <div class="col-6"><img src="../../assets/volet.jpeg" alt=""></div>
+                    <div class="col-6">
                         <h5 style="padding-left:20%;">Volet - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
@@ -211,23 +198,31 @@
                                     <td class="col-6">{{ shutter.hourOn | date: "hh:mm a"}}</td>
                                 </tr>
                                 <tr class="col-12">
-                                    <td class="col-6">Fermé à</td>
+                                    <td class="col-6">Fermer à</td>
                                     <td class="col-6">{{ shutter.hourOff | date: "hh:mm a"}}</td>
                                 </tr>
 
                             </table>
                         </div>
-                    </ng-container>
-
+                    </div>
                 </div>
-            </div>
+                <!-- Manage params for shutters-->
+                <div class="my-custom-row mt-5">
+                    <div class="col-12">
+                        <hr width="85%" color="blue">
+                    </div>
+                    <h5>
+                        Paramètres :
+                    </h5>
+                </div>
+            </ng-container>
         </mat-tab>
 
         <mat-tab label="Réveil" *ngIf="alarmClocks.length > 0">
-            <div class="my-custom-row mt-5">
-                <div class="col-6"><img src="../../assets/AlarmClock.jpg" alt=""></div>
-                <div class="col-6">
-                    <ng-container *ngFor="let alarmClock of alarmClocks; index as i">
+            <ng-container *ngFor="let alarmClock of alarmClocks; index as i">
+                <div class="my-custom-row mt-5">
+                    <div class="col-6"><img src="../../assets/AlarmClock.jpg" alt=""></div>
+                    <div class="col-6">
                         <h5 style="padding-left:20%;">Réveil - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
@@ -257,18 +252,27 @@
 
                             </table>
                         </div>
-                    </ng-container>
-
+                    </div>
                 </div>
-            </div>
+
+                <!-- Manage params for shutters-->
+                <div class="my-custom-row mt-5">
+                    <div class="col-12">
+                        <hr width="85%" color="blue">
+                    </div>
+                    <h5>
+                        Paramètres :
+                    </h5>
+                </div>
+            </ng-container>
         </mat-tab>
 
 
         <mat-tab label="Machine à café" *ngIf="coffeeMachines.length > 0">
-            <div class="my-custom-row mt-5">
-                <div class="col-6"><img src="../../assets/coffeeMachine.jpg" alt=""></div>
-                <div class="col-6">
-                    <ng-container *ngFor="let coffeeMachine of coffeeMachines; index as i">
+            <ng-container *ngFor="let coffeeMachine of coffeeMachines; index as i">
+                <div class="my-custom-row mt-5">
+                    <div class="col-6"><img src="../../assets/coffeeMachine.jpg" alt=""></div>
+                    <div class="col-6">
                         <h5 style="padding-left:20%;">Machine à café - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
@@ -287,15 +291,25 @@
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Niveau d'eau de ma machine</td>
-                                    <td class="col-6">{{coffeeMachine.waterLevel}} Litre</td>
+                                    <td class="col-6">{{coffeeMachine.waterLevel}} cl</td>
                                 </tr>
 
                             </table>
                         </div>
-                    </ng-container>
-
+                    </div>
                 </div>
-            </div>
+
+                <!-- Manage params for Lamps-->
+                <div class="my-custom-row mt-5">
+                    <div class="col-12">
+                        <hr width="85%" color="blue">
+                    </div>
+                    <h5>
+                        Paramètres :
+                    </h5>
+                </div>
+
+            </ng-container>
         </mat-tab>
     </mat-tab-group>
 </section>

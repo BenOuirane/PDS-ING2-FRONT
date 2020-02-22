@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { ResidentService } from '../resident.service';
-import { Room } from '../room';
+import { Rooms } from '../room';
 import { Objects } from '../objects';
 import { ObjectService } from '../object.service';
 import { LampeService } from '../lampe.service';
@@ -31,7 +31,7 @@ registerLocaleData(localeFr, 'fr');
 export class ObjectComponent implements OnInit {
 
   user: User = new User();
-  room: Room = new Room();
+  room: Rooms = new Rooms();
   roomString: string;
   objects: Objects[] = new Array<Objects>();
   lamps: Lampe[] = new Array<Lampe>();
@@ -68,54 +68,6 @@ export class ObjectComponent implements OnInit {
     this.residentService.getResident(this.user).subscribe(
       data => {
         this.room = data.room;
-<<<<<<< HEAD
-        //this.objects = this.room.objects;
-
-        this.objects.forEach(object => {
-          switch (object.objectType) {
-            case 'LAMP':
-              this.lampeService.getlampe(object).subscribe(
-                data => {
-                  this.lamps = data;
-                  console.log(data);
-                }
-              ); break;
-            case 'OVEN':
-              this.ovenService.getOven(object).subscribe(
-                data => {
-                  this.ovens = data;
-                  console.log(data);
-                }
-              ); break;
-
-            case 'SHUTTER':
-              this.shutterService.getshutter(object).subscribe(
-                data => {
-                  this.shutters = data;
-                  console.log(data);
-                }
-              ); break;
-
-            case 'ALARMCLOCK':
-              this.alarmClockService.getAlarmClock(object).subscribe(
-                data => {
-                  this.alarmClocks = data;
-                  console.log(data);
-                }
-              ); break;
-
-            case 'COFFEEMACHINE':
-              this.coffeeMachineService.getCoffeeMachine(object).subscribe(
-                data => {
-                  this.coffeeMachines = data;
-                  console.log(data);
-                }
-              ); break;
-
-
-            default:
-              break;
-=======
 
         this.objectService.getObject(this.room).subscribe(
           data => {
@@ -174,9 +126,8 @@ export class ObjectComponent implements OnInit {
               }
               this.dataloaded = true;
             });
->>>>>>> aled_41_lampFrt
           }
-        })
+        );
       }, error => console.log(error)
     );
   }
@@ -213,27 +164,21 @@ export class ObjectComponent implements OnInit {
 
   }
 
-<<<<<<< HEAD
-  //Used to get automaticaly the right color 
-  colorOnChange(value: string) : string {
-    let color: string = ''; 
-=======
   //Used to get automaticaly the right color
   colorOnChange(value: string): string {
     let color: string = '';
->>>>>>> aled_41_lampFrt
     switch (value) {
       case 'WHITE':
-          color = 'Blanche'
+        color = 'Blanche'
         break;
       case 'BLUE':
-          color = 'Bleue'
+        color = 'Bleue'
         break;
-        case 'GREEN':
-          color = 'Verte'
+      case 'GREEN':
+        color = 'Verte'
         break;
-        case 'YELLOW':
-          color = 'Jaune'
+      case 'YELLOW':
+        color = 'Jaune'
         break;
 
       default:
