@@ -12,9 +12,8 @@
     <form (ngSubmit)="onGetResidence()">
       <h4>Sélectionnez l'indicateur à calculer</h4>
     <div class="primo col-md-5">
-      <select class="form-control" id="notification_type" >
-        <option value="empty">Selectionnez un indicateur</option>
-        <option value="text_notification" selected>Taux d'occupation des résidences</option>
+      <select class="form-control" id="notification_type">
+        <option value="residence_rate">Taux d'occupation des résidences</option>
       </select>
     </div>
     <div class="primo col-md-5">
@@ -25,7 +24,58 @@
     </div>
     </form>
   </div>
+  <div class="col-12 col-md-2 text-center">
+    <br/>
+    <br/>
+  </div>
+  <form (ngSubmit)="onGetFailure($event)">
 
+    <div class="primo col-md-5">
+      <select class="form-control" id="annual_failure_rate" (change)='annualfailureChange()'>
+        <option value="annual_failure_rate" selected>Taux de panne annuel</option>
+        <option value="annual_failure_rate_1">2019</option>
+        <option value="annual_failure_rate_2">2020</option>
+      </select>
+    </div>
+    <div class="primo col-md-5">
+
+      <button type="submit" class="btn btn-primary">
+        Calculer
+      </button>
+    </div>
+  </form>
+  <div class="col-12 col-md-2 text-center">
+    <br/>
+    <br/>
+
+  </div>
+  <form (ngSubmit)="onGetMonthlyFailure($event)">
+    <div class="primo col-md-5">
+
+      <select class="form-control" id="monthly_failure_rate" (change)='monthlyfailureChange()'>
+        <option value="monthly_failure_rate" selected>Taux de panne mensuel</option>
+        <option value="monthly_failure_rate_1"> Décembre 2019</option>
+        <option value="monthly_failure_rate_2"> Janvier 2020</option>
+        <option value="monthly_failure_rate_3"> Février 2020</option>
+        <div class="col-12 col-md-2 text-center">
+          <br/>
+          <br/>
+
+        </div>
+      </select>
+    </div>
+    <div class="primo col-md-5">
+
+      <button type="submit" class="btn btn-primary">
+        Calculer
+      </button>
+    </div>
+  </form>
+  <div class="col-12 col-md-2 text-center">
+    <br/>
+    <br/>
+
+  </div>
   <div class="panel">
     <div class="panel-heading">
       <br/>
@@ -48,6 +98,40 @@
             <td>{{r.numberOfResident/150 | number}}</td>
           </tr>
         </tbody>
+        </table>
+        <table class="table table-bordered" *ngIf="failure">
+          <thead>
+          <tr class = "info">
+            <th>Année</th>
+            <th>Nombre de pannes annuel</th>
+            <th>Taux de panne annuel </th>
+          </tr>
+          </thead>
+          <tbody >
+          <tr >
+            <td>{{year}}</td>
+            <td>{{failure}}</td>
+            <td>{{failure/100| number}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <table class="table table-bordered" *ngIf="failuremonth">
+          <thead>
+          <tr class = "info">
+            <th>Année</th>
+            <th>Mois</th>
+            <th>Nombre de pannes mensuel</th>
+            <th>Taux de panne mensuel </th>
+          </tr>
+          </thead>
+          <tbody >
+          <tr >
+            <td>{{year}}</td>
+            <td>{{month}}</td>
+            <td>{{failuremonth}}</td>
+            <td>{{failuremonth/100| number}}</td>
+          </tr>
+          </tbody>
         </table>
       </div>
     </div>

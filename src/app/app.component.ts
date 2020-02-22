@@ -5,6 +5,7 @@ import { User } from "./user";
 import { Notification } from "./notification"
 import { NotificationService } from "./notification.service";
 
+
 declare var $: any;
 
 @Component({
@@ -50,7 +51,7 @@ export class AppComponent {
 
       }
     }
-    
+
   }
 
   toggleHeaderStyle() {
