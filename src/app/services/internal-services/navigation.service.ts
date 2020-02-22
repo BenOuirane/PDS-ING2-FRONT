@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core'
 import {Event, NavigationEnd, Router, ActivatedRoute} from '@angular/router'
 import {BehaviorSubject} from 'rxjs';
-import {NavigationKey} from '../enums/navigation-key.enum'
+import {NavigationKey} from '../../helpers/enums/navigation-key.enum'
   
 
 @Injectable({providedIn: 'root'})

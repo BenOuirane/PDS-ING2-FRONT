@@ -22,13 +22,14 @@ import { CreateCandidateComponent } from './create-candidate/create-candidate.co
 import {CandidateService} from './candidate_services/candidate.service';
 import { from } from 'rxjs';
 
-import { SearchBarComponent } from './search-bar/search-bar.component';
-import { FooterComponent } from './footer/footer.component';
-import { UpdateDatamockComponent } from './update-datamock/update-datamock.component';
+import { SearchBarComponent } from './layouts/search-bar/search-bar.component';
+import { FooterComponent } from './layouts/footer/footer.component';
+import { UpdateDatamockComponent } from './layouts/update-datamock/update-datamock.component';
 import { ObjectComponent } from './object/object.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MapPrototypeComponent } from './map-prototype/map-prototype.component';
+import { MapPrototypeComponent } from './layouts/map-prototype/map-prototype.component';
+import { FavoriteFiltersComponent } from './layouts/favorite-filters/favorite-filters.component';
 
 
 
@@ -48,6 +49,7 @@ import { MapPrototypeComponent } from './map-prototype/map-prototype.component';
     UpdateDatamockComponent,
     ObjectComponent,
     MapPrototypeComponent,
+    FavoriteFiltersComponent,
     
     
   ],

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { User } from "./user";
-import { Resident } from './resident';
+import { User } from "../user";
+import { Resident } from '../resident';
 import { Observable } from 'rxjs';
-import { Room } from "./room";
+import { Room } from "../room";
 
 @Injectable({
   providedIn: 'root'

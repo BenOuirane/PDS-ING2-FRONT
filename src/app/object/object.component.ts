@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
-import { ResidentService } from '../resident.service';
+import { ResidentService } from '../services/resident.service';
 import { Room } from '../room';
 import { Objects } from '../objects';
 import { ObjectService } from '../object.service';

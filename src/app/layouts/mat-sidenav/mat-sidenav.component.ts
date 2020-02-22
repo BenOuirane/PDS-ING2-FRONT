@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { NavigationKey } from '../enums/navigation-key.enum';
-import { NavigationService } from '../internal-services/navigation.service';
+import { NavigationKey } from '../../helpers/enums/navigation-key.enum';
+import { NavigationService } from '../../services/internal-services/navigation.service';
 import { filter } from 'rxjs/operators';
 //import { NavigationKey } from 'selenium-webdriver';
 @Component({
@@ -35,4 +35,5 @@ export class MatSidNavComponent implements AfterViewInit {
     this.router.navigate(['/reporting-service'])
   }
 }
-
+/*THIS COMPONENT WON'T BE USED UNTIL THE NEXT SPRINT
+SOME UPDATES TO DO BEFORE THAT WILL BE FUNCTIONAL*/
