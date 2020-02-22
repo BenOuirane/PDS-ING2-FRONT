@@ -19,19 +19,19 @@ export class IndicatorsService {
 
   getAnnualFailure(year: number): Observable<Failure> {
 
-    return this.http.get<any>('http://localhost:8080/api/failure/year?year='+year);
+    return this.http.get<any>('http://172.31.254.61:8080/api/failure/year?year='+year);
 
   }
   getMonthlyFailure1(): Observable<any> {
-    return this.http.get<any>('http://localhost:8080/api/failure/month?year=2019&month=12');
+    return this.http.get<any>('http://172.31.254.61:8080/api/failure/month?year=2019&month=12');
 
   }
   getMonthlyFailure2(): Observable<any> {
-    return this.http.get<any>('http://localhost:8080/api/failure/month?year=2020&month=01');
+    return this.http.get<any>('http://172.31.254.61:8080/api/failure/month?year=2020&month=01');
 
   }
   getMonthlyFailure3(): Observable<any> {
-    return this.http.get<any>('http://localhost:8080/api/failure/month?year=2020&month=02');
+    return this.http.get<any>('http://172.31.254.61:8080/api/failure/month?year=2020&month=02');
 
   }
 }
