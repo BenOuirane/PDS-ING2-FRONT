@@ -19,6 +19,7 @@
                                     <td class="col-6">Couleur</td>
                                     <td class="col-6"><span>{{colorOnChange(lampe.color)}}</span></td>
                                 </tr>
+<<<<<<< HEAD
                                 <tr class="col-12">
                                     <td class="col-6">Allumées à</td>
                                     <td class="col-6">{{ lampe.hourOn | date: "hh:mm a"}}</td>
@@ -26,6 +27,21 @@
                                 <tr class="col-12">
                                     <td class="col-6">Éteintes à</td>
                                     <td class="col-6">{{ lampe.hourOff | date: "hh:mm a"}}</td>
+=======
+                                <tr>
+                                    <td>Allumées à</td>
+                                    <td>
+                                        <span *ngIf="lampe.hourOn; else elseBlock">{{ lampe.hourOn | date: "hh:mm a"}}</span>
+                                        <ng-template #elseBlock>Non paramétré</ng-template>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Éteintes à</td>
+                                    <td>
+                                      <span *ngIf="lampe.hourOff; else elseBlock">{{ lampe.hourOff | date: "hh:mm a"}}</span>
+                                      <ng-template #elseBlock>Non paramétré</ng-template>
+                                    </td>
+>>>>>>> aled_41_lampFrt
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Intensité</td>
@@ -79,10 +95,10 @@
                             <tr>
                                 <td>Allumées à</td>
                                 <td class="col-6" [ngClass]="stateOn.value ? 'visible' : 'invisible'">
-                                    <span (click)="open()"><i class="material-icons" md-36>schedule</i></span>
+                                    <span (click)="openOn(lampe.hourOn)"><mat-icon md-36>schedule</mat-icon></span> {{checkoutFormLamp.value.hourOn | date : 'hh:mm a'}}{{checkoutFormLamp.value.hourOn === 'false' ? lampe.hourOn : '' }}
                                 </td>
                                 <td>
-                                    <mat-slide-toggle #stateOn (toggleChange)="stateOn.value = !stateOn.value"
+                                    <mat-slide-toggle #stateOn (toggleChange)="stateOn.value = !stateOn.value; "
                                         [checked]="lampe.hourOn != null"></mat-slide-toggle>
                                 </td>
                             </tr>
@@ -90,14 +106,13 @@
                             <tr>
                                 <td>Éteintes à</td>
                                 <td class="col-6" [ngClass]="stateOff.value ? 'visible' : 'invisible'">
-                                    <!-- <input type="time" atp-time-picker value="20:55" theme="dark" locale='fr' arrowStyle="{'background': 'red', 'color': 'white'}"/> -->
-                                    <span (click)="open()"><i class="material-icons" md-36>schedule</i></span> 
+                                    <span (click)="openOff(lampe.hourOff)"><mat-icon md-36>schedule</mat-icon></span>{{checkoutFormLamp.value.hourOff | date : 'hh:mm a'}}{{checkoutFormLamp.value.hourOff === 'false' ? lampe.hourOff : '' }}
 
-                                    
+
                                 </td>
                                 <td>
-                                    <mat-slide-toggle #stateOff (toggleChange)="stateOff.value = !stateOff.value"
-                                        [checked]="lampe.hourOff != null"></mat-slide-toggle>
+                                  <mat-slide-toggle #stateOff (toggleChange)="stateOff.value = !stateOff.value; "
+                                  [checked]="lampe.hourOff != null"></mat-slide-toggle>
                                 </td>
                             </tr>
 
@@ -156,8 +171,26 @@
                         </div>
                     </ng-container>
 
+<<<<<<< HEAD
                 </div>
             </div>
+=======
+                <!-- Manage params for shutters-->
+                <div class="my-custom-row mt-5">
+                    <div class="col-12">
+                        <hr width="85%" color="blue">
+                    </div>
+                    <h5>
+                        Paramètres :
+                    </h5>
+
+                    <!-- <input hidden #idShutter formControlName="idShutter" [ngModel]="shutter.idShutter"> -->
+                    <!-- <input hidden #idShutter formControlName="idShutter" [ngModel]="shutter.idShutter"> -->
+
+                </div>
+
+            </ng-container>
+>>>>>>> aled_41_lampFrt
         </mat-tab>
 
         <mat-tab label="Volet" *ngIf="shutters.length > 0">
