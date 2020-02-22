@@ -19,7 +19,7 @@ import { CoffeeMachine } from '../coffeeMachine';
 import { FormBuilder } from '@angular/forms';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
 import { AmazingTimePickerService } from 'amazing-time-picker';
-
+ 
 
 registerLocaleData(localeFr, 'fr');
 
