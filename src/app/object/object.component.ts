@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { ResidentService } from '../resident.service';
-import { Rooms } from '../room';
+import { Room } from '../room';
 import { Objects } from '../objects';
 import { ObjectService } from '../object.service';
 import { LampeService } from '../lampe.service';
@@ -31,7 +31,7 @@ registerLocaleData(localeFr, 'fr');
 export class ObjectComponent implements OnInit {
 
   user: User = new User();
-  room: Rooms = new Rooms();
+  room: Room = new Room();
   roomString: string;
   objects: Objects[] = new Array<Objects>();
   lamps: Lampe[] = new Array<Lampe>();
