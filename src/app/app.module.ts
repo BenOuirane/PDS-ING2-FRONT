@@ -11,12 +11,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from '@angular/common';
+import { IndicatorsComponent } from './indicators/indicators.component';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
 import { GetNotificationsComponent } from './get-notifications/get-notifications.component';
+import {IndicatorsService} from "./indicators.service";
 
 import { CreateCandidateComponent } from './create-candidate/create-candidate.component';
 import { CandidateService } from './candidate_services/candidate.service';
@@ -52,11 +54,9 @@ import { HistoryComponent } from './history/history.component';
     FooterComponent,
     UpdateDatamockComponent,
     ObjectComponent,
- 
+    IndicatorsComponent,
     MapPrototypeComponent,
     FavoriteFiltersComponent,
-    
-    
 
     ObjectMapComponent,
     HistoryComponent
@@ -74,7 +74,7 @@ import { HistoryComponent } from './history/history.component';
     MatSliderModule,
     MatSlideToggleModule,
     BrowserAnimationsModule,
-    NgxMaterialTimepickerModule, 
+    NgxMaterialTimepickerModule,
     MatButtonModule,
     MatFormFieldModule,
     AmazingTimePickerModule,
@@ -83,6 +83,7 @@ import { HistoryComponent } from './history/history.component';
   providers: [
     CandidateService,
     CommonModule,
+    IndicatorsService,
     {
       provide: LOCALE_ID, useValue: "fr-FR"
     }
