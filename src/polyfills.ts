@@ -27,6 +27,7 @@ import 'classlist.js';  // Run `npm install --save classlist.js`.
  * Standard animation support in Angular DOES NOT require any polyfills (as of Angular 6.0).
  */
 import 'web-animations-js';  // Run `npm install --save web-animations-js`.
+import 'hammerjs';
 
 /**
  * By default, zone.js will patch all possible macroTask and DomEvents
@@ -55,8 +56,26 @@ import 'web-animations-js';  // Run `npm install --save web-animations-js`.
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
-import 'zone.js/dist/zone';  // Included with Angular CLI.
 
+ // fix IE free script error 
+// (window as any).__Zone_enable_cross_context_check = true;
+ //
+import 'zone.js/dist/zone';  // Included with Angular CLI.
+/*global.Buffer = global.Buffer || require('buffer').Buffer;
+
+(window as any).global = window;
+
+if (!Object.entries) {
+    Object.entries = function( obj ){
+    var ownProps = Object.keys( obj ),
+    i = ownProps.length,
+    resArray = new Array(i);
+    while (i--)
+    resArray[i] = [ownProps [i], obj[ownProps[i]]];
+    
+    return resArray;
+};
+};
 
 /***************************************************************************************************
  * APPLICATION IMPORTS

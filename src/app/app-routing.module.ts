@@ -21,10 +21,14 @@ If he goes on 'http://{localhost} or {172.31.254.61}:4200/',
 we redirect him to the route '/user that calls the UsersListComponent'
  */
 
-import { SearchBarComponent } from './search-bar/search-bar.component';
-import { UpdateDatamockComponent } from './update-datamock/update-datamock.component';
-import { ObjectComponent } from './object/object.component'; 
+import { SearchBarComponent } from './layouts/search-bar/search-bar.component';
+import { UpdateDatamockComponent } from './layouts/update-datamock/update-datamock.component';
+import { ObjectComponent } from './object/object.component';
 
+import { MapPrototypeComponent } from './layouts/map-prototype/map-prototype.component';
+import { ObjectMapComponent } from './object-map/object-map.component';
+import { HistoryComponent } from './history/history.component';
+import {IndicatorsComponent} from './indicators/indicators.component';
 
 
 
@@ -36,11 +40,20 @@ const routes: Routes = [
   { path: 'notifications', component: GetNotificationsComponent, canActivate: [RoleGuard], data: { expectedRole: 'RESIDENT'}},
   { path: 'object', component: ObjectComponent, canActivate: [RoleGuard], data: {expectedRole: 'RESIDENT'}},
   { path: 'login', component: LoginComponent },
+  { path: 'indicators', component: IndicatorsComponent },
 
   { path: 'add', component: CreateCandidateComponent },
 
+
   { path: 'search', component: SearchBarComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
-  { path: 'updatedata', component: UpdateDatamockComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}}
+
+ // todto be deleted for next releases, once the mocks are done !!
+  { path: 'updatedata', component: UpdateDatamockComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+  { path: 'track-patients-control-view', component: MapPrototypeComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+
+  { path: 'updatedata', component: UpdateDatamockComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+  { path: 'objects', component: ObjectMapComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+  { path: 'history/:type/:id', component: HistoryComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}}
 
 ];
 
@@ -54,5 +67,5 @@ const routes: Routes = [
 })
 
 export class AppRoutingModule {
-  
+
  }

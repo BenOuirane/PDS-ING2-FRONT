@@ -5,6 +5,7 @@ import { User } from "./user";
 import { Notification } from "./notification"
 import { NotificationService } from "./notification.service";
 
+
 declare var $: any;
 
 @Component({
@@ -25,6 +26,7 @@ export class AppComponent {
   ngOnInit() {
     this.toggleHeaderStyle();
 
+
     if(!window.location.href.includes('login')) {
 
       this.user = JSON.parse(localStorage.getItem('user'));
@@ -32,6 +34,7 @@ export class AppComponent {
         timer(0, 10000).subscribe(() => {
           this.numberNotification = 0;
           this.notificationService.getNotifications(this.user).subscribe(
+
             data => {
               this.newNotifications = data;
               this.newNotifications.forEach(notification => {
@@ -48,7 +51,7 @@ export class AppComponent {
 
       }
     }
-    
+
   }
 
   toggleHeaderStyle() {
@@ -82,4 +85,7 @@ export class AppComponent {
     this.user = JSON.parse(localStorage.getItem('user'));
     return localStorage.getItem('user');
   }
+
+  
 }
+

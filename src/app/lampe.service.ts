@@ -10,8 +10,8 @@ import { Lampe } from './lampe';
 })
 export class LampeService {
 
-  //private baseUrl = 'http://localhost:8080/api';
-  private baseUrl = 'http://172.31.254.61:8080/api';
+  private baseUrl = 'http://localhost:8080/api';
+  //private baseUrl = 'http://172.31.254.61:8080/api';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -19,4 +19,10 @@ export class LampeService {
     return this.http.put<Array<Lampe>>(`${this.baseUrl}` + `/lamp/list`, objects);
   }
 
+  updateLamp(lampe: Lampe): Observable<boolean> {
+    console.log("updateLampe is call"); 
+    return this.http.put<boolean>(`${this.baseUrl}` + `/lamp/updateParam`, lampe);
+    
+  }
+ 
 }

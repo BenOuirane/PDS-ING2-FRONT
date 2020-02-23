@@ -2,9 +2,9 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import { refresidentService } from '../refresident.service';
-import { refresident } from '../refresident';
-import { positionService } from '../position.service'
+import { refresidentService } from '../../services/refresident.service';
+import { refresident } from '../../refresident';
+import { positionService } from '../../services/position.service'
 //import { User } from '../user';
 
  
