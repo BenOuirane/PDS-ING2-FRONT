@@ -58,8 +58,6 @@ import { HistoryComponent } from './history/history.component';
     MapPrototypeComponent,
     FavoriteFiltersComponent,
 
-
-
     ObjectMapComponent,
     HistoryComponent
 
