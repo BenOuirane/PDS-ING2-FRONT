@@ -1,6 +1,12 @@
 <div class = "container-fluid" style="margin-top: 7rem;">
 	
 <form class="form-inline md-form mr-auto mb-4">
+
+	<div class="col-12">
+		<h2><img src="assets/img/cam.png" alt="cam" style=" height: 90px;
+			margin-right: 30px;">Surveillance des patients</h2>
+			<h6	style="margin-left: 7.58rem; margin-top: -1rem;">Voici le plan de l'établissement</h6>
+	</div>
 	<input class="form-control mr-sm-2" type="text" value = ""  #searchInput placeholder="Rechercher un patient" aria-label="Search">
 
 	<search-bar></search-bar>
@@ -11,7 +17,8 @@
   </form>
   
 <div class="cont col">
-
+	
+	<h5 class="text-danger">Veuillez sélectionner un emplacement !</h5>
 	<div class="d-flex flex-row mb-2 b-5 ">
 		<div class=chambre>Chambre 1</div>
 		<div class=chambre>Chambre 2</div>
@@ -22,20 +29,22 @@
 		<div class=chambre>Chambre 7</div>
 		
 	</div>
-
+	<div class="row space">
+	</div>
 	<div class="d-flex flex-row mt-2 mb-2">
 		<!--<ng-container *ngFor="let area of areas | paginate : { itemsPerPage: 10, currentPage: p}; trackBy: identifyItem" 
 		class="flex-fill" (click)="getAreaDetails(area.id)" >1</ng-container>-->
 		<div class="cuisine flex-fill">Forum</div>
 		<div class="cuisine flex-fill">Lumen</div>
 		<div class="restaurant flex-fill">Aqua</div>
-		<div class="sallesport flex-fill">Forest Hill</div>
+		<div class="sallesport flex-fill">Phare</div>
 		<div class="cuisine flex-fill">Savane</div>
 		<div class="cuisine flex-fill">Amazonie</div>
 		<div class="cuisine flex-fill">Jungle</div>
 		
 	</div>
-
+	<div class="row space">
+	</div>
 	<div class="d-flex mt-2">
 		<div class="salle flex-fill">Multimedia</div>
 		<div class="salle flex-fill">Evergreen</div>
@@ -45,6 +54,23 @@
 	</div>
 	  
 </div>
+<div class="col-11 col-md-3 room-summary">
+	 
+		
+	
+
+	<div id="room-summary-full"> 
+		<h5>Résumé de la chambre {{ activeRoom.roomNumber }}</h5>
+		<div class="col-12" *ngIf="numberOfObjects > 0">Nombre d'objets : {{ numberOfObjects }}</div>
+		<div class="col-12" *ngIf="numberOfObjects == 0">Aucun object dans cette chambre</div>
+	</div>
+</div>
+
+
+
+
+
+
 <ng-template #messageTmpl>
 	<h4 class="text-center mb-4">Vue synthètique des patients</h4>
 	<div class="alert alert-info text-center w-50 m-50 m-auto" role="alert">Veuillez utiliser le button en haut <i class ="material-icons">rechercher</i></div>
