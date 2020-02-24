@@ -35,6 +35,7 @@ export class HistoryComponent implements OnInit {
         this.lampHistoryService.getHistory(this.objectId).subscribe(
           data => {
             this.histories = data;
+            this.histories.reverse();
           }
         ); break;
       case 'oven':
@@ -42,6 +43,7 @@ export class HistoryComponent implements OnInit {
         this.ovenHistoryService.getHistory(this.objectId).subscribe(
           data => {
             this.histories = data;
+            this.histories.reverse();
           }
         ); break;
 
@@ -50,6 +52,7 @@ export class HistoryComponent implements OnInit {
         this.shutterHistoryService.getHistory(this.objectId).subscribe(
           data => {
             this.histories = data;
+            this.histories.reverse();
           }
         ); break;
 
@@ -58,6 +61,7 @@ export class HistoryComponent implements OnInit {
         this.alarmClockHistoryService.getHistory(this.objectId).subscribe(
           data => {
             this.histories = data;
+            this.histories.reverse();
           }
         ); break;
 
@@ -66,6 +70,7 @@ export class HistoryComponent implements OnInit {
         this.coffeeMachineHistoryService.getHistory(this.objectId).subscribe(
           data => {
             this.histories = data;
+            this.histories.reverse();
           }
         );
         break;
