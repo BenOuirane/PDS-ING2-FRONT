@@ -44,6 +44,7 @@ export class ObjectComponent implements OnInit {
   checkoutFormLamp;
   checkoutFormShutter;
   test: boolean;
+  now : Date = new Date();
 
 
   constructor(private residentService: ResidentService,
@@ -58,6 +59,10 @@ export class ObjectComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
+
+    setInterval(() => {
+      this.now = new Date();
+    },  1);
 
     this.getResidentService();
 
