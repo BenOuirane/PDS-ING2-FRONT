@@ -156,7 +156,13 @@
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Mode</td>
-                                    <td class="col-6"><span *ngIf="oven.mode === 'FAN'">Chaleur tournante</span></td>
+                                    <td class="col-6">
+                                        <span *ngIf="oven.mode === 'FAN'">Chaleur tournante</span>
+                                        <span *ngIf="oven.mode === 'PIZZA'">Pizza</span>
+                                        <span *ngIf="oven.mode === 'BAKERY'">Gâteau</span>
+                                        <span *ngIf="oven.mode === 'ROTISSERIE'">Rotisserie</span>
+                                        <span *ngIf="oven.mode === 'PREHEATED'">Pré-chauffage</span>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
