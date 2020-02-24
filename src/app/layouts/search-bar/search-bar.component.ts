@@ -23,7 +23,7 @@ export class SearchBarComponent implements OnInit {
   filteredOptions: Observable<string[]>;
  @ViewChild('searchInput', {static: false}) searchInput : ElementRef<HTMLInputElement>;
 
-  constructor(private refresidentService: refresidentService, private residentSerive: ResidentService, private positionService: positionService) {
+  constructor(private refresidentService: refresidentService, private residentSerive: ResidentService, private positionService: positionService, ) {
     
 
 console.log("start")
