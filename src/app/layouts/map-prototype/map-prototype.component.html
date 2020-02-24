@@ -7,8 +7,7 @@
 			margin-right: 30px;">Surveillance des patients</h2>
 			<h6	style="margin-left: 7.58rem; margin-top: -1rem;">Voici le plan de l'établissement</h6>
 	</div>
-	<input class="form-control mr-sm-2" type="text" value = ""  #searchInput placeholder="Rechercher un patient" aria-label="Search">
-
+	
 	<search-bar></search-bar>
 	<button class="btn btn-elegant btn-rounded btn-sm my-0" type="submit" value="search" (click)="loaddata()" style="margin-left: 0.9rem;">Rechercher</button>
 	
@@ -54,23 +53,19 @@
 	</div>
 	  
 </div>
-<div class="col-11 col-md-3 room-summary">
-	 
+	<div class="col-11 col-md-3 room-summary">
 		
-	
+			
+		
 
-	<div id="room-summary-full"> 
-		<h5>Résumé de la chambre {{ activeRoom.roomNumber }}</h5>
-		<div class="col-12" *ngIf="numberOfObjects > 0">Nombre d'objets : {{ numberOfObjects }}</div>
-		<div class="col-12" *ngIf="numberOfObjects == 0">Aucun object dans cette chambre</div>
+
 	</div>
-</div>
 
 
 
 
 
-
+<app-footer></app-footer>
 <ng-template #messageTmpl>
 	<h4 class="text-center mb-4">Vue synthètique des patients</h4>
 	<div class="alert alert-info text-center w-50 m-50 m-auto" role="alert">Veuillez utiliser le button en haut <i class ="material-icons">rechercher</i></div>
