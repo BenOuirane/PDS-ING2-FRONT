@@ -1,0 +1,178 @@
+<section class="container">
+    <div class="row">
+        <div class="col-12">
+                <h2><img src="../../assets/monitor.png" alt="">Monitorer les objets connectés</h2>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12 col-md-9 map">
+                    <div class="row first-row">
+                        <div id="101" class="col-3 room" (click)="setRoomSummary($event)">101</div>
+                        <div id="102" class="col-2 room" (click)="setRoomSummary($event)">102</div>
+                        <div class="col-1 corridor-column"></div>
+                        <div id="103" class="col-2 room" (click)="setRoomSummary($event)">103</div>
+                        <div id="104" class="col-2 room" (click)="setRoomSummary($event)">104</div>
+                        <div id="105" class="col-2 room" (click)="setRoomSummary($event)">105</div>
+                    </div>
+                    <div class="row corridor">
+                    </div>
+                    <div class="row second-row">
+                        <div id="106" class="col-2 room" (click)="setRoomSummary($event)">106</div>
+                        <div id="107" class="col-2 room" (click)="setRoomSummary($event)">107</div>
+                        <div id="108" class="col-2 room" (click)="setRoomSummary($event)">108</div>
+                        <div class="col-1 corridor-column"></div>
+                        <div id="109" class="col-3 room" (click)="setRoomSummary($event)">109</div>
+                        <div id="110" class="col-2 room" (click)="setRoomSummary($event)">110</div>
+                    </div>
+                </div>
+                <div class="col-11 col-md-3 room-summary">
+                    <div id="room-summary-none"> 
+                        <h5>Veuillez sélectionner une chambre</h5>
+                    </div>
+
+                    <div id="room-summary-full"> 
+                        <h5>Résumé de la chambre {{ activeRoom.roomNumber }}</h5>
+                        <div class="col-12" *ngIf="numberOfObjects > 0">Nombre d'objets : {{ numberOfObjects }}</div>
+                        <div class="col-12" *ngIf="numberOfObjects == 0">Aucun object dans cette chambre</div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+       
+    </div>
+    <div class="row objectRow" *ngIf="lamps.length > 0">
+        <div class="col-12" label="lamps">
+            <div class="row" *ngFor="let lamp of lamps; index as i">
+                <div class="col-12 col-md-6">
+                    <h5 style="text-align: center;">Lampe - {{ lamp.objects.id }} :</h5>
+                    <div>Status : 
+                        <span *ngIf="lamp.status">Allumées</span> 
+                        <span *ngIf="!lamp.status">Éteint</span>
+                    </div>
+                    <div>Couleur : 
+                        <span>{{lamp.color}}</span> 
+                    </div>
+                    <div>Allumées à : 
+                        <span>{{ lamp.hourOn | date: "hh:mm a"}}</span> 
+                    </div>
+                    <div>Éteintes à : 
+                        <span>{{ lamp.hourOff | date: "hh:mm a"}}</span> 
+                    </div>
+                    <div>Intensité : 
+                        <span>{{ lamp.intensity }} %</span> 
+                    </div>
+                    <div class="d-flex flex-row justify-content-center">
+                        <a [routerLink]="['/history', 'lamp', lamp.objects.id]" target="_blank" class="use-link">Voir l'utilisation</a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div class="row objectRow" *ngIf="shutters.length > 0">
+        <div class="col-12" label="Shutters">
+            <div class="row" *ngFor="let shutter of shutters; index as i">
+                <div class="col-12 col-md-6">
+                    <h5 style="text-align: center;">Volet - {{ shutter.objects.id }} :</h5>
+                    <div>Status : 
+                        <span *ngIf="shutter.status">Ouvert</span> 
+                        <span *ngIf="!shutter.status">Fermé</span>
+                    </div>
+                    <div>Ouvert à : 
+                        <span>{{ shutter.hourOn | date: "hh:mm a"}}</span> 
+                    </div>
+                    <div>Fermé à : 
+                        <span>{{ shutter.hourOff | date: "hh:mm a"}}</span> 
+                    </div>
+                    <div class="d-flex flex-row justify-content-center">
+                        <a [routerLink]="['/history', 'shutter', shutter.objects.id]" target="_blank" class="use-link">Voir l'utilisation</a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div class="row objectRow" *ngIf="coffeeMachines.length > 0">
+        <div class="col-12" label="CoffeeMachines">
+            <div class="row" *ngFor="let coffeeMachine of coffeeMachines; index as i">
+                <div class="col-12 col-md-6">
+                    <h5 style="text-align: center;">Machine à café - {{ coffeeMachine.objects.id }} :</h5>
+                    <div>Status : 
+                        <span *ngIf="coffeeMachine.status">Allumée</span> 
+                        <span *ngIf="!coffeeMachine.status">Eteinte</span>
+                    </div>
+                    <div>Nombre de capsule restante(s) : 
+                        <span>{{ coffeeMachine.nbCapsule }}</span> 
+                    </div>
+                    <div>Programmation du prochain café : 
+                        <span>{{ coffeeMachine.scheduleCoffee | date: "hh:mm a"}}</span> 
+                    </div>
+                    <div>Niveau d'eau de la machine : 
+                        <span>{{ coffeeMachine.waterLevel }} l</span> 
+                    </div>
+                    <div class="d-flex flex-row justify-content-center">
+                        <a [routerLink]="['/history', 'coffeeMachine', coffeeMachine.objects.id]" target="_blank" class="use-link">Voir l'utilisation</a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div class="row objectRow" *ngIf="alarmClocks.length > 0">
+        <div class="col-12" label="AlarmClocks">
+            <div class="row" *ngFor="let alarmClock of alarmClocks; index as i">
+                <div class="col-12 col-md-6">
+                    <h5 style="text-align: center;">Réveil - {{ alarmClock.objects.id }} :</h5>
+                    <div>Statut de l'alarme : 
+                        <span *ngIf="alarmClock.status">Réveil programmé</span> 
+                        <span *ngIf="!alarmClock.status">Réveil non programmé</span>
+                    </div>
+                    <div>Sonnerie à : 
+                        <span>{{ alarmClock.time | date: "hh:mm a" }}</span> 
+                    </div>
+                    <div>Radio allumée : 
+                        <span *ngIf="alarmClock.radioStatus">Oui</span> 
+                        <span *ngIf="!alarmClock.radioStatus">Non</span>
+                    </div>
+                    <div>Dernière fréquence radio utilisée : 
+                        <span>{{ alarmClock.radioHrz | number }}</span> 
+                    </div>
+                    <div class="d-flex flex-row justify-content-center">
+                        <a [routerLink]="['/history', 'alarmClock', alarmClock.objects.id]" target="_blank" class="use-link">Voir l'utilisation</a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div class="row objectRow" *ngIf="ovens.length > 0">
+        <div class="col-12" label="Ovens">
+            <div class="row" *ngFor="let oven of ovens; index as i">
+                <div class="col-12 col-md-6">
+                    <h5 style="text-align: center;">Four - {{ oven.objects.id }} :</h5>
+                    <div>Statut : 
+                        <span *ngIf="oven.status">Allumé</span> 
+                        <span *ngIf="!oven.status">Eteint</span>
+                    </div>
+                    <div>Température programmée : 
+                        <span>{{ oven.programTemp }}</span> 
+                    </div>
+                    <div>Température effective : 
+                        <span>{{ oven.effectiveTemp }}</span> 
+                    </div>
+                    <div>Heure de lancement : 
+                        <span *ngIf="oven.scheduleTime == null">Non Renseigné</span> 
+                        <span *ngIf="oven.scheduleTime != null">{{ oven.scheduleTime | date: "hh:mm a"}}</span>
+                    </div>
+                    <div>Mode : 
+                        <span>{{ oven.mode }}</span> 
+                    </div>
+                    <div class="d-flex flex-row justify-content-center">
+                        <a [routerLink]="['/history', 'oven', oven.objects.id]" target="_blank" class="use-link">Voir l'utilisation</a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+</section>

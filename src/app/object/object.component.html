@@ -1,57 +1,144 @@
 <section class="container">
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
     <mat-tab-group *ngIf="dataloaded">
-        <mat-tab label="Lampe" *ngIf="lamps">
-            <div class="my-custom-row">
-                <div class="col-6"><img src="../../assets/lampe.jpg" alt=""></div>
-                <div class="col-6">
-                    <ng-container *ngFor="let lampe of lamps; index as i">
+        <!-- Manage infos of Lamps-->
+        <mat-tab label="Lampe" *ngIf="lamps.length > 0">
+            <ng-container *ngFor="let lampe of lamps; index as i">
+                <div class="my-custom-row mt-5">
+                    <div class="col-6"><img src="../../assets/lampe.jpg" alt=""></div>
+                    <div class="col-6">
                         <h5 style="padding-left:20%;">Lampe - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
-                                <tr class="col-12">
-                                    <td class="col-6">Status</td>
-                                    <td class="col-6"><span *ngIf="lampe.status">Allumées</span> <span
+                                <tr>
+                                    <td>Status</td>
+                                    <td><span *ngIf="lampe.status">Allumées</span> <span
                                             *ngIf="!lampe.status">Éteint</span></td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Couleur</td>
-                                    <td class="col-6"><span *ngIf="lampe.color === 'WHITE'">Blanche</span></td>
+                                <tr>
+                                    <td>Couleur</td>
+                                    <td><span>{{colorOnChange(lampe.color)}}</span></td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Allumées à</td>
-                                    <td class="col-6">{{ lampe.hourOn | date: "hh:mm a"}}</td>
+                                <tr>
+                                    <td>Allumées à</td>
+                                    <td>
+                                        <span *ngIf="lampe.hourOn; else elseBlock">{{ lampe.hourOn | date: "hh:mm a"}}</span>
+                                        <ng-template #elseBlock>Non paramétré</ng-template>
+                                    </td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Éteintes à</td>
-                                    <td class="col-6">{{ lampe.hourOff | date: "hh:mm a"}}</td>
+                                <tr>
+                                    <td>Éteintes à</td>
+                                    <td>
+                                      <span *ngIf="lampe.hourOff; else elseBlock">{{ lampe.hourOff | date: "hh:mm a"}}</span>
+                                      <ng-template #elseBlock>Non paramétré</ng-template>
+                                    </td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Intensité</td>
-                                    <td class="col-6">{{ lampe.intensity }}%</td>
+                                <tr>
+                                    <td>Intensité</td>
+                                    <td>{{ lampe.intensity }}%</td>
                                 </tr>
                             </table>
                         </div>
 
-                    </ng-container>
-
+                    </div>
                 </div>
-            </div>
+                <!-- Manage params for Lamps-->
+                <div class="my-custom-row mt-5">
+                    <form [formGroup]="checkoutFormLamp" (ngSubmit)="buildLamp()">
+                        <div class="col-12">
+                            <hr width="85%" color="blue">
+                        </div>
+                        <h5>
+                            Paramètres :
+                        </h5>
+                        <input hidden #idLamp formControlName="idLamp" [ngModel]="lampe.idLamp">
+                        <input hidden #objects formControlName="objects" [ngModel]="lampe.objects">
+                        <input hidden #colorUsine formControlName="colorUsine" [ngModel]="lampe.colorUsine">
+                        <input hidden #hourOffUsine formControlName="hourOffUsine" [ngModel]="lampe.hourOffUsine">
+                        <input hidden #hourOnUsine formControlName="hourOnUsine" [ngModel]="lampe.hourOnUsine">
+                        <input hidden #intensityUsine formControlName="intensityUsine" [ngModel]="lampe.intensityUsine">
+                        <input hidden #statusUsine formControlName="statusUsine" [ngModel]="lampe.statusUsine">
+                        <input hidden #rooms formControlName="rooms" [ngModel]="lampe.objects.rooms">
+                        <table width="90%">
+                            <tr>
+                                <td>Status</td>
+                                <td>
+                                    <mat-slide-toggle #status formControlName="status" [ngModel]="lampe.status">
+                                    </mat-slide-toggle>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Couleur</td>
+                                <td>
+                                    <mat-form-field>
+                                        <mat-select #color formControlName="color" [ngModel]="lampe.color">
+                                            <mat-option value="WHITE">Blanche</mat-option>
+                                            <mat-option value="BLUE">Bleue</mat-option>
+                                            <mat-option value="YELLOW">Jaune</mat-option>
+                                            <mat-option value="GREEN">Verte</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Allumées à</td>
+                                <td class="col-6" [ngClass]="stateOn.checked ? 'visible' : 'invisible'">
+                                    <span (click)="openOn(lampe.hourOn)"><mat-icon md-36>schedule</mat-icon></span> {{checkoutFormLamp.value.hourOn | date : 'hh:mm a'}}{{checkoutFormLamp.value.hourOn === 'false' ? lampe.hourOn : '' }}
+                                </td>
+                                <td>
+                                    <mat-slide-toggle #stateOn (toggleChange)="stateOn.value = !stateOn.value; "
+                                        [checked]="lampe.hourOn != null"></mat-slide-toggle>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Éteintes à</td>
+                                <td class="col-6" [ngClass]="stateOff.checked ? 'visible' : 'invisible'">
+                                    <span (click)="openOff(lampe.hourOff)"><mat-icon md-36>schedule</mat-icon></span>{{checkoutFormLamp.value.hourOff | date : 'hh:mm a'}}{{checkoutFormLamp.value.hourOff === 'false' ? lampe.hourOff : '' }}
 
 
+                                </td>
+                                <td>
+                                  <mat-slide-toggle #stateOff (toggleChange)="stateOff.value = !stateOff.value; "
+                                  [checked]="lampe.hourOff != null"></mat-slide-toggle>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Intensité</td>
+                                <td>
+                                    <mat-slider #intensity formControlName="intensity" thumbLabel
+                                        [displayWith]="formatLabel" min="10" max="100" step="10"
+                                        [ngModel]="lampe.intensity"></mat-slider>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- SUBMIT LAMP-->
+                        <div class="d-flex justify-content-center mt-5 mb-5">
+                            <button mat-raised-button type="submit">Valider</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </ng-container>
         </mat-tab>
-        
-        <mat-tab label="Four" *ngIf="ovens">
-            <div class="my-custom-row">
-                <div class="col-6"><img src="../../assets/oven.jpg" alt=""></div>
-                <div class="col-6">
-                    <ng-container *ngFor="let oven of ovens; index as i">
+
+        <mat-tab label="Four" *ngIf="ovens.length > 0">
+            <ng-container *ngFor="let oven of ovens; index as i">
+                <div class="my-custom-row mt-5">
+                    <div class="col-6"><img src="../../assets/oven.jpg" alt=""></div>
+                    <div class="col-6">
                         <h5 style="padding-left:20%;">Four - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
                                 <tr class="col-12">
                                     <td class="col-6">Status</td>
-                                    <td class="col-6"><span *ngIf="oven.status">Allumées</span> <span *ngIf="!oven.status">Éteint</span></td>
+                                    <td class="col-6"><span *ngIf="oven.status">Allumées</span> <span
+                                            *ngIf="!oven.status">Éteint</span></td>
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Température programmée</td>
@@ -63,55 +150,85 @@
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Heure de lancement</td>
-                                    <td class="col-6"><span *ngIf="oven.scheduleTime == null">Non Renseigné</span> <span *ngIf="oven.scheduleTime != null">{{ oven.scheduleTime | date: "hh:mm a"}}</span></td>
+                                    <td class="col-6"><span *ngIf="oven.scheduleTime == null">Non Renseigné</span> <span
+                                            *ngIf="oven.scheduleTime != null">{{ oven.scheduleTime | date: "hh:mm a"}}</span>
+                                    </td>
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Mode</td>
-                                    <td class="col-6"><span *ngIf="oven.mode === 'FAN'">Chaleur tournante</span></td>
+                                    <td class="col-6">
+                                        <span *ngIf="oven.mode === 'FAN'">Chaleur tournante</span>
+                                        <span *ngIf="oven.mode === 'PIZZA'">Pizza</span>
+                                        <span *ngIf="oven.mode === 'BAKERY'">Gâteau</span>
+                                        <span *ngIf="oven.mode === 'ROTISSERIE'">Rotisserie</span>
+                                        <span *ngIf="oven.mode === 'PREHEATED'">Pré-chauffage</span>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
-                    </ng-container>
+                    </div>
+                </div>
+
+                <!-- Manage params for shutters-->
+                <div class="my-custom-row mt-5">
+                    <div class="col-12">
+                        <hr width="85%" color="blue">
+                    </div>
+                    <h5>
+                        Paramètres :
+                    </h5>
+
+                    <!-- <input hidden #idShutter formControlName="idShutter" [ngModel]="shutter.idShutter"> -->
+                    <!-- <input hidden #idShutter formControlName="idShutter" [ngModel]="shutter.idShutter"> -->
 
                 </div>
-            </div>
+
+            </ng-container>
         </mat-tab>
 
-        <mat-tab label="Volet" *ngIf="shutters"> 
-            <div class="my-custom-row">
-                <div class="col-6"><img src="../../assets/volet.jpeg" alt=""></div>
-                <div class="col-6">
-                    <ng-container *ngFor="let shutter of shutters; index as i">
+        <mat-tab label="Volet" *ngIf="shutters.length > 0">
+            <ng-container *ngFor="let shutter of shutters; index as i">
+                <div class="my-custom-row mt-5">
+                    <div class="col-6"><img src="../../assets/volet.jpeg" alt=""></div>
+                    <div class="col-6">
                         <h5 style="padding-left:20%;">Volet - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
                                 <tr class="col-12">
                                     <td class="col-6">Status</td>
                                     <td class="col-6"><span *ngIf="shutter.status">Ouvert</span> <span
-                                        *ngIf="!shutter.status">Fermé</span></td>
+                                            *ngIf="!shutter.status">Fermé</span></td>
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Ouvrir à </td>
                                     <td class="col-6">{{ shutter.hourOn | date: "hh:mm a"}}</td>
                                 </tr>
                                 <tr class="col-12">
-                                    <td class="col-6">Fermé à</td>
+                                    <td class="col-6">Fermer à</td>
                                     <td class="col-6">{{ shutter.hourOff | date: "hh:mm a"}}</td>
                                 </tr>
-                                
+
                             </table>
                         </div>
-                    </ng-container>
-
+                    </div>
                 </div>
-            </div>
+                <!-- Manage params for shutters-->
+                <div class="my-custom-row mt-5">
+                    <div class="col-12">
+                        <hr width="85%" color="blue">
+                    </div>
+                    <h5>
+                        Paramètres :
+                    </h5>
+                </div>
+            </ng-container>
         </mat-tab>
 
-        <mat-tab label="Réveil" *ngIf="alarmClocks"> 
-            <div class="my-custom-row">
-                <div class="col-6"><img src="../../assets/AlarmClock.jpg" alt=""></div>
-                <div class="col-6">
-                    <ng-container *ngFor="let alarmClock of alarmClocks; index as i">
+        <mat-tab label="Réveil" *ngIf="alarmClocks.length > 0">
+            <ng-container *ngFor="let alarmClock of alarmClocks; index as i">
+                <div class="my-custom-row mt-5">
+                    <div class="col-6"><img src="../../assets/AlarmClock.jpg" alt=""></div>
+                    <div class="col-6">
                         <h5 style="padding-left:20%;">Réveil - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
@@ -122,7 +239,7 @@
                                 <tr class="col-12">
                                     <td class="col-6">Statut réveil </td>
                                     <td class="col-6"><span *ngIf="alarmClock.alarmStatus">ON</span> <span
-                                        *ngIf="!alarmClock.alarmStatus">OFF</span></td>
+                                            *ngIf="!alarmClock.alarmStatus">OFF</span></td>
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Sonnerie à </td>
@@ -131,35 +248,44 @@
                                 <tr class="col-12">
                                     <td class="col-6">Statut radio </td>
                                     <td class="col-6"><span *ngIf="alarmClock.radioStatus">ON</span> <span
-                                        *ngIf="!alarmClock.radioStatus">OFF</span></td>
+                                            *ngIf="!alarmClock.radioStatus">OFF</span></td>
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Fréquence Radio</td>
                                     <td class="col-6">{{alarmClock.radioHrz | number}}</td>
                                 </tr>
-                                
-                                
+
+
                             </table>
                         </div>
-                    </ng-container>
-
+                    </div>
                 </div>
-            </div>
+
+                <!-- Manage params for shutters-->
+                <div class="my-custom-row mt-5">
+                    <div class="col-12">
+                        <hr width="85%" color="blue">
+                    </div>
+                    <h5>
+                        Paramètres :
+                    </h5>
+                </div>
+            </ng-container>
         </mat-tab>
 
 
-        <mat-tab label="Machine à café" *ngIf="coffeeMachines"> 
-            <div class="my-custom-row">
-                <div class="col-6"><img src="../../assets/coffeeMachine.jpg" alt=""></div>
-                <div class="col-6">
-                    <ng-container *ngFor="let coffeeMachine of coffeeMachines; index as i">
+        <mat-tab label="Machine à café" *ngIf="coffeeMachines.length > 0">
+            <ng-container *ngFor="let coffeeMachine of coffeeMachines; index as i">
+                <div class="my-custom-row mt-5">
+                    <div class="col-6"><img src="../../assets/coffeeMachine.jpg" alt=""></div>
+                    <div class="col-6">
                         <h5 style="padding-left:20%;">Machine à café - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
                                 <tr class="col-12">
                                     <td class="col-6">Status </td>
                                     <td class="col-6"><span *ngIf="coffeeMachine.status">Allumée</span> <span
-                                        *ngIf="!coffeeMachine.status">Éteinte</span></td>
+                                            *ngIf="!coffeeMachine.status">Éteinte</span></td>
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Nombre de capsule restante </td>
@@ -171,15 +297,26 @@
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Niveau d'eau de ma machine</td>
-                                    <td class="col-6">{{coffeeMachine.waterLevel}} Litre</td>
+                                    <td class="col-6">{{coffeeMachine.waterLevel}} cl</td>
                                 </tr>
-                               
+
                             </table>
                         </div>
-                    </ng-container>
-
+                    </div>
                 </div>
-            </div>
+
+                <!-- Manage params for Lamps-->
+                <div class="my-custom-row mt-5">
+                    <div class="col-12">
+                        <hr width="85%" color="blue">
+                    </div>
+                    <h5>
+                        Paramètres :
+                    </h5>
+                </div>
+
+            </ng-container>
         </mat-tab>
     </mat-tab-group>
 </section>
+ 

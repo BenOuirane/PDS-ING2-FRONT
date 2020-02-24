@@ -19,4 +19,10 @@ export class LampeService {
     return this.http.put<Array<Lampe>>(`${this.baseUrl}` + `/lamp/list`, objects);
   }
 
+  updateLamp(lampe: Lampe): Observable<boolean> {
+    console.log("updateLampe is call"); 
+    return this.http.put<boolean>(`${this.baseUrl}` + `/lamp/updateParam`, lampe);
+    
+  }
+ 
 }
