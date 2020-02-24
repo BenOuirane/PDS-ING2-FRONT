@@ -15,7 +15,10 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let history of histories">
-                        <td> 
+                        <td>
+                            <span *ngIf="history.columnData == 'connected'">
+                                Connecté
+                            </span>
                             <span *ngIf="history.columnData == 'intensity'">
                                 Intensité
                             </span>
@@ -37,13 +40,20 @@
                             <span *ngIf="history.columnData == 'power'">
                                 Mise en route
                             </span>
+                        
                         </td>
                         <td>
                             <span *ngIf="history.columnData == 'alarm' || history.columnData == 'schedule_coffee'">
                                 {{ history.data | date : "short" }}
                             </span>
-                            <span *ngIf="history.columnData != 'alarm' && history.columnData != 'schedule_coffee'">
+                            <span *ngIf="history.columnData != 'alarm' && history.columnData != 'schedule_coffee' && history.columnData != 'connected'">
                                 {{ history.data }}
+                            </span>
+                            <span style="color:green" *ngIf="history.columnData == 'connected' && history.data == 'true'">
+                                Oui
+                            </span>
+                            <span style="color:red" *ngIf="history.data == 'connected' && history.data == 'false'">
+                                Non
                             </span>
                         </td>
                         <td>{{ history.messageTimestamp | date : "short" }}</td>
