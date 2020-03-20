@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { positionService } from '../../services/position.service'
 import { Observable } from 'rxjs';
-import { Area } from '../../area';
+import { Area } from '../models/area';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -11,7 +11,7 @@ import { FormControl } from '@angular/forms';
 })
 export class MapPrototypeComponent implements OnInit {
   ngOnInit(): void {
-    throw new Error("Method not implemented.");
+    throw new Error("Method not implementedaaa.");
   }
   areas: Observable<Area>[];
  
@@ -22,7 +22,7 @@ export class MapPrototypeComponent implements OnInit {
     console.log("end here")
   }
   
-/* reloadDataById() {
+ reloadDataById() {
     console.log(this.searchInput.nativeElement.value);
     let inputValue = this.searchInput.nativeElement.value;
     

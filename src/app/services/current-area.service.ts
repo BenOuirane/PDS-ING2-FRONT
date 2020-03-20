@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { User } from "../user";
 import { Resident } from '../resident';
 import { Observable } from 'rxjs';
-import { CurrentArea } from '../current-area';
+import { CurrentArea } from '../layouts/models/current-area';
 
 
 @Injectable({

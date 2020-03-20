@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { Area } from '../area';
+import { Area } from '../layouts/models/area';
 
 @Injectable({
   providedIn: 'root'

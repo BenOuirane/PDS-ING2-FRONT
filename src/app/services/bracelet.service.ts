@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Bracelet } from '../bracelet';
+import { Bracelet } from '../layouts/models/bracelet';
 
 
 @Injectable({
