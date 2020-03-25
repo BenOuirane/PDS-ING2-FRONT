@@ -39,6 +39,7 @@ import { FavoriteFiltersComponent } from './layouts/favorite-filters/favorite-fi
 import { ObjectMapComponent } from './object-map/object-map.component';
 import { HistoryComponent } from './history/history.component';
 import { PopupConfirmationComponent } from './layouts/popup-confirmation/popup-confirmation.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -80,7 +81,8 @@ import { PopupConfirmationComponent } from './layouts/popup-confirmation/popup-c
     MatButtonModule,
     MatFormFieldModule,
     AmazingTimePickerModule,
-    MatIconModule
+    MatIconModule,
+    NgbModule
   ],
   providers: [
     CandidateService,
