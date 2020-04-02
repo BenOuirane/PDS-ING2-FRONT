@@ -285,29 +285,32 @@
                         <h5 style="padding-left:20%;">Réveil - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
-                                <tr class="col-12">
-                                    <td class="col-6">Heure actuelle</td>
-                                    <td class="col-6">{{ now | date: "d MMMM y | HH:mm:ss"}}</td>
+                                <tr>
+                                    <td>Date | Heure </td>
+                                    <td>{{ now | date: "d MMMM y | HH:mm:ss"}}</td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Statut réveil </td>
-                                    <td class="col-6"><span *ngIf="alarmClock.alarmStatus">ON</span> <span
+                                <tr>
+                                    <td>Statut réveil </td>
+                                    <td><span *ngIf="alarmClock.alarmStatus">ON</span> <span
                                             *ngIf="!alarmClock.alarmStatus">OFF</span></td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Sonnerie à </td>
-                                    <td class="col-6">{{ alarmClock.alarm | date: "HH:mm "}}</td>
+                                <tr>
+                                    <td>Alarme à </td>
+                                    <td>
+                                        <span
+                                            *ngIf="alarmClock.alarm; else elseBlock">{{ alarmClock.alarm | date: "HH:mm "}}</span>
+                                        <ng-template #elseBlock>Non paramétré</ng-template>
+                                    </td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Statut radio </td>
-                                    <td class="col-6"><span *ngIf="alarmClock.radioStatus">ON</span> <span
+                                <tr>
+                                    <td>Statut radio </td>
+                                    <td><span *ngIf="alarmClock.radioStatus">ON</span> <span
                                             *ngIf="!alarmClock.radioStatus">OFF</span></td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Fréquence Radio</td>
-                                    <td class="col-6">{{alarmClock.radioHrz | number}}</td>
+                                <tr>
+                                    <td>Fréquence Radio</td>
+                                    <td>{{alarmClock.radioHrz | number}}</td>
                                 </tr>
-
 
                             </table>
                         </div>
@@ -316,17 +319,59 @@
 
                 <!-- Manage params for alarmClock-->
                 <div class="my-custom-row mt-5">
-                    <form [formGroup]="checkoutFormLamp" (ngSubmit)="build('alarmClock')">
+                    <form [formGroup]="checkoutFormAlarmClock" (ngSubmit)="build('alarmClock')">
                     <div class="col-12">
                         <hr width="85%" color="blue">
                     </div>
                     <h5>
                         Paramètres :
                     </h5>
+                    <input hidden #idAlarmClock formControlName="idAlarmClock" [ngModel]="alarmClock.idAlarmClock">
+                    <input hidden #objects formControlName="objects" [ngModel]="alarmClock.objects">
+                    <input hidden #alarmUsine formControlName="alarmUsine" [ngModel]="alarmClock.alarmUsine">
+                    <input hidden #radioHrzUsine formControlName="radioHrzUsine" [ngModel]="alarmClock.radioHrzUsine">
+                    <input hidden #radioStatusUsine formControlName="radioStatusUsine" [ngModel]="alarmClock.radioStatusUsine">
+                    <input hidden #alarmStatusUsine formControlName="alarmStatusUsine" [ngModel]="alarmClock.alarmStatusUsine">
 
+                    <table width="90%">
+                        <tr>
+                            <td>Status réveil</td>
+                            <td>
+                                <mat-slide-toggle #alarmStatus formControlName="alarmStatus" [ngModel]="alarmClock.alarmStatus">
+                                </mat-slide-toggle>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Alarme à</td>
+                            <td>
+                                <span (click)="openOn(alarmClock.alarm, 'alarm')">
+                                    <mat-icon md-36>schedule</mat-icon>
+                                </span>
+                            </td>
+                        </tr>
 
+                        <tr>
+                            <td>Status radio</td>
+                            <td>
+                                <mat-slide-toggle #radioStatus formControlName="radioStatus" [ngModel]="alarmClock.radioStatus">
+                                </mat-slide-toggle>
+                            </td>
+                        </tr>
 
-
+                        <tr>
+                            <td>Fréquence radio</td>
+                            <td>
+                                <mat-slider #radioHrz formControlName="radioHrz" thumbLabel
+                                    [displayWith]="formatLabel" min="87.5" max="108" step="0.1"
+                                    [ngModel]="alarmClock.radioHrz"></mat-slider>
+                            </td>
+                        </tr>
+                        </table>
+                         <!-- SUBMIT ALARMCLOCK-->
+                         <div class="d-flex justify-content-center mt-5 mb-5">
+                            <button mat-raised-button type="submit">Valider</button>
+                        </div>
+                    </form>
                 </div>
             </ng-container>
         </mat-tab>

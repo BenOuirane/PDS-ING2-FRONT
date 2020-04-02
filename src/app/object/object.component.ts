@@ -178,7 +178,7 @@ export class ObjectComponent implements OnInit {
       radioHrzUsine: Number,
       radioStatusUsine: Boolean,
       alarmStatusUsine: Boolean,
-      object: Objects
+      objects: Objects
     })
 
   }
@@ -251,18 +251,13 @@ export class ObjectComponent implements OnInit {
             console.log(err);
           }
         );
-        break; 
+        break;
     }
 
     this.getResidentService();
 
   }
 
-
-  testd(timestampOn: string, timestampOff: string, type: string) {
-    this.openOn(timestampOn, type);
-    this.openOff(timestampOff, type);
-  }
 
   openOn(timestamp: string, type: string) {
 
@@ -292,6 +287,15 @@ export class ObjectComponent implements OnInit {
         });
 
         return this.checkoutFormShutter.value.hourOn;
+
+      case 'alarm':
+        amazingTimePicker.afterClose().subscribe(time => {
+
+          let alarm = this.commonDate(time);
+          this.checkoutFormAlarmClock.value.alarm = alarm;
+        });
+
+        return this.checkoutFormAlarmClock.value.alarm;
     }
   }
 
