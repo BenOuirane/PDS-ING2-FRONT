@@ -58,6 +58,8 @@
                         <input hidden #colorUsine formControlName="colorUsine" [ngModel]="lampe.colorUsine">
                         <input hidden #hourOffUsine formControlName="hourOffUsine" [ngModel]="lampe.hourOffUsine">
                         <input hidden #hourOnUsine formControlName="hourOnUsine" [ngModel]="lampe.hourOnUsine">
+                        <input hidden #hourOff formControlName="hourOff" [ngModel]="lampe.hourOff">
+                        <input hidden #hourOn formControlName="hourOn" [ngModel]="lampe.hourOn">
                         <input hidden #intensityUsine formControlName="intensityUsine" [ngModel]="lampe.intensityUsine">
                         <input hidden #statusUsine formControlName="statusUsine" [ngModel]="lampe.statusUsine">
                         <input hidden #rooms formControlName="rooms" [ngModel]="lampe.objects.rooms">
@@ -128,6 +130,11 @@
                         </div>
 
                     </form>
+
+                </div>
+
+                <div class="d-flex justify-content-center mb-5">
+                    <button class="type" type="submit" color="red">Restaurer les paramètres d'usine</button>
                 </div>
 
             </ng-container>
@@ -247,6 +254,11 @@
 
                     </form>
                 </div>
+
+                <div class="d-flex justify-content-center mb-5">
+                    <button class="type" type="submit" color="red">Restaurer les paramètres d'usine</button>
+                </div>
+
             </ng-container>
         </mat-tab>
 
@@ -334,6 +346,11 @@
                         </div>
                     </form>
                 </div>
+
+                <div class="d-flex justify-content-center mb-5">
+                    <button class="type" type="submit" color="red">Restaurer les paramètres d'usine</button>
+                </div>
+
             </ng-container>
         </mat-tab>
 
@@ -439,6 +456,11 @@
                         </div>
                     </form>
                 </div>
+
+                <div class="d-flex justify-content-center mb-5">
+                    <button class="type" type="submit" color="red">Restaurer les paramètres d'usine</button>
+                </div>
+
             </ng-container>
         </mat-tab>
 
@@ -526,6 +548,11 @@
                         </div>
                     </form>
                 </div>
+
+                <div class="d-flex justify-content-center mb-5">
+                    <button class="type" type="submit" color="red">Restaurer les paramètres d'usine</button>
+                </div>
+
             </ng-container>
         </mat-tab>
     </mat-tab-group>
