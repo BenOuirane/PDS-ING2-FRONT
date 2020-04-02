@@ -19,7 +19,7 @@ import { CoffeeMachine } from '../coffeeMachine';
 import { FormBuilder } from '@angular/forms';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
 import { AmazingTimePickerService } from 'amazing-time-picker';
- 
+
 
 registerLocaleData(localeFr, 'fr');
 
@@ -44,7 +44,7 @@ export class ObjectComponent implements OnInit {
   checkoutFormLamp;
   checkoutFormShutter;
   test: boolean;
-  now : Date = new Date();
+  now: Date = new Date();
 
 
   constructor(private residentService: ResidentService,
@@ -62,7 +62,7 @@ export class ObjectComponent implements OnInit {
 
     setInterval(() => {
       this.now = new Date();
-    },  1);
+    }, 1);
 
     this.getResidentService();
 
@@ -164,7 +164,7 @@ export class ObjectComponent implements OnInit {
       hourOnUsine: String,
       hourOffUsine: String,
       statusUsine: Boolean,
-      object: Objects
+      objects: Objects
     });
 
   }
@@ -220,7 +220,7 @@ export class ObjectComponent implements OnInit {
     this.shutterService.updateShutter(this.checkoutFormShutter.value).subscribe(
       data => {
         console.log(data);
-        window.location.reload();
+        this.getResidentService();
       },
       err => {
         console.log(err);
@@ -228,7 +228,12 @@ export class ObjectComponent implements OnInit {
     );
   }
 
-  openOn(timestamp: string) {
+  testd(timestampOn : string, timestampOff : string, type : string){
+    this.openOn(timestampOn, type); 
+    this.openOff(timestampOff, type); 
+  }
+
+  openOn(timestamp: string, type: string) {
 
     console.log("this.checkoutFormLamp.value.hourOn", this.checkoutFormLamp.value.hourOn);
 
@@ -237,28 +242,54 @@ export class ObjectComponent implements OnInit {
     const amazingTimePicker = this.atp.open({
       time: time.toTimeString()
     });
-    amazingTimePicker.afterClose().subscribe(time => {
 
-      let hourOn = this.commonDate(time);
-      this.checkoutFormLamp.value.hourOn = hourOn;
-    });
+    switch (type) {
+      case 'lamp':
+        amazingTimePicker.afterClose().subscribe(time => {
 
-    return this.checkoutFormLamp.value.hourOn;
+          let hourOn = this.commonDate(time);
+          this.checkoutFormLamp.value.hourOn = hourOn;
+        });
+
+        return this.checkoutFormLamp.value.hourOn;
+
+      case 'shutter':
+        amazingTimePicker.afterClose().subscribe(time => {
+
+          let hourOn = this.commonDate(time);
+          this.checkoutFormShutter.value.hourOn = hourOn;
+        });
+
+        return this.checkoutFormShutter.value.hourOn;
+    }
   }
 
-  openOff(timestamp: string) {
+  openOff(timestamp: string, type: string) {
     let time = new Date(timestamp);
 
     const amazingTimePicker = this.atp.open({
       time: time.toTimeString()
     });
-    amazingTimePicker.afterClose().subscribe(time => {
 
-      let hourOff = this.commonDate(time);
-      this.checkoutFormLamp.value.hourOff = hourOff;
-    });
+    switch (type) {
 
-    return this.checkoutFormLamp.value.hourOff;
+      case 'lamp':
+        amazingTimePicker.afterClose().subscribe(time => {
+
+          let hourOff = this.commonDate(time);
+          this.checkoutFormLamp.value.hourOff = hourOff;
+        });
+
+        return this.checkoutFormLamp.value.hourOff;
+      case 'shutter' :
+        amazingTimePicker.afterClose().subscribe(time => {
+
+          let hourOff = this.commonDate(time);
+          this.checkoutFormShutter.value.hourOff = hourOff;
+        });
+
+        return this.checkoutFormShutter.value.hourOff;
+  }
   }
 
   private commonDate(time: string): number {

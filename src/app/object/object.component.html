@@ -1,6 +1,5 @@
 <section class="container">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <mat-tab-group *ngIf="dataloaded">
         <!-- Manage infos of Lamps-->
         <mat-tab label="Lampe" *ngIf="lamps.length > 0">
@@ -23,15 +22,17 @@
                                 <tr>
                                     <td>Allumées à</td>
                                     <td>
-                                        <span *ngIf="lampe.hourOn; else elseBlock">{{ lampe.hourOn | date: "hh:mm a"}}</span>
+                                        <span
+                                            *ngIf="lampe.hourOn; else elseBlock">{{ lampe.hourOn | date: "hh:mm a"}}</span>
                                         <ng-template #elseBlock>Non paramétré</ng-template>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Éteintes à</td>
                                     <td>
-                                      <span *ngIf="lampe.hourOff; else elseBlock">{{ lampe.hourOff | date: "hh:mm a"}}</span>
-                                      <ng-template #elseBlock>Non paramétré</ng-template>
+                                        <span
+                                            *ngIf="lampe.hourOff; else elseBlock">{{ lampe.hourOff | date: "hh:mm a"}}</span>
+                                        <ng-template #elseBlock>Non paramétré</ng-template>
                                     </td>
                                 </tr>
                                 <tr>
@@ -86,7 +87,10 @@
                             <tr>
                                 <td>Allumées à</td>
                                 <td class="col-6" [ngClass]="stateOn.checked ? 'visible' : 'invisible'">
-                                    <span (click)="openOn(lampe.hourOn)"><mat-icon md-36>schedule</mat-icon></span> {{checkoutFormLamp.value.hourOn | date : 'hh:mm a'}}{{checkoutFormLamp.value.hourOn === 'false' ? lampe.hourOn : '' }}
+                                    <span (click)="openOn(lampe.hourOn, 'lamp')">
+                                        <mat-icon md-36>schedule</mat-icon>
+                                    </span>
+                                    {{checkoutFormLamp.value.hourOn | date : 'hh:mm a'}}{{checkoutFormLamp.value.hourOn === 'false' ? lampe.hourOn : '' }}
                                 </td>
                                 <td>
                                     <mat-slide-toggle #stateOn (toggleChange)="stateOn.value = !stateOn.value; "
@@ -97,13 +101,15 @@
                             <tr>
                                 <td>Éteintes à</td>
                                 <td class="col-6" [ngClass]="stateOff.checked ? 'visible' : 'invisible'">
-                                    <span (click)="openOff(lampe.hourOff)"><mat-icon md-36>schedule</mat-icon></span>{{checkoutFormLamp.value.hourOff | date : 'hh:mm a'}}{{checkoutFormLamp.value.hourOff === 'false' ? lampe.hourOff : '' }}
+                                    <span (click)="openOff(lampe.hourOff, 'lamp')">
+                                        <mat-icon md-36>schedule</mat-icon>
+                                    </span>{{checkoutFormLamp.value.hourOff | date : 'hh:mm a'}}{{checkoutFormLamp.value.hourOff === 'false' ? lampe.hourOff : '' }}
 
 
                                 </td>
                                 <td>
-                                  <mat-slide-toggle #stateOff (toggleChange)="stateOff.value = !stateOff.value; "
-                                  [checked]="lampe.hourOff != null"></mat-slide-toggle>
+                                    <mat-slide-toggle #stateOff (toggleChange)="stateOff.value = !stateOff.value; "
+                                        [checked]="lampe.hourOff != null"></mat-slide-toggle>
                                 </td>
                             </tr>
 
@@ -194,18 +200,26 @@
                         <h5 style="padding-left:20%;">Volet - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
-                                <tr class="col-12">
-                                    <td class="col-6">Status</td>
-                                    <td class="col-6"><span *ngIf="shutter.status">Ouvert</span> <span
+                                <tr>
+                                    <td>Status</td>
+                                    <td><span *ngIf="shutter.status">Ouvert</span> <span
                                             *ngIf="!shutter.status">Fermé</span></td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Ouvrir à </td>
-                                    <td class="col-6">{{ shutter.hourOn | date: "hh:mm a"}}</td>
+                                <tr>
+                                    <td>Ouvrir à </td>
+                                    <td>
+                                        <span
+                                            *ngIf="shutter.hourOn; else elseBlock">{{ shutter.hourOn | date: "hh:mm a"}}</span>
+                                        <ng-template #elseBlock>Non paramétré</ng-template>
+                                    </td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Fermer à</td>
-                                    <td class="col-6">{{ shutter.hourOff | date: "hh:mm a"}}</td>
+                                <tr>
+                                    <td>Fermer à</td>
+                                    <td>
+                                        <span
+                                            *ngIf="shutter.hourOff; else elseBlock">{{ shutter.hourOff | date: "hh:mm a"}}</span>
+                                        <ng-template #elseBlock>Non paramétré</ng-template>
+                                    </td>
                                 </tr>
 
                             </table>
@@ -214,12 +228,51 @@
                 </div>
                 <!-- Manage params for shutters-->
                 <div class="my-custom-row mt-5">
-                    <div class="col-12">
-                        <hr width="85%" color="blue">
-                    </div>
-                    <h5>
-                        Paramètres :
-                    </h5>
+                    <form [formGroup]="checkoutFormShutter" (ngSubmit)="buildShutter()">
+                        <div class="col-12">
+                            <hr width="85%" color="blue">
+                        </div>
+                        <h5>
+                            Paramètres :
+                        </h5>
+                        <input hidden #idShutter formControlName="idShutter" [ngModel]="shutter.idShutter">
+                        <input hidden #objects formControlName="objects" [ngModel]="shutter.objects">
+                        <input hidden #hourOnUsine formControlName="hourOnUsine" [ngModel]="shutter.hourOnUsine">
+                        <input hidden #hourOffUsine formControlName="hourOffUsine" [ngModel]="shutter.hourOffUsine">
+                        <input hidden #statusUsine formControlName="statusUsine" [ngModel]="shutter.statusUsine">
+
+                        <table width="90%">
+                            <tr>
+                                <td>Status</td>
+                                <td>
+                                    <mat-slide-toggle #status formControlName="status" [ngModel]="shutter.status">
+                                    </mat-slide-toggle>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Ouvrir à</td>
+                                <td class="col-6">
+                                    <span (click)="openOn(shutter.hourOn, 'shutter')">
+                                        <mat-icon md-36>schedule</mat-icon>
+                                    </span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Fermer à</td>
+                                <td class="col-6">
+                                    <span (click)="openOff(shutter.hourOff, 'shutter')">
+                                        <mat-icon md-36>schedule</mat-icon>
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- SUBMIT SHUTTER-->
+                        <div class="d-flex justify-content-center mt-5 mb-5">
+                            <button mat-raised-button type="submit">Valider</button>
+                        </div>
+                    </form>
                 </div>
             </ng-container>
         </mat-tab>
@@ -261,7 +314,7 @@
                     </div>
                 </div>
 
-                <!-- Manage params for shutters-->
+                <!-- Manage params for alarmClock-->
                 <div class="my-custom-row mt-5">
                     <div class="col-12">
                         <hr width="85%" color="blue">
@@ -269,6 +322,10 @@
                     <h5>
                         Paramètres :
                     </h5>
+
+
+
+
                 </div>
             </ng-container>
         </mat-tab>
@@ -319,4 +376,3 @@
         </mat-tab>
     </mat-tab-group>
 </section>
- 
