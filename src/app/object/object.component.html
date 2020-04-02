@@ -46,7 +46,7 @@
                 </div>
                 <!-- Manage params for Lamps-->
                 <div class="my-custom-row mt-5">
-                    <form [formGroup]="checkoutFormLamp" (ngSubmit)="buildLamp()">
+                    <form [formGroup]="checkoutFormLamp" (ngSubmit)="build('lamp')">
                         <div class="col-12">
                             <hr width="85%" color="blue">
                         </div>
@@ -228,7 +228,7 @@
                 </div>
                 <!-- Manage params for shutters-->
                 <div class="my-custom-row mt-5">
-                    <form [formGroup]="checkoutFormShutter" (ngSubmit)="buildShutter()">
+                    <form [formGroup]="checkoutFormShutter" (ngSubmit)="build('shutter')">
                         <div class="col-12">
                             <hr width="85%" color="blue">
                         </div>
@@ -287,7 +287,7 @@
                             <table width="90%">
                                 <tr class="col-12">
                                     <td class="col-6">Heure actuelle</td>
-                                    <td class="col-6">{{ now | date: "hh:mm a"}}</td>
+                                    <td class="col-6">{{ now | date: "d MMMM y | HH:mm:ss"}}</td>
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Statut réveil </td>
@@ -296,7 +296,7 @@
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Sonnerie à </td>
-                                    <td class="col-6">{{ alarmClock.alarm | date: "hh:mm a"}}</td>
+                                    <td class="col-6">{{ alarmClock.alarm | date: "HH:mm "}}</td>
                                 </tr>
                                 <tr class="col-12">
                                     <td class="col-6">Statut radio </td>
@@ -316,6 +316,7 @@
 
                 <!-- Manage params for alarmClock-->
                 <div class="my-custom-row mt-5">
+                    <form [formGroup]="checkoutFormLamp" (ngSubmit)="build('alarmClock')">
                     <div class="col-12">
                         <hr width="85%" color="blue">
                     </div>
