@@ -44,6 +44,7 @@ export class ObjectComponent implements OnInit {
   checkoutFormLamp;
   checkoutFormShutter;
   checkoutFormAlarmClock;
+  checkoutFormCoffeeMachine;
   test: boolean;
   now: Date = new Date();
 
@@ -180,7 +181,18 @@ export class ObjectComponent implements OnInit {
       alarmStatusUsine: Boolean,
       objects: Objects
     })
-
+    this.checkoutFormCoffeeMachine = this.formBuilder.group({
+      idCoffee: Number,
+      nbCapsule: Number,
+      scheduleCoffee: String,
+      status: Boolean,
+      waterLevel: Number,
+      nbCapsuleUsine: Number,
+      scheduleCoffeeUsine: String,
+      statusUsine: Boolean,
+      waterLevelUsine: Number,
+      objects: Objects
+    })
   }
 
   //Used to get automaticaly the right color
@@ -252,6 +264,18 @@ export class ObjectComponent implements OnInit {
           }
         );
         break;
+      case 'coffeeMachine':
+        console.log("buildCoffeeMachine : ", this.checkoutFormCoffeeMachine.value);
+        this.coffeeMachineService.updateCoffeeMachine(this.checkoutFormCoffeeMachine.value).subscribe(
+          data => {
+            console.log(data);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+        break;
+
     }
 
     this.getResidentService();
@@ -296,6 +320,15 @@ export class ObjectComponent implements OnInit {
         });
 
         return this.checkoutFormAlarmClock.value.alarm;
+
+      case 'coffeeMachine':
+        amazingTimePicker.afterClose().subscribe(time => {
+
+          let scheduleCoffee = this.commonDate(time);
+          this.checkoutFormCoffeeMachine.value.scheduleCoffee = scheduleCoffee;
+        });
+
+        return this.checkoutFormCoffeeMachine.value.scheduleCoffee;
     }
   }
 
@@ -320,10 +353,10 @@ export class ObjectComponent implements OnInit {
         amazingTimePicker.afterClose().subscribe(time => {
 
           let hourOff = this.commonDate(time);
-          this.checkoutFormShutter.value.hourOff = hourOff;
+          this.checkoutFormCoffeeMachine.value.hourOff = hourOff;
         });
 
-        return this.checkoutFormShutter.value.hourOff;
+        return this.checkoutFormCoffeeMachine.value.hourOff;
     }
   }
 
