@@ -43,6 +43,7 @@ export class ObjectComponent implements OnInit {
   LampStatus = false;
   checkoutFormLamp;
   checkoutFormShutter;
+  checkoutFormAlarmClock;
   test: boolean;
   now: Date = new Date();
 
@@ -167,6 +168,19 @@ export class ObjectComponent implements OnInit {
       objects: Objects
     });
 
+    this.checkoutFormAlarmClock = this.formBuilder.group({
+      idAlarmClock: Number,
+      alarm: String,
+      radioHrz: Number,
+      radioStatus: Boolean,
+      alarmStatus: Boolean,
+      alarmUsine: String,
+      radioHrzUsine: Number,
+      radioStatusUsine: Boolean,
+      alarmStatusUsine: Boolean,
+      object: Objects
+    })
+
   }
 
   //Used to get automaticaly the right color
@@ -201,36 +215,53 @@ export class ObjectComponent implements OnInit {
     return value;
   }
 
-  buildLamp() {
-    console.log("this.checkoutFormLamp.value", this.checkoutFormLamp.value);
+  build(type: string) {
 
-    this.lampeService.updateLamp(this.checkoutFormLamp.value).subscribe(
-      data => {
-        console.log(data);
-        this.getResidentService();
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    switch (type) {
+      case 'lamp':
+        console.log("this.checkoutFormLamp.value", this.checkoutFormLamp.value);
+
+        this.lampeService.updateLamp(this.checkoutFormLamp.value).subscribe(
+          data => {
+            console.log(data);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+        break;
+      case 'shutter':
+        console.log("buildShutter : ", this.checkoutFormShutter.value);
+        this.shutterService.updateShutter(this.checkoutFormShutter.value).subscribe(
+          data => {
+            console.log(data);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+        break;
+      case 'alarmClock':
+        console.log("buildAlarmClock : ", this.checkoutFormAlarmClock.value);
+        this.alarmClockService.updateAlarmClock(this.checkoutFormAlarmClock.value).subscribe(
+          data => {
+            console.log(data);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+        break; 
+    }
+
+    this.getResidentService();
+
   }
 
-  buildShutter() {
-    console.log("buildShutter : ", this.checkoutFormShutter.value);
-    this.shutterService.updateShutter(this.checkoutFormShutter.value).subscribe(
-      data => {
-        console.log(data);
-        this.getResidentService();
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  }
 
-  testd(timestampOn : string, timestampOff : string, type : string){
-    this.openOn(timestampOn, type); 
-    this.openOff(timestampOff, type); 
+  testd(timestampOn: string, timestampOff: string, type: string) {
+    this.openOn(timestampOn, type);
+    this.openOff(timestampOff, type);
   }
 
   openOn(timestamp: string, type: string) {
@@ -281,7 +312,7 @@ export class ObjectComponent implements OnInit {
         });
 
         return this.checkoutFormLamp.value.hourOff;
-      case 'shutter' :
+      case 'shutter':
         amazingTimePicker.afterClose().subscribe(time => {
 
           let hourOff = this.commonDate(time);
@@ -289,7 +320,7 @@ export class ObjectComponent implements OnInit {
         });
 
         return this.checkoutFormShutter.value.hourOff;
-  }
+    }
   }
 
   private commonDate(time: string): number {

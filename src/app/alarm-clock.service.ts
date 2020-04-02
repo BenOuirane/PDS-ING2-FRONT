@@ -18,4 +18,10 @@ export class AlarmClockService {
   getAlarmClock(objects: Objects) : Observable<Array<AlarmClock>>{
     return this.http.put<Array<AlarmClock>>(`${this.baseUrl}` + `/alarmClock/list`, objects);
   }
+
+  updateAlarmClock(alarmClock: AlarmClock) : Observable<boolean> {
+    console.log("updateAlarmClock is call"); 
+    return this.http.put<boolean>(`${this.baseUrl}` + `/alarmClock/updateParam`, alarmClock);
+    
+  }
 }
