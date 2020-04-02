@@ -195,6 +195,7 @@
                             [ngModel]="oven.programTempUsine">
                         <input hidden #effectiveTempUsine formControlName="effectiveTempUsine"
                             [ngModel]="oven.effectiveTempUsine">
+                        <input hidden #scheduleTime formControlName="scheduleTime" [ngModel]="oven.scheduleTime">
 
                         <table width="90%">
                             <tr>
@@ -297,6 +298,8 @@
                         <input hidden #hourOnUsine formControlName="hourOnUsine" [ngModel]="shutter.hourOnUsine">
                         <input hidden #hourOffUsine formControlName="hourOffUsine" [ngModel]="shutter.hourOffUsine">
                         <input hidden #statusUsine formControlName="statusUsine" [ngModel]="shutter.statusUsine">
+                        <input hidden #hourOff formControlName="hourOff" [ngModel]="shutter.hourOff">
+                        <input hidden #hourOn formControlName="hourOn" [ngModel]="shutter.hourOn">
 
                         <table width="90%">
                             <tr>
@@ -392,6 +395,7 @@
                             [ngModel]="alarmClock.radioStatusUsine">
                         <input hidden #alarmStatusUsine formControlName="alarmStatusUsine"
                             [ngModel]="alarmClock.alarmStatusUsine">
+                        <input hidden #alarm formControlName="alarm" [ngModel]="alarmClock.alarm">
 
                         <table width="90%">
                             <tr>
@@ -494,6 +498,8 @@
                         <input hidden #statusUsine formControlName="statusUsine" [ngModel]="coffeeMachine.statusUsine">
                         <input hidden #waterLevelUsine formControlName="waterLevelUsine"
                             [ngModel]="coffeeMachine.waterLevelUsine">
+                        <input hidden #scheduleCoffee formControlName="scheduleCoffee"
+                            [ngModel]="coffeeMachine.scheduleCoffee">
 
                         <table width="90%">
                             <tr>
