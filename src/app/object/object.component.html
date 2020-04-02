@@ -141,28 +141,28 @@
                         <h5 style="padding-left:20%;">Four - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
-                                <tr class="col-12">
-                                    <td class="col-6">Status</td>
+                                <tr>
+                                    <td>Status</td>
                                     <td class="col-6"><span *ngIf="oven.status">Allumées</span> <span
                                             *ngIf="!oven.status">Éteint</span></td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Température programmée</td>
-                                    <td class="col-6">{{ oven.programTemp}}°C</td>
+                                <tr>
+                                    <td>Température programmée</td>
+                                    <td>{{ oven.programTemp}}°C</td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Température effective</td>
-                                    <td class="col-6">{{ oven.effectiveTemp}}°C</td>
+                                <tr>
+                                    <td>Température effective</td>
+                                    <td>{{ oven.effectiveTemp}}°C</td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Heure de lancement</td>
-                                    <td class="col-6"><span *ngIf="oven.scheduleTime == null">Non Renseigné</span> <span
+                                <tr>
+                                    <td>Heure de lancement</td>
+                                    <td><span *ngIf="oven.scheduleTime == null">Non Renseigné</span> <span
                                             *ngIf="oven.scheduleTime != null">{{ oven.scheduleTime | date: "HH:mm"}}</span>
                                     </td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Mode</td>
-                                    <td class="col-6">
+                                <tr>
+                                    <td>Mode</td>
+                                    <td>
                                         <span *ngIf="oven.mode === 'FAN'">Chaleur tournante</span>
                                         <span *ngIf="oven.mode === 'PIZZA'">Pizza</span>
                                         <span *ngIf="oven.mode === 'BAKERY'">Gâteau</span>
@@ -175,20 +175,77 @@
                     </div>
                 </div>
 
-                <!-- Manage params for shutters-->
+                <!-- Manage params for Oven-->
                 <div class="my-custom-row mt-5">
-                    <div class="col-12">
-                        <hr width="85%" color="blue">
-                    </div>
-                    <h5>
-                        Paramètres :
-                    </h5>
+                    <form [formGroup]="checkoutFormOven" (ngSubmit)="build('oven')">
+                        <div class="col-12">
+                            <hr width="85%" color="blue">
+                        </div>
+                        <h5>
+                            Paramètres :
+                        </h5>
+                        <input hidden #idOven formControlName="idOven" [ngModel]="oven.idOven">
+                        <input hidden #objects formControlName="objects" [ngModel]="oven.objects">
+                        <input hidden #effectiveTemp formControlName="effectiveTemp" [ngModel]="oven.effectiveTemp">
+                        <input hidden #modeUsine formControlName="modeUsine" [ngModel]="oven.modeUsine">
+                        <input hidden #statusUsine formControlName="statusUsine" [ngModel]="oven.statusUsine">
+                        <input hidden #scheduleTimeUsine formControlName="scheduleTimeUsine"
+                            [ngModel]="oven.scheduleTimeUsine">
+                        <input hidden #programTempUsine formControlName="programTempUsine"
+                            [ngModel]="oven.programTempUsine">
+                        <input hidden #effectiveTempUsine formControlName="effectiveTempUsine"
+                            [ngModel]="oven.effectiveTempUsine">
 
-                    <!-- <input hidden #idShutter formControlName="idShutter" [ngModel]="shutter.idShutter"> -->
-                    <!-- <input hidden #idShutter formControlName="idShutter" [ngModel]="shutter.idShutter"> -->
+                        <table width="90%">
+                            <tr>
+                                <td>Status</td>
+                                <td>
+                                    <mat-slide-toggle #status formControlName="status" [ngModel]="oven.status">
+                                    </mat-slide-toggle>
+                                </td>
+                            </tr>
 
+                            <tr>
+                                <td>Température programmée</td>
+                                <td>
+                                    <mat-slider #programTemp formControlName="programTemp" thumbLabel
+                                        [displayWith]="formatLabel" min="0" max="270" step="1"
+                                        [ngModel]="oven.programTemp"></mat-slider>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>programmée à</td>
+                                <td class="col-6">
+                                    <span (click)="openOn(oven.scheduleTime, 'oven')">
+                                        <mat-icon md-36>schedule</mat-icon>
+                                    </span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Mode</td>
+                                <td>
+                                    <mat-form-field>
+                                        <mat-select #mode formControlName="mode" [ngModel]="oven.mode">
+                                            <mat-option value="PIZZA">Pizza</mat-option>
+                                            <mat-option value="FAN">Chaleur tournante</mat-option>
+                                            <mat-option value="BAKERY">Patisserie</mat-option>
+                                            <mat-option value="ROTISSERIE">Rotisserie</mat-option>
+                                            <mat-option value="PREHEATED">Préchauffage</mat-option>
+
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <!-- SUBMIT OVEN-->
+                        <div class="d-flex justify-content-center mt-5 mb-5">
+                            <button mat-raised-button type="submit">Valider</button>
+                        </div>
+
+                    </form>
                 </div>
-
             </ng-container>
         </mat-tab>
 
@@ -430,11 +487,14 @@
                         <input hidden #objects formControlName="objects" [ngModel]="coffeeMachine.objects">
                         <input hidden #nbCapsule formControlName="nbCapsule" [ngModel]="coffeeMachine.nbCapsule">
                         <input hidden #waterLevel formControlName="waterLevel" [ngModel]="coffeeMachine.waterLevel">
-                        <input hidden #nbCapsuleUsine formControlName="nbCapsuleUsine" [ngModel]="coffeeMachine.nbCapsuleUsine">
-                        <input hidden #scheduleCoffeeUsine formControlName="scheduleCoffeeUsine" [ngModel]="coffeeMachine.scheduleCoffeeUsine">
+                        <input hidden #nbCapsuleUsine formControlName="nbCapsuleUsine"
+                            [ngModel]="coffeeMachine.nbCapsuleUsine">
+                        <input hidden #scheduleCoffeeUsine formControlName="scheduleCoffeeUsine"
+                            [ngModel]="coffeeMachine.scheduleCoffeeUsine">
                         <input hidden #statusUsine formControlName="statusUsine" [ngModel]="coffeeMachine.statusUsine">
-                        <input hidden #waterLevelUsine formControlName="waterLevelUsine" [ngModel]="coffeeMachine.waterLevelUsine">
-                     
+                        <input hidden #waterLevelUsine formControlName="waterLevelUsine"
+                            [ngModel]="coffeeMachine.waterLevelUsine">
+
                         <table width="90%">
                             <tr>
                                 <td>Status réveil</td>

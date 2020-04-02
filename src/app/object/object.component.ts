@@ -45,6 +45,7 @@ export class ObjectComponent implements OnInit {
   checkoutFormShutter;
   checkoutFormAlarmClock;
   checkoutFormCoffeeMachine;
+  checkoutFormOven;
   test: boolean;
   now: Date = new Date();
 
@@ -193,6 +194,20 @@ export class ObjectComponent implements OnInit {
       waterLevelUsine: Number,
       objects: Objects
     })
+    this.checkoutFormOven = this.formBuilder.group({
+      idOven: Number,
+      effectiveTemp: Number,
+      programTemp: Number,
+      scheduleTime: String,
+      status: Boolean,
+      mode: String,
+      effectiveTempUsine: Number,
+      programTempUsine: Number,
+      scheduleTimeUsine: String,
+      statusUsine: Boolean,
+      modeUsine: String,
+      objects: Objects
+    })
   }
 
   //Used to get automaticaly the right color
@@ -275,6 +290,17 @@ export class ObjectComponent implements OnInit {
           }
         );
         break;
+      case 'oven':
+        console.log("buildOven : ", this.checkoutFormOven.value);
+        this.ovenService.updateOven(this.checkoutFormOven.value).subscribe(
+          data => {
+            console.log(data);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+        break;
 
     }
 
@@ -329,6 +355,16 @@ export class ObjectComponent implements OnInit {
         });
 
         return this.checkoutFormCoffeeMachine.value.scheduleCoffee;
+
+      case 'oven' :
+        amazingTimePicker.afterClose().subscribe(time => {
+
+          let scheduleTime = this.commonDate(time);
+          this.checkoutFormOven.value.scheduleTime = scheduleTime;
+        });
+
+        return this.checkoutFormOven.value.scheduleTime;
+
     }
   }
 
