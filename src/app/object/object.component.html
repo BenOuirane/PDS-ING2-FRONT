@@ -23,7 +23,7 @@
                                     <td>Allumées à</td>
                                     <td>
                                         <span
-                                            *ngIf="lampe.hourOn; else elseBlock">{{ lampe.hourOn | date: "hh:mm a"}}</span>
+                                            *ngIf="lampe.hourOn; else elseBlock">{{ lampe.hourOn | date: "HH:mm"}}</span>
                                         <ng-template #elseBlock>Non paramétré</ng-template>
                                     </td>
                                 </tr>
@@ -88,30 +88,19 @@
 
                             <tr>
                                 <td>Allumées à</td>
-                                <td class="col-6" [ngClass]="stateOn.checked ? 'visible' : 'invisible'">
+                                <td class="col-6">
                                     <span (click)="openOn(lampe.hourOn, 'lamp')">
                                         <mat-icon md-36>schedule</mat-icon>
                                     </span>
-                                    {{checkoutFormLamp.value.hourOn | date : 'HH:mm'}}{{checkoutFormLamp.value.hourOn === 'false' ? lampe.hourOn : '' }}
-                                </td>
-                                <td>
-                                    <mat-slide-toggle #stateOn (toggleChange)="stateOn.value = !stateOn.value; "
-                                        [checked]="lampe.hourOn != null"></mat-slide-toggle>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td>Éteintes à</td>
-                                <td class="col-6" [ngClass]="stateOff.checked ? 'visible' : 'invisible'">
+                                <td class="col-6">
                                     <span (click)="openOff(lampe.hourOff, 'lamp')">
                                         <mat-icon md-36>schedule</mat-icon>
-                                    </span>{{checkoutFormLamp.value.hourOff | date : 'HH:mm'}}{{checkoutFormLamp.value.hourOff === 'false' ? lampe.hourOff : '' }}
-
-
-                                </td>
-                                <td>
-                                    <mat-slide-toggle #stateOff (toggleChange)="stateOff.value = !stateOff.value; "
-                                        [checked]="lampe.hourOff != null"></mat-slide-toggle>
+                                    </span>
                                 </td>
                             </tr>
 
