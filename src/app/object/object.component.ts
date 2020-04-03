@@ -89,7 +89,6 @@ export class ObjectComponent implements OnInit {
                   this.lampeService.getlampe(object).subscribe(
                     data => {
                       this.lamps = data;
-                      console.log("lamps", data);
                     }
                   );
                   break;
@@ -97,7 +96,6 @@ export class ObjectComponent implements OnInit {
                   this.ovenService.getOven(object).subscribe(
                     data => {
                       this.ovens = data;
-                      console.log(data);
                     }
                   );
                   break;
@@ -106,7 +104,6 @@ export class ObjectComponent implements OnInit {
                   this.shutterService.getshutter(object).subscribe(
                     data => {
                       this.shutters = data;
-                      console.log(data);
                     }
                   );
                   break;
@@ -115,7 +112,6 @@ export class ObjectComponent implements OnInit {
                   this.alarmClockService.getAlarmClock(object).subscribe(
                     data => {
                       this.alarmClocks = data;
-                      console.log(data);
                     }
                   );
                   break;
@@ -124,7 +120,6 @@ export class ObjectComponent implements OnInit {
                   this.coffeeMachineService.getCoffeeMachine(object).subscribe(
                     data => {
                       this.coffeeMachines = data;
-                      console.log(data);
                     }
                   );
                   break;
@@ -249,7 +244,6 @@ export class ObjectComponent implements OnInit {
 
     switch (type) {
       case 'lamp':
-        console.log("this.checkoutFormLamp.value", this.checkoutFormLamp.value);
 
         this.lampeService.updateLamp(this.checkoutFormLamp.value).subscribe(
           data => {
@@ -261,7 +255,6 @@ export class ObjectComponent implements OnInit {
         );
         break;
       case 'shutter':
-        console.log("buildShutter : ", this.checkoutFormShutter.value);
         this.shutterService.updateShutter(this.checkoutFormShutter.value).subscribe(
           data => {
             console.log(data);
@@ -272,7 +265,6 @@ export class ObjectComponent implements OnInit {
         );
         break;
       case 'alarmClock':
-        console.log("buildAlarmClock : ", this.checkoutFormAlarmClock.value);
         this.alarmClockService.updateAlarmClock(this.checkoutFormAlarmClock.value).subscribe(
           data => {
             console.log(data);
@@ -283,7 +275,6 @@ export class ObjectComponent implements OnInit {
         );
         break;
       case 'coffeeMachine':
-        console.log("buildCoffeeMachine : ", this.checkoutFormCoffeeMachine.value);
         this.coffeeMachineService.updateCoffeeMachine(this.checkoutFormCoffeeMachine.value).subscribe(
           data => {
             console.log(data);
@@ -294,7 +285,6 @@ export class ObjectComponent implements OnInit {
         );
         break;
       case 'oven':
-        console.log("buildOven : ", this.checkoutFormOven.value);
         this.ovenService.updateOven(this.checkoutFormOven.value).subscribe(
           data => {
             console.log(data);
@@ -313,8 +303,6 @@ export class ObjectComponent implements OnInit {
 
   //Build the tiestamp format on schedule time for ON
   openOn(timestamp: string, type: string) {
-
-    console.log("this.checkoutFormLamp.value.hourOn", this.checkoutFormLamp.value.hourOn);
 
     let time = new Date(timestamp);
 
@@ -401,7 +389,6 @@ export class ObjectComponent implements OnInit {
   }
 
   private commonDate(time: string): number {
-    console.log(time);
     const split = time.split(':');
     const hours = Number.parseInt(split[0]);
     const minutes = Number.parseInt(split[1]);
@@ -410,7 +397,6 @@ export class ObjectComponent implements OnInit {
     myDate.setHours(hours);
     myDate.setMinutes(minutes);
 
-    console.log("myDate", myDate.getTime());
     return myDate.getTime();
   }
 

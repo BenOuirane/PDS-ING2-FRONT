@@ -62,7 +62,7 @@
                         <input hidden #hourOn formControlName="hourOn" [ngModel]="lampe.hourOn">
                         <input hidden #intensityUsine formControlName="intensityUsine" [ngModel]="lampe.intensityUsine">
                         <input hidden #statusUsine formControlName="statusUsine" [ngModel]="lampe.statusUsine">
-                        <input hidden #rooms formControlName="rooms" [ngModel]="lampe.objects.rooms">
+                       
                         <table width="90%">
                             <tr>
                                 <td>Status</td>
@@ -551,16 +551,12 @@
 
         <!-- Manage scenario My Morning-->
         <mat-tab label="Mon Matin">
-                <div>
-                    <div><img class="imgScenar" src="../../assets/MyMorning1.png" alt=""></div>
-                    <p> Bon matin...</p>
+            <p>
+                <img class="imgScenar" src="../../assets/MyMorning1.png" alt=""/>
+                <strong style="text-align: center;"> Bon matin...</strong>
+            </p>
 
-                </div>
-                <div class="col-6">
-                </div>
+            <div class="col-6"> </div>
         </mat-tab>
-
-
-
     </mat-tab-group>
 </section>
