@@ -19,6 +19,7 @@ import { CoffeeMachine } from '../coffeeMachine';
 import { FormBuilder } from '@angular/forms';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
 import { AmazingTimePickerService } from 'amazing-time-picker';
+import { ThrowStmt } from '@angular/compiler';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -140,6 +141,7 @@ export class ObjectComponent implements OnInit {
     );
   }
 
+  // Initiate the form
   private initForm(): void {
     this.checkoutFormLamp = this.formBuilder.group({
       idLamp: Number,
@@ -242,6 +244,7 @@ export class ObjectComponent implements OnInit {
     return value;
   }
 
+  //BUild the objects and send it to the back for update /api/xxxxx/updateParam
   build(type: string) {
 
     switch (type) {
@@ -308,7 +311,7 @@ export class ObjectComponent implements OnInit {
 
   }
 
-
+  //Build the tiestamp format on schedule time for ON
   openOn(timestamp: string, type: string) {
 
     console.log("this.checkoutFormLamp.value.hourOn", this.checkoutFormLamp.value.hourOn);
@@ -356,7 +359,7 @@ export class ObjectComponent implements OnInit {
 
         return this.checkoutFormCoffeeMachine.value.scheduleCoffee;
 
-      case 'oven' :
+      case 'oven':
         amazingTimePicker.afterClose().subscribe(time => {
 
           let scheduleTime = this.commonDate(time);
@@ -368,6 +371,7 @@ export class ObjectComponent implements OnInit {
     }
   }
 
+  //Build the tiestamp format on schedule time for OFF
   openOff(timestamp: string, type: string) {
     let time = new Date(timestamp);
 
@@ -409,4 +413,95 @@ export class ObjectComponent implements OnInit {
     console.log("myDate", myDate.getTime());
     return myDate.getTime();
   }
+
+  //Used to restore usine parameters. Switch on each objects' type
+  restore(type: string, idObject: Number) {
+
+    switch (type) {
+      case 'lamp':
+        this.checkoutFormLamp.value.idLamp = idObject;
+        this.checkoutFormLamp.value.hourOff = this.checkoutFormLamp.value.hourOffUsine;
+        this.checkoutFormLamp.value.hourOn = this.checkoutFormLamp.value.hourOnUsine;
+        this.checkoutFormLamp.value.color = this.checkoutFormLamp.value.colorUsine;
+        this.checkoutFormLamp.value.status = this.checkoutFormLamp.value.statusUsine;
+
+        this.lampeService.updateLamp(this.checkoutFormLamp.value).subscribe(
+          data => {
+            console.log(data);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+        break;
+
+      case 'oven' : 
+      this.checkoutFormOven.value.idOven = idObject;
+      this.checkoutFormOven.value.programTemp = this.checkoutFormOven.value.programTempUsine;
+      this.checkoutFormOven.value.scheduleTime = this.checkoutFormOven.value.scheduleTimeUsine;
+      this.checkoutFormOven.value.status = this.checkoutFormOven.value.statusUsine;
+      this.checkoutFormOven.value.mode = this.checkoutFormOven.value.modeUsine;
+
+      this.ovenService.updateOven(this.checkoutFormOven.value).subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          console.log(err);
+        }
+      );
+      break;
+
+      case 'shutter' : 
+      this.checkoutFormShutter.value.idOven = idObject;
+      this.checkoutFormShutter.value.hourOn = this.checkoutFormShutter.value.hourOnUsine;
+      this.checkoutFormShutter.value.hourOff = this.checkoutFormShutter.value.hourOffUsine;
+      this.checkoutFormShutter.value.status = this.checkoutFormShutter.value.statusUsine;
+
+      this.shutterService.updateShutter(this.checkoutFormShutter.value).subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          console.log(err);
+        }
+      );
+      break;
+
+      case 'alarmClock' : 
+      this.checkoutFormAlarmClock.value.idOven = idObject;
+      this.checkoutFormAlarmClock.value.alarm = this.checkoutFormAlarmClock.value.alarmUsine;
+      this.checkoutFormAlarmClock.value.radioHrz = this.checkoutFormAlarmClock.value.radioHrzUsine;
+      this.checkoutFormAlarmClock.value.radioStatus = this.checkoutFormAlarmClock.value.radioStatusUsine;
+      this.checkoutFormAlarmClock.value.alarmStatus = this.checkoutFormAlarmClock.value.alarmStatusUsine;
+
+      this.alarmClockService.updateAlarmClock(this.checkoutFormAlarmClock.value).subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          console.log(err);
+        }
+      );
+      break;
+
+      case 'coffeeMachine' : 
+      this.checkoutFormCoffeeMachine.value.idOven = idObject;
+      this.checkoutFormCoffeeMachine.value.scheduleCoffee = this.checkoutFormCoffeeMachine.value.scheduleCoffeeUsine;
+      this.checkoutFormCoffeeMachine.value.status = this.checkoutFormCoffeeMachine.value.statusUsine;
+
+      this.coffeeMachineService.updateCoffeeMachine(this.checkoutFormCoffeeMachine.value).subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          console.log(err);
+        }
+      );
+      break;
+    }
+    this.getResidentService();
+  }
+
+
 }

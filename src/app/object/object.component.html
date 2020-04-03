@@ -134,7 +134,8 @@
                 </div>
 
                 <div class="d-flex justify-content-center mb-5">
-                    <button class="type" type="submit" color="red">Restaurer les paramètres d'usine</button>
+                    <button class="type" (click)="restore('lamp', lampe.idLamp)">Restaurer les paramètres
+                        d'usine</button>
                 </div>
 
             </ng-container>
@@ -172,7 +173,7 @@
                                     <td>
                                         <span *ngIf="oven.mode === 'FAN'">Chaleur tournante</span>
                                         <span *ngIf="oven.mode === 'PIZZA'">Pizza</span>
-                                        <span *ngIf="oven.mode === 'BAKERY'">Gâteau</span>
+                                        <span *ngIf="oven.mode === 'BAKERY'">Patisserie</span>
                                         <span *ngIf="oven.mode === 'ROTISSERIE'">Rotisserie</span>
                                         <span *ngIf="oven.mode === 'PREHEATED'">Pré-chauffage</span>
                                     </td>
@@ -256,9 +257,8 @@
                 </div>
 
                 <div class="d-flex justify-content-center mb-5">
-                    <button class="type" type="submit" color="red">Restaurer les paramètres d'usine</button>
+                    <button class="type" (click)="restore('oven', oven.idOven)">Restaurer les paramètres d'usine</button>
                 </div>
-
             </ng-container>
         </mat-tab>
 
@@ -348,7 +348,7 @@
                 </div>
 
                 <div class="d-flex justify-content-center mb-5">
-                    <button class="type" type="submit" color="red">Restaurer les paramètres d'usine</button>
+                    <button class="type" (click)="restore('shutter', shutter.idShutter)">Restaurer les paramètres d'usine</button>
                 </div>
 
             </ng-container>
@@ -458,7 +458,7 @@
                 </div>
 
                 <div class="d-flex justify-content-center mb-5">
-                    <button class="type" type="submit" color="red">Restaurer les paramètres d'usine</button>
+                    <button class="type" (click)="restore('alarmClock', alarmClock.idAlarmClock)">Restaurer les paramètres d'usine</button>
                 </div>
 
             </ng-container>
@@ -525,7 +525,7 @@
 
                         <table width="90%">
                             <tr>
-                                <td>Status réveil</td>
+                                <td>Status de ma machine</td>
                                 <td>
                                     <mat-slide-toggle #status formControlName="status" [ngModel]="coffeeMachine.status">
                                     </mat-slide-toggle>
@@ -550,7 +550,7 @@
                 </div>
 
                 <div class="d-flex justify-content-center mb-5">
-                    <button class="type" type="submit" color="red">Restaurer les paramètres d'usine</button>
+                    <button class="type" (click)="restore('coffeeMachine', coffeeMachine.idCoffee)">Restaurer les paramètres d'usine</button>
                 </div>
 
             </ng-container>
