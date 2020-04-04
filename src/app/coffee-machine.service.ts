@@ -24,4 +24,11 @@ export class CoffeeMachineService {
     return this.http.put<boolean>(`${this.baseUrl}` + `/coffeeMachine/updateParam`, coffeeMachine);
     
   }
+
+  makeCoffee(coffeeMachine: CoffeeMachine): Observable<boolean> {
+    console.log("MakeCoffee is call"); 
+    return this.http.put<boolean>(`${this.baseUrl}` + `/coffeeMachine/makeCoffee`, coffeeMachine);
+    
+  }
+  
 }

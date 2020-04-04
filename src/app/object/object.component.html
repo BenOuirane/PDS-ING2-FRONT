@@ -122,6 +122,10 @@
 
                 </div>
 
+                <div class="col-12">
+                    <hr width="85%" color="blue">
+                </div>
+
                 <div class="d-flex justify-content-center mb-5">
                     <button class="type" (click)="restore('lamp', lampe.idLamp)">Restaurer les paramètres
                         d'usine</button>
@@ -244,6 +248,9 @@
 
                     </form>
                 </div>
+                <div class="col-12">
+                    <hr width="85%" color="blue">
+                </div>
 
                 <div class="d-flex justify-content-center mb-5">
                     <button class="type" (click)="restore('oven', oven.idOven)">Restaurer les paramètres
@@ -337,6 +344,9 @@
                     </form>
                 </div>
 
+                <div class="col-12">
+                    <hr width="85%" color="blue">
+                </div>
                 <div class="d-flex justify-content-center mb-5">
                     <button class="type" (click)="restore('shutter', shutter.idShutter)">Restaurer les paramètres
                         d'usine</button>
@@ -447,6 +457,9 @@
                         </div>
                     </form>
                 </div>
+                <div class="col-12">
+                    <hr width="85%" color="blue">
+                </div>
 
                 <div class="d-flex justify-content-center mb-5">
                     <button class="type" (click)="restore('alarmClock', alarmClock.idAlarmClock)">Restaurer les
@@ -539,6 +552,19 @@
                             <button mat-raised-button type="submit">Valider</button>
                         </div>
                     </form>
+                </div>
+                <h5>
+                    Mes actions :
+                </h5>
+
+                <div>
+                    <button  [disabled]="coffeeMachine.nbCapsule==0 || coffeeMachine.waterLevel < 2" class="typeAction" (click)="expresso(coffeeMachine.idCoffee)">Fais moi couler un expresso</button>
+                    <p class="d-flex justify-content-center mb-5" style="color :red" *ngIf="coffeeMachine.nbCapsule==0">Veuillez recharger les capsules de votre machine</p>
+                    <p class="d-flex justify-content-center mb-5" style="color :red" *ngIf="coffeeMachine.waterLevel < 2">Veuillez recharger le niveau d'eau de votre machine</p>
+                </div>
+
+                <div class="col-12">
+                    <hr width="85%" color="blue">
                 </div>
 
                 <div class="d-flex justify-content-center mb-5">

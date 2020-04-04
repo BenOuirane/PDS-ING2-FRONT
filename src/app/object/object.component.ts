@@ -489,5 +489,26 @@ export class ObjectComponent implements OnInit {
     this.getResidentService();
   }
 
+  expresso(idObject: Number){
+
+    for(let object of this.coffeeMachines){
+      if(object.idCoffee == idObject)
+      {
+       console.log(object);
+       this.coffeeMachineService.makeCoffee(object).subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          console.log(err);
+        }
+      );
+      }
+    }
+
+    this.getResidentService();
+   
+
+  }
 
 }
