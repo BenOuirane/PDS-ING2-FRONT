@@ -31,3 +31,18 @@ table tr td {
 form {
     width: 100%;
 } 
+
+.type {
+    transition-duration: 0.4s;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+  
+.type:hover {
+    background-color: rgb(175, 76, 76); /* Green */
+    color: white;
+  }

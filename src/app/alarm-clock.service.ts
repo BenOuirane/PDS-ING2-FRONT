@@ -10,12 +10,18 @@ import { AlarmClock } from './alarm-clock';
 })
 export class AlarmClockService {
 
-  //private baseUrl = 'http://localhost:8080/api';
-  private baseUrl = 'http://172.31.254.61:8080/api';
+  private baseUrl = 'http://localhost:8080/api';
+  //private baseUrl = 'http://172.31.254.61:8080/api';
 
   constructor(private http: HttpClient, private router: Router) { }
 
   getAlarmClock(objects: Objects) : Observable<Array<AlarmClock>>{
     return this.http.put<Array<AlarmClock>>(`${this.baseUrl}` + `/alarmClock/list`, objects);
+  }
+
+  updateAlarmClock(alarmClock: AlarmClock) : Observable<boolean> {
+    console.log("updateAlarmClock is call"); 
+    return this.http.put<boolean>(`${this.baseUrl}` + `/alarmClock/updateParam`, alarmClock);
+    
   }
 }

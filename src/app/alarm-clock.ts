@@ -6,7 +6,6 @@ export class AlarmClock {
     radioHrz : Number;
     radioStatus : Boolean;
     alarmStatus : Boolean;
-    time : String;
     alarmUsine : String;
     radioHrzUsine : Number;
     radioStatusUsine : Boolean;
