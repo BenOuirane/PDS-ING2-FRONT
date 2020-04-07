@@ -17,9 +17,7 @@ import { Shutter } from '../shutter';
 import { AlarmClock } from '../alarm-clock';
 import { CoffeeMachine } from '../coffeeMachine';
 import { FormBuilder } from '@angular/forms';
-import { Timestamp } from 'rxjs/internal/operators/timestamp';
 import { AmazingTimePickerService } from 'amazing-time-picker';
-import { ThrowStmt } from '@angular/compiler';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -49,7 +47,7 @@ export class ObjectComponent implements OnInit {
   checkoutFormOven;
   test: boolean;
   now: Date = new Date();
-
+  interval;
 
   constructor(private residentService: ResidentService,
     private objectService: ObjectService,
@@ -71,9 +69,28 @@ export class ObjectComponent implements OnInit {
     this.getResidentService();
 
     this.initForm();
+
+    /* setInterval(() => {
+       this.objects.forEach(object => {
+         if (object.id == this.checkoutFormOven.value.objects.id) {
+           this.ovenService.getOven(object).subscribe(
+             data => {
+               this.ovens = data;
+             }
+           )
+         }
+ 
+       })
+     }, 5000);*/
+
   }
 
+
+
+
+
   private getResidentService(): void {
+
     this.residentService.getResident(this.user).subscribe(
       data => {
         this.room = data.room;
@@ -82,7 +99,6 @@ export class ObjectComponent implements OnInit {
           data => {
             this.objects = data;
             this.objects.forEach(object => {
-
 
               switch (object.objectType) {
                 case 'LAMP':
@@ -293,13 +309,36 @@ export class ObjectComponent implements OnInit {
             console.log(err);
           }
         );
+        this.objects.forEach(object => {
+          if (object.id == this.checkoutFormOven.value.objects.id) {
+            this.interval = setInterval(() => {
+              this.ovenService.getOven(object).subscribe(
+                data => {
+                  for (let oven of this.ovens) {
+                    if (this.checkoutFormOven.value.idOven == oven.idOven) {
+                      for (let data2 of data) {
+                        oven.effectiveTemp = data2.effectiveTemp;
+                        if(oven.effectiveTemp == 0 || oven.effectiveTemp == oven.programTemp){
+                          clearInterval(this.interval);
+                        }
+                      }
+                    }
+                  }
+                })
+            }, 1000);
+            return;
+          }
+        });
+
         break;
-
     }
-
     this.getResidentService();
 
   }
+
+
+
+
 
   //Build the tiestamp format on schedule time for ON
   openOn(timestamp: string, type: string) {
@@ -400,6 +439,7 @@ export class ObjectComponent implements OnInit {
     return myDate.getTime();
   }
 
+
   //Used to restore usine parameters. Switch on each objects' type
   restore(type: string, idObject: Number) {
 
@@ -411,7 +451,63 @@ export class ObjectComponent implements OnInit {
         this.checkoutFormLamp.value.color = this.checkoutFormLamp.value.colorUsine;
         this.checkoutFormLamp.value.status = this.checkoutFormLamp.value.statusUsine;
 
-        this.lampeService.updateLamp(this.checkoutFormLamp.value).subscribe(
+        this.build("lamp");
+        /*this.lampeService.updateLamp(this.checkoutFormLamp.value).subscribe(
+          data => {
+            console.log(data);
+          },
+          err => {
+            console.log(err);
+          }
+        );*/
+        break;
+
+      case 'oven':
+        this.checkoutFormOven.value.idOven = idObject;
+        this.checkoutFormOven.value.programTemp = this.checkoutFormOven.value.programTempUsine;
+        this.checkoutFormOven.value.scheduleTime = this.checkoutFormOven.value.scheduleTimeUsine;
+        this.checkoutFormOven.value.status = this.checkoutFormOven.value.statusUsine;
+        this.checkoutFormOven.value.mode = this.checkoutFormOven.value.modeUsine;
+
+        this.build("oven");
+        break;
+
+      case 'shutter':
+        this.checkoutFormShutter.value.idOven = idObject;
+        this.checkoutFormShutter.value.hourOn = this.checkoutFormShutter.value.hourOnUsine;
+        this.checkoutFormShutter.value.hourOff = this.checkoutFormShutter.value.hourOffUsine;
+        this.checkoutFormShutter.value.status = this.checkoutFormShutter.value.statusUsine;
+
+        this.build("shutter");
+        break;
+
+      case 'alarmClock':
+        this.checkoutFormAlarmClock.value.idOven = idObject;
+        this.checkoutFormAlarmClock.value.alarm = this.checkoutFormAlarmClock.value.alarmUsine;
+        this.checkoutFormAlarmClock.value.radioHrz = this.checkoutFormAlarmClock.value.radioHrzUsine;
+        this.checkoutFormAlarmClock.value.radioStatus = this.checkoutFormAlarmClock.value.radioStatusUsine;
+        this.checkoutFormAlarmClock.value.alarmStatus = this.checkoutFormAlarmClock.value.alarmStatusUsine;
+
+        this.build("alarmClock");
+        break;
+
+      case 'coffeeMachine':
+        this.checkoutFormCoffeeMachine.value.idOven = idObject;
+        this.checkoutFormCoffeeMachine.value.scheduleCoffee = this.checkoutFormCoffeeMachine.value.scheduleCoffeeUsine;
+        this.checkoutFormCoffeeMachine.value.status = this.checkoutFormCoffeeMachine.value.statusUsine;
+
+        this.build("coffeeMachine");
+        break;
+    }
+    this.getResidentService();
+  }
+
+  expresso(idObject: Number) {
+
+    for (let object of this.coffeeMachines) {
+      if (object.idCoffee == idObject) {
+        console.log(object);
+        this.coffeeMachineService.makeCoffee(object).subscribe(
           data => {
             console.log(data);
           },
@@ -419,95 +515,11 @@ export class ObjectComponent implements OnInit {
             console.log(err);
           }
         );
-        break;
-
-      case 'oven' : 
-      this.checkoutFormOven.value.idOven = idObject;
-      this.checkoutFormOven.value.programTemp = this.checkoutFormOven.value.programTempUsine;
-      this.checkoutFormOven.value.scheduleTime = this.checkoutFormOven.value.scheduleTimeUsine;
-      this.checkoutFormOven.value.status = this.checkoutFormOven.value.statusUsine;
-      this.checkoutFormOven.value.mode = this.checkoutFormOven.value.modeUsine;
-
-      this.ovenService.updateOven(this.checkoutFormOven.value).subscribe(
-        data => {
-          console.log(data);
-        },
-        err => {
-          console.log(err);
-        }
-      );
-      break;
-
-      case 'shutter' : 
-      this.checkoutFormShutter.value.idOven = idObject;
-      this.checkoutFormShutter.value.hourOn = this.checkoutFormShutter.value.hourOnUsine;
-      this.checkoutFormShutter.value.hourOff = this.checkoutFormShutter.value.hourOffUsine;
-      this.checkoutFormShutter.value.status = this.checkoutFormShutter.value.statusUsine;
-
-      this.shutterService.updateShutter(this.checkoutFormShutter.value).subscribe(
-        data => {
-          console.log(data);
-        },
-        err => {
-          console.log(err);
-        }
-      );
-      break;
-
-      case 'alarmClock' : 
-      this.checkoutFormAlarmClock.value.idOven = idObject;
-      this.checkoutFormAlarmClock.value.alarm = this.checkoutFormAlarmClock.value.alarmUsine;
-      this.checkoutFormAlarmClock.value.radioHrz = this.checkoutFormAlarmClock.value.radioHrzUsine;
-      this.checkoutFormAlarmClock.value.radioStatus = this.checkoutFormAlarmClock.value.radioStatusUsine;
-      this.checkoutFormAlarmClock.value.alarmStatus = this.checkoutFormAlarmClock.value.alarmStatusUsine;
-
-      this.alarmClockService.updateAlarmClock(this.checkoutFormAlarmClock.value).subscribe(
-        data => {
-          console.log(data);
-        },
-        err => {
-          console.log(err);
-        }
-      );
-      break;
-
-      case 'coffeeMachine' : 
-      this.checkoutFormCoffeeMachine.value.idOven = idObject;
-      this.checkoutFormCoffeeMachine.value.scheduleCoffee = this.checkoutFormCoffeeMachine.value.scheduleCoffeeUsine;
-      this.checkoutFormCoffeeMachine.value.status = this.checkoutFormCoffeeMachine.value.statusUsine;
-
-      this.coffeeMachineService.updateCoffeeMachine(this.checkoutFormCoffeeMachine.value).subscribe(
-        data => {
-          console.log(data);
-        },
-        err => {
-          console.log(err);
-        }
-      );
-      break;
-    }
-    this.getResidentService();
-  }
-
-  expresso(idObject: Number){
-
-    for(let object of this.coffeeMachines){
-      if(object.idCoffee == idObject)
-      {
-       console.log(object);
-       this.coffeeMachineService.makeCoffee(object).subscribe(
-        data => {
-          console.log(data);
-        },
-        err => {
-          console.log(err);
-        }
-      );
       }
     }
 
     this.getResidentService();
-   
+
 
   }
 
