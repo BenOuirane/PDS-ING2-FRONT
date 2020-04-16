@@ -325,7 +325,7 @@ export class ObjectComponent implements OnInit {
                     }
                   }
                 })
-            }, 1000);
+            }, 3000);
             return;
           }
         });
