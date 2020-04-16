@@ -45,9 +45,11 @@ export class ObjectComponent implements OnInit {
   checkoutFormAlarmClock;
   checkoutFormCoffeeMachine;
   checkoutFormOven;
+  formMyMorning; 
   test: boolean;
   now: Date = new Date();
   interval;
+  
 
   constructor(private residentService: ResidentService,
     private objectService: ObjectService,
@@ -69,20 +71,7 @@ export class ObjectComponent implements OnInit {
     this.getResidentService();
 
     this.initForm();
-
-    /* setInterval(() => {
-       this.objects.forEach(object => {
-         if (object.id == this.checkoutFormOven.value.objects.id) {
-           this.ovenService.getOven(object).subscribe(
-             data => {
-               this.ovens = data;
-             }
-           )
-         }
- 
-       })
-     }, 5000);*/
-
+    
   }
 
 
@@ -221,6 +210,14 @@ export class ObjectComponent implements OnInit {
       modeUsine: String,
       objects: Objects
     })
+
+    this.formMyMorning = this.formBuilder.group({
+      selectAlarmClock: AlarmClock, 
+      selectCoffeeMachine: CoffeeMachine,
+      selectLamp: Lampe, 
+      selectShutter: Shutter
+
+    })
   }
 
   //Used to get automaticaly the right color
@@ -342,8 +339,10 @@ export class ObjectComponent implements OnInit {
 
   //Build the tiestamp format on schedule time for ON
   openOn(timestamp: string, type: string) {
+console.log("timestamp", timestamp);
 
     let time = new Date(timestamp);
+console.log("time.toTimeString()", time.toTimeString());
 
     const amazingTimePicker = this.atp.open({
       time: time.toTimeString()
@@ -395,6 +394,20 @@ export class ObjectComponent implements OnInit {
 
         return this.checkoutFormOven.value.scheduleTime;
 
+      case 'myMorning':
+        console.log("yolo");
+        
+        amazingTimePicker.afterClose().subscribe(time => {
+
+          let myMorning = this.commonDate(time);
+          console.log("myMorning", myMorning);
+          console.log("this.formMyMorning.value.selectAlarmClock", this.formMyMorning.value.selectAlarmClock);
+          
+          
+          this.formMyMorning.value.selectAlarmClock.alarm = myMorning;
+        });
+
+        return this.formMyMorning.value.myMorning
     }
   }
 

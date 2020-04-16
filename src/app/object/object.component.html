@@ -62,7 +62,7 @@
                         <input hidden #hourOn formControlName="hourOn" [ngModel]="lampe.hourOn">
                         <input hidden #intensityUsine formControlName="intensityUsine" [ngModel]="lampe.intensityUsine">
                         <input hidden #statusUsine formControlName="statusUsine" [ngModel]="lampe.statusUsine">
-                       
+
                         <table width="90%">
                             <tr>
                                 <td>Status</td>
@@ -558,9 +558,12 @@
                 </h5>
 
                 <div>
-                    <button  [disabled]="coffeeMachine.nbCapsule==0 || coffeeMachine.waterLevel < 2" class="typeAction" (click)="expresso(coffeeMachine.idCoffee)">Fais moi couler un expresso</button>
-                    <p class="d-flex justify-content-center mb-5" style="color :red" *ngIf="coffeeMachine.nbCapsule==0">Veuillez recharger les capsules de votre machine</p>
-                    <p class="d-flex justify-content-center mb-5" style="color :red" *ngIf="coffeeMachine.waterLevel < 2">Veuillez recharger le niveau d'eau de votre machine</p>
+                    <button [disabled]="coffeeMachine.nbCapsule==0 || coffeeMachine.waterLevel < 2" class="typeAction"
+                        (click)="expresso(coffeeMachine.idCoffee)">Fais moi couler un expresso</button>
+                    <p class="d-flex justify-content-center mb-5" style="color :red" *ngIf="coffeeMachine.nbCapsule==0">
+                        Veuillez recharger les capsules de votre machine</p>
+                    <p class="d-flex justify-content-center mb-5" style="color :red"
+                        *ngIf="coffeeMachine.waterLevel < 2">Veuillez recharger le niveau d'eau de votre machine</p>
                 </div>
 
                 <div class="col-12">
@@ -577,24 +580,91 @@
 
         <!-- Manage scenario My Morning-->
         <mat-tab label="Mon Matin">
-          
-        <div class="my-custom-row mt-5">
-            <div class="col-6"><img class="imgScenar" src="../../assets/MyMorning1.png" alt=""></div>
-            <div class="col-6" style="width: 200px; line-height: 400px; margin-top: 50px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; text-align: center; font-style : italic; font-size: 50px;">
-                <b> Bon matin...</b>
-            </div>
-        </div>
 
-        <div class="my-custom-row mt-5">
-            <div class="col-6" style="display: flex; align-items: center; width: 200px; margin-top: 50px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; text-align: center; font-style : italic; font-size: 20px;">
-                <b> Parce qu'il n'y a rien de plus important qu'un réveil en douceur...  <br><br> Profitez d'un voyage dans l'automatique et surtout... ne faites plus rien ! #Wally</b>
-                
+            <div class="my-custom-row mt-5">
+                <div class="col-6"><img class="imgScenar" src="../../assets/MyMorning1.png" alt=""></div>
+                <div class="col-6"
+                    style="width: 200px; line-height: 400px; margin-top: 50px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; text-align: center; font-style : italic; font-size: 50px;">
+                    <b> Bon matin...</b>
+                </div>
             </div>
-            <div class="col-6"><img class="imgScenar" src="../../assets/MorningCoffee.jpg" alt=""></div>
-           
-        </div>
-            
-         
+
+            <div class="my-custom-row mt-5">
+                <div class="col-6"
+                    style="display: flex; align-items: center; width: 200px; margin-top: 50px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; text-align: center; font-style : italic; font-size: 20px;">
+                    <b> Parce qu'il n'y a rien de plus important qu'un réveil en douceur... <br><br> Profitez d'un
+                        voyage dans l'automatique et surtout... ne faites plus rien ! #Wally</b>
+
+                </div>
+                <div class="col-6"><img class="imgScenar" src="../../assets/MorningCoffee.jpg" alt=""></div>
+
+            </div>
+            <div class="col-12 mt-5 mb-5">
+                <hr width="85%" color="blue">
+            </div>
+            <div>
+                <span
+                    *ngIf="lamps.length == 0 || shutters.length == 0 || alarmClocks.length == 0 || coffeeMachines.length == 0; else elseBlock">
+                    <p class="d-flex justify-content-center mb-5" style="color :red">Vous n'avez pas tous les objets
+                        nécessaires pour ce scénario</p>
+                </span>
+                <ng-template #elseBlock>
+                    <form [formGroup]="formMyMorning" (ngSubmit)="build('x')" class="justify-content-center">
+
+                        <div>
+                            <mat-form-field class="col-3">
+                                <mat-label>Réveils</mat-label>
+                                <mat-select #selectAlarmClock formControlName="selectAlarmClock" required>
+                                    <mat-option *ngFor="let alarmClock of alarmClocks; index as i" [value]="alarmClock">
+                                        Réveil - {{ i + 1}} -<!--{{alarmClock | json}} -->
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="col-3">
+                                <mat-label>Lampes</mat-label>
+                                <mat-select formControlName="selectLamp" required>
+                                    <mat-option *ngFor="let lamp of lamps; index as i" [value]="lamp">
+                                        Lampe - {{ i + 1}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="col-3">
+                                <mat-label>Volets</mat-label>
+                                <mat-select formControlName="selectShutter" required>
+                                    <mat-option *ngFor="let shutter of shutters; index as i" [value]="shutter">
+                                        Volet - {{ i + 1}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="col-3">
+                                <mat-label>Machine à café</mat-label>
+                                <mat-select formControlName="selectCoffeeMachine" required>
+                                    <mat-option *ngFor="let coffeeMachine of coffeeMachines; index as i"
+                                        [value]="coffeeMachine">
+                                        Machine à café - {{ i + 1}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <div class="d-flex justify-content-center mb-5">
+                                <span (click)="openOn('1587016800', 'myMorning')">
+                                    <mat-icon md-36>schedule</mat-icon>
+                                </span>
+                            </div>
+
+                            <!-- SUBMIT MYMORNING -->
+                            <div class="d-flex justify-content-center mt-5 mb-5">
+                                <button mat-raised-button type="submit">Lancer</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </ng-template>
+
+            </div>
+
         </mat-tab>
     </mat-tab-group>
 </section>
