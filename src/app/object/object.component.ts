@@ -18,6 +18,7 @@ import { AlarmClock } from '../alarm-clock';
 import { CoffeeMachine } from '../coffeeMachine';
 import { FormBuilder } from '@angular/forms';
 import { AmazingTimePickerService } from 'amazing-time-picker';
+import { ScenarioMyMorning } from '../scenarioMyMorning';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -45,11 +46,11 @@ export class ObjectComponent implements OnInit {
   checkoutFormAlarmClock;
   checkoutFormCoffeeMachine;
   checkoutFormOven;
-  formMyMorning; 
+  formMyMorning;
   test: boolean;
   now: Date = new Date();
   interval;
-  
+
 
   constructor(private residentService: ResidentService,
     private objectService: ObjectService,
@@ -71,7 +72,7 @@ export class ObjectComponent implements OnInit {
     this.getResidentService();
 
     this.initForm();
-    
+
   }
 
 
@@ -212,9 +213,9 @@ export class ObjectComponent implements OnInit {
     })
 
     this.formMyMorning = this.formBuilder.group({
-      selectAlarmClock: AlarmClock, 
+      selectAlarmClock: AlarmClock,
       selectCoffeeMachine: CoffeeMachine,
-      selectLamp: Lampe, 
+      selectLamp: Lampe,
       selectShutter: Shutter
 
     })
@@ -315,7 +316,7 @@ export class ObjectComponent implements OnInit {
                     if (this.checkoutFormOven.value.idOven == oven.idOven) {
                       for (let data2 of data) {
                         oven.effectiveTemp = data2.effectiveTemp;
-                        if(oven.effectiveTemp == 0 || oven.effectiveTemp == oven.programTemp){
+                        if (oven.effectiveTemp == 0 || oven.effectiveTemp == oven.programTemp) {
                           clearInterval(this.interval);
                         }
                       }
@@ -328,6 +329,25 @@ export class ObjectComponent implements OnInit {
         });
 
         break;
+
+      case 'myMorning':
+        const formValue = this.formMyMorning.value;
+        const myMorning: ScenarioMyMorning = {
+          lamp: formValue.selectLamp,
+          shutter: formValue.selectShutter,
+          alarmClock: formValue.selectAlarmClock,
+          coffeeMachine: formValue.selectCoffeeMachine
+        };
+        this.objectService.scenarioMyMorning(myMorning).subscribe(
+          data => {
+            console.log(data);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+        break;
+
     }
     this.getResidentService();
 
@@ -339,10 +359,9 @@ export class ObjectComponent implements OnInit {
 
   //Build the tiestamp format on schedule time for ON
   openOn(timestamp: string, type: string) {
-console.log("timestamp", timestamp);
 
     let time = new Date(timestamp);
-console.log("time.toTimeString()", time.toTimeString());
+    console.log("time.toTimeString()", time.toTimeString());
 
     const amazingTimePicker = this.atp.open({
       time: time.toTimeString()
@@ -395,15 +414,10 @@ console.log("time.toTimeString()", time.toTimeString());
         return this.checkoutFormOven.value.scheduleTime;
 
       case 'myMorning':
-        console.log("yolo");
-        
-        amazingTimePicker.afterClose().subscribe(time => {
 
+        amazingTimePicker.afterClose().subscribe(time => {
           let myMorning = this.commonDate(time);
-          console.log("myMorning", myMorning);
-          console.log("this.formMyMorning.value.selectAlarmClock", this.formMyMorning.value.selectAlarmClock);
-          
-          
+
           this.formMyMorning.value.selectAlarmClock.alarm = myMorning;
         });
 
