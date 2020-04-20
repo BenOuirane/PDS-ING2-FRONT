@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 import { History } from '../historyService/history';
 import { LampHistoryService } from '../historyService/lamp-history.service';
@@ -20,7 +21,14 @@ export class HistoryComponent implements OnInit {
   objectTypeString: string;
   histories: History[] = new Array<History>();
 
-  constructor(private activatedroute: ActivatedRoute, private lampHistoryService: LampHistoryService, private ovenHistoryService: OvenHistoryService, private shutterHistoryService: ShutterHistoryService, private alarmClockHistoryService: AlarmClockHistoryService, private coffeeMachineHistoryService: CoffeeMachineHistoryService) { }
+  startDate = new Date();
+  endDate = new Date();
+
+  startDateString : string;
+  endDateString : string;
+
+  constructor(private activatedroute: ActivatedRoute, private lampHistoryService: LampHistoryService, private ovenHistoryService: OvenHistoryService, 
+    private shutterHistoryService: ShutterHistoryService, private alarmClockHistoryService: AlarmClockHistoryService, private coffeeMachineHistoryService: CoffeeMachineHistoryService) { }
 
   ngOnInit() {
     this.objectId = parseInt(this.activatedroute.snapshot.paramMap.get("id"));
@@ -29,6 +37,16 @@ export class HistoryComponent implements OnInit {
   }
 
   getHistory() {
+    var datePipe = new DatePipe("fr-FR");
+    this.startDate = new Date();
+    this.endDate = new Date();
+    this.endDate.setDate(this.endDate.getDate() - 1);
+    this.startDateString = datePipe.transform(this.startDate, 'yyyy-MM-dd hh:mm:ss');
+    this.endDateString = datePipe.transform(this.endDate, 'yyyy-MM-dd hh:mm:ss');
+
+    console.log(this.startDateString + " start");
+    console.log(this.endDateString + " end");
+
     switch (this.objectType) {
       case 'lamp':
         this.objectTypeString = "Lampe";
@@ -63,7 +81,18 @@ export class HistoryComponent implements OnInit {
             this.histories = data;
             this.histories.reverse();
           }
-        ); break;
+        ); 
+        this.alarmClockHistoryService.getHistoryByColumnAndDate(this.objectId, this.startDateString, this.endDateString).subscribe(
+          data => {
+            console.log(data);
+          }
+        );
+        this.alarmClockHistoryService.getHistoryFavoriteParameterByDate(this.objectId, "radio", this.startDateString, this.endDateString).subscribe(
+          data => {
+            console.log(data);
+          }
+        );
+        break;
 
       case 'coffeeMachine':
         this.objectTypeString = "Machine à café" ;
