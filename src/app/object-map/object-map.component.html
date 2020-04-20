@@ -35,6 +35,11 @@
                         <div class="col-12" *ngIf="numberOfObjects > 0">Nombre d'objets : {{ numberOfObjects }}</div>
                         <div class="col-12" *ngIf="numberOfObjects == 0">Aucun object dans cette chambre</div>
                         <div class="col-12" *ngIf="resident">Résident : {{ resident.firstName }} {{ resident.lastName }}</div>
+                        <div class="col-12" *ngIf="shutters.length > 0">Volet(s) : {{ shutters.length }}</div>
+                        <div class="col-12" *ngIf="lamps.length > 0">Lampe(s) : {{ lamps.length }}</div>
+                        <div class="col-12" *ngIf="ovens.length > 0">Four(s) : {{ ovens.length }}</div>
+                        <div class="col-12" *ngIf="coffeeMachines.length > 0">Machine(s) à café : {{ coffeeMachines.length }}</div>
+                        <div class="col-12" *ngIf="alarmClocks.length > 0">Réveil(s) : {{ alarmClocks.length }}</div>
                     </div>
                 </div>
             </div>            
