@@ -18,7 +18,7 @@ export class LampHistoryService {
     return this.http.put<Array<History>>(`${this.baseUrl}` + `/history/lamp`, id);
   }
 
-  getHistoryUsingHoursByDate(id: Number, start : string, end : string) : Observable<Array<Map<String[], number>>>{
-    return this.http.put<Array<Map<String[], number>>>(`${this.baseUrl}` + `/hours/lamp`, {'id': id, 'start': start, 'end' : end });
+  getHistoryUsingHoursByDate(id: Number, start : string, end : string) : Observable<Array<Map<Array<String>, number>>>{
+    return this.http.put<Array<Map<Array<String>, number>>>(`${this.baseUrl}` + `/hours/lamp`, {'id': id, 'start': start, 'end' : end });
   }
 }

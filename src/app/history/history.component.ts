@@ -28,7 +28,8 @@ export class HistoryComponent implements OnInit {
   endDateString : string;
 
   lampUsingHours = new Array<Map<String[], number>>();
-  lampWellUsingHours = new Map<String[], number>();
+  lampPowered = new Map<String[], number>();
+  lampPoweredTooLong = new Map<String[], number>();
 
   constructor(private activatedroute: ActivatedRoute, private lampHistoryService: LampHistoryService, private ovenHistoryService: OvenHistoryService, 
     private shutterHistoryService: ShutterHistoryService, private alarmClockHistoryService: AlarmClockHistoryService, private coffeeMachineHistoryService: CoffeeMachineHistoryService) { }
@@ -41,14 +42,13 @@ export class HistoryComponent implements OnInit {
 
   getHistory() {
     var datePipe = new DatePipe("fr-FR");
-    this.startDate = new Date();
-    this.endDate = new Date();
+
+    // Testing with the date of 7 days ago
     this.endDate.setDate(this.endDate.getDate() - 7);
+
+    // Creating date strings
     this.startDateString = datePipe.transform(this.startDate, 'yyyy-MM-dd hh:mm:ss');
     this.endDateString = datePipe.transform(this.endDate, 'yyyy-MM-dd hh:mm:ss');
-
-    console.log(this.startDateString + " start");
-    console.log(this.endDateString + " end");
 
     switch (this.objectType) {
       case 'lamp':
@@ -61,12 +61,12 @@ export class HistoryComponent implements OnInit {
         ); 
         this.lampHistoryService.getHistoryUsingHoursByDate(this.objectId, this.startDateString, this.endDateString).subscribe(
           data => {
-            console.log(data);
             this.lampUsingHours = data;
-            this.lampWellUsingHours = this.lampUsingHours[0];
-            console.log(this.lampWellUsingHours.values);
+            this.lampPowered = this.lampUsingHours[0];
+            this.lampPoweredTooLong = this.lampUsingHours[1];
           }
-        )
+        );
+        // TODO : getting favorite intensity /"intensity" and favorite color /"color"
         break;
       case 'oven':
         this.objectTypeString = "Four";
@@ -75,7 +75,9 @@ export class HistoryComponent implements OnInit {
             this.histories = data;
             this.histories.reverse();
           }
-        ); break;
+        ); 
+        // TODO : getting favorite mode /"mode" and if temperature too high
+        break;
 
       case 'shutter':
         this.objectTypeString = "Volet";
@@ -84,7 +86,9 @@ export class HistoryComponent implements OnInit {
             this.histories = data;
             this.histories.reverse();
           }
-        ); break;
+        ); 
+        // TODO : getting if open during many days or open during the night
+        break;
 
       case 'alarmClock':
         this.objectTypeString = "Réveil";
@@ -94,16 +98,12 @@ export class HistoryComponent implements OnInit {
             this.histories.reverse();
           }
         ); 
-        this.alarmClockHistoryService.getHistoryByColumnAndDate(this.objectId, this.startDateString, this.endDateString).subscribe(
-          data => {
-            console.log(data);
-          }
-        );
         this.alarmClockHistoryService.getHistoryFavoriteParameterByDate(this.objectId, "radio", this.startDateString, this.endDateString).subscribe(
           data => {
             console.log(data);
           }
         );
+        // TODO : getting favorite time to wake up /"alarm"
         break;
 
       case 'coffeeMachine':
@@ -114,14 +114,10 @@ export class HistoryComponent implements OnInit {
             this.histories.reverse();
           }
         );
+        // TODO : getting number of capsules bought /"capsules" and time powered on /"power"
         break;
       default:
         break;
     }
   }
-
-  getKeys(map){
-    return Array.from(map.keys());
-  }
-
 }
