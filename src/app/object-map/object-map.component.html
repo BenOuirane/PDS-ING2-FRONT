@@ -34,6 +34,8 @@
                         <h5>Résumé de la chambre {{ activeRoom.roomNumber }}</h5>
                         <div class="col-12" *ngIf="numberOfObjects > 0">Nombre d'objets : {{ numberOfObjects }}</div>
                         <div class="col-12" *ngIf="numberOfObjects == 0">Aucun object dans cette chambre</div>
+                        <div class="col-12" *ngIf="numberOfObjectsBreakdown > 0">Objets en panne : {{ numberOfObjectsBreakdown }}</div>
+                        <div class="col-12" *ngIf="numberOfObjectsBreakdown == 0">Aucun objet en panne</div>
                         <div class="col-12" *ngIf="resident">Résident : {{ resident.firstName }} {{ resident.lastName }}</div>
                         <div class="col-12" *ngIf="shutters.length > 0">Volet(s) : {{ shutters.length }}</div>
                         <div class="col-12" *ngIf="lamps.length > 0">Lampe(s) : {{ lamps.length }}</div>

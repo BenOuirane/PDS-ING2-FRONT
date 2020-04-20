@@ -34,6 +34,7 @@ export class ObjectMapComponent implements OnInit {
   activeRoom: Room;
 
   numberOfObjects: number = 0;
+  numberOfObjectsBreakdown: number = 0;
   roomsWithObjects: Map<Room, Objects[]> = new Map<Room, Objects[]>();
 
   roomsWithLamps: Map<Room, Lampe[]> = new Map<Room, Lampe[]>();
@@ -92,6 +93,8 @@ export class ObjectMapComponent implements OnInit {
     this.coffeeMachines = new Array<CoffeeMachine>();
     this.shutters = new Array<Shutter>();
 
+    this.numberOfObjectsBreakdown = 0;
+
     this.residentService.getResidentByRoom(activeRoom).subscribe(
       data => {
         this.resident = data;
@@ -130,6 +133,7 @@ export class ObjectMapComponent implements OnInit {
 
   createObjectTypeList(objects: Objects[], activeRoom: Room) {
     objects.forEach(object => {
+      object.state == false ? this.numberOfObjectsBreakdown = this.numberOfObjectsBreakdown + 1 : '';
       switch (object.objectType) {
         case 'LAMP':
           if (this.roomsWithLamps.get(activeRoom)) {
