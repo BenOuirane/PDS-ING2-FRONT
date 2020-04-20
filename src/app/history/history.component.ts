@@ -27,6 +27,9 @@ export class HistoryComponent implements OnInit {
   startDateString : string;
   endDateString : string;
 
+  lampUsingHours = new Array<Map<String[], number>>();
+  lampWellUsingHours = new Map<String[], number>();
+
   constructor(private activatedroute: ActivatedRoute, private lampHistoryService: LampHistoryService, private ovenHistoryService: OvenHistoryService, 
     private shutterHistoryService: ShutterHistoryService, private alarmClockHistoryService: AlarmClockHistoryService, private coffeeMachineHistoryService: CoffeeMachineHistoryService) { }
 
@@ -40,7 +43,7 @@ export class HistoryComponent implements OnInit {
     var datePipe = new DatePipe("fr-FR");
     this.startDate = new Date();
     this.endDate = new Date();
-    this.endDate.setDate(this.endDate.getDate() - 1);
+    this.endDate.setDate(this.endDate.getDate() - 7);
     this.startDateString = datePipe.transform(this.startDate, 'yyyy-MM-dd hh:mm:ss');
     this.endDateString = datePipe.transform(this.endDate, 'yyyy-MM-dd hh:mm:ss');
 
@@ -55,7 +58,16 @@ export class HistoryComponent implements OnInit {
             this.histories = data;
             this.histories.reverse();
           }
-        ); break;
+        ); 
+        this.lampHistoryService.getHistoryUsingHoursByDate(this.objectId, this.startDateString, this.endDateString).subscribe(
+          data => {
+            console.log(data);
+            this.lampUsingHours = data;
+            this.lampWellUsingHours = this.lampUsingHours[0];
+            console.log(this.lampWellUsingHours.values);
+          }
+        )
+        break;
       case 'oven':
         this.objectTypeString = "Four";
         this.ovenHistoryService.getHistory(this.objectId).subscribe(
@@ -106,6 +118,10 @@ export class HistoryComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  getKeys(map){
+    return Array.from(map.keys());
   }
 
 }
