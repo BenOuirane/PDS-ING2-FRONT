@@ -11,6 +11,7 @@ import { ShutterService } from '../shutter.service';
 import { AlarmClockService } from '../alarm-clock.service';
 import { CoffeeMachineService } from '../coffee-machine.service';
 import { OvenService } from '../oven.service';
+import { ResidentService } from '../resident.service';
 
 import { Objects } from '../objects';
 import { Lampe } from '../lampe';
@@ -18,6 +19,7 @@ import { Oven } from '../oven';
 import { Shutter } from '../shutter';
 import { AlarmClock } from '../alarm-clock';
 import { CoffeeMachine } from '../coffeeMachine';
+import { Resident } from '../resident';
 
 declare var $: any;
 
@@ -48,7 +50,9 @@ export class ObjectMapComponent implements OnInit {
   coffeeMachines: CoffeeMachine[] = new Array<CoffeeMachine>();
   shutters: Shutter[] = new Array<Shutter>();
 
-  constructor(private roomService: RoomService, private objectService: ObjectService, private lampeService: LampeService, private ovenService: OvenService, private shutterService: ShutterService, private alarmClockService: AlarmClockService, private coffeeMachineService: CoffeeMachineService) { }
+  resident : Resident = new Resident();
+
+  constructor(private roomService: RoomService, private objectService: ObjectService, private lampeService: LampeService, private ovenService: OvenService, private shutterService: ShutterService, private alarmClockService: AlarmClockService, private coffeeMachineService: CoffeeMachineService, private residentService : ResidentService) { }
 
   ngOnInit() {
     this.roomService.getRooms().subscribe(
@@ -75,18 +79,25 @@ export class ObjectMapComponent implements OnInit {
 
     this.rooms.forEach(room => {
       if (room.roomNumber == value) {
-        this.gettingRoomObjects(room);
+        this.gettingRoomInfos(room);
         this.activeRoom = room;
       }
     });
   }
 
-  gettingRoomObjects(activeRoom: Room) {
+  gettingRoomInfos(activeRoom: Room) {
     this.lamps = new Array<Lampe>();
     this.ovens = new Array<Oven>();
     this.alarmClocks = new Array<AlarmClock>();
     this.coffeeMachines = new Array<CoffeeMachine>();
     this.shutters = new Array<Shutter>();
+
+    this.residentService.getResidentByRoom(activeRoom).subscribe(
+      data => {
+        this.resident = data;
+        console.log(data);
+      }
+    )
 
     if (this.roomsWithObjects.has(activeRoom)) {
       this.objects = this.roomsWithObjects.get(activeRoom);
