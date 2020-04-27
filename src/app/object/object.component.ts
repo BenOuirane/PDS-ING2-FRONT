@@ -51,7 +51,6 @@ export class ObjectComponent implements OnInit {
   now: Date = new Date();
   interval;
 
-
   constructor(private residentService: ResidentService,
     private objectService: ObjectService,
     private lampeService: LampeService,
@@ -158,10 +157,6 @@ export class ObjectComponent implements OnInit {
       intensityUsine: Number,
       objects: Objects
     });
-
-    this.checkoutFormLamp.value.hourOn = 'false';
-    this.checkoutFormLamp.value.hourOff = 'false';
-
     this.checkoutFormShutter = this.formBuilder.group({
       idShutter: Number,
       hourOn: String,
@@ -340,12 +335,16 @@ export class ObjectComponent implements OnInit {
         };
         this.objectService.scenarioMyMorning(myMorning).subscribe(
           data => {
+            console.log("scenarioMyMorning", myMorning);
+            
             console.log(data);
+            this.getResidentService();
           },
           err => {
-            console.log(err);
+            console.log("Les objets ne sont pas correctement mis à jours." + err);
           }
         );
+        
         break;
 
     }

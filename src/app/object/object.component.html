@@ -616,7 +616,8 @@
                                 <mat-label>Réveils</mat-label>
                                 <mat-select #selectAlarmClock formControlName="selectAlarmClock" required>
                                     <mat-option *ngFor="let alarmClock of alarmClocks; index as i" [value]="alarmClock">
-                                        Réveil - {{ i + 1}} <!--{{alarmClock | json}} -->
+                                        Réveil - {{ i + 1}}
+                                        <!--{{alarmClock | json}} -->
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -650,11 +651,19 @@
                             </mat-form-field>
 
                             <div class="d-flex justify-content-center mb-5">
-                                <span (click)="openOn(1587103200000, 'myMorning')">
+                                <span (click)="openOn(formMyMorning.value.selectAlarmClock.alarm, 'myMorning')">
                                     <mat-icon class="custom-mat-icon">schedule</mat-icon>
                                 </span>
+                                <div class="ml-3 mt-3">
+                                    <span
+                                        *ngIf="formMyMorning.value.selectAlarmClock.alarm == null; else elseBlock">{{ 1587103200000 | date: "HH:mm"}}</span>
+                               
+                                    <ng-template #elseBlock>
+                                        {{formMyMorning.value.selectAlarmClock.alarm  | date: "HH:mm"}}
+                                    </ng-template>
+                                </div>
                             </div>
-                            
+
                             <!-- SUBMIT MYMORNING -->
                             <div class="d-flex justify-content-center mt-5 mb-5">
                                 <button mat-raised-button type="submit">Lancer</button>
