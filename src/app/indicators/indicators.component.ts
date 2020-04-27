@@ -13,15 +13,27 @@ export class IndicatorsComponent implements OnInit {
   public failuremonth: any;
   public year: any;
   public month: any;
-
-
-
+  public objects: any;
+  public rooms: any;
 
   constructor(private indicatorsService: IndicatorsService) {
 
   }
 
   ngOnInit() {
+    this.indicatorsService.getObjects()
+      .subscribe(data => {
+        this.objects = data;
+      }, err => {
+        console.log(err);
+      });
+    this.indicatorsService.getRooms()
+      .subscribe(data => {
+        this.rooms = data;
+      }, err => {
+        console.log(err);
+      });
+
   }
 
   onGetResidence() {

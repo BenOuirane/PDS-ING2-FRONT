@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from "rxjs";
-import {Failure} from "./Failure";
+import {Observable} from 'rxjs';
+import {Failure} from './Failure';
 
 
 const httpOptions = {
@@ -13,10 +13,15 @@ export class IndicatorsService {
   }
 
   getResidence() {
-    return this.http.get("http://localhost:8080/residence");
+    return this.http.get("http://172.31.254.61:8080/residence");
   }
 
-
+  getRooms() {
+    return this.http.get<any>("http://172.31.254.61:8080/api/roomsize");
+  }
+  getObjects() {
+    return this.http.get<any>("http://172.31.254.61:8080/api/objectsize");
+  }
   getAnnualFailure(year: number): Observable<Failure> {
 
     return this.http.get<any>('http://172.31.254.61:8080/api/failure/year?year='+year);
