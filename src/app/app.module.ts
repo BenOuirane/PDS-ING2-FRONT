@@ -38,6 +38,20 @@ import { FavoriteFiltersComponent } from './layouts/favorite-filters/favorite-fi
 
 import { ObjectMapComponent } from './object-map/object-map.component';
 import { HistoryComponent } from './history/history.component';
+import { HealthStateComponent } from './health-state/health-state.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatHeaderRowDef, MatTableModule} from "@angular/material/table";
+import {MatInputModule} from "@angular/material/input";
+import {MatSortModule} from "@angular/material/sort";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatCardModule} from "@angular/material/card";
+import {MatGridListModule} from "@angular/material/grid-list";
+import { HealthResidentComponent } from './health-resident/health-resident.component';
+// @ts-ignore
+import { ProgressWebsocketService } from './services/progress-websocket.service';
+// @ts-ignore
+import { RxStompService  } from '@stomp/ng2-stompjs';
+import { HealthAlertComponent } from './health-alert/health-alert.component';
 
 
 
@@ -59,7 +73,13 @@ import { HistoryComponent } from './history/history.component';
     FavoriteFiltersComponent,
 
     ObjectMapComponent,
-    HistoryComponent
+    HistoryComponent,
+    HealthStateComponent,
+    HealthResidentComponent,
+    HealthAlertComponent,
+
+
+
 
   ],
   imports: [
@@ -78,15 +98,37 @@ import { HistoryComponent } from './history/history.component';
     MatButtonModule,
     MatFormFieldModule,
     AmazingTimePickerModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatGridListModule
+
+
+
+
+
   ],
   providers: [
+    RxStompService,
+    ProgressWebsocketService,
     CandidateService,
     CommonModule,
     IndicatorsService,
+
     {
       provide: LOCALE_ID, useValue: "fr-FR"
-    }
+    },
+
   ],
   bootstrap: [AppComponent]
 

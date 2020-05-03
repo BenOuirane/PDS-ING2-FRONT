@@ -1,0 +1,149 @@
+img {
+    height: 60px;
+    margin-right: 30px;
+}
+
+textarea {
+    resize: none;
+}
+
+input, textarea, select {
+    box-shadow: none;
+}
+
+span {
+    color: red;
+}
+
+.container {
+    margin-top: 150px;
+    color: #151515;
+    border-radius: 16px;
+}
+
+h2 {
+    text-align: center;
+    font-weight: 600;
+}
+
+.response {
+    padding-bottom: 40px;
+    color: purple;
+    font-weight: 600;
+}
+
+form {
+    padding-top: 30px;
+
+    &_intro {
+        align-items: center;
+        padding-top: 50px;
+        padding-bottom: 35px;
+
+        h4 {
+            font-weight: 200;
+            color: purple;
+            padding-top: 20px;
+        }
+
+        select {
+            margin-bottom: 15px;
+        }
+
+    }
+}
+
+.form_notificaiton {
+    padding-bottom: 40px;
+
+    h4 {
+        text-align: center;
+        font-weight: 400;
+    }
+}
+
+h2 {
+    padding-bottom: 20px;
+    color: #002f5a;
+}
+
+h4 {
+    padding-bottom: 20px;
+    color: purple;
+    padding-top:30px;
+}
+
+.custom_field {
+    display: none;
+}
+
+.sending_button {
+    margin-top: 20px;
+    background-color: #002f5a;
+    border-color: #002f5a;
+    transition: 1s;
+    font-weight: 600;
+    border-radius: 15px;
+    margin-left: 50%;
+    transform: translate(-50%);
+
+    &:hover {
+        background-color: #27bae6;
+        border-color: #27bae6;
+    }
+
+}
+/* Structure */
+.example-container {
+  position: relative;
+  padding: 5px;
+}
+
+.example-table-container {
+  position: relative;
+  max-height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.example-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-rate-limit-reached {
+  color: #980000;
+  max-width: 360px;
+  text-align: center;
+}
+
+/* Column Widths */
+.mat-column-number,
+.mat-column-state {
+  max-width: 64px;
+}
+
+.mat-column-created {
+  max-width: 124px;
+}
+
+.mat-flat-button {
+  margin: 5px;
+}
+
+mat-header-cell, mat-header-row{
+  position: sticky;
+  top:0;
+  background: white;
+}
