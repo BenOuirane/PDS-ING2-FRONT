@@ -1,0 +1,48 @@
+<nav *ngIf="authenticated()" class="navbar navbar-expand-md fixed-top navbar-light" id="navbarBox">
+    <a class="navbar-brand" [routerLink]="['home']">
+        <img src="./assets/logo.png"
+
+            alt="Logo">
+    </a>
+    <div *ngIf="numberNotification > 0" class="newNotification">{{ numberNotification }} <img src="../../assets/notif.png" alt=""></div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" (click)="showMenu()"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar" (window:resize)="toggleHeaderStyle()" (window:scroll)="toggleHeaderStyle()">
+        <ul id="menu-menu-head" class="navbar-nav ml-auto">
+            <li id="menu-item-204"
+                class="menu-item">
+                <span>Compte de {{ user.username }}</span></li>
+            <li id="menu-item-204"
+                class="menu-item">
+                <a [routerLink]="['home']" aria-current="page">Accueil</a></li>
+           <!-- <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['search']"
+                >Recherche de résident</a></li>-->
+            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['track-patients-control-view']"
+                    >Consutler la carte</a></li>
+            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['notification']"
+                    >Envoyer une notification</a></li>
+            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'RESIDENT'"><a [routerLink]="['object']"
+                        >Mes Objets connectés</a></li>
+            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'RESIDENT'"><a [routerLink]="['notifications']"
+                        >Notifications</a></li>
+          <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['indicators']"
+          >Indicateurs de la résidence</a></li>
+
+                        <li  ><a  href="add" >candidate </a></li>
+            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['objects']"
+                >Monitorer les objets</a></li>
+            <li *ngIf="authenticated()" id="menu-item-202" class="menu-item"><a
+                href="" (click)="logout()">Déconnexion</a></li>
+
+
+
+
+        </ul>
+
+    </div>
+
+</nav>
+
+<router-outlet></router-outlet>

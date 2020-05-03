@@ -1,0 +1,28 @@
+<div class="aled-header">
+
+  <button mat-icon-button id="menu" *ngIf="shouldShowNavigationMenu()" (click)="navigationService.openNav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+
+  <div class="cacib-logo-square block"></div>
+
+  <div class="aled-name block">
+    <h1>Cortex</h1>
+  </div>
+
+  <div *ngIf="shouldShowEnvironmentBlock()" class="block data-info">
+
+    <button mat-button class="btn-ca-apple btn-flat environment" (click)="showEnvironmentInformations()">
+      <mat-icon>public</mat-icon>{{appConfigService.getConfig().environment}}
+    </button>
+
+    
+    <button mat-button class="aled-usr" *ngIf="currentUser">&nbsp;{{currentUser.name}}&nbsp;</button>
+
+    <button mat-button class="btn-ca-apple logout" *ngIf="currentUser" (click)="logout()">
+      <mat-icon>power_settings_new</mat-icon>
+    </button>
+  </div>
+
+</div>

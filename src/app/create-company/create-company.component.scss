@@ -1,0 +1,32 @@
+.form {
+
+  &-add {
+    width: 300px;
+
+    &-group {
+      padding-top: 5px;
+      padding-bottom: 5px;
+
+      label {
+        padding-right: 10px;
+      }
+    }
+  }
+
+  &-submitted {
+    h4 {
+      color: green;
+    }
+  }
+
+  &-button {
+    background-color: #495867;
+    color: white;
+    padding: 5px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 13px;
+    border: none;
+    border-radius: 2px;
+  }
+ }

@@ -1,0 +1,69 @@
+.aled-header{
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    // background-color: #e9e8e6;
+}
+.aled-logo-square {
+    border-radius: 3px;
+      background-image: url(/assets/img/);
+      background-position: center center;
+      background-size: 80%;
+      background-repeat: no-repeat;
+      box-shadow: 3px 3px 40px -8px #767877;
+      width: 60px;
+      height: 60px;
+      margin: 0 0 0 10px;
+  }
+  
+  .aled-name {
+    width: auto;
+    color: #16a085;
+    padding-left: 20px;
+    margin: 0 0 0 10px;
+    font-weight: 700;
+  }
+  
+  .block {
+    display: inline-block;
+    vertical-align:middle;
+  }
+
+  .data-info {
+    float: right;
+    vertical-align: middle;
+    padding: 10px;
+    margin: 0 0 0 10px;
+  }
+
+  .aled-usr {
+    background: #16a085;
+    color: #fff;
+    border-radius: unset;
+    font-size: 80%;
+    cursor: default;
+  
+  }
+
+.btn-aled-apple {
+	color: #fff;
+	background-color: #b1d000;
+  border-color: #b1d000;
+  border-radius: 0;
+  font-size: 80%;
+}
+
+.aled-usr-btn-grp {
+  font-size: 0;
+}
+
+.environment {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.logout {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}

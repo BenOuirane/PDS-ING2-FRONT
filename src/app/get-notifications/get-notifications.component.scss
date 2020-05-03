@@ -1,0 +1,31 @@
+.container {
+    padding-top: 150px;
+}
+
+img {
+    height: 60px;
+    margin-right: 30px;
+}
+
+h2 {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 50px;
+}
+
+span {
+    font-weight: 600;
+    color: #002f5a;
+}
+
+.newNotification {
+    position:absolute;
+    right:10px;
+    top:0;
+
+    img {
+        width: auto;
+        height: 30px;
+    }
+   
+}
