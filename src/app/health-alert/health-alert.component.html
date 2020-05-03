@@ -1,0 +1,34 @@
+<div style="text-align:center">
+
+  Alert Resident
+</div>
+
+<div class="card" *ngIf = "!isShow">
+  <h5 class="card-header" style="background-color: red;color: white;">Notifications</h5>
+  <div class="card-body">
+    <h5 class="card-title" style="background-color:darkblue;color: white;">
+      Medical alert received for a Resident. Here are the information
+    </h5>
+    <ul>
+      <li>Resident : {{progress.residentFirsName}} &nbsp; {{progress.residentLastName}}  </li>
+      <li>Age: {{progress.residentAge}} &nbsp; ans -  Room : &nbsp;{{progress.residentRoom}} </li>
+      <li>Alert on : {{progress.measurementType}} &nbsp; Unit : &nbsp;{{progress.measurementUnit}}</li>
+      <li>Thresholds for this resident : MIN = {{progress.measurementTypeMinValue}} &nbsp;  - MAX = : &nbsp;{{progress.measurementTypeMaxValue}}</li>
+      <li>Last three values reported : </li>
+      <li>{{progress.lastMeasurement_1}} </li>
+      <li>{{progress.lastMeasurement_2}} </li>
+      <li>{{progress.lastMeasurement_3}} </li>
+
+
+    </ul>
+    <h5 class="card-title" style="background-color:darkblue;color: white;">
+      End notification
+    </h5>
+  </div>
+  <button (click) = toggleDisplay()>CLEAR ALERT</button>
+</div>
+
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
