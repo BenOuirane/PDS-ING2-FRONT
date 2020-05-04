@@ -21,8 +21,8 @@ export class AlarmClockHistoryService {
   getHistoryByColumnAndDate(id: Number, start : string, end : string) : Observable<Array<History>>{
     return this.http.put<Array<History>>(`${this.baseUrl}` + `/alarm/alarmClock`, {'id': id, 'start': start, 'end' : end });
   }
-
-  getHistoryFavoriteParameterByDate(id: Number, parameter : string, start : string, end : string) : Observable<string>{
-    return this.http.put<string>(`${this.baseUrl}` + `/favorite/alarmClock`, {'id': id, 'start': start, 'parameter' : parameter, 'end' : end });
+  
+  getAlarmDuringNight(id: Number, start : string, end : string) : Observable<Array<History>>{
+    return this.http.put<Array<History>>(`${this.baseUrl}` + `/nightAlarm/alarmClock`, {'id': id, 'start': start, 'end' : end });
   }
 }

@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 import { History } from '../historyService/history';
-import { LampHistoryService } from '../historyService/lamp-history.service';
 import { ShutterHistoryService } from '../historyService/shutter-history.service';
 import { OvenHistoryService } from '../historyService/oven-history.service';
 import { AlarmClockHistoryService } from '../historyService/alarm-clock-history.service';
 import { CoffeeMachineHistoryService } from '../historyService/coffee-machine-history.service';
+import { ObjectsHistoryService } from '../historyService/objects-history.service';
 
 @Component({
   selector: 'app-history',
@@ -31,13 +31,28 @@ export class HistoryComponent implements OnInit {
   lampPowered = new Map<String[], number>();
   lampPoweredTooLong = new Map<String[], number>();
 
-  constructor(private activatedroute: ActivatedRoute, private lampHistoryService: LampHistoryService, private ovenHistoryService: OvenHistoryService, 
+  coffeeMachineUsingHours = new Array<Map<String[], number>>();
+  coffeeMachinePowered = new Map<String[], number>();
+  coffeeMachinePoweredTooLong = new Map<String[], number>();
+  capsules = new Number;
+
+  ovenUsingHours = new Array<Map<String[], number>>();
+  ovenPowered = new Map<String[], number>();
+  ovenPoweredTooLong = new Map<String[], number>();
+  ovenTooHigh = new Array<History>();
+
+  constructor(private activatedroute: ActivatedRoute, private objectsHistoryService : ObjectsHistoryService, private ovenHistoryService: OvenHistoryService, 
     private shutterHistoryService: ShutterHistoryService, private alarmClockHistoryService: AlarmClockHistoryService, private coffeeMachineHistoryService: CoffeeMachineHistoryService) { }
 
   ngOnInit() {
     this.objectId = parseInt(this.activatedroute.snapshot.paramMap.get("id"));
     this.objectType = this.activatedroute.snapshot.paramMap.get("type");
     this.getHistory();
+  }
+
+  // Prendre en charge la date, 'il y a une semaine, il y a un mois"
+  getDate(){
+  
   }
 
   getHistory() {
@@ -53,68 +68,109 @@ export class HistoryComponent implements OnInit {
     switch (this.objectType) {
       case 'lamp':
         this.objectTypeString = "Lampe";
-        this.lampHistoryService.getHistory(this.objectId).subscribe(
-          data => {
-            this.histories = data;
-            this.histories.reverse();
-          }
-        ); 
-        this.lampHistoryService.getHistoryUsingHoursByDate(this.objectId, this.startDateString, this.endDateString).subscribe(
+        // Get history by date
+        this.objectsHistoryService.getHistoryUsingHoursByDate(this.objectId, this.startDateString, this.endDateString, "lamp").subscribe(
           data => {
             this.lampUsingHours = data;
             this.lampPowered = this.lampUsingHours[0];
             this.lampPoweredTooLong = this.lampUsingHours[1];
           }
         );
-        // TODO : getting favorite intensity /"intensity" and favorite color /"color"
+        this.objectsHistoryService.getHistoryFavoriteParameterByDate(this.objectId, "intensity", this.startDateString, this.endDateString, "lamp").subscribe(
+          data => {
+            console.log(data);
+          }
+        );
+        this.objectsHistoryService.getHistoryFavoriteParameterByDate(this.objectId, "color", this.startDateString, this.endDateString, "lamp").subscribe(
+          data => {
+            console.log(data);
+          }
+        );
         break;
       case 'oven':
         this.objectTypeString = "Four";
+        // Get history by date
         this.ovenHistoryService.getHistory(this.objectId).subscribe(
           data => {
             this.histories = data;
             this.histories.reverse();
           }
         ); 
-        // TODO : getting favorite mode /"mode" and if temperature too high
+        this.objectsHistoryService.getHistoryFavoriteParameterByDate(this.objectId, "mode", this.startDateString, this.endDateString, "oven").subscribe(
+          data => {
+            console.log(data);
+          }
+        );
+        this.objectsHistoryService.getHistoryUsingHoursByDate(this.objectId, this.startDateString, this.endDateString, "oven").subscribe(
+          data => {
+            this.ovenUsingHours = data;
+            this.ovenPowered = this.ovenUsingHours[0];
+            this.ovenPoweredTooLong = this.ovenUsingHours[1];
+          }
+        );
+        // temperature asked on ihm
+        this.ovenHistoryService.getTemperatureTooHigh(this.objectId, this.startDateString, this.endDateString, 600).subscribe(
+          data => {
+            this.ovenTooHigh = data;
+          }
+        );
         break;
 
       case 'shutter':
         this.objectTypeString = "Volet";
+        // Get history by date
         this.shutterHistoryService.getHistory(this.objectId).subscribe(
           data => {
             this.histories = data;
             this.histories.reverse();
           }
         ); 
-        // TODO : getting if open during many days or open during the night
-        break;
 
-      case 'alarmClock':
-        this.objectTypeString = "Réveil";
-        this.alarmClockHistoryService.getHistory(this.objectId).subscribe(
-          data => {
-            this.histories = data;
-            this.histories.reverse();
-          }
-        ); 
-        this.alarmClockHistoryService.getHistoryFavoriteParameterByDate(this.objectId, "radio", this.startDateString, this.endDateString).subscribe(
+        this.shutterHistoryService.getWronglyOpened(this.objectId, this.startDateString, this.endDateString).subscribe(
           data => {
             console.log(data);
           }
         );
-        // TODO : getting favorite time to wake up /"alarm"
+        
+        break;
+
+      case 'alarmClock':
+        this.objectTypeString = "Réveil";
+        // Get history by date
+        this.objectsHistoryService.getHistoryFavoriteParameterByDate(this.objectId, "radio", this.startDateString, this.endDateString, "alarmClock").subscribe(
+          data => {
+            console.log(data);
+          }
+        );
+        this.objectsHistoryService.getHistoryFavoriteParameterByDate(this.objectId, "alarm", this.startDateString, this.endDateString, "alarmClock").subscribe(
+          data => {
+            console.log(data);
+          }
+        );
+        this.alarmClockHistoryService.getAlarmDuringNight(this.objectId, this.startDateString, this.endDateString).subscribe(
+          data => {
+            console.log(data);
+          }
+        );
         break;
 
       case 'coffeeMachine':
         this.objectTypeString = "Machine à café" ;
-        this.coffeeMachineHistoryService.getHistory(this.objectId).subscribe(
+        // Get history by date
+        this.objectsHistoryService.getHistoryUsingHoursByDate(this.objectId, this.startDateString, this.endDateString, "coffeeMachine").subscribe(
           data => {
-            this.histories = data;
-            this.histories.reverse();
+            this.coffeeMachineUsingHours = data;
+            this.coffeeMachinePowered = this.coffeeMachineUsingHours[0];
+            this.coffeeMachinePoweredTooLong = this.coffeeMachineUsingHours[1];
+            console.log(data)
           }
         );
-        // TODO : getting number of capsules bought /"capsules" and time powered on /"power"
+
+        this.coffeeMachineHistoryService.getCapsulesBrought(this.objectId, this.startDateString, this.endDateString).subscribe(
+          data => {
+            this.capsules = data;
+          }
+        );
         break;
       default:
         break;

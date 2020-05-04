@@ -17,4 +17,8 @@ export class ShutterHistoryService {
   getHistory(id: Number) : Observable<Array<History>>{
     return this.http.put<Array<History>>(`${this.baseUrl}` + `/history/shutter`, id);
   }
+
+  getWronglyOpened(id: Number, start : string, end : string): Observable<Array<History>> {
+    return this.http.put<Array<History>>(`${this.baseUrl}` + `/wronglyOpened/shutter`, {'id': id, 'start': start, 'end' : end });
+  }
 }

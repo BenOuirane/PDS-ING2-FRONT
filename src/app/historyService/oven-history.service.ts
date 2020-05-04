@@ -17,4 +17,8 @@ export class OvenHistoryService {
   getHistory(id: Number) : Observable<Array<History>>{
     return this.http.put<Array<History>>(`${this.baseUrl}` + `/history/oven`, id);
   }
+
+  getTemperatureTooHigh(id: Number, start : string, end : string, temperature : Number) : Observable<Array<History>>{
+    return this.http.put<Array<History>>(`${this.baseUrl}` + `/temperatureMax/oven`, {'id': id, "temperature" : temperature, 'start': start, 'end' : end });
+  }
 }
