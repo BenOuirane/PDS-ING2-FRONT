@@ -12,8 +12,8 @@ const httpOptions = {
 const apiRoot = "http://localhost:8080";
 const apiResident = apiRoot + "/api/resident";
 const apiResidents= apiRoot + "/api/residents"
-const apiAllMeasurementTypes = apiRoot + "/api/measurementType";
-const apiMeasurementsByResidentAndType = apiRoot + "/api/measurement/resident";
+const apiAllMeasurementTypes = apiRoot + "/api/medical_measurement_type";
+const apiMeasurementsByResidentAndType = apiRoot + "/api/medical_measurement/resident";
 
 @Injectable({
   providedIn: 'root'

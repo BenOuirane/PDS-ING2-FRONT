@@ -28,6 +28,8 @@ export class HealthResidentComponent implements OnInit {
   }
 
 
+
+
   getResidentDetails(id: any) {
     this.medicalMeasureService.getResident(id)
       .subscribe((data: any) => {
