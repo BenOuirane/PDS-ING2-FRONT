@@ -11,6 +11,29 @@ import { AlarmClockHistoryService } from '../historyService/alarm-clock-history.
 import { CoffeeMachineHistoryService } from '../historyService/coffee-machine-history.service';
 import { ObjectsHistoryService } from '../historyService/objects-history.service';
 
+import { LampeService } from '../lampe.service';
+import { ShutterService } from '../shutter.service';
+import { AlarmClockService } from '../alarm-clock.service';
+import { CoffeeMachineService } from '../coffee-machine.service';
+import { OvenService } from '../oven.service';
+
+import { Lampe } from '../lampe';
+import { Oven } from '../oven';
+import { Shutter } from '../shutter';
+import { AlarmClock } from '../alarm-clock';
+import { CoffeeMachine } from '../coffeeMachine';
+
+import { Objects } from '../objects';
+import { ObjectService } from '../object.service'
+
+import { Notification } from "../notification";
+import { User } from '../user';
+
+import { NotificationService } from '../notification.service';
+import { UserService } from "../user.service";
+
+import { ResidentService } from '../resident.service';
+
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
@@ -19,9 +42,17 @@ import { ObjectsHistoryService } from '../historyService/objects-history.service
 export class HistoryComponent implements OnInit {
 
   objectId: number;
-  objectType: string;
+  residentId: number;
   objectTypeString: string;
   histories: History[] = new Array<History>();
+  object = new Objects();
+  receiver = new User();
+
+  lamp= new Array<Lampe>();
+  oven= new Array<Oven>();
+  alarmClock= new Array<AlarmClock>();
+  coffeeMachine= new Array<CoffeeMachine>();
+  shutter= new Array<Shutter>();
 
   startDate = new Date();
   endDate = new Date();
@@ -29,35 +60,101 @@ export class HistoryComponent implements OnInit {
   startDateString : string;
   endDateString : string;
 
-  lampUsingHours = new Array<Map<String[], number>>();
-  lampPowered = new Map<String[], number>();
-  lampPoweredTooLong = new Map<String[], number>();
+  usingHours = new Array<Map<String[], number>>();
+  powered = new Map<String[], number>();
+  poweredTooLong = new Map<String[], number>();
+  
   favoriteColor = new String();
   favoriteIntensity = new String();
-
-  coffeeMachineUsingHours = new Array<Map<String[], number>>();
-  coffeeMachinePowered = new Map<String[], number>();
-  coffeeMachinePoweredTooLong = new Map<String[], number>();
+  
   capsules = new Number;
 
-  ovenUsingHours = new Array<Map<String[], number>>();
-  ovenPowered = new Map<String[], number>();
-  ovenPoweredTooLong = new Map<String[], number>();
   ovenTooHigh = new Array<History>();
   favoriteMode = new String;
 
-  constructor(private activatedroute: ActivatedRoute, private objectsHistoryService : ObjectsHistoryService, private ovenHistoryService: OvenHistoryService, 
-    private shutterHistoryService: ShutterHistoryService, private alarmClockHistoryService: AlarmClockHistoryService, private coffeeMachineHistoryService: CoffeeMachineHistoryService) { }
+  wronglyOpened = new Map<Array<String>, number>();
+
+  alarmDuringNightime = new Array<History>();
+  favoriteAlarm = new String();
+  favoriteRadio = new String();
+
+  user: User;
+  notification: Notification;
+
+  constructor(private activatedroute: ActivatedRoute,private objectsService : ObjectService,  private objectsHistoryService : ObjectsHistoryService, private ovenHistoryService: OvenHistoryService, 
+    private shutterHistoryService: ShutterHistoryService, private alarmClockHistoryService: AlarmClockHistoryService, private coffeeMachineHistoryService: CoffeeMachineHistoryService,
+    private lampeService: LampeService, private ovenService: OvenService, private shutterService: ShutterService, private alarmClockService: AlarmClockService, private coffeeMachineService: CoffeeMachineService,
+    private residentService: ResidentService) { }
 
   ngOnInit() {
     this.objectId = parseInt(this.activatedroute.snapshot.paramMap.get("id"));
-    this.objectType = this.activatedroute.snapshot.paramMap.get("type");
-    this.getHistory();
+    this.residentId = parseInt(this.activatedroute.snapshot.paramMap.get("userId"));
+    this.getObjects();
+  }
+
+  sendNotification(){
+    this.user = JSON.parse(localStorage.getItem('user'));
+
+    this.residentService.getResidentById(this.residentId).subscribe(
+      data => {
+        this.receiver = data;
+      }
+    )
+    
+    this.notification.message = $("#message").val();
+    this.notification.receiver = this.receiver;
+    this.notification.title = "Mauvaise utilisation d'un appareil";
+    this.notification.sender = this.user;
+    this.notification.type = "OBJECT";
+    this.notification.customData = this.objectId.toString();
   }
 
   // Prendre en charge la date, 'il y a une semaine, il y a un mois"
-  getDate(){
-  
+  getObjects(){
+    this.objectsService.getObjectById(this.objectId).subscribe(
+      data => {
+        this.object = data;
+        switch (this.object.objectType) {
+          case 'LAMP':
+              this.lampeService.getlampe(this.object).subscribe(
+                data => {
+                  this.lamp = data;
+                  this.getHistory();
+                });
+            break;
+          case 'OVEN':
+            this.ovenService.getOven(this.object).subscribe(
+              data => {
+                this.oven = data;
+                this.getHistory();
+              });
+            break;
+          case 'SHUTTER':
+            this.shutterService.getshutter(this.object).subscribe(
+              data => {
+                this.shutter = data;
+                this.getHistory();
+              });
+            break;
+          case 'ALARMCLOCK':
+            this.alarmClockService.getAlarmClock(this.object).subscribe(
+              data => {
+                this.alarmClock = data;
+                this.getHistory();
+              });
+            break;
+          case 'COFFEEMACHINE':
+            this.coffeeMachineService.getCoffeeMachine(this.object).subscribe(
+              data => {
+                this.coffeeMachine = data;
+                this.getHistory();
+              });
+            break;
+          default:
+            break;
+        }
+      }
+    )
   }
 
   getHistory() {
@@ -70,15 +167,15 @@ export class HistoryComponent implements OnInit {
     this.startDateString = datePipe.transform(this.startDate, 'yyyy-MM-dd hh:mm:ss');
     this.endDateString = datePipe.transform(this.endDate, 'yyyy-MM-dd hh:mm:ss');
 
-    switch (this.objectType) {
-      case 'lamp':
+    switch (this.object.objectType) {
+      case 'LAMP':
         this.objectTypeString = "Lampe";
         // Get history by date
         this.objectsHistoryService.getHistoryUsingHoursByDate(this.objectId, this.startDateString, this.endDateString, "lamp").subscribe(
           data => {
-            this.lampUsingHours = data;
-            this.lampPowered = this.lampUsingHours[0];
-            this.lampPoweredTooLong = this.lampUsingHours[1];
+            this.usingHours = data;
+            this.powered = this.usingHours[0];
+            this.poweredTooLong = this.usingHours[1];
           }
         );
         this.objectsHistoryService.getHistoryFavoriteParameterByDate(this.objectId, "intensity", this.startDateString, this.endDateString, "lamp").subscribe(
@@ -92,7 +189,7 @@ export class HistoryComponent implements OnInit {
           }
         );
         break;
-      case 'oven':
+      case 'OVEN':
         this.objectTypeString = "Four";
         // Get history by date
         this.ovenHistoryService.getHistory(this.objectId).subscribe(
@@ -108,9 +205,9 @@ export class HistoryComponent implements OnInit {
         );
         this.objectsHistoryService.getHistoryUsingHoursByDate(this.objectId, this.startDateString, this.endDateString, "oven").subscribe(
           data => {
-            this.ovenUsingHours = data;
-            this.ovenPowered = this.ovenUsingHours[0];
-            this.ovenPoweredTooLong = this.ovenUsingHours[1];
+            this.usingHours = data;
+            this.powered = this.usingHours[0];
+            this.poweredTooLong = this.usingHours[1];
           }
         );
         // temperature asked on ihm
@@ -121,7 +218,7 @@ export class HistoryComponent implements OnInit {
         );
         break;
 
-      case 'shutter':
+      case 'SHUTTER':
         this.objectTypeString = "Volet";
         // Get history by date
         this.shutterHistoryService.getHistory(this.objectId).subscribe(
@@ -133,41 +230,41 @@ export class HistoryComponent implements OnInit {
 
         this.shutterHistoryService.getWronglyOpened(this.objectId, this.startDateString, this.endDateString).subscribe(
           data => {
-            console.log(data);
+            this.wronglyOpened = data;
           }
         );
         
         break;
 
-      case 'alarmClock':
+      case 'ALARMCLOCK':
         this.objectTypeString = "Réveil";
         // Get history by date
         this.objectsHistoryService.getHistoryFavoriteParameterByDate(this.objectId, "radio", this.startDateString, this.endDateString, "alarmClock").subscribe(
           data => {
-            console.log(data);
+            this.favoriteRadio = data;
           }
         );
         this.objectsHistoryService.getHistoryFavoriteParameterByDate(this.objectId, "alarm", this.startDateString, this.endDateString, "alarmClock").subscribe(
           data => {
-            console.log(data);
+            this.favoriteAlarm = data;
           }
         );
         this.alarmClockHistoryService.getAlarmDuringNight(this.objectId, this.startDateString, this.endDateString).subscribe(
           data => {
-            console.log(data);
+            this.alarmDuringNightime = data;
           }
         );
         break;
 
-      case 'coffeeMachine':
+      case 'COFFEEMACHINE':
         this.objectTypeString = "Machine à café" ;
         // Get history by date
         this.objectsHistoryService.getHistoryUsingHoursByDate(this.objectId, this.startDateString, this.endDateString, "coffeeMachine").subscribe(
           data => {
-            this.coffeeMachineUsingHours = data;
-            this.coffeeMachinePowered = this.coffeeMachineUsingHours[0];
-            this.coffeeMachinePoweredTooLong = this.coffeeMachineUsingHours[1];
-            console.log(data)
+            this.usingHours = data;
+            this.powered = this.usingHours[0];
+            this.poweredTooLong = this.usingHours[1];
+            console.log(this.poweredTooLong)
           }
         );
 

@@ -25,6 +25,10 @@ export class ObjectService {
     return this.http.put<Array<Objects>>(`${this.baseUrl}/object/list`, room);
   }
 
+  getObjectById(id: Number): Observable<Objects> {
+    return this.http.put<Objects>(`${this.baseUrl}/object/id`, id);
+  }
+
   scenarioMyMorning(scenarioMyMorning : ScenarioMyMorning) : Observable<ScenarioMyMorning> {
     console.log("scenarioMyMorning", scenarioMyMorning);
     

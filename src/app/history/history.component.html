@@ -7,26 +7,129 @@
             <div class="row">
                 <div class="col-12">
                     <h3>Caractéristiques</h3>
-                    <div *ngIf="objectType == 'lamp'">
-                        <h5>Éléments préférés</h5>
-                        <div class="col-12 col-md-6"><span class="caracteristics">Couleur préférée : </span>
-                            {{ favoriteColor }}</div>
-                        <div class="col-12 col-md-6"><span class="caracteristics">Intensité préférée : </span>
-                            {{ favoriteIntensity }}</div>
+                    <div class="row" *ngIf="object.objectType == 'LAMP'">
+                        <div class="col-12 col-md-6">
+                            <div>Status :
+                                <span *ngIf="lamp[0].status">Allumées</span>
+                                <span *ngIf="!lamp[0].status">Éteint</span>
+                            </div>
+                            <div>Couleur :
+                                <span>{{ lamp[0].color }}</span>
+                            </div>
+                            <div>Allumées à :
+                                <span>{{ lamp[0].hourOn | date: "hh:mm a"}}</span>
+                            </div>
+                            <div>Éteintes à :
+                                <span>{{ lamp[0].hourOff | date: "hh:mm a"}}</span>
+                            </div>
+                            <div>Intensité :
+                                <span>{{ lamp[0].intensity }} %</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <h5>Éléments préférés</h5>
+                            <span class="caracteristics">Couleur préférée : </span> {{ favoriteColor }}<br />
+                            <span class="caracteristics">Intensité préférée : </span>{{ favoriteIntensity }}
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="object.objectType == 'OVEN'">
+                        <div class="col-12 col-md-6">
+                            <div>Statut : 
+                                <span *ngIf="oven.status">Allumé</span> 
+                                <span *ngIf="!oven.status">Eteint</span>
+                            </div>
+                            <div>Température programmée : 
+                                <span>{{ oven.programTemp }}</span> 
+                            </div>
+                            <div>Température effective : 
+                                <span>{{ oven.effectiveTemp }}</span> 
+                            </div>
+                            <div>Heure de lancement : 
+                                <span *ngIf="oven.scheduleTime == null">Non Renseigné</span> 
+                                <span *ngIf="oven.scheduleTime != null">{{ oven.scheduleTime | date: "hh:mm a"}}</span>
+                            </div>
+                            <div>Mode : 
+                                <span>{{ oven.mode }}</span> 
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <h5>Éléments préférés</h5>
+                            <span class="caracteristics">Mode préférée : </span>
+                                {{ favoriteMode }}
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="object.objectType == 'ALARMCLOCK'">
+                        <div class="col-12 col-md-6">
+                            <div>Statut de l'alarme : 
+                                <span *ngIf="alarmClock.status">Réveil programmé</span> 
+                                <span *ngIf="!alarmClock.status">Réveil non programmé</span>
+                            </div>
+                            <div>Sonnerie à : 
+                                <span>{{ alarmClock.time | date: "hh:mm a" }}</span> 
+                            </div>
+                            <div>Radio allumée : 
+                                <span *ngIf="alarmClock.radioStatus">Oui</span> 
+                                <span *ngIf="!alarmClock.radioStatus">Non</span>
+                            </div>
+                            <div>Dernière fréquence radio utilisée : 
+                                <span>{{ alarmClock.radioHrz | number }}</span> 
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <h5>Éléments préférés</h5>
+                            <span class="caracteristics">Radio préférée : </span>
+                            {{ favoriteRadio }}<br/>
+                            <span class="caracteristics">Heure de réveil préférée : </span>
+                            {{ favoriteAlarm }}
+                        </div>                        
+                    </div>
+                    <div class="row" *ngIf="object.objectType == 'COFFEEMACHINE'">
+                        <div class="col-12 col-md-6">
+                            <div>Status :
+                                <span *ngIf="coffeeMachine[0].status">Allumée</span>
+                                <span *ngIf="!coffeeMachine[0].status">Eteinte</span>
+                            </div>
+                            <div>Nombre de capsule restante(s) :
+                                <span>{{ coffeeMachine[0].nbCapsule }}</span>
+                            </div>
+                            <div>Programmation du prochain café :
+                                <span>{{ coffeeMachine[0].scheduleCoffee | date: "hh:mm a"}}</span>
+                            </div>
+                            <div>Niveau d'eau de la machine :
+                                <span>{{ coffeeMachine[0].waterLevel }} l</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <h5>Éléments additionnels</h5>
+                            <span class="caracteristics">Nombre de capsules achetées : </span>{{ capsules }}
+                        </div>
+                    </div>
+                    <div *ngIf="object.objectType == 'SHUTTER'">
+                        <div>Status :
+                            <span *ngIf="shutter[0].status">Ouvert</span>
+                            <span *ngIf="!shutter[0].status">Fermé</span>
+                        </div>
+                        <div>Ouvert à :
+                            <span>{{ shutter[0].hourOn | date: "hh:mm a"}}</span>
+                        </div>
+                        <div>Fermé à :
+                            <span>{{ shutter[0].hourOff | date: "hh:mm a"}}</span>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div *ngIf="objectType == 'lamp'">
+                    <div
+                        *ngIf="object.objectType == 'LAMP' || object.objectType == 'OVEN' || object.objectType == 'COFFEEMACHINE'">
                         <h3>Plages d'utilisation</h3>
                         <div class="row">
                             <h4 class="col-12 col-md-11" style="color:brown">Plages suscpectes</h4>
-                            <div class="col-12 col-md-1 togglers" data-toggle="collapse" data-target="#suspectLamps"
-                                aria-expanded="false" aria-controls="suspectLamps">
+                            <div class="col-12 col-md-1 togglers" data-toggle="collapse" data-target="#suspect"
+                                aria-expanded="false" aria-controls="suspect">
                                 +
                             </div>
-                            <div class="col-12 collapse" id="suspectLamps" *ngFor="let item of lampPoweredTooLong | keyvalue">
+                            <div class="col-12 collapse" id="suspect" *ngFor="let item of poweredTooLong  | keyvalue">
                                 <div class="row">
                                     <div class="col-12 col-md-3">
                                         <span>Début :</span> {{ split(item.key,0) }}
@@ -40,19 +143,20 @@
                                         <span>Heures totales :</span> {{ item.value }}
                                     </div>
                                     <div class="col-11 col-md-3">
-                                        <button type="button">Notifier</button>
+                                        <button class="notify-link" type="button">Notifier</button>
                                     </div>
                                 </div>
                                 <hr>
                             </div>
-                            
+
 
                             <h4 class="col-12 col-md-11" style="color:darkgreen">Plages non suscpectes</h4>
-                            <div class="col-12 col-md-1 togglers" data-toggle="collapse" data-target="#unsuspectLamps" aria-expanded="false" aria-controls="unsuspectLamps">
+                            <div class="col-12 col-md-1 togglers" data-toggle="collapse" data-target="#unsuspect"
+                                aria-expanded="false" aria-controls="unsuspect">
                                 +
                             </div>
 
-                            <div class="col-12 collapse" id="unsuspectLamps" *ngFor="let item of  lampPowered | keyvalue">
+                            <div class="col-12 collapse" id="unsuspect" *ngFor="let item of powered | keyvalue">
                                 <div class="row">
                                     <div class="col-12 col-md-4">
                                         <span>Début :</span> {{ split(item.key,0) }}
@@ -64,6 +168,116 @@
                                     </div>
                                     <div class="col-11 col-md-4">
                                         <span>Heures totales :</span> {{ item.value }}
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div *ngIf="object.objectType == 'OVEN'">
+                        <h3>Monitoring</h3>
+                        <div class="row">
+                            <h4 class="col-12 col-md-11" style="color:brown">Temperature trop haute</h4>
+                            <div class="col-12 col-md-1 togglers" data-toggle="collapse" data-target="#tempHigh"
+                                aria-expanded="false" aria-controls="tempHigh">
+                                +
+                            </div>
+                            <div class="col-12 collapse" id="tempHigh" *ngFor="let item of ovenTooHigh">
+                                <div class="row">
+                                    <div class="col-12 col-md-3">
+                                        <span>Température :</span> {{ item.data }}
+                                        <br>
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <span>Date :</span> {{ item.messageTimestamp }}
+                                        <br>
+                                    </div>
+                                    <div class="col-11 col-md-3">
+                                        <button class="notify-link" type="button">Notifier</button>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div *ngIf="object.objectType == 'SHUTTER'">
+                        <h3>Monitoring</h3>
+                        <div class="row">
+                            <h4 class="col-12 col-md-11" style="color:brown">Volet mal utilisés</h4>
+                            <div class="col-12 col-md-1 togglers" data-toggle="collapse" data-target="#wronglyUsed"
+                                aria-expanded="false" aria-controls="wronglyUsed">
+                                +
+                            </div>
+                            <div class="collapse col-12" id="wronglyUsed">
+                                <div class="row">
+                                    <div class="col-12">Le volet est resté ouvert plusieurs jours</div>
+                                    <div class="col-12" *ngFor="let item of wronglyOpened | keyvalue">
+                                        <div class="row" *ngIf='item.value > 0'>
+                                            <div class="col-12 col-md-4">
+                                                <span>Début :</span> {{ split(item.key,0) }}
+                                                <br>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <span>Fin :</span> {{ split(item.key,1) }}
+                                                <br>
+                                            </div>
+                                            <div class="col-11 col-md-4">
+                                                <span>Jour ouvert :</span> {{ item.value }}
+                                            </div>
+                                            <div class="col-11 col-md-3">
+                                                <button class="notify-link" type="button">Notifier</button>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+
+                                    <div class="col-12">Le volet à été ouvert après minuit</div>
+                                    <div class="col-12" *ngFor="let item of wronglyOpened | keyvalue">
+                                        <div class="row" *ngIf='item.value == 0'>
+                                            <div class="col-12 col-md-4">
+                                                <span>Ouvert à :</span> {{ split(item.key,0) }}
+                                                <br>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <span>Fermé à :</span> {{ split(item.key,1) }}
+                                                <br>
+                                            </div>
+                                            <div class="col-11 col-md-3">
+                                                <button class="notify-link" type="button">Notifier</button>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div *ngIf="object.objectType == 'ALARMCLOCK'">
+                        <h3>Monitoring</h3>
+                        <div class="row">
+                            <h4 class="col-12 col-md-11" style="color:brown">Alarmes programées la nuit</h4>
+                            <div class="col-12 col-md-1 togglers" data-toggle="collapse" data-target="#nightAlarms"
+                                aria-expanded="false" aria-controls="nightAlarms">
+                                +
+                            </div>
+                            <div class="col-12 collapse" id="nightAlarms" *ngFor="let item of alarmDuringNightime">
+                                <div class="row">
+                                    <div class="col-12 col-md-3">
+                                        <span>Programmation :</span> {{ item.data }}
+                                        <br>
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <span>Date :</span> {{ item.messageTimestamp }}
+                                        <br>
+                                    </div>
+                                    <div class="col-11 col-md-3">
+                                        <button class="notify-link" type="button">Notifier</button>
                                     </div>
                                 </div>
                                 <hr>
