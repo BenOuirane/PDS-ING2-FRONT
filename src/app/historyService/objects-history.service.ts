@@ -14,8 +14,8 @@ export class ObjectsHistoryService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getHistoryUsingHoursByDate(id: Number, start : string, end : string, objType : string) : Observable<Array<Map<Array<String>, number>>>{
-    return this.http.put<Array<Map<Array<String>, number>>>(`${this.baseUrl}` + `/hours/` + objType, {'id': id, 'start': start, 'end' : end });
+  getHistoryUsingHoursByDate(id: Number, parameter : string,  start : string, end : string, objType : string) : Observable<Array<Map<Array<String>, number>>>{
+    return this.http.put<Array<Map<Array<String>, number>>>(`${this.baseUrl}` + `/hours/` + objType, {'id': id, 'start': start,  'parameter' : parameter, 'end' : end });
   }
 
   getHistoryFavoriteParameterByDate(id: Number, parameter : string, start : string, end : string, objType: string) : Observable<string>{

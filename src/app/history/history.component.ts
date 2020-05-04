@@ -47,7 +47,7 @@ export class HistoryComponent implements OnInit {
   histories: History[] = new Array<History>();
   object = new Objects();
   receiver = new User();
-  notify: false;
+  parameter : string = "5";
 
   lamp= new Array<Lampe>();
   oven= new Array<Oven>();
@@ -173,6 +173,11 @@ export class HistoryComponent implements OnInit {
     )
   }
 
+  changeParam(){
+    this.parameter = $('#hourParameters').val();
+    this.getHistory();
+  }
+
   getHistory() {
     var datePipe = new DatePipe("fr-FR");
 
@@ -187,7 +192,7 @@ export class HistoryComponent implements OnInit {
       case 'LAMP':
         this.objectTypeString = "Lampe";
         // Get history by date
-        this.objectsHistoryService.getHistoryUsingHoursByDate(this.objectId, this.startDateString, this.endDateString, "lamp").subscribe(
+        this.objectsHistoryService.getHistoryUsingHoursByDate(this.objectId, this.parameter, this.startDateString, this.endDateString, "lamp").subscribe(
           data => {
             this.usingHours = data;
             this.powered = this.usingHours[0];
@@ -219,7 +224,7 @@ export class HistoryComponent implements OnInit {
             this.favoriteMode = data;
           }
         );
-        this.objectsHistoryService.getHistoryUsingHoursByDate(this.objectId, this.startDateString, this.endDateString, "oven").subscribe(
+        this.objectsHistoryService.getHistoryUsingHoursByDate(this.objectId, this.parameter, this.startDateString, this.endDateString, "oven").subscribe(
           data => {
             this.usingHours = data;
             this.powered = this.usingHours[0];
@@ -275,7 +280,7 @@ export class HistoryComponent implements OnInit {
       case 'COFFEEMACHINE':
         this.objectTypeString = "Machine à café" ;
         // Get history by date
-        this.objectsHistoryService.getHistoryUsingHoursByDate(this.objectId, this.startDateString, this.endDateString, "coffeeMachine").subscribe(
+        this.objectsHistoryService.getHistoryUsingHoursByDate(this.objectId, this.parameter, this.startDateString, this.endDateString, "coffeeMachine").subscribe(
           data => {
             this.usingHours = data;
             this.powered = this.usingHours[0];
