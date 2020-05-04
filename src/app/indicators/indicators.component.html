@@ -1,15 +1,17 @@
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<div class="container">
-  <div class="primo">
+
+
+<section class="container">
+  <div class="row">
+
+  </div>
+  <div class="row">
 
   </div>
 
   <div class="align-items-center">
     <form (ngSubmit)="onGetResidence()">
+      <br/><br/><br/>
+
       <h4>Sélectionnez l'indicateur à calculer</h4>
     <div class="primo col-md-5">
       <select class="form-control" id="notification_type">
@@ -95,7 +97,7 @@
             <td>{{r.idResidence}}</td>
             <td>{{r.name}}</td>
             <td>{{r.numberOfResident}}</td>
-            <td>{{(r.numberOfResident*100/rooms)|number}}%</td>
+            <td>{{(r.numberOfResident*1/rooms)|number}}%</td>
           </tr>
         </tbody>
         </table>
@@ -134,8 +136,43 @@
           </tbody>
         </table>
       </div>
+
     </div>
 
   </div>
+  <h4> Récapitulatifs</h4>
+  <div>
+  <h5> Formules d'abonnement choisies par an</h5>
+    <br/>
+  <div class="subscription_left">
+    <canvas id="chart" width="500" height="200"></canvas>
+    <br/>
+    <h6> année 2019 </h6>
+  </div>
 
+  <div class="subscription_right">
+    <canvas id="chart1" width="500" height="200"></canvas>
+    <br/>
+    <h6> année 2020 </h6>
+  </div>
+  </div>
+
+<div class = mensuals> <br/><h5> Chiffres d'affaire mensuels</h5>
+  <br/>
+  <div class = "mensual_left">
+    <canvas id="chart2" width="500" height="200"></canvas>
+  </div>
+  <div class = "mensual_right">
+
+    <canvas id="chart3" width="500" height="200"></canvas>
+  </div>
 </div>
+  <br/>
+
+  <div class = mensuals>
+    <br/><h5> Chiffres d'affaire annuels</h5>
+    <br/>
+  <div class = " annual_CA"> <canvas id="chart4" width="50" height="50"></canvas></div>
+  </div>
+
+</section>

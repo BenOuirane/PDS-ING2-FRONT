@@ -62,7 +62,7 @@
                         <input hidden #hourOn formControlName="hourOn" [ngModel]="lampe.hourOn">
                         <input hidden #intensityUsine formControlName="intensityUsine" [ngModel]="lampe.intensityUsine">
                         <input hidden #statusUsine formControlName="statusUsine" [ngModel]="lampe.statusUsine">
-                        <input hidden #rooms formControlName="rooms" [ngModel]="lampe.objects.rooms">
+
                         <table width="90%">
                             <tr>
                                 <td>Status</td>
@@ -120,6 +120,10 @@
 
                     </form>
 
+                </div>
+
+                <div class="col-12">
+                    <hr width="85%" color="blue">
                 </div>
 
                 <div class="d-flex justify-content-center mb-5">
@@ -244,9 +248,13 @@
 
                     </form>
                 </div>
+                <div class="col-12">
+                    <hr width="85%" color="blue">
+                </div>
 
                 <div class="d-flex justify-content-center mb-5">
-                    <button class="type" (click)="restore('oven', oven.idOven)">Restaurer les paramètres d'usine</button>
+                    <button class="type" (click)="restore('oven', oven.idOven)">Restaurer les paramètres
+                        d'usine</button>
                 </div>
             </ng-container>
         </mat-tab>
@@ -336,8 +344,12 @@
                     </form>
                 </div>
 
+                <div class="col-12">
+                    <hr width="85%" color="blue">
+                </div>
                 <div class="d-flex justify-content-center mb-5">
-                    <button class="type" (click)="restore('shutter', shutter.idShutter)">Restaurer les paramètres d'usine</button>
+                    <button class="type" (click)="restore('shutter', shutter.idShutter)">Restaurer les paramètres
+                        d'usine</button>
                 </div>
 
             </ng-container>
@@ -445,9 +457,13 @@
                         </div>
                     </form>
                 </div>
+                <div class="col-12">
+                    <hr width="85%" color="blue">
+                </div>
 
                 <div class="d-flex justify-content-center mb-5">
-                    <button class="type" (click)="restore('alarmClock', alarmClock.idAlarmClock)">Restaurer les paramètres d'usine</button>
+                    <button class="type" (click)="restore('alarmClock', alarmClock.idAlarmClock)">Restaurer les
+                        paramètres d'usine</button>
                 </div>
 
             </ng-container>
@@ -537,12 +553,128 @@
                         </div>
                     </form>
                 </div>
+                <h5>
+                    Mes actions :
+                </h5>
+
+                <div>
+                    <button [disabled]="coffeeMachine.nbCapsule==0 || coffeeMachine.waterLevel < 2" class="typeAction"
+                        (click)="expresso(coffeeMachine.idCoffee)">Fais moi couler un expresso</button>
+                    <p class="d-flex justify-content-center mb-5" style="color :red" *ngIf="coffeeMachine.nbCapsule==0">
+                        Veuillez recharger les capsules de votre machine</p>
+                    <p class="d-flex justify-content-center mb-5" style="color :red"
+                        *ngIf="coffeeMachine.waterLevel < 2">Veuillez recharger le niveau d'eau de votre machine</p>
+                </div>
+
+                <div class="col-12">
+                    <hr width="85%" color="blue">
+                </div>
 
                 <div class="d-flex justify-content-center mb-5">
-                    <button class="type" (click)="restore('coffeeMachine', coffeeMachine.idCoffee)">Restaurer les paramètres d'usine</button>
+                    <button class="type" (click)="restore('coffeeMachine', coffeeMachine.idCoffee)">Restaurer les
+                        paramètres d'usine</button>
                 </div>
 
             </ng-container>
+        </mat-tab>
+
+        <!-- Manage scenario My Morning-->
+        <mat-tab label="Mon Matin">
+
+            <div class="my-custom-row mt-5">
+                <div class="col-6"><img class="imgScenar" src="../../assets/MyMorning1.png" alt=""></div>
+                <div class="col-6"
+                    style="width: 200px; line-height: 400px; margin-top: 50px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; text-align: center; font-style : italic; font-size: 50px;">
+                    <b> Bon matin...</b>
+                </div>
+            </div>
+
+            <div class="my-custom-row mt-5">
+                <div class="col-6"
+                    style="display: flex; align-items: center; width: 200px; margin-top: 50px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; text-align: center; font-style : italic; font-size: 20px;">
+                    <b> Parce qu'il n'y a rien de plus important qu'un réveil en douceur... <br><br> Profitez d'un
+                        voyage dans l'automatique et surtout... ne faites plus rien ! #Wally</b>
+
+                </div>
+                <div class="col-6"><img class="imgScenar" src="../../assets/MorningCoffee.jpg" alt=""></div>
+
+            </div>
+            <div class="col-12 mt-5 mb-5">
+                <hr width="85%" color="blue">
+            </div>
+            <div>
+                <span
+                    *ngIf="lamps.length == 0 || shutters.length == 0 || alarmClocks.length == 0 || coffeeMachines.length == 0; else elseBlock">
+                    <p class="d-flex justify-content-center mb-5" style="color :red">Vous n'avez pas tous les objets
+                        nécessaires pour ce scénario</p>
+                </span>
+                <ng-template #elseBlock>
+                    <form [formGroup]="formMyMorning" (ngSubmit)="build('myMorning')" class="justify-content-center">
+
+                        <div>
+                            <mat-form-field class="col-3">
+                                <mat-label>Réveils</mat-label>
+                                <mat-select #selectAlarmClock formControlName="selectAlarmClock" required>
+                                    <mat-option *ngFor="let alarmClock of alarmClocks; index as i" [value]="alarmClock">
+                                        Réveil - {{ i + 1}}
+                                        <!--{{alarmClock | json}} -->
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="col-3">
+                                <mat-label>Lampes</mat-label>
+                                <mat-select formControlName="selectLamp" required>
+                                    <mat-option *ngFor="let lamp of lamps; index as i" [value]="lamp">
+                                        Lampe - {{ i + 1}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="col-3">
+                                <mat-label>Volets</mat-label>
+                                <mat-select formControlName="selectShutter" required>
+                                    <mat-option *ngFor="let shutter of shutters; index as i" [value]="shutter">
+                                        Volet - {{ i + 1}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="col-3">
+                                <mat-label>Machine à café</mat-label>
+                                <mat-select formControlName="selectCoffeeMachine" required>
+                                    <mat-option *ngFor="let coffeeMachine of coffeeMachines; index as i"
+                                        [value]="coffeeMachine">
+                                        Machine à café - {{ i + 1}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <div class="d-flex justify-content-center mb-5">
+                                <span (click)="openOn(formMyMorning.value.selectAlarmClock.alarm, 'myMorning')">
+                                    <mat-icon class="custom-mat-icon">schedule</mat-icon>
+                                </span>
+                                <div class="ml-3 mt-3">
+                                    <span
+                                        *ngIf="formMyMorning.value.selectAlarmClock.alarm == null; else elseBlock">{{ 1587103200000 | date: "HH:mm"}}</span>
+                               
+                                    <ng-template #elseBlock>
+                                        {{formMyMorning.value.selectAlarmClock.alarm  | date: "HH:mm"}}
+                                    </ng-template>
+                                </div>
+                            </div>
+
+                            <!-- SUBMIT MYMORNING -->
+                            <div class="d-flex justify-content-center mt-5 mb-5">
+                                <button mat-raised-button type="submit">Lancer</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </ng-template>
+
+            </div>
+
         </mat-tab>
     </mat-tab-group>
 </section>

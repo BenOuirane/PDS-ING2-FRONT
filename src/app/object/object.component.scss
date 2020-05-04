@@ -7,6 +7,12 @@ img {
     margin-right: 30px;
 }
 
+.imgScenar{
+    margin-top: 50px;
+    height: 400px;
+}
+
+
 mat-tab-body > div {
     overflow: none;
 }
@@ -43,6 +49,27 @@ form {
   }
   
 .type:hover {
-    background-color: rgb(175, 76, 76); /* Green */
+    background-color: rgb(175, 76, 76);
     color: white;
   }
+
+  .typeAction {
+    transition-duration: 0.8s;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+  
+.typeAction:hover:enabled {
+    background-color: rgb(59, 83, 163);
+    color: white;
+  }
+
+.custom-mat-icon {
+    font-size: 48px !important;
+    width: 48px !important;
+    height: 48px !important;
+}
