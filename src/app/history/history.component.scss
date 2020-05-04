@@ -5,9 +5,24 @@
     margin-bottom: 100px;
 }
 
-h2 {
+h2, h3 {
     text-align: center;
     margin-top: 15px;
     margin-bottom: 15px;
-    color: darkblue;
+    color: #002f5a;
 }
+
+h4 {
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.togglers {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: bold;
+   }
+   
