@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PopupConfirmationComponent } from 'src/app/layouts/popup-confirmation/popup-confirmation.component';
 
-import { PopupConfirmationComponent } from '../layouts/models/popup-confirmation.service';
 
 @Injectable()
 export class ConfirmationDialogService {

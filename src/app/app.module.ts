@@ -24,13 +24,13 @@ import { CreateCandidateComponent } from './create-candidate/create-candidate.co
 import { CandidateService } from './candidate_services/candidate.service';
 import { from } from 'rxjs';
 
-import { SearchBarComponent } from './layouts/search-bar/search-bar.component';
+//import { SearchBarComponent } from './layouts/search-bar/search-bar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { UpdateDatamockComponent } from './layouts/update-datamock/update-datamock.component';
 import { ObjectComponent } from './object/object.component';
 import {
   MatTabsModule, MatSelectModule, MatSliderModule,
-  MatSlideToggleModule, MatButtonModule, MatFormFieldModule, MatIconModule
+  MatSlideToggleModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatDialogModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MapPrototypeComponent } from './layouts/map-prototype/map-prototype.component';
@@ -40,6 +40,7 @@ import { ObjectMapComponent } from './object-map/object-map.component';
 import { HistoryComponent } from './history/history.component';
 import { PopupConfirmationComponent } from './layouts/popup-confirmation/popup-confirmation.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuditPathsComponent } from './layouts/audit-paths/audit-paths.component';
 
 
 
@@ -51,7 +52,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SendNotificationComponent,
     GetNotificationsComponent,
     CreateCandidateComponent,
-    SearchBarComponent,
+   //SearchBarComponent,
     HomeComponent,
     FooterComponent,
     UpdateDatamockComponent,
@@ -62,7 +63,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
     ObjectMapComponent,
     HistoryComponent,
-    PopupConfirmationComponent
+    //PopupConfirmationComponent,
+    AuditPathsComponent
 
   ],
   imports: [
@@ -82,7 +84,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatFormFieldModule,
     AmazingTimePickerModule,
     MatIconModule,
-    NgbModule
+    NgbModule,
+    MatDialogModule
   ],
   providers: [
     CandidateService,

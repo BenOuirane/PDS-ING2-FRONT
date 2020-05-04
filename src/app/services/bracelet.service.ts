@@ -19,7 +19,9 @@ export class BraceletService {
       return this.http.post(this.baseUrl+ '/generate_bracelet', null, httpOption);
       }
 
-
+     
+          
+    
       //Temp method
       updateBraceletData(): Observable<any>{
         let header = new HttpHeaders({'Content-Type': 'application/json'})
@@ -45,8 +47,24 @@ export class BraceletService {
         params: httpParams,
         headers: new HttpHeaders({'Content-Type': 'application/json'})
       };
-      return this.http.get<any>(this.baseUrl + `/bracelet/singleton/`+id_bracelet, httpOption);
+      return this.http.get<any>(this.baseUrl + `/bracelets/`+id_bracelet, httpOption);
 
 }
+
+/*
+getBraceletByIds(id_bracelet: string): Observable<any> {
+  console.log("hihihih " +id_bracelet)
+  console.log(this.baseUrl + `/bracelets/`+id_bracelet);
+  let httpParams = new HttpParams();
+  httpParams.set('id', id_bracelet);
+    let httpOption = {
+      params: httpParams,
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    
+    return this.http.get<any>(this.baseUrl + `/bracelets/`+id_bracelet, httpOption);
+
+}
+*/
 
 }
