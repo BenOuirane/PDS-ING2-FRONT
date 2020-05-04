@@ -21,6 +21,6 @@ export class ResidentService {
   }
 
   getResidentById(id : Number) : Observable<User>{
-    return this.http.put<User>(`${this.baseUrl}` + `/resident/id`, id);
+    return this.http.put<User>(`${this.baseUrl}` + `/user/id`, id);
   }
 }

@@ -129,21 +129,27 @@
                                 aria-expanded="false" aria-controls="suspect">
                                 +
                             </div>
-                            <div class="col-12 collapse" id="suspect" *ngFor="let item of poweredTooLong  | keyvalue">
+                            <div class="col-12 collapse" id="suspect" *ngFor="let item of poweredTooLong | keyvalue; let indexOfelement=index">
                                 <div class="row">
-                                    <div class="col-12 col-md-3">
+                                    <div class="col-12 col-md-2">
                                         <span>Début :</span> {{ split(item.key,0) }}
                                         <br>
                                     </div>
-                                    <div class="col-12 col-md-3">
+                                    <div class="col-12 col-md-2">
                                         <span>Fin :</span> {{ split(item.key,1) }}
                                         <br>
                                     </div>
                                     <div class="col-11 col-md-3">
                                         <span>Heures totales :</span> {{ item.value }}
                                     </div>
-                                    <div class="col-11 col-md-3">
-                                        <button class="notify-link" type="button">Notifier</button>
+                                    <div class="col-11 col-md-5">
+                                        <button class="notify-link" [attr.id]="'suspectNotify' + indexOfelement"  data-toggle="collapse"  [attr.data-target]="'#suspect' + indexOfelement" aria-expanded="false" [attr.aria-controls]="'#suspect' + indexOfelement">Notifier</button>
+                                        <div class="collapse" [attr.id]="'suspect' + indexOfelement">
+                                            <textarea  [attr.id]="'suspectMessage' + indexOfelement" rows="5">La lampe numéro {{ objectId }} à été mal utilisée, elle est restée allumée {{ item.value }} heures entre {{ split(item.key,0) }} et {{ split(item.key,1) }}.
+                                            </textarea><br/>
+                                            <button class="send-link" (click)="sendNotification('#suspectMessage' + indexOfelement, '#suspectResponse' + indexOfelement, '#suspectNotify' + indexOfelement)" [attr.id]="'suspectButton' + indexOfelement">Envoyer</button>
+                                            <div class="response" [attr.id]="'suspectResponse' + indexOfelement"></div>
+                                        </div>
                                     </div>
                                 </div>
                                 <hr>
@@ -156,7 +162,7 @@
                                 +
                             </div>
 
-                            <div class="col-12 collapse" id="unsuspect" *ngFor="let item of powered | keyvalue">
+                            <div class="col-12 collapse" id="unsuspect" *ngFor="let item of powered | keyvalue;">
                                 <div class="row">
                                     <div class="col-12 col-md-4">
                                         <span>Début :</span> {{ split(item.key,0) }}
@@ -184,7 +190,7 @@
                                 aria-expanded="false" aria-controls="tempHigh">
                                 +
                             </div>
-                            <div class="col-12 collapse" id="tempHigh" *ngFor="let item of ovenTooHigh">
+                            <div class="col-12 collapse" id="tempHigh" *ngFor="let item of ovenTooHigh; let indexOfelement=index">
                                 <div class="row">
                                     <div class="col-12 col-md-3">
                                         <span>Température :</span> {{ item.data }}
@@ -195,7 +201,8 @@
                                         <br>
                                     </div>
                                     <div class="col-11 col-md-3">
-                                        <button class="notify-link" type="button">Notifier</button>
+                                        <button data-toggle="collapse" data-target="'#tempNotification' + item.data" aria-expanded="false" aria-controls="tempNotification">Notifier</button>
+                                        <div id="'tempNotification' + item.data">toot</div>
                                     </div>
                                 </div>
                                 <hr>
@@ -215,7 +222,7 @@
                             <div class="collapse col-12" id="wronglyUsed">
                                 <div class="row">
                                     <div class="col-12">Le volet est resté ouvert plusieurs jours</div>
-                                    <div class="col-12" *ngFor="let item of wronglyOpened | keyvalue">
+                                    <div class="col-12" *ngFor="let item of wronglyOpened | keyvalue; let indexOfelement1=index">
                                         <div class="row" *ngIf='item.value > 0'>
                                             <div class="col-12 col-md-4">
                                                 <span>Début :</span> {{ split(item.key,0) }}
@@ -236,7 +243,7 @@
                                     </div>
 
                                     <div class="col-12">Le volet à été ouvert après minuit</div>
-                                    <div class="col-12" *ngFor="let item of wronglyOpened | keyvalue">
+                                    <div class="col-12" *ngFor="let item of wronglyOpened | keyvalue; let indexOfelement2=index">
                                         <div class="row" *ngIf='item.value == 0'>
                                             <div class="col-12 col-md-4">
                                                 <span>Ouvert à :</span> {{ split(item.key,0) }}
@@ -266,7 +273,7 @@
                                 aria-expanded="false" aria-controls="nightAlarms">
                                 +
                             </div>
-                            <div class="col-12 collapse" id="nightAlarms" *ngFor="let item of alarmDuringNightime">
+                            <div class="col-12 collapse" id="nightAlarms" *ngFor="let item of alarmDuringNightime; let indexOfelement=index">
                                 <div class="row">
                                     <div class="col-12 col-md-3">
                                         <span>Programmation :</span> {{ item.data }}

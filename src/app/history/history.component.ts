@@ -47,6 +47,7 @@ export class HistoryComponent implements OnInit {
   histories: History[] = new Array<History>();
   object = new Objects();
   receiver = new User();
+  notify: false;
 
   lamp= new Array<Lampe>();
   oven= new Array<Oven>();
@@ -79,12 +80,12 @@ export class HistoryComponent implements OnInit {
   favoriteRadio = new String();
 
   user: User;
-  notification: Notification;
+  notification: Notification = new Notification();
 
   constructor(private activatedroute: ActivatedRoute,private objectsService : ObjectService,  private objectsHistoryService : ObjectsHistoryService, private ovenHistoryService: OvenHistoryService, 
     private shutterHistoryService: ShutterHistoryService, private alarmClockHistoryService: AlarmClockHistoryService, private coffeeMachineHistoryService: CoffeeMachineHistoryService,
     private lampeService: LampeService, private ovenService: OvenService, private shutterService: ShutterService, private alarmClockService: AlarmClockService, private coffeeMachineService: CoffeeMachineService,
-    private residentService: ResidentService) { }
+    private residentService: ResidentService, private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.objectId = parseInt(this.activatedroute.snapshot.paramMap.get("id"));
@@ -92,21 +93,36 @@ export class HistoryComponent implements OnInit {
     this.getObjects();
   }
 
-  sendNotification(){
+  sendNotification(elementMessage : string, element : string, elementToggler: string){
     this.user = JSON.parse(localStorage.getItem('user'));
 
     this.residentService.getResidentById(this.residentId).subscribe(
       data => {
-        this.receiver = data;
-      }
-    )
-    
-    this.notification.message = $("#message").val();
-    this.notification.receiver = this.receiver;
-    this.notification.title = "Mauvaise utilisation d'un appareil";
-    this.notification.sender = this.user;
-    this.notification.type = "OBJECT";
-    this.notification.customData = this.objectId.toString();
+        this.notification.message = $(elementMessage).val();
+        console.log(this.notification.message)
+        this.notification.receiver = data;
+        this.notification.title = "Mauvaise utilisation d'un appareil";
+        this.notification.sender = this.user;
+        this.notification.type = "OBJECT";
+        this.notification.customData = this.objectId.toString();
+
+        this.notificationService.createNotification(this.notification).subscribe(
+          data => {
+            $(element).append("La notification va être envoyée sous peu. Merci à vous.");
+            setTimeout(function () {
+              $(elementToggler).click();
+            }, 2000);
+            $(element).val("");
+          },
+          error => {
+            console.log(error),
+            $(elementMessage).append("Un problème est survenu, veuillez réessayer plus tard.");
+          });
+
+            this.receiver = data;
+            console.log(this.receiver)
+          }
+        )
   }
 
   // Prendre en charge la date, 'il y a une semaine, il y a un mois"
@@ -285,4 +301,8 @@ export class HistoryComponent implements OnInit {
     var array = string.split(',');
     return array[nb];
   }
+  
+
+  
+
 }

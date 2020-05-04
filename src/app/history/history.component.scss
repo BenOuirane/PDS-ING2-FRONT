@@ -27,15 +27,42 @@ h4 {
 }
 
 .notify-link {
-border-radius: 15px;
-margin-top: -10px;
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 15px;
-padding-right: 15px;
-background-color:#27bae6;
-border-color:#27bae6;
-border: none;
-color:white;
+    border-radius: 15px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color:#27bae6;
+    border-color:#27bae6;
+    border: none;
+    color:white;
+}
+
+.send-link {
+    border-radius: 15px;
+    margin-top: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color:#002f5a;
+    border-color:#002f5a;
+    border: none;
+    color:white;
+}
+
+.response{
+    padding-top:10px;
+}
+
+textarea {
+    resize: none;
+    width: 80%;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid 0.5px;
+    border-color: lightblue;
 }
    
