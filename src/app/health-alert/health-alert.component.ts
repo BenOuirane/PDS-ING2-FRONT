@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {ProgressWebsocketService} from "../services/progress-websocket.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-health-alert',
   templateUrl: './health-alert.component.html',
-  styleUrls: ['./health-alert.component.scss']
+  styleUrls: ['./health-alert.component.scss'],
 })
 export class HealthAlertComponent implements OnInit {
 
