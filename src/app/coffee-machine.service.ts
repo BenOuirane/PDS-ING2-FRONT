@@ -18,4 +18,17 @@ export class CoffeeMachineService {
   getCoffeeMachine(objects: Objects) : Observable<Array<CoffeeMachine>>{
     return this.http.put<Array<CoffeeMachine>>(`${this.baseUrl}` + `/coffeeMachine/list`, objects);
   }
+
+  updateCoffeeMachine(coffeeMachine: CoffeeMachine): Observable<boolean> {
+    console.log("updateCoffeeMachine is call"); 
+    return this.http.put<boolean>(`${this.baseUrl}` + `/coffeeMachine/updateParam`, coffeeMachine);
+    
+  }
+
+  makeCoffee(coffeeMachine: CoffeeMachine): Observable<boolean> {
+    console.log("MakeCoffee is call"); 
+    return this.http.put<boolean>(`${this.baseUrl}` + `/coffeeMachine/makeCoffee`, coffeeMachine);
+    
+  }
+  
 }
