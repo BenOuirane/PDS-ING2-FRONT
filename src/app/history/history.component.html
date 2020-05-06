@@ -2,6 +2,15 @@
     <div class="row">
         <div class="col-12">
             <h2>{{ objectTypeString }} - {{ objectId }}</h2>
+            <div class="picker col-12">
+                Récupérer les données pour :
+                <select id="picker-period" (change)="changePeriod()">
+                    <option value="day">aujourd'hui</option>
+                    <option value="week" selected>la semaine passée</option>
+                    <option value="month">le mois passé</option>
+                    <option value="year">l'année passée</option>
+                </select>
+            </div>
         </div>
         <div class="col-12">
             <div class="row">
@@ -17,10 +26,10 @@
                                 <span>{{ lamp[0].color }}</span>
                             </div>
                             <div>Allumées à :
-                                <span>{{ lamp[0].hourOn | date: "hh:mm a"}}</span>
+                                <span>{{ lamp[0].hourOn | date: "HH:mm"}}</span>
                             </div>
                             <div>Éteintes à :
-                                <span>{{ lamp[0].hourOff | date: "hh:mm a"}}</span>
+                                <span>{{ lamp[0].hourOff | date: "HH:mm"}}</span>
                             </div>
                             <div>Intensité :
                                 <span>{{ lamp[0].intensity }} %</span>
@@ -34,54 +43,54 @@
                     </div>
                     <div class="row" *ngIf="object.objectType == 'OVEN'">
                         <div class="col-12 col-md-6">
-                            <div>Statut : 
-                                <span *ngIf="oven.status">Allumé</span> 
+                            <div>Statut :
+                                <span *ngIf="oven.status">Allumé</span>
                                 <span *ngIf="!oven.status">Eteint</span>
                             </div>
-                            <div>Température programmée : 
-                                <span>{{ oven.programTemp }}</span> 
+                            <div>Température programmée :
+                                <span>{{ oven.programTemp }}</span>
                             </div>
-                            <div>Température effective : 
-                                <span>{{ oven.effectiveTemp }}</span> 
+                            <div>Température effective :
+                                <span>{{ oven.effectiveTemp }}</span>
                             </div>
-                            <div>Heure de lancement : 
-                                <span *ngIf="oven.scheduleTime == null">Non Renseigné</span> 
+                            <div>Heure de lancement :
+                                <span *ngIf="oven.scheduleTime == null">Non Renseigné</span>
                                 <span *ngIf="oven.scheduleTime != null">{{ oven.scheduleTime | date: "hh:mm a"}}</span>
                             </div>
-                            <div>Mode : 
-                                <span>{{ oven.mode }}</span> 
+                            <div>Mode :
+                                <span>{{ oven.mode }}</span>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <h5>Éléments préférés</h5>
                             <span class="caracteristics">Mode préférée : </span>
-                                {{ favoriteMode }}
+                            {{ favoriteMode }}
                         </div>
                     </div>
                     <div class="row" *ngIf="object.objectType == 'ALARMCLOCK'">
                         <div class="col-12 col-md-6">
-                            <div>Statut de l'alarme : 
-                                <span *ngIf="alarmClock.status">Réveil programmé</span> 
+                            <div>Statut de l'alarme :
+                                <span *ngIf="alarmClock.status">Réveil programmé</span>
                                 <span *ngIf="!alarmClock.status">Réveil non programmé</span>
                             </div>
-                            <div>Sonnerie à : 
-                                <span>{{ alarmClock.time | date: "hh:mm a" }}</span> 
+                            <div>Sonnerie à :
+                                <span>{{ alarmClock.alarm }}</span>
                             </div>
-                            <div>Radio allumée : 
-                                <span *ngIf="alarmClock.radioStatus">Oui</span> 
+                            <div>Radio allumée :
+                                <span *ngIf="alarmClock.radioStatus">Oui</span>
                                 <span *ngIf="!alarmClock.radioStatus">Non</span>
                             </div>
-                            <div>Dernière fréquence radio utilisée : 
-                                <span>{{ alarmClock.radioHrz | number }}</span> 
+                            <div>Dernière fréquence radio utilisée :
+                                <span>{{ alarmClock.radioHrz | number }}</span>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <h5>Éléments préférés</h5>
                             <span class="caracteristics">Radio préférée : </span>
-                            {{ favoriteRadio }}<br/>
+                            {{ favoriteRadio }}<br />
                             <span class="caracteristics">Heure de réveil préférée : </span>
                             {{ favoriteAlarm }}
-                        </div>                        
+                        </div>
                     </div>
                     <div class="row" *ngIf="object.objectType == 'COFFEEMACHINE'">
                         <div class="col-12 col-md-6">
@@ -110,10 +119,10 @@
                             <span *ngIf="!shutter[0].status">Fermé</span>
                         </div>
                         <div>Ouvert à :
-                            <span>{{ shutter[0].hourOn | date: "hh:mm a"}}</span>
+                            <span>{{ shutter[0].hourOn | date: "HH:mm"}}</span>
                         </div>
                         <div>Fermé à :
-                            <span>{{ shutter[0].hourOff | date: "hh:mm a"}}</span>
+                            <span>{{ shutter[0].hourOff | date: "HH:mm"}}</span>
                         </div>
                     </div>
                 </div>
@@ -124,13 +133,11 @@
                         *ngIf="object.objectType == 'LAMP' || object.objectType == 'OVEN' || object.objectType == 'COFFEEMACHINE'">
                         <h3>Plages d'utilisation</h3>
                         <div class="row">
-                            <div class="col-12">Récupérer les plages excédant <input id="hourParameters" type="text" [attr.value]="5" (change)="changeParam()"> heures</div>
-                            <h4 class="col-12 col-md-11" style="color:brown">Plages suscpectes</h4>
-                            <div class="col-12 col-md-1 togglers" data-toggle="collapse" data-target="#suspect"
-                                aria-expanded="false" aria-controls="suspect">
-                                +
-                            </div>
-                            <div class="col-12 collapse" id="suspect" *ngFor="let item of poweredTooLong | keyvalue; let indexOfelement=index">
+                            <div class="col-12">Récupérer les plages excédant <input id="hourParameters" type="text"
+                                    [attr.value]="5" (change)="changeParam()"> heures</div>
+                            <div class="col-12" id="suspect"
+                                *ngFor="let item of poweredTooLong | keyvalue; let indexOfelement=index">
+                                <h4 *ngIf="indexOfelement == 0" style="color:brown">Plages suscpectes</h4>
                                 <div class="row">
                                     <div class="col-12 col-md-2">
                                         <span>Début :</span> {{ split(item.key,0) }}
@@ -144,16 +151,22 @@
                                         <span>Heures totales :</span> {{ item.value }}
                                     </div>
                                     <div class="col-11 col-md-5">
-                                        <button class="notify-link" [attr.id]="'suspectNotify' + indexOfelement"  data-toggle="collapse"  [attr.data-target]="'#suspect' + indexOfelement" aria-expanded="false" [attr.aria-controls]="'#suspect' + indexOfelement">Notifier</button>
+                                        <button class="notify-link" [attr.id]="'suspectNotify' + indexOfelement"
+                                            data-toggle="collapse" [attr.data-target]="'#suspect' + indexOfelement"
+                                            aria-expanded="false"
+                                            [attr.aria-controls]="'#suspect' + indexOfelement">Notifier</button>
                                         <div class="collapse" [attr.id]="'suspect' + indexOfelement">
-                                            <textarea  [attr.id]="'suspectMessage' + indexOfelement" rows="5">La {{ objectTypeString | lowercase }} numéro {{ objectId }} a été mal utilisé, l'objet est resté allumé {{ item.value }} heures entre {{ split(item.key,0) }} et {{ split(item.key,1) }}.
-                                            </textarea><br/>
-                                            <button class="send-link" (click)="sendNotification('#suspectMessage' + indexOfelement, '#suspectResponse' + indexOfelement, '#suspectNotify' + indexOfelement)" [attr.id]="'suspectButton' + indexOfelement">Envoyer</button>
+                                            <textarea [attr.id]="'suspectMessage' + indexOfelement" rows="5">La {{ objectTypeString | lowercase }} numéro {{ objectId }} a été mal utilisé, l'objet est resté allumé {{ item.value }} heures entre {{ split(item.key,0) }} et{{ split(item.key,1) }}.
+                                            </textarea><br />
+                                            <button class="send-link"
+                                                (click)="sendNotification('#suspectMessage' + indexOfelement, '#suspectResponse' + indexOfelement, '#suspectNotify' + indexOfelement)"
+                                                [attr.id]="'suspectButton' + indexOfelement">Envoyer</button>
                                             <div class="response" [attr.id]="'suspectResponse' + indexOfelement"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <hr>
+                                <div *ngIf="poweredTooLong.size == 0">toto</div>
                             </div>
 
 
@@ -186,31 +199,38 @@
                     <div *ngIf="object.objectType == 'OVEN'">
                         <h3>Monitoring</h3>
                         <div class="row">
-                            <h4 class="col-12 col-md-11" style="color:brown">Temperature trop haute</h4>
-                            <div class="col-12 col-md-1 togglers" data-toggle="collapse" data-target="#tempHigh"
-                                aria-expanded="false" aria-controls="tempHigh">
-                                +
-                            </div>
-                            <div class="col-12 collapse" id="tempHigh" *ngFor="let item of ovenTooHigh; let indexOfelement=index">
+                            <div class="col-12">Récupérer les températures excédent <input id="tempParameters" type="text"
+                                [attr.value]="600" (change)="changeTemp()"></div>
+                            <div class="col-12" id="tempHigh"
+                                *ngFor="let item of ovenTooHigh; let indexOfelement=index">
+                                <h4 *ngIf="indexOfelement == 0" class="col-12 col-md-11" style="color:brown">Temperature
+                                    trop haute</h4>
+                                    
                                 <div class="row">
                                     <div class="col-12 col-md-3">
                                         <span>Température :</span> {{ item.data }}
                                         <br>
                                     </div>
                                     <div class="col-12 col-md-3">
-                                        <span>Date :</span> {{ item.messageTimestamp }}
+                                        <span>Date :</span> {{ item.messageTimestamp  | date: 'yyyy/MM/dd HH:mm:ss' }}
                                         <br>
                                     </div>
                                     <div class="col-11 col-md-3">
-                                        <button data-toggle="collapse" data-target="'#tempNotification' + item.data" aria-expanded="false" aria-controls="tempNotification">Notifier</button>
+                                        <button data-toggle="collapse" data-target="'#tempNotification' + item.data"
+                                            aria-expanded="false" aria-controls="tempNotification">Notifier</button>
                                         <div id="'tempNotification' + item.data">toot</div>
                                     </div>
                                     <div class="col-11 col-md-6">
-                                        <button class="notify-link" [attr.id]="'tempNotify' + indexOfelement"  data-toggle="collapse"  [attr.data-target]="'#temp' + indexOfelement" aria-expanded="false" [attr.aria-controls]="'#temp' + indexOfelement">Notifier</button>
+                                        <button class="notify-link" [attr.id]="'tempNotify' + indexOfelement"
+                                            data-toggle="collapse" [attr.data-target]="'#temp' + indexOfelement"
+                                            aria-expanded="false"
+                                            [attr.aria-controls]="'#temp' + indexOfelement">Notifier</button>
                                         <div class="collapse" [attr.id]="'temp' + indexOfelement">
-                                            <textarea  [attr.id]="'tempMessage' + indexOfelement" rows="5">Le four numéro {{ objectId }} a été mal utilisé, sa température {{ item.value }} à {{ item.messageTimestamp }} est trop haute.
-                                            </textarea><br/>
-                                            <button class="send-link" (click)="sendNotification('#tempMessage' + indexOfelement, '#tempResponse' + indexOfelement, '#tempNotify' + indexOfelement)" [attr.id]="'tempButton' + indexOfelement">Envoyer</button>
+                                            <textarea [attr.id]="'tempMessage' + indexOfelement" rows="5">Le four numéro {{ objectId }} a été mal utilisé, sa température {{ item.value }} à {{ item.messageTimestamp }} est trop haute.
+                                            </textarea><br />
+                                            <button class="send-link"
+                                                (click)="sendNotification('#tempMessage' + indexOfelement, '#tempResponse' + indexOfelement, '#tempNotify' + indexOfelement)"
+                                                [attr.id]="'tempButton' + indexOfelement">Envoyer</button>
                                             <div class="response" [attr.id]="'tempResponse' + indexOfelement"></div>
                                         </div>
                                     </div>
@@ -224,64 +244,65 @@
                     <div *ngIf="object.objectType == 'SHUTTER'">
                         <h3>Monitoring</h3>
                         <div class="row">
-                            <h4 class="col-12 col-md-11" style="color:brown">Volet mal utilisés</h4>
-                            <div class="col-12 col-md-1 togglers" data-toggle="collapse" data-target="#wronglyUsed"
-                                aria-expanded="false" aria-controls="wronglyUsed">
-                                +
-                            </div>
-                            <div class="collapse col-12" id="wronglyUsed">
-                                <div class="row">
-                                    <div class="col-12">Le volet est resté ouvert plusieurs jours</div>
-                                    <div class="col-12" *ngFor="let item of wronglyOpened | keyvalue; let indexOfelement1=index">
-                                        <div class="row" *ngIf='item.value > 0'>
-                                            <div class="col-12 col-md-2">
-                                                <span>Début :</span> {{ split(item.key,0) }}
-                                                <br>
-                                            </div>
-                                            <div class="col-12 col-md-2">
-                                                <span>Fin :</span> {{ split(item.key,1) }}
-                                                <br>
-                                            </div>
-                                            <div class="col-11 col-md-2">
-                                                <span>Jour(s) ouvert :</span> {{ item.value }}
-                                            </div>
-                                            <div class="col-11 col-md-6">
-                                                <button class="notify-link" [attr.id]="'shutterDaysNotify' + indexOfelement"  data-toggle="collapse"  [attr.data-target]="'#shutterDays' + indexOfelement" aria-expanded="false" [attr.aria-controls]="'#shutterDays' + indexOfelement">Notifier</button>
-                                                <div class="collapse" [attr.id]="'shutterDays' + indexOfelement">
-                                                    <textarea  [attr.id]="'shutterDaysMessage' + indexOfelement" rows="5">Le volet numéro {{ objectId }} a été mal utilisé, il est resté ouvert {{ item.value }} jours.
-                                                    </textarea><br/>
-                                                    <button class="send-link" (click)="sendNotification('#shutterDaysMessage' + indexOfelement, '#shutterDaysResponse' + indexOfelement, '#shutterDaysNotify' + indexOfelement)" [attr.id]="'shutterDaysButton' + indexOfelement">Envoyer</button>
-                                                    <div class="response" [attr.id]="'shutterDaysResponse' + indexOfelement"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
+                            <div class="col-12" *ngFor="let item of wronglyOpened | keyvalue; let indexOfelement=index">
+                                <div *ngIf="indexOfelement == 0" style="color:brown">
+                                    <h4>Volet mal utilisés</h4>
+                                    <h5 style="margin-bottom: 20px;">Le volet est resté ouvert plusieurs jours ou le volet à été ouvert après minuit</h5>
+                                </div>
+                                <div class="row" *ngIf='item.value > 0'>
+                                    <div class="col-12 col-md-2">
+                                        <span>Début :</span> {{ split(item.key,0) }}
+                                        <br>
                                     </div>
-
-                                    <div class="col-12">Le volet à été ouvert après minuit</div>
-                                    <div class="col-12" *ngFor="let item of wronglyOpened | keyvalue; let indexOfelement2=index">
-                                        <div class="row" *ngIf='item.value == 0'>
-                                            <div class="col-12 col-md-3">
-                                                <span>Ouvert à :</span> {{ split(item.key,0) }}
-                                                <br>
-                                            </div>
-                                            <div class="col-12 col-md-3">
-                                                <span>Fermé à :</span> {{ split(item.key,1) }}
-                                                <br>
-                                            </div>
-                                            <div class="col-11 col-md-6">
-                                                <button class="notify-link" [attr.id]="'shutterNightNotify' + indexOfelement"  data-toggle="collapse"  [attr.data-target]="'#shutterNight' + indexOfelement" aria-expanded="false" [attr.aria-controls]="'#shutterNight' + indexOfelement">Notifier</button>
-                                                <div class="collapse" [attr.id]="'shutterNight' + indexOfelement">
-                                                    <textarea  [attr.id]="'shutterNightMessage' + indexOfelement" rows="5">Le volet numéro {{ objectId }} a été mal utilisé, il a été ouvert en pleine nuit à {{ split(item.key,0) }}.
-                                                    </textarea><br/>
-                                                    <button class="send-link" (click)="sendNotification('#shutterNightMessage' + indexOfelement, '#shutterNightResponse' + indexOfelement, '#shutterNightNotify' + indexOfelement)" [attr.id]="'shutterNightButton' + indexOfelement">Envoyer</button>
-                                                    <div class="response" [attr.id]="'shutterNightResponse' + indexOfelement"></div>
-                                                </div>
+                                    <div class="col-12 col-md-2">
+                                        <span>Fin :</span> {{ split(item.key,1) }}
+                                        <br>
+                                    </div>
+                                    <div class="col-11 col-md-2">
+                                        <span>Jour(s) ouvert :</span> {{ item.value }}
+                                    </div>
+                                    <div class="col-11 col-md-6">
+                                        <button class="notify-link" [attr.id]="'shutterDaysNotify' + indexOfelement"
+                                            data-toggle="collapse" [attr.data-target]="'#shutterDays' + indexOfelement"
+                                            aria-expanded="false"
+                                            [attr.aria-controls]="'#shutterDays' + indexOfelement">Notifier</button>
+                                        <div class="collapse" [attr.id]="'shutterDays' + indexOfelement">
+                                            <textarea [attr.id]="'shutterDaysMessage' + indexOfelement" rows="5">Le volet numéro {{ objectId }} a été mal utilisé, il est resté ouvert {{ item.value }} jour(s).
+                                                    </textarea><br />
+                                            <button class="send-link"
+                                                (click)="sendNotification('#shutterDaysMessage' + indexOfelement, '#shutterDaysResponse' + indexOfelement, '#shutterDaysNotify' + indexOfelement)"
+                                                [attr.id]="'shutterDaysButton' + indexOfelement">Envoyer</button>
+                                            <div class="response" [attr.id]="'shutterDaysResponse' + indexOfelement">
                                             </div>
                                         </div>
-                                        <hr>
                                     </div>
                                 </div>
+                                <div class="row" *ngIf='item.value == 0'>
+                                    <div class="col-12 col-md-3">
+                                        <span>Ouvert à :</span> {{ split(item.key,0) }}
+                                        <br>
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <span>Fermé à :</span> {{ split(item.key,1) }}
+                                        <br>
+                                    </div>
+                                    <div class="col-11 col-md-6">
+                                        <button class="notify-link" [attr.id]="'shutterNightNotify' + indexOfelement"
+                                            data-toggle="collapse" [attr.data-target]="'#shutterNight' + indexOfelement"
+                                            aria-expanded="false"
+                                            [attr.aria-controls]="'#shutterNight' + indexOfelement">Notifier</button>
+                                        <div class="collapse" [attr.id]="'shutterNight' + indexOfelement">
+                                            <textarea [attr.id]="'shutterNightMessage' + indexOfelement" rows="5">Le volet numéro {{ objectId }} a été mal utilisé, il a été ouvert en pleine nuit à {{ split(item.key,0) }}.
+                                                    </textarea><br />
+                                            <button class="send-link"
+                                                (click)="sendNotification('#shutterNightMessage' + indexOfelement, '#shutterNightResponse' + indexOfelement, '#shutterNightNotify' + indexOfelement)"
+                                                [attr.id]="'shutterNightButton' + indexOfelement">Envoyer</button>
+                                            <div class="response" [attr.id]="'shutterNightResponse' + indexOfelement">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
                             </div>
                         </div>
                     </div>
@@ -290,28 +311,31 @@
                     <div *ngIf="object.objectType == 'ALARMCLOCK'">
                         <h3>Monitoring</h3>
                         <div class="row">
-                            <h4 class="col-12 col-md-11" style="color:brown">Alarmes programées la nuit</h4>
-                            <div class="col-12 col-md-1 togglers" data-toggle="collapse" data-target="#nightAlarms"
-                                aria-expanded="false" aria-controls="nightAlarms">
-                                +
-                            </div>
-                            <div class="col-12 collapse" id="nightAlarms" *ngFor="let item of alarmDuringNightime; let indexOfelement=index">
+                            <div class="col-12" id="nightAlarms"
+                                *ngFor="let item of alarmDuringNightime; let indexOfelement=index">
+                                <h4 *ngIf="indexOfelement == 0" style="color:brown">Alarmes programées la nuit</h4>
                                 <div class="row">
                                     <div class="col-12 col-md-3">
-                                        <span>Programmation :</span> {{ item.data }}
+                                        <span>Programmation :</span> {{ item.data | date: "HH:mm" }}
                                         <br>
                                     </div>
                                     <div class="col-12 col-md-3">
-                                        <span>Date :</span> {{ item.messageTimestamp }}
+                                        <span>Date :</span> {{ item.messageTimestamp | date: 'yyyy/MM/dd HH:mm:ss' }}
                                         <br>
                                     </div>
                                     <div class="col-11 col-md-6">
-                                        <button class="notify-link" [attr.id]="'alarmNightNotify' + indexOfelement"  data-toggle="collapse"  [attr.data-target]="'#alarmNight' + indexOfelement" aria-expanded="false" [attr.aria-controls]="'#alarmNight' + indexOfelement">Notifier</button>
+                                        <button class="notify-link" [attr.id]="'alarmNightNotify' + indexOfelement"
+                                            data-toggle="collapse" [attr.data-target]="'#alarmNight' + indexOfelement"
+                                            aria-expanded="false"
+                                            [attr.aria-controls]="'#alarmNight' + indexOfelement">Notifier</button>
                                         <div class="collapse" [attr.id]="'alarmNight' + indexOfelement">
-                                            <textarea  [attr.id]="'alarmNightMessage' + indexOfelement" rows="5">Le réveil numéro {{ objectId }} a été mal utilisé, il a sonné en pleine nuit à {{ split(item.key,0) }}.
-                                            </textarea><br/>
-                                            <button class="send-link" (click)="sendNotification('#alarmNightMessage' + indexOfelement, '#alarmNightResponse' + indexOfelement, '#alarmNightNotify' + indexOfelement)" [attr.id]="'alarmNightButton' + indexOfelement">Envoyer</button>
-                                            <div class="response" [attr.id]="'alarmNightResponse' + indexOfelement"></div>
+                                            <textarea [attr.id]="'alarmNightMessage' + indexOfelement" rows="5">Le réveil numéro {{ objectId }} a été mal utilisé, il a été programmé pour sonner en pleine nuit à {{ item.data | date: "HH:mm" }}.
+                                            </textarea><br />
+                                            <button class="send-link"
+                                                (click)="sendNotification('#alarmNightMessage' + indexOfelement, '#alarmNightResponse' + indexOfelement, '#alarmNightNotify' + indexOfelement)"
+                                                [attr.id]="'alarmNightButton' + indexOfelement">Envoyer</button>
+                                            <div class="response" [attr.id]="'alarmNightResponse' + indexOfelement">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

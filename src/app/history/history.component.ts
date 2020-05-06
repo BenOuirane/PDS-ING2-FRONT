@@ -47,27 +47,27 @@ export class HistoryComponent implements OnInit {
   histories: History[] = new Array<History>();
   object = new Objects();
   receiver = new User();
-  parameter : string = "5";
+  parameter: string = "5";
 
-  lamp= new Array<Lampe>();
-  oven= new Array<Oven>();
-  alarmClock= new Array<AlarmClock>();
-  coffeeMachine= new Array<CoffeeMachine>();
-  shutter= new Array<Shutter>();
+  lamp = new Array<Lampe>();
+  oven = new Array<Oven>();
+  alarmClock = new Array<AlarmClock>();
+  coffeeMachine = new Array<CoffeeMachine>();
+  shutter = new Array<Shutter>();
 
   startDate = new Date();
   endDate = new Date();
 
-  startDateString : string;
-  endDateString : string;
+  startDateString: string;
+  endDateString: string;
 
   usingHours = new Array<Map<String[], number>>();
   powered = new Map<String[], number>();
   poweredTooLong = new Map<String[], number>();
-  
+
   favoriteColor = new String();
   favoriteIntensity = new String();
-  
+
   capsules = new Number;
 
   ovenTooHigh = new Array<History>();
@@ -82,7 +82,9 @@ export class HistoryComponent implements OnInit {
   user: User;
   notification: Notification = new Notification();
 
-  constructor(private activatedroute: ActivatedRoute,private objectsService : ObjectService,  private objectsHistoryService : ObjectsHistoryService, private ovenHistoryService: OvenHistoryService, 
+  datePipe = new DatePipe("fr-FR");
+
+  constructor(private activatedroute: ActivatedRoute, private objectsService: ObjectService, private objectsHistoryService: ObjectsHistoryService, private ovenHistoryService: OvenHistoryService,
     private shutterHistoryService: ShutterHistoryService, private alarmClockHistoryService: AlarmClockHistoryService, private coffeeMachineHistoryService: CoffeeMachineHistoryService,
     private lampeService: LampeService, private ovenService: OvenService, private shutterService: ShutterService, private alarmClockService: AlarmClockService, private coffeeMachineService: CoffeeMachineService,
     private residentService: ResidentService, private notificationService: NotificationService) { }
@@ -90,16 +92,21 @@ export class HistoryComponent implements OnInit {
   ngOnInit() {
     this.objectId = parseInt(this.activatedroute.snapshot.paramMap.get("id"));
     this.residentId = parseInt(this.activatedroute.snapshot.paramMap.get("userId"));
+
+    this.endDate.setDate(this.endDate.getDate() - 7);
+
+    this.startDateString = this.datePipe.transform(this.startDate, 'yyyy-MM-dd hh:mm:ss');
+    this.endDateString = this.datePipe.transform(this.endDate, 'yyyy-MM-dd hh:mm:ss');
+
     this.getObjects();
   }
 
-  sendNotification(elementMessage : string, element : string, elementToggler: string){
+  sendNotification(elementMessage: string, element: string, elementToggler: string) {
     this.user = JSON.parse(localStorage.getItem('user'));
 
     this.residentService.getResidentById(this.residentId).subscribe(
       data => {
         this.notification.message = $(elementMessage).val();
-        console.log(this.notification.message)
         this.notification.receiver = data;
         this.notification.title = "Mauvaise utilisation d'un appareil";
         this.notification.sender = this.user;
@@ -116,27 +123,47 @@ export class HistoryComponent implements OnInit {
           },
           error => {
             console.log(error),
-            $(elementMessage).append("Un problème est survenu, veuillez réessayer plus tard.");
+              $(elementMessage).append("Un problème est survenu, veuillez réessayer plus tard.");
           });
-
-            this.receiver = data;
-            console.log(this.receiver)
-          }
-        )
+      }
+    )
   }
 
-  // Prendre en charge la date, 'il y a une semaine, il y a un mois"
-  getObjects(){
+  changePeriod() {
+    this.endDate = new Date();
+    switch ($("#picker-period option:selected").val()) {
+      case "day":
+        this.endDate.setDate(this.endDate.getDate() - 1);
+        break;
+      case "week":
+        this.endDate.setDate(this.endDate.getDate() - 7);
+        break;
+      case "month":
+        this.endDate.setDate(this.endDate.getDate() - 30);
+        break;
+      case "year":
+        this.endDate.setDate(this.endDate.getDate() - 365);
+        break;
+
+      default:
+        break;
+    }
+
+    this.endDateString = this.datePipe.transform(this.endDate, 'yyyy-MM-dd hh:mm:ss');
+    this.getHistory();
+  };
+
+  getObjects() {
     this.objectsService.getObjectById(this.objectId).subscribe(
       data => {
         this.object = data;
         switch (this.object.objectType) {
           case 'LAMP':
-              this.lampeService.getlampe(this.object).subscribe(
-                data => {
-                  this.lamp = data;
-                  this.getHistory();
-                });
+            this.lampeService.getlampe(this.object).subscribe(
+              data => {
+                this.lamp = data;
+                this.getHistory();
+              });
             break;
           case 'OVEN':
             this.ovenService.getOven(this.object).subscribe(
@@ -173,25 +200,15 @@ export class HistoryComponent implements OnInit {
     )
   }
 
-  changeParam(){
+  changeParam() {
     this.parameter = $('#hourParameters').val();
     this.getHistory();
   }
 
   getHistory() {
-    var datePipe = new DatePipe("fr-FR");
-
-    // Testing with the date of 7 days ago
-    this.endDate.setDate(this.endDate.getDate() - 7);
-
-    // Creating date strings
-    this.startDateString = datePipe.transform(this.startDate, 'yyyy-MM-dd hh:mm:ss');
-    this.endDateString = datePipe.transform(this.endDate, 'yyyy-MM-dd hh:mm:ss');
-
     switch (this.object.objectType) {
       case 'LAMP':
         this.objectTypeString = "Lampe";
-        // Get history by date
         this.objectsHistoryService.getHistoryUsingHoursByDate(this.objectId, this.parameter, this.startDateString, this.endDateString, "lamp").subscribe(
           data => {
             this.usingHours = data;
@@ -212,13 +229,12 @@ export class HistoryComponent implements OnInit {
         break;
       case 'OVEN':
         this.objectTypeString = "Four";
-        // Get history by date
         this.ovenHistoryService.getHistory(this.objectId).subscribe(
           data => {
             this.histories = data;
             this.histories.reverse();
           }
-        ); 
+        );
         this.objectsHistoryService.getHistoryFavoriteParameterByDate(this.objectId, "mode", this.startDateString, this.endDateString, "oven").subscribe(
           data => {
             this.favoriteMode = data;
@@ -241,25 +257,23 @@ export class HistoryComponent implements OnInit {
 
       case 'SHUTTER':
         this.objectTypeString = "Volet";
-        // Get history by date
         this.shutterHistoryService.getHistory(this.objectId).subscribe(
           data => {
             this.histories = data;
             this.histories.reverse();
           }
-        ); 
+        );
 
         this.shutterHistoryService.getWronglyOpened(this.objectId, this.startDateString, this.endDateString).subscribe(
           data => {
             this.wronglyOpened = data;
           }
         );
-        
+
         break;
 
       case 'ALARMCLOCK':
         this.objectTypeString = "Réveil";
-        // Get history by date
         this.objectsHistoryService.getHistoryFavoriteParameterByDate(this.objectId, "radio", this.startDateString, this.endDateString, "alarmClock").subscribe(
           data => {
             this.favoriteRadio = data;
@@ -278,14 +292,12 @@ export class HistoryComponent implements OnInit {
         break;
 
       case 'COFFEEMACHINE':
-        this.objectTypeString = "Machine à café" ;
-        // Get history by date
+        this.objectTypeString = "Machine à café";
         this.objectsHistoryService.getHistoryUsingHoursByDate(this.objectId, this.parameter, this.startDateString, this.endDateString, "coffeeMachine").subscribe(
           data => {
             this.usingHours = data;
             this.powered = this.usingHours[0];
             this.poweredTooLong = this.usingHours[1];
-            console.log(this.poweredTooLong)
           }
         );
 
@@ -306,8 +318,4 @@ export class HistoryComponent implements OnInit {
     var array = string.split(',');
     return array[nb];
   }
-  
-
-  
-
 }

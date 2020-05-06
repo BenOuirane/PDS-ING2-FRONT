@@ -136,7 +136,7 @@
                         <span *ngIf="!alarmClock.status">Réveil non programmé</span>
                     </div>
                     <div>Sonnerie à : 
-                        <span>{{ alarmClock.time | date: "hh:mm a" }}</span> 
+                        <span>{{ alarmClock.alarm | date: "HH:mm" }}</span> 
                     </div>
                     <div>Radio allumée : 
                         <span *ngIf="alarmClock.radioStatus">Oui</span> 
