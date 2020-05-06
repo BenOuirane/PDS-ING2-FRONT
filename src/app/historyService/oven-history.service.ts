@@ -9,8 +9,8 @@ import { History } from '../historyService/history';
 })
 export class OvenHistoryService {
 
-  //private baseUrl = 'http://localhost:8080/api';
-  private baseUrl = 'http://172.31.254.61:8080/api';
+  private baseUrl = 'http://localhost:8080/api';
+  //private baseUrl = 'http://172.31.254.61:8080/api';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -18,7 +18,7 @@ export class OvenHistoryService {
     return this.http.put<Array<History>>(`${this.baseUrl}` + `/history/oven`, id);
   }
 
-  getTemperatureTooHigh(id: Number, start : string, end : string, temperature : Number) : Observable<Array<History>>{
+  getTemperatureTooHigh(id: Number, start : string, end : string, temperature : string) : Observable<Array<History>>{
     return this.http.put<Array<History>>(`${this.baseUrl}` + `/temperatureMax/oven`, {'id': id, "temperature" : temperature, 'start': start, 'end' : end });
   }
 }

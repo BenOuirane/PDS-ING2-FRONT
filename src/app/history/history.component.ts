@@ -48,6 +48,7 @@ export class HistoryComponent implements OnInit {
   object = new Objects();
   receiver = new User();
   parameter: string = "5";
+  tempParameter: string = "600";
 
   lamp = new Array<Lampe>();
   oven = new Array<Oven>();
@@ -205,6 +206,11 @@ export class HistoryComponent implements OnInit {
     this.getHistory();
   }
 
+  changeTemp(){
+    this.tempParameter = $("#tempParameters").val();
+    this.getHistory();
+  }
+
   getHistory() {
     switch (this.object.objectType) {
       case 'LAMP':
@@ -245,10 +251,11 @@ export class HistoryComponent implements OnInit {
             this.usingHours = data;
             this.powered = this.usingHours[0];
             this.poweredTooLong = this.usingHours[1];
+            console.log(this.usingHours[0])
           }
         );
         // temperature asked on ihm
-        this.ovenHistoryService.getTemperatureTooHigh(this.objectId, this.startDateString, this.endDateString, 600).subscribe(
+        this.ovenHistoryService.getTemperatureTooHigh(this.objectId, this.startDateString, this.endDateString, this.tempParameter).subscribe(
           data => {
             this.ovenTooHigh = data;
           }
