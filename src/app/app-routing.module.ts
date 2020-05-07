@@ -29,6 +29,8 @@ import { MapPrototypeComponent } from './layouts/map-prototype/map-prototype.com
 import { ObjectMapComponent } from './object-map/object-map.component';
 import { HistoryComponent } from './history/history.component';
 import {IndicatorsComponent} from './indicators/indicators.component';
+import { HealthStateComponent} from './health-state/health-state.component';
+import {HealthResidentComponent} from "./health-resident/health-resident.component";
 
 
 
@@ -43,6 +45,13 @@ const routes: Routes = [
   { path: 'indicators', component: IndicatorsComponent },
 
   { path: 'add', component: CreateCandidateComponent },
+
+  { path: 'health-state', component: HealthStateComponent },
+  {
+    path: 'health-resident/:id',
+    component: HealthResidentComponent,
+    data: { title: 'Health Resident ' }
+  },
 
 
   { path: 'search', component: SearchBarComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},

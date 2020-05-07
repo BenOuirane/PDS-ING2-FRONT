@@ -12,8 +12,8 @@ export class UserService {
   // /!\ Uncomment the first line and comment the second line if you test in localhost /!\
   // /!\ Keep the second line uncommented before you push your code on git /!\
 
-  //private baseUrl = 'http://localhost:8080/api';
-  private baseUrl = 'http://172.31.254.61:8080/api';
+  private baseUrl = 'http://localhost:8080/api';
+  //private baseUrl = 'http://172.31.254.61:8080/api';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -45,6 +45,6 @@ export class UserService {
     http://{localhost} or {172.31.254.61}:8080/api/users/create
     with no body parameter
      */
-    return this.http.get(`http://172.31.254.61:8080/api/` + `/referential_resident2`);
+    return this.http.get(`http://localhost:8080/api/` + `/referential_resident2`);
   }
 }
