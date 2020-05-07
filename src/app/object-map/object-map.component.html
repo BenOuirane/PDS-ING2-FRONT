@@ -70,7 +70,7 @@
                         <span>{{ lamp.intensity }} %</span> 
                     </div>
                     <div class="d-flex flex-row justify-content-center">
-                        <a [routerLink]="['/history', resident.user.id, lamp.objects.id]" target="_blank" class="use-link">Voir l'utilisation</a>
+                        <a [attr.id]="'lamp' + lamp.objects.id" [routerLink]="['/history', resident.user.id, lamp.objects.id]" target="_blank" class="use-link">Voir l'utilisation</a>
                     </div>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                         <span>{{ shutter.hourOff | date: "hh:mm a"}}</span> 
                     </div>
                     <div class="d-flex flex-row justify-content-center">
-                        <a [routerLink]="['/history', resident.user.id, shutter.objects.id]" target="_blank" class="use-link">Voir l'utilisation</a>
+                        <a [attr.id]="'shutter' + shutter.objects.id" [routerLink]="['/history', resident.user.id, shutter.objects.id]" target="_blank" class="use-link">Voir l'utilisation</a>
                     </div>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                         <span>{{ coffeeMachine.waterLevel }} l</span> 
                     </div>
                     <div class="d-flex flex-row justify-content-center">
-                        <a [routerLink]="['/history', resident.user.id , coffeeMachine.objects.id]" target="_blank" class="use-link">Voir l'utilisation</a>
+                        <a [attr.id]="'coffeeMachine' + coffeeMachine.objects.id" [routerLink]="['/history', resident.user.id , coffeeMachine.objects.id]" target="_blank" class="use-link">Voir l'utilisation</a>
                     </div>
                 </div>
             </div>
@@ -146,7 +146,7 @@
                         <span>{{ alarmClock.radioHrz | number }}</span> 
                     </div>
                     <div class="d-flex flex-row justify-content-center">
-                        <a [routerLink]="['/history', resident.user.id, alarmClock.objects.id]" target="_blank" class="use-link">Voir l'utilisation</a>
+                        <a [attr.id]="'alarmClock' + alarmClock.objects.id" [routerLink]="['/history', resident.user.id, alarmClock.objects.id]" target="_blank" class="use-link">Voir l'utilisation</a>
                     </div>
                 </div>
             </div>
@@ -176,7 +176,7 @@
                         <span>{{ oven.mode }}</span> 
                     </div>
                     <div class="d-flex flex-row justify-content-center">
-                        <a [routerLink]="['/history', resident.user.id, oven.objects.id]" target="_blank" class="use-link">Voir l'utilisation</a>
+                        <a [attr.id]="'oven' + oven.objects.id" [routerLink]="['/history', resident.user.id, oven.objects.id]" target="_blank" class="use-link">Voir l'utilisation</a>
                     </div>
                 </div>
             </div>

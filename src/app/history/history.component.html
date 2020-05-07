@@ -44,21 +44,21 @@
                     <div class="row" *ngIf="object.objectType == 'OVEN'">
                         <div class="col-12 col-md-6">
                             <div>Statut :
-                                <span *ngIf="oven.status">Allumé</span>
-                                <span *ngIf="!oven.status">Eteint</span>
+                                <span *ngIf="oven[0].status">Allumé</span>
+                                <span *ngIf="!oven[0].status">Eteint</span>
                             </div>
                             <div>Température programmée :
-                                <span>{{ oven.programTemp }}</span>
+                                <span>{{ oven[0].programTemp }}</span>
                             </div>
                             <div>Température effective :
-                                <span>{{ oven.effectiveTemp }}</span>
+                                <span>{{ oven[0].effectiveTemp }}</span>
                             </div>
                             <div>Heure de lancement :
-                                <span *ngIf="oven.scheduleTime == null">Non Renseigné</span>
-                                <span *ngIf="oven.scheduleTime != null">{{ oven.scheduleTime | date: "hh:mm a"}}</span>
+                                <span *ngIf="oven[0].scheduleTime == null">Non Renseigné</span>
+                                <span *ngIf="oven[0].scheduleTime != null">{{ oven[0].scheduleTime | date: "hh:mm a"}}</span>
                             </div>
                             <div>Mode :
-                                <span>{{ oven.mode }}</span>
+                                <span>{{ oven[0].mode }}</span>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
@@ -70,18 +70,18 @@
                     <div class="row" *ngIf="object.objectType == 'ALARMCLOCK'">
                         <div class="col-12 col-md-6">
                             <div>Statut de l'alarme :
-                                <span *ngIf="alarmClock.status">Réveil programmé</span>
-                                <span *ngIf="!alarmClock.status">Réveil non programmé</span>
+                                <span *ngIf="alarmClock[0].status">Réveil programmé</span>
+                                <span *ngIf="!alarmClock[0].status">Réveil non programmé</span>
                             </div>
                             <div>Sonnerie à :
-                                <span>{{ alarmClock.alarm }}</span>
+                                <span>{{ alarmClock[0].alarm | date: "HH:mm" }}</span>
                             </div>
                             <div>Radio allumée :
-                                <span *ngIf="alarmClock.radioStatus">Oui</span>
-                                <span *ngIf="!alarmClock.radioStatus">Non</span>
+                                <span *ngIf="alarmClock[0].radioStatus">Oui</span>
+                                <span *ngIf="!alarmClock[0].radioStatus">Non</span>
                             </div>
                             <div>Dernière fréquence radio utilisée :
-                                <span>{{ alarmClock.radioHrz | number }}</span>
+                                <span>{{ alarmClock[0].radioHrz }}</span>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
@@ -89,7 +89,7 @@
                             <span class="caracteristics">Radio préférée : </span>
                             {{ favoriteRadio }}<br />
                             <span class="caracteristics">Heure de réveil préférée : </span>
-                            {{ favoriteAlarm }}
+                            {{ favoriteAlarm | date: "HH:mm" }}
                         </div>
                     </div>
                     <div class="row" *ngIf="object.objectType == 'COFFEEMACHINE'">
