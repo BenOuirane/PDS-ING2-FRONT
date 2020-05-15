@@ -25,8 +25,17 @@
                         >Mes Objets connectés</a></li>
             <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'RESIDENT'"><a [routerLink]="['notifications']" 
                         >Notifications</a></li>
+            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['listcandidate']" 
+                            >Liste-des-candidats</a></li>
 
-                        <li  ><a  href="add" >candidate </a></li>
+             <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['prioritycandidate']" 
+                                >Liste-de-priorité</a></li>
+                           
+             <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['add']" 
+                                >Inscrire </a></li>   
+             <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['note']" 
+                                    >Score </a></li>            
+                        
             <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['objects']" 
                 >Monitorer les objets</a></li>
             <li *ngIf="authenticated()" id="menu-item-202" class="menu-item"><a

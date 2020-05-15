@@ -34,6 +34,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ObjectMapComponent } from './object-map/object-map.component';
 import { HistoryComponent } from './history/history.component';
 
+import { ListCandidateComponent } from './list-candidate/list-candidate.component';
+import { PriorityCandidateComponent } from './priority-candidate/priority-candidate.component';
+import { ScoreService } from './Score_service/score.service';
+import { NoteProfilesComponent } from './note-profiles/note-profiles.component';
 
 
 @NgModule({
@@ -50,7 +54,10 @@ import { HistoryComponent } from './history/history.component';
     UpdateDatamockComponent,
     ObjectComponent,
     ObjectMapComponent,
-    HistoryComponent
+    HistoryComponent,
+    ListCandidateComponent,
+    PriorityCandidateComponent,
+    NoteProfilesComponent
   ],
   imports: [
     BrowserModule,
@@ -68,10 +75,12 @@ import { HistoryComponent } from './history/history.component';
     MatButtonModule,
     MatFormFieldModule,
     AmazingTimePickerModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule
   ],
   providers: [
     CandidateService,
+    ScoreService,
     CommonModule,
     {
       provide: LOCALE_ID, useValue: "fr-FR"

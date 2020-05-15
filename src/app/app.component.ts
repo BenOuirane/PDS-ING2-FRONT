@@ -22,6 +22,13 @@ export class AppComponent {
     this.numberNotification = 0;
   }
 
+ tolistprio(){
+
+  this.router.navigate(["prioritycandidate"]);
+ }
+
+
+
   ngOnInit() {
     this.toggleHeaderStyle();
 
