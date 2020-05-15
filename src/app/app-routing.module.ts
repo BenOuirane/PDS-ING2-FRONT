@@ -26,6 +26,9 @@ import { UpdateDatamockComponent } from './update-datamock/update-datamock.compo
 import { ObjectComponent } from './object/object.component'; 
 import { ObjectMapComponent } from './object-map/object-map.component'; 
 import { HistoryComponent } from './history/history.component'; 
+import { ListCandidateComponent } from './list-candidate/list-candidate.component';
+import { PriorityCandidateComponent } from './priority-candidate/priority-candidate.component';
+import { NoteProfilesComponent } from './note-profiles/note-profiles.component';
 
 
 
@@ -39,7 +42,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
 
   { path: 'add', component: CreateCandidateComponent },
-
+  { path: 'note', component: NoteProfilesComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'} },
+  { path: 'listcandidate', component: ListCandidateComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+  { path: 'prioritycandidate', component: PriorityCandidateComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'search', component: SearchBarComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'updatedata', component: UpdateDatamockComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'objects', component: ObjectMapComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
