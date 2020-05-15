@@ -1,0 +1,76 @@
+<br><br><br><br><br><br><br>
+
+<div  class="container" *ngIf="candidates?.length == 0" >  
+    <div class="card">
+        <div class="card-header">
+            <h3>Il n'y a aucun candidat à afficher</h3>
+        </div>
+    </div>
+</div>
+
+<div  class="container" *ngIf="candidates?.length > 0" >  
+    <div class="card">
+        <div class="card-header">
+            <h3>Liste des candidats</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th><b>Id</b></th>
+                        <th><b>Prénom</b></th>
+                        <th><b>Nom</b></th>
+                        <th><b>E mail</b></th>
+                        <th><b>Le genre</b></th>
+                        <th><b>Age</b></th>
+                        <th><b>Profiles</b></th>
+                       
+                        
+                    </tr>
+                </thead>
+                <thead>
+                    <tr *ngFor="let candidate of candidates" >
+                     
+                        <td>{{candidate.id}}</td>
+                        <td>{{candidate.firstname}}</td>
+                        <td>{{candidate.lastname}}</td>
+                        <td>{{candidate.mail}}</td>
+                        <td>{{candidate.genre}} </td>
+                        <td>{{candidate.age}} ans</td>
+                        
+                        <td><ul>
+                            <li>{{candidate.autonomy}} </li>
+                            <br><li>{{candidate.sport}}
+                                
+                            </li>
+                             <br><li>{{candidate.social_activity}}
+                                
+                             </li>
+                             <br>  <li>{{candidate.type_de_maladie}}
+                            
+                          </li>
+                           <br><li>{{candidate.habit}}
+                            
+                           </li>
+                           <br><li>{{candidate.etat_sociale}}
+                            
+                           </li>
+                           <br><li>{{candidate.finance}}
+                           
+                           </li>
+                          
+                            
+                        </ul> </td>
+                        
+                      
+                    </tr>
+                 
+                </thead>
+               
+            </table>
+        </div>
+    </div>
+</div>    
+<br><br><br>
+
+

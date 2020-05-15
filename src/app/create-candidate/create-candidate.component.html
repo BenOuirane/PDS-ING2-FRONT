@@ -1,221 +1,349 @@
-
-
+<br><br><br><br>
 <div class="container">
-    <div class="row">
-        <div class="text-center border border-light p-5">
-            <div class="col-12">
-                <div class="row form_intro">
-         
-                
-          <!-- form subscription -->
-          
-<form class="text-center border border-light p-5"   (ngSubmit)="postCandidate()"  >
+  <div class="row">
+    <div class="text-center border border-light p-5">
+      <div class="col-12">
+        <div class="row form_intro">
 
-    <h2 class="bold"   class="text-uppercase"  style="text-shadow: 2px 2px  #87CEFA; color: #000033" > 
-   <img src="../../assets/in.png" alt="" width= 120px  height=120px >
-    <b> Subscribe </b>  </h2>
-    <br>
-    <h4 style="color: #00004d"  >
-      <b>Please fill-in the following form.</b>  
-    <br>
-    <b>It's fast and easy.</b>
-    </h4>
-     <br>
-      <!-- FirstName -->
-      <div class="form-group">
-       
-        <small id="firstnameHelp" class="form-text text-muted">Enter your FirstName please.</small>
-            <input type="text" class="form-control" id="firstname"  name="firstname" [(ngModel)]="candidate.firstname"  
-            aria-describedby="lastnamelHelp"  placeholder=" FirstName "  />
-            <div class="col-10" *ngIf="candidateError?.firstname">
-              <span class="text text-danger">
-                {{candidateError.firstname}}
-              </span>
-    
+
+          <!-- form subscription  -->
+
+          <form class="text-center border border-light p-5"  
+          id="ben_form" class="card card-body" (ngSubmit)="postCandidate()">
+
+            <h2 class="bold" class="text-uppercase" style="text-shadow: 2px 2px  #87CEFA; color: #000033">
+              <img src="../../assets/in.png" alt="" width=120px height=120px>
+              <b> Inscrire </b> </h2>
+            <br>
+            <h4 style="color: #00004d">
+              <b>Veuillez remplir le formulaire suivant.</b>
+              <div>
+                <br>
+              </div>
+
+            </h4>
+            <br>
+
+            <!-- FirstName -->
+            <div class="col-12">
+              <div class="row form_intro">
+                <div class="col-12 col-md-5">
+                  <small id="firstnameHelp" class="form-text text-muted">Entrez votre prénom.</small>
+                  <input type="text" class="form-control" id="firstname" name="firstname"
+                    [(ngModel)]="candidate.firstname" placeholder=" FirstName " />
+                  <div class="col-10" *ngIf="candidateError?.firstname">
+                    <span class="text text-danger">
+                      {{candidateError.firstname}}
+                    </span>
+
+                  </div>
+                </div>
+                <!-- End FirstName -->
+                <div class="col-12 col-md-2 text-center">
+                  <h2> </h2>
+                </div>
+                <!-- LastName -->
+                <div class="col-12 col-md-5">
+                  <small id="lastnameHelp" class="form-text text-muted">Entrez votre nom de famille.</small>
+                  <input type="text" class="form-control" id="lastname" name="lastname" [(ngModel)]="candidate.lastname"
+                    placeholder=" LastName " />
+                  <div class="col-10" *ngIf="candidateError?.lastname">
+                    <span class="text text-danger">
+                      {{candidateError.lastname}}
+                    </span>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--End LastName-->
+            <div>
+              <br>
+            </div>
+            <!-- age -->
+            <div class="col-12">
+              <div class="row form_intro">
+                <div class="col-12 col-md-5">
+                  <small id="age" class="form-text text-muted">Entrez votre âge.</small>
+                  <input  required type="text" class="form-control" 
+                  id="age" name="age" [(ngModel)]="candidate.age"
+                   
+                    placeholder="Enter age" />
+                  <div class="col-10" *ngIf="candidateError?.age">
+                    <span class="text text-danger">
+                      {{candidateError.age}}
+                    </span>
+
+                  </div>
+                </div>
+                <!-- End  age  -->
+                <div class="col-12 col-md-2 text-center">
+                  <h2> </h2>
+                </div>
+                <!-- genre -->
+                
+                <div class="col-12 col-md-5">
+                  <small id="sexeHelp" class="form-text text-muted">Choisissez votre genre.</small>
+                  <select class="custom-select" id="genre" name="genre" [(ngModel)]="candidate.genre">
+                    <option > </option>
+                    <option value="Woman">Femme</option>
+                    <option value="Man">Homme</option>
+                  </select>
+                  <div class="col-10" *ngIf="candidateError?.genre">
+                    <span class="text text-danger">
+                      {{candidateError.genre}}
+                    </span>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- genre -->
+
+            <div>
+              <br>
+            </div>
+
+            <!-- Email -->
+            <div class="col-15 col-md-20">
+              <small id="emailHelp" class="form-text text-muted">Entrez votre adresse email.</small>
+              <input type="email" class="form-control" id="e_mail" name="e_mail" [(ngModel)]="candidate.mail"
+                placeholder="you@example.com" />
+              <div class="col-6" *ngIf="candidateError?.mail">
+                <span class="text text-danger">
+                  {{candidateError.mail}}
+                </span>
+
+              </div>
+            </div>
+            <!-- End Email -->
+            <div>
+              <br>
+            </div>
+            <!--  Questionnaire -->
+
+            <!-- Autnomie-->
+            <div class="form-group">
+              <strong id="AutnomyHelp" class="card card-body">Vous êtes en situation de perte d'autonomie ? </strong>
+              <br>
+              <select class="form-control" id="autnomy" name="autnomy" [(ngModel)]="candidate.autonomy">
+                <option > </option>
+                <option value="NO_SELFE_RULING"> Oui </option>
+                <option value="SELF_RULING "> Non</option>
+              </select>
+              <div class="col-10" *ngIf="candidateError?.autonomy">
+                <span class="text text-danger">
+                  {{candidateError.autonomy}}
+                </span>
+
+              </div>
+            </div>
+            <!-- Autnomie-->
+
+            <!-- Finace-->
+            <div class="form-group">
+              <strong id="financeHelp" class="card card-body">Quelle est la source principale de revenu ?</strong><br>
+              <select class="form-control" id="finance" name="finance" [(ngModel)]="candidate.finance">
+                <option > </option>
+                <option value="BAD_FINANCIAL_CONDITION">  Le salaire </option>
+                <option value="BAD_FINANCIAL_CONDITION">  Le petit commerce
+                </option>
+                <option value="BAD_FINANCIAL_CONDITION">  Aide régulière de la famille ou de proches</option>
+                <option value="BAD_FINANCIAL_CONDITION">  Revenu de solidarité active (RSA)
+
+                </option>
+                <option value="GOOD_FINANCIAL_CONDITION">   Le grand commerce</option>
+                <option value="GOOD_FINANCIAL_CONDITION"> Les activités libre (cabinets d'avocats, médecins...)
+                </option>
+              </select>
+              <div class="col-10" *ngIf="candidateError?.finance">
+                <span class="text text-danger">
+                  {{candidateError.finance}}
+                </span>
+
+              </div>
+            </div>
+            <!-- Finace-->
+            <!-- Sport-->
+            <div class="form-group">
+              <strong id="sportHelp" class="card card-body">Avez-vous fait régulièrement du sport ? </strong> <br>
+              <select class="form-control" id="sport" name="sport" [(ngModel)]="candidate.sport">
+                <option > </option>
+                <option value="ATHLETIC "> Oui </option>
+                <option value="NO_ ATHLETIC "> Non</option>
+              </select>
+              <div class="col-10" *ngIf="candidateError?.sport">
+                <span class="text text-danger">
+                  {{candidateError.sport}}
+                </span>
+
+              </div>
+            </div>
+            <!-- Sport-->
+
+            <!-- Social-->
+            <div class="form-group">
+              <strong id="social_activityHelp" class="card card-body">Vous pratiquez une activité sociale
+                ? </strong> <br>
+              <select class="form-control" id="social_activity" name="social_activity"
+                [(ngModel)]="candidate.social_activity">
+                <option > </option>
+                <option value="SOCIABLE "> Art </option>
+                <option value="SOCIABLE ">Autre activités sociales
+                </option>
+                <option value="NO_SOCIABLE"> Aucun </option>
+              </select>
+              <div class="col-10" *ngIf="candidateError?.social_activity">
+                <span class="text text-danger">
+                  {{candidateError.social_activity}}
+                </span>
+
+              </div>
+            </div>
+            <!-- Social-->
+
+            <!-- Habit-->
+            <div class="row">
+              <div class="col">
+            <div class="form-group">
+              <strong id="habitHelp" class="card card-body">Pendant vos temps libres vous préférez faire quoi ? </strong> <br>
+              <select class="form-control" id="habit" name="habit" [(ngModel)]="candidate.habit">
+                <option > </option>
+                <option value="LIKE_COOKING "> Cuisine </option>
+                <option value="LIKE_REST "> Regarder TV</option>
+                <option value="LIKE_GAMES "> Jouer (quel que soit le type de jeu) 
+                </option>
+              </select>
+              <div class="col-10" *ngIf="candidateError?.habit">
+                <span class="text text-danger">
+                  {{candidateError.habit}}
+                </span>
+
+              </div>
             </div>
           </div>
-     
-    <!-- LastName -->
-    <div class="form-group">   
-      
-      <small id="lastnameHelp" class="form-text text-muted">Enter your LastName please.</small>
-           <input type="text"  class="form-control"  id="lastname"  name="lastname"   [(ngModel)]="candidate.lastname"  
-            aria-describedby="lastnamelHelp" placeholder=" LastName "  /> 
-            <div class="col-10" *ngIf="candidateError?.lastname">
-              <span class="text text-danger">
-                {{candidateError.lastname}}
-              </span>
+        </div>
+            <!-- Habit -->
 
-            </div> 
-           
-          </div>
-          
-    <!-- Email -->
-    <div class="form-group">
-      <small id="emailHelp" class="form-text text-muted">Enter your email address please.</small>
-        <input type="email" class="form-control" id="e_mail" name="e_mail"  [(ngModel)]="candidate.mail" 
-        aria-describedby="emailHelp" placeholder="you@example.com" />
-        <div class="col-10" *ngIf="candidateError?.mail">
-          <span class="text text-danger">
-            {{candidateError.mail}}
-          </span>
+            <!--Questionnaire tree-->
+            <!--EtatSocial -->
+            <div class="row">
+              <div class="col">
+                   <div class="form-group">  
+                        <strong id="etat_socialeHelp" class="card card-body"> Dans le domicile où vous résidez <br>le plus souvent, vivez-vous en couple  :
+                          </strong> <br>
+                        <div class="radio" id="etat_sociale " >
+                          <label><input type="radio" name="ptnradio" data-toggle="collapse" (change)="toggleShow()" 
+                            >Non</label>
+                        </div>
+                        <div class="radio">
+                          <label><input type="radio" name="ptnradio"  (change)= "toggleHidden()"
+                            value= "GOOD_SOCIAL_CONDITION " [(ngModel)]="candidate.etat_sociale">Oui</label>
+                             
+                        </div>
+                       
+                      </div>
+                      <!--Etat Social Tree--> 
+                      <div  *ngIf="Coupleshow"  id="etat_sociale " >
+                        <div class="card card-body">
+                          <strong id="etat_sociale" class="card card-body">Avec vos enfants ou <br>ceux de votre conjoint(e)
+                            ?</strong> <br> 
+                          <select class="form-control"id="etat_sociale"  name="etat_sociale" [(ngModel)]="candidate.etat_sociale" >
+                            <option > </option>
+                            <option value= "GOOD_SOCIAL_CONDITION">Oui</option>
+                            <option value= "BAD_SOCIAL_CONDITION">Non</option>                        
+                          </select>
+                          
+                        </div>
+                      </div>
+              </div>
+              <div class="col-10" *ngIf="candidateError?.etat_sociale">
+                <span class="text text-danger">
+                  {{candidateError.etat_sociale}}
+                </span>
+            
+              </div>
+            </div>
+            <!--EtatSocial-->
+            <div>
+              <br>
+            </div>
+            <!--Type de maladie  -->
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <strong  class="card card-body">Avez-vous une maladie chronique? </strong> <br>
+                  <div class="radio">
+                    <label><input type="radio" name="radio" data-toggle="collapse" (change)=" Show()"
+                        aria-controls="Typedemaladie">Oui</label>
+                  </div>
+                  <div class="radio">
+                    <label><input type="radio" name="radio" (change)=" Hidden()" value="NOT_SICk "
+                        [(ngModel)]="candidate.type_de_maladie" >Non</label>
+
+                  </div>
+
+                </div>
+                <!--Type de maladie Tree-->
+                <div *ngIf="hide" id="Typedemaladie ">
+                  <div class="card card-body">
+                    <strong class="card card-body">Quel est ton maladie ?</strong> <br>
+                    <select class="form-control" id="type_de_maladie" name="type_de_maladie"
+                      [(ngModel)]="candidate.type_de_maladie">
+                      <option > </option>
+                      <option value="HYPERTENSION">Hypertension </option>
+                      <option value="DIABETES"> Diabète </option>
+                    </select>
+
+                  </div>
+                </div>
+              </div>
+              <div class="col-10" *ngIf="candidateError?.type_de_maladie">
+                <span class="text text-danger">
+                  {{candidateError.type_de_maladie}}
+                </span>
+
+              </div>
+            </div>
+            <!--Type de maladie -->
+
+            <!-- end Questionnaire-->
+
+            <div>
+              <br>
+            </div>
+
+
+
+            <!-- Sign in button -->
+
+
+
+            <button type="submit"  value="postCandidate" class="btn btn-outline-primary btn-lg btn-block">
+              Inscription</button>
+
+          </form>
+
+
+          <!-- fin form subscription -->
+
+
+
+
+
 
         </div>
       </div>
-       
-    <!-- Birth_day-->
-    <div class="form-group">
-      <small id="birth_dayHelp" class="form-text text-muted">Enter your Birth_date please.</small>
-            <input type="date" class="form-control" id="birth_date"  name="birth_date"   [(ngModel)]="candidate.birth_date" 
-            aria-describedby="birthHelp" placeholder="Enter Birth_date" />
-            <div class="col-10" *ngIf="candidateError?.birth_date">
-              <span class="text text-danger">
-                {{candidateError.birth_date}}
-              </span>
-    
-            </div>
-          </div>
-        
-    <!-- Sexe -->
-    <div class="form-group">   
-      <small id="sexeHelp" class="form-text text-muted">Choise your gender  please.</small> 
-        <select class="form-control" id="sexe"  name="sexe"  [(ngModel)]="candidate.sexe" >
-          <option>Selectionner </option>
-          <option value= "Woman">Woman</option>
-          <option value= "Man">Man</option>
-        </select>
-        <div class="col-10" *ngIf="candidateError?.sexe">
-          <span class="text text-danger">
-            {{candidateError.sexe}}
-          </span>
 
-        </div>
+      <div class="alert alert-success" role="alert" *ngIf="isCreated">
+        Félicitations, votre compte a été créé !
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="candidateExist">
+        Le candidat existe déjà !
+      </div>
     </div>
-         <br>
 
-      <!--  Questionnaire -->
-
-<!-- Autnomie-->
-<div class="form-group">  
-  <strong id="AutnomyHelp" >Are you in a situation of loss of autonomy? </strong> <br>
-  <select class="form-control" id="autnomy"  name="autnomy"  [(ngModel)]="candidate.autonomy"  >
-    <option>To select </option>
-    <option value= "SELF_RULING">	Yes </option>
-    <option value= "NO_SELFE_RULING"> No</option>
-  </select>
-  <div class="col-10" *ngIf="candidateError?.autonomy">
-    <span class="text text-danger">
-      {{candidateError.autonomy}}
-    </span>
 
   </div>
-</div>
-<!-- Autnomie-->
 
-<!-- Finace-->
-<div class="form-group">   
-  <strong id="financeHelp" >What is the main source of income?</strong>
-    <select class="form-control" id="finance"  name="finance"  [(ngModel)]="candidate.finance">
-      <option>To select </option>
-      <option value= "BAD_FINANCIAL_CONDITION">	Salary </option>
-      <option value= "BAD_FINANCIAL_CONDITION">Small business </option>
-      <option value= "BAD_FINANCIAL_CONDITION">Regular help from family</option>
-      <option value= "BAD_FINANCIAL_CONDITION">Active Solidarity Income</option>
-      <option value= "GOOD_FINANCIAL_CONDITION">Big business</option>
-      <option value= "GOOD_FINANCIAL_CONDITION">Free activities (lawyers, doctors)</option>
-    </select>
-    <div class="col-10" *ngIf="candidateError?.finance">
-      <span class="text text-danger">
-        {{candidateError.finance}}
-      </span>
-  
-    </div>
-</div>
-<!-- Finace-->
-<!-- Sport-->
-<div class="form-group">  
-  <strong id="sportHelp" >Did you exercise sport regularly  </strong> <br>
-  <select class="form-control" id="sport"  name="sport"  [(ngModel)]="candidate.sport" >
-    <option>To select </option>
-    <option value= "ATHLETIC ">	Yes </option>
-    <option value= "NO_ ATHLETIC "> No</option>
-  </select>
-  <div class="col-10" *ngIf="candidateError?.sport">
-    <span class="text text-danger">
-      {{candidateError.sport}}
-    </span>
-
-  </div>
-</div>
-<!-- Sport-->
-
-<!-- Social-->
-<div class="form-group">  
-  <strong id="social_activityHelp" >Do you practice a social activity? </strong> <br>
-  <select class="form-control"  id="social_activity"  name="social_activity"  [(ngModel)]="candidate.social_activity" >
-    <option>To select </option>
-    <option value= "SOCIABLE ">	Art  </option>
-    <option value= "SOCIABLE ">Other social activities</option>
-    <option value= "NO_SOCIABLE"> Neither    </option>
-  </select>
-  <div class="col-10" *ngIf="candidateError?.social_activity">
-    <span class="text text-danger">
-      {{candidateError.social_activity}}
-    </span>
-
-  </div>
-</div>
-<!-- Social-->
-
-<!-- Social-->
-<div class="form-group">  
-  <strong id="habitHelp" >What do you prefer to do in your spare time? </strong> <br>
-  <select class="form-control" id="habit"  name="habit"  [(ngModel)]="candidate.habit" >
-    <option>To select </option>
-    <option value= "LIKE_COOKING ">	Cooking  </option>
-    <option value= "LIKE_REST ">Watch tv</option>
-    <option value= "LIKE_GAMES "> Play games   </option>
-  </select>
-  <div class="col-10" *ngIf="candidateError?.habit">
-    <span class="text text-danger">
-      {{candidateError.habit}}
-    </span>
-
-  </div>
-</div>
-<!-- Social-->
-
-
-
-
-<!-- end Questionnaire-->
-
-
-        
-
-
-    <!-- Sign in button -->
-
-  
-   
-  <button type="submit" value="postCandidate"  class="btn btn-outline-primary btn-lg btn-block" >Sign in</button>
-</form>
-<div class="alert alert-danger col-10" *ngIf="candidateExist">
-  A Candidate already exist !
-</div>
-<div class="alert alert-success col-10" *ngIf="isCreated">
-Congratulation your account was created !
-</div>
-
-<!-- fin form subscription -->
-
- 
-
-
-
-
- </div>
- </div>
-    </div>
-  </div>
 </div>
