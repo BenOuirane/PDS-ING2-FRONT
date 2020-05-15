@@ -24,7 +24,7 @@
       <!-- FirstName -->
       <div class="form-group">
        
-        <small id="firstnameHelp" class="form-text text-muted">Put your FirstName please.</small>
+        <small id="firstnameHelp" class="form-text text-muted">Enter your FirstName please.</small>
             <input type="text" class="form-control" id="firstname"  name="firstname" [(ngModel)]="candidate.firstname"  
             aria-describedby="lastnamelHelp"  placeholder=" FirstName "  />
             <div class="col-10" *ngIf="candidateError?.firstname">
@@ -38,7 +38,7 @@
     <!-- LastName -->
     <div class="form-group">   
       
-      <small id="lastnameHelp" class="form-text text-muted">Put your LastName please.</small>
+      <small id="lastnameHelp" class="form-text text-muted">Enter your LastName please.</small>
            <input type="text"  class="form-control"  id="lastname"  name="lastname"   [(ngModel)]="candidate.lastname"  
             aria-describedby="lastnamelHelp" placeholder=" LastName "  /> 
             <div class="col-10" *ngIf="candidateError?.lastname">
@@ -52,7 +52,7 @@
           
     <!-- Email -->
     <div class="form-group">
-      <small id="emailHelp" class="form-text text-muted">Put your email address please.</small>
+      <small id="emailHelp" class="form-text text-muted">Enter your email address please.</small>
         <input type="email" class="form-control" id="e_mail" name="e_mail"  [(ngModel)]="candidate.mail" 
         aria-describedby="emailHelp" placeholder="you@example.com" />
         <div class="col-10" *ngIf="candidateError?.mail">
@@ -65,7 +65,7 @@
        
     <!-- Birth_day-->
     <div class="form-group">
-      <small id="birth_dayHelp" class="form-text text-muted">Put your Birth_date please.</small>
+      <small id="birth_dayHelp" class="form-text text-muted">Enter your Birth_date please.</small>
             <input type="date" class="form-control" id="birth_date"  name="birth_date"   [(ngModel)]="candidate.birth_date" 
             aria-describedby="birthHelp" placeholder="Enter Birth_date" />
             <div class="col-10" *ngIf="candidateError?.birth_date">
@@ -78,7 +78,7 @@
         
     <!-- Sexe -->
     <div class="form-group">   
-      <small id="sexeHelp" class="form-text text-muted">Choise your sexe  please.</small> 
+      <small id="sexeHelp" class="form-text text-muted">Choise your gender  please.</small> 
         <select class="form-control" id="sexe"  name="sexe"  [(ngModel)]="candidate.sexe" >
           <option>Selectionner </option>
           <option value= "Woman">Woman</option>
@@ -92,7 +92,110 @@
         </div>
     </div>
          <br>
+
+      <!--  Questionnaire -->
+
+<!-- Autnomie-->
+<div class="form-group">  
+  <strong id="AutnomyHelp" >Are you in a situation of loss of autonomy? </strong> <br>
+  <select class="form-control" id="autnomy"  name="autnomy"  [(ngModel)]="candidate.autonomy"  >
+    <option>To select </option>
+    <option value= "SELF_RULING">	Yes </option>
+    <option value= "NO_SELFE_RULING"> No</option>
+  </select>
+  <div class="col-10" *ngIf="candidateError?.autonomy">
+    <span class="text text-danger">
+      {{candidateError.autonomy}}
+    </span>
+
+  </div>
+</div>
+<!-- Autnomie-->
+
+<!-- Finace-->
+<div class="form-group">   
+  <strong id="financeHelp" >What is the main source of income?</strong>
+    <select class="form-control" id="finance"  name="finance"  [(ngModel)]="candidate.finance">
+      <option>To select </option>
+      <option value= "BAD_FINANCIAL_CONDITION">	Salary </option>
+      <option value= "BAD_FINANCIAL_CONDITION">Small business </option>
+      <option value= "BAD_FINANCIAL_CONDITION">Regular help from family</option>
+      <option value= "BAD_FINANCIAL_CONDITION">Active Solidarity Income</option>
+      <option value= "GOOD_FINANCIAL_CONDITION">Big business</option>
+      <option value= "GOOD_FINANCIAL_CONDITION">Free activities (lawyers, doctors)</option>
+    </select>
+    <div class="col-10" *ngIf="candidateError?.finance">
+      <span class="text text-danger">
+        {{candidateError.finance}}
+      </span>
+  
+    </div>
+</div>
+<!-- Finace-->
+<!-- Sport-->
+<div class="form-group">  
+  <strong id="sportHelp" >Did you exercise sport regularly  </strong> <br>
+  <select class="form-control" id="sport"  name="sport"  [(ngModel)]="candidate.sport" >
+    <option>To select </option>
+    <option value= "ATHLETIC ">	Yes </option>
+    <option value= "NO_ ATHLETIC "> No</option>
+  </select>
+  <div class="col-10" *ngIf="candidateError?.sport">
+    <span class="text text-danger">
+      {{candidateError.sport}}
+    </span>
+
+  </div>
+</div>
+<!-- Sport-->
+
+<!-- Social-->
+<div class="form-group">  
+  <strong id="social_activityHelp" >Do you practice a social activity? </strong> <br>
+  <select class="form-control"  id="social_activity"  name="social_activity"  [(ngModel)]="candidate.social_activity" >
+    <option>To select </option>
+    <option value= "SOCIABLE ">	Art  </option>
+    <option value= "SOCIABLE ">Other social activities</option>
+    <option value= "NO_SOCIABLE"> Neither    </option>
+  </select>
+  <div class="col-10" *ngIf="candidateError?.social_activity">
+    <span class="text text-danger">
+      {{candidateError.social_activity}}
+    </span>
+
+  </div>
+</div>
+<!-- Social-->
+
+<!-- Social-->
+<div class="form-group">  
+  <strong id="habitHelp" >What do you prefer to do in your spare time? </strong> <br>
+  <select class="form-control" id="habit"  name="habit"  [(ngModel)]="candidate.habit" >
+    <option>To select </option>
+    <option value= "LIKE_COOKING ">	Cooking  </option>
+    <option value= "LIKE_REST ">Watch tv</option>
+    <option value= "LIKE_GAMES "> Play games   </option>
+  </select>
+  <div class="col-10" *ngIf="candidateError?.habit">
+    <span class="text text-danger">
+      {{candidateError.habit}}
+    </span>
+
+  </div>
+</div>
+<!-- Social-->
+
+
+
+
+<!-- end Questionnaire-->
+
+
+        
+
+
     <!-- Sign in button -->
+
   
    
   <button type="submit" value="postCandidate"  class="btn btn-outline-primary btn-lg btn-block" >Sign in</button>

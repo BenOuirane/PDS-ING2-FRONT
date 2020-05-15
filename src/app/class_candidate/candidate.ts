@@ -11,6 +11,12 @@ export class Candidate {
     mail:String;
     birth_date: string;
     sexe: string;
+    autonomy: string;
+    sport: string;
+    social_activity: string;
+    habit: string;
+    finance: string;
+
   
 
 
