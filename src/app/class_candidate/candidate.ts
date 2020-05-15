@@ -9,13 +9,16 @@ export class Candidate {
     lastname: string;
     firstname: string;
     mail:String;
-    birth_date: string;
-    sexe: string;
+    age:String;
+    genre: string;
     autonomy: string;
     sport: string;
     social_activity: string;
     habit: string;
     finance: string;
+    etat_sociale: string;
+    type_de_maladie: string;
+    score: number;
 
   
 
