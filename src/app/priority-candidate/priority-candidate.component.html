@@ -1,0 +1,67 @@
+
+<br><br><br><br><br><br><br>
+
+
+
+<!---------------------------------------------------->
+
+<div  class="container" *ngIf=" candidats?.length == 0"  >  
+    <div class="card"  >
+        <div class="card-header">
+            <h3>Il n'y a pas de chambre vide pour le moment</h3>
+        </div>
+    </div>
+</div>
+
+<div  class="container" *ngIf=" candidats?.length > 0" >  
+    <div class="card">
+        <div class="card-header">
+            <h3>Liste prioritaire</h3>
+        </div>
+        <div class="card-body">
+<div >
+            <table   class="table table-hover">
+                <thead>
+                    <tr>
+                        <th><b>Rang</b></th>
+                        <th><b>Prénom</b></th>
+                        <th><b>Nom</b></th>
+                        <th><b>E mail</b></th>
+                        <th><b>Le genre</b></th>
+                        <th><b>Age</b></th>
+                        <th><b>Profiles</b></th>
+                        <th><b>Score</b></th>
+                        
+                    </tr>
+                </thead>
+                <thead>
+                    <tr *ngFor="let candidate of candidats; let i=index" >
+                     
+                        <td>{{i+1}}</td>
+                        <td>{{candidate.firstname}}</td>
+                        <td>{{candidate.lastname}}</td>
+                        <td>{{candidate.mail}}</td>
+                        <td>{{candidate.genre}} </td>
+                        <td>{{candidate.age}} years old</td>
+                        
+                        <td><ul>
+                            <li>{{candidate.autonomy}}</li>
+                            <br><li>{{candidate.sport}}</li>
+                            <br><li>{{candidate.social_activity}}</li>
+                            <br><li>{{candidate.type_de_maladie}}</li>
+                            <br><li>{{candidate.habit}}</li>
+                            <br><li>{{candidate.etat_sociale}}</li>
+                            <br><li>{{candidate.finance}}</li>
+                          
+                            
+                        </ul> </td>
+                        <td>{{candidate.score}} </td>
+                      
+                    </tr>
+                </thead>
+            </table>
+</div>
+        </div>
+    </div>
+</div>    
+<br><br><br>
