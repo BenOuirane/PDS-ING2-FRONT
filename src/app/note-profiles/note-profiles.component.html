@@ -1,0 +1,318 @@
+<br><br><br><br><br><br><br>
+
+<div class="container">
+    <div class="card" >
+        <div class="card-header"  >
+            <h3>Note : Veuillez attribuer une note à chaque caractères</h3>
+        </div>
+        <div class="card-body">
+            <div>
+                <form     #myform = "ngForm" (ngSubmit)="submit(myform)">     
+
+
+
+                  
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th><b>Profiles</b></th>
+                                <th><b>Note</b></th>
+
+
+                            </tr>
+                        </thead>
+                        <thead>
+
+
+                            <tr>
+                                <th><label for="">NO_ ATHLETIC</label></th>
+                                <th><b><input type="number"  min="0"  max="1000" step="1" name="note_no_athletic" class="form-control"
+                                  #note_no_athletic="ngModel"   pattern="[0-9]{1,3}" maxlength="3"
+                                    placeholder=" Note " [(ngModel)]="score.note_no_athletic" required /></b>
+                               <div *ngIf="note_no_athletic.invalid && (note_no_athletic.dirty || note_no_athletic.touched)" class="alert alert-danger">
+                               <div *ngIf="note_no_athletic.errors.required">
+                                Ce champ est obligatoire et doit être un nombre 
+                               </div>
+                               <div *ngIf="note_no_athletic.errors.pattern">
+                                Ce champ doit être un nombre de trois chiffres maximum
+                               </div>
+                               
+                               </div>
+                               
+
+                                       
+                                </th>
+                            </tr>
+                            <tr>
+                                <th><b>ATHLETIC</b></th>
+                                <th><b><input input type="number"  min="0" max="1000" step="1" name="note_athletic" class="form-control"
+                                    #note_athletic="ngModel"   pattern="[0-9]{1,3}" maxlength="3"
+                                      placeholder=" Note " required [(ngModel)]="score.note_athletic" /></b>
+                                        
+                                            <div *ngIf="note_athletic.invalid && (note_athletic.dirty || note_athletic.touched)" class="alert alert-danger">
+                                                <div *ngIf="note_athletic.errors.required">
+                                                 Ce champ est obligatoire et doit être un nombre 
+                                                </div>
+                                                <div *ngIf="note_athletic.errors.pattern">
+                                                 Ce champ doit être un nombre de trois chiffres maximum
+                                                </div>
+                                                
+                                                </div>
+                                        
+                                        </th>
+                            </tr>
+                            <tr>
+                                <th><b>GOOD_FINANCIAL_CONDITION</b></th>
+                                <th><b><input type="number"  min="0" max="1000" step="1" name="note_good_financial_condition" class="form-control"
+                                    #note_good_financial_condition="ngModel"   pattern="[0-9]{1,3}" maxlength="3"
+                                      placeholder=" Note " required [(ngModel)]="score.note_good_financial_condition" /></b>
+                                      <div *ngIf="note_good_financial_condition.invalid && (note_good_financial_condition.dirty || note_good_financial_condition.touched)" class="alert alert-danger">
+                                        <div *ngIf="note_good_financial_condition.errors.required">
+                                         Ce champ est obligatoire et doit être un nombre 
+                                        </div>
+                                        <div *ngIf="note_good_financial_condition.errors.pattern">
+                                         Ce champ doit être un nombre de trois chiffres maximum
+                                        </div>
+                                        
+                                        </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th><b>BAD_FINANCIAL_CONDITION</b></th>
+                                <th><b><input type="number"  min="0" max="1000" step="1" name="note_bad_financial_condition" class="form-control"
+                                    #note_bad_financial_condition="ngModel"   pattern="[0-9]{1,3}" maxlength="3"
+                                      placeholder=" Note " required [(ngModel)]="score.note_bad_financial_condition" /></b>
+                                      <div *ngIf="note_bad_financial_condition.invalid && (note_bad_financial_condition.dirty || note_bad_financial_condition.touched)" class="alert alert-danger">
+                                        <div *ngIf="note_bad_financial_condition.errors.required">
+                                         Ce champ est obligatoire et doit être un nombre 
+                                        </div>
+                                        <div *ngIf="note_bad_financial_condition.errors.pattern">
+                                         Ce champ doit être un nombre de trois chiffres maximum
+                                        </div>
+                                        
+                                        </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th><b>SELF_RULING</b></th>
+                                <th><b><input type="number"  min="0" max="1000" step="1" name="note_self_ruling" class="form-control"
+                                    #note_self_ruling="ngModel"   pattern="[0-9]{1,3}" maxlength="3"
+                                      placeholder=" Note " required [(ngModel)]="score.note_self_ruling" /></b>
+                                      <div *ngIf="note_self_ruling.invalid && (note_self_ruling.dirty || note_self_ruling.touched)" class="alert alert-danger">
+                                        <div *ngIf="note_self_ruling.errors.required">
+                                         Ce champ est obligatoire et doit être un nombre 
+                                        </div>
+                                        <div *ngIf="note_self_ruling.errors.pattern">
+                                         Ce champ doit être un nombre de trois chiffres maximum
+                                        </div>
+                                        
+                                        </div>
+                                    
+                                    </th>
+                            </tr>
+                            <tr>
+                                <th><b>NON_SELF_RULING</b></th>
+                                <th><b><input type="number" min="0" max="1000" step="1" name="note_no_self_ruling" class="form-control"
+                                    #note_no_self_ruling="ngModel"   pattern="[0-9]{1,3}" maxlength="3"
+                                      placeholder=" Note " required placeholder=" Note" [(ngModel)]="score.note_no_self_ruling" /></b>
+                                      <div *ngIf="note_no_self_ruling.invalid && (note_no_self_ruling.dirty || note_no_self_ruling.touched)" class="alert alert-danger">
+                                        <div *ngIf="note_no_self_ruling.errors.required">
+                                         Ce champ est obligatoire et doit être un nombre 
+                                        </div>
+                                        <div *ngIf="note_no_self_ruling.errors.pattern">
+                                         Ce champ doit être un nombre de trois chiffres maximum
+                                        </div>
+                                        
+                                        </div>
+                                    
+                                    
+                                    </th>
+                            </tr>
+                            <tr>
+                                <th><b>GOOD_SOCIAL_CONDITION</b></th>
+                                <th><b><input type="number"   min="0" max="1000" step="1" name="note_good_social_condition" class="form-control"
+                                    #note_good_social_condition="ngModel"   pattern="[0-9]{1,3}" maxlength="3"
+                                      placeholder=" Note " required [(ngModel)]="score.note_good_social_condition" /></b>
+                                      <div *ngIf="note_good_social_condition.invalid && (note_good_social_condition.dirty || note_good_social_condition.touched)" class="alert alert-danger">
+                                        <div *ngIf="note_good_social_condition.errors.required">
+                                         Ce champ est obligatoire et doit être un nombre 
+                                        </div>
+                                        <div *ngIf="note_good_social_condition.errors.pattern">
+                                         Ce champ doit être un nombre de trois chiffres maximum
+                                        </div>
+                                        
+                                        </div>
+                                    
+                                    </th>
+                            </tr>
+                            <tr>
+                                <th><b>BAD_SOCIAL_CONDITION</b></th>
+                                <th><b><input type="number"  min="0" max="1000" step="1" name="note_bad_social_condition" class="form-control"
+                                    #note_bad_social_condition="ngModel"   pattern="[0-9]{1,3}" maxlength="3"
+                                      placeholder=" Note " required  [(ngModel)]="score.note_bad_social_condition" /></b>
+                                      <div *ngIf="note_bad_social_condition.invalid && (note_bad_social_condition.dirty || note_bad_social_condition.touched)" class="alert alert-danger">
+                                        <div *ngIf="note_bad_social_condition.errors.required">
+                                         Ce champ est obligatoire et doit être un nombre 
+                                        </div>
+                                        <div *ngIf="note_bad_social_condition.errors.pattern">
+                                         Ce champ doit être un nombre de trois chiffres maximum
+                                        </div>
+                                        
+                                        </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th><b>SOCIABLE</b></th>
+                                <th><b><input type="number"   min="0" max="1000" step="1" name="note_sociable" class="form-control"
+                                    #note_sociable="ngModel"   pattern="[0-9]{1,3}" maxlength="3"
+                                      placeholder=" Note " required  [(ngModel)]="score.note_sociable" /></b>
+                                      <div *ngIf="note_sociable.invalid && (note_sociable.dirty || note_sociable.touched)" class="alert alert-danger">
+                                        <div *ngIf="note_sociable.errors.required">
+                                         Ce champ est obligatoire et doit être un nombre 
+                                        </div>
+                                        <div *ngIf="note_sociable.errors.pattern">
+                                         Ce champ doit être un nombre de trois chiffres maximum
+                                        </div>
+                                        
+                                        </div> 
+                                    
+                                    
+                                    </th>
+                            </tr>
+                            <tr>
+                                <th><b>NO_SOCIABLE</b></th>
+                                <th><b><input type="number"  min="0" max="1000" step="1" name="note_no_sociable" class="form-control"
+                                    #note_no_sociable="ngModel"   pattern="[0-9]{1,3}" maxlength="3"
+                                      placeholder=" Note " required  [(ngModel)]="score.note_no_sociable" /></b>
+                                      <div *ngIf="note_no_sociable.invalid && (note_no_sociable.dirty || note_no_sociable.touched)" class="alert alert-danger">
+                                        <div *ngIf="note_no_sociable.errors.required">
+                                         Ce champ est obligatoire et doit être un nombre 
+                                        </div>
+                                        <div *ngIf="note_no_sociable.errors.pattern">
+                                         Ce champ doit être un nombre de trois chiffres maximum
+                                        </div>
+                                        
+                                        </div>
+                                    
+                                    
+                                    </th>
+                            </tr>
+                            <tr>
+                                <th><b>LIKE_COOKING</b></th>
+                                <th><b><input type="number"  min="0" max="1000" step="1" name="note_like_cooking" class="form-control"
+                                    #note_like_cooking="ngModel"   pattern="[0-9]{1,3}" maxlength="3"
+                                      placeholder=" Note " required [(ngModel)]="score.note_like_cooking" /></b>
+                                      <div *ngIf="note_like_cooking.invalid && (note_like_cooking.dirty || note_like_cooking.touched)" class="alert alert-danger">
+                                        <div *ngIf="note_like_cooking.errors.required">
+                                         Ce champ est obligatoire et doit être un nombre 
+                                        </div>
+                                        <div *ngIf="note_like_cooking.errors.pattern">
+                                         Ce champ doit être un nombre de trois chiffres maximum
+                                        </div>
+                                        
+                                        </div>
+                                    
+                                    </th>
+                            </tr>
+                            <tr>
+                                <th><b>LIKE_REST</b></th>
+                                <th><b><input type="number"  min="0" max="1000" step="1" name="note_like_rest" class="form-control"
+                                    #note_like_rest="ngModel"   pattern="[0-9]{1,3}" maxlength="3"
+                                      placeholder=" Note " required  [(ngModel)]="score.note_like_rest" /></b>
+                                      <div *ngIf="note_like_rest.invalid && (note_like_rest.dirty || note_like_rest.touched)" class="alert alert-danger">
+                                        <div *ngIf="note_like_rest.errors.required">
+                                         Ce champ est obligatoire et doit être un nombre 
+                                        </div>
+                                        <div *ngIf="note_like_rest.errors.pattern">
+                                         Ce champ doit être un nombre de trois chiffres maximum
+                                        </div>
+                                        
+                                        </div>
+                                    
+                                    
+                                    </th>
+                            </tr>
+                            <tr>
+                                <th><b>LIKE_GAMES</b></th>
+                                <th><b><input type="number"  min="0" max="1000" step="1" name="note_like_game" class="form-control"
+                                    #note_like_game="ngModel"   pattern="[0-9]{1,3}" maxlength="3"
+                                      placeholder=" Note " required  [(ngModel)]="score.note_like_game" /></b>
+                                      <div *ngIf="note_like_game.invalid && (note_like_game.dirty || note_like_game.touched)" class="alert alert-danger">
+                                        <div *ngIf="note_like_game.errors.required">
+                                         Ce champ est obligatoire et doit être un nombre 
+                                        </div>
+                                        <div *ngIf="note_like_game.errors.pattern">
+                                         Ce champ doit être un nombre de trois chiffres maximum
+                                        </div>
+                                        
+                                        </div>
+                                    </th>
+                            </tr>
+                            <tr>
+                                <th><b>NOT_SICk</b></th>
+                                <th><b><input type="number"  min="0" max="1000" step="1" name="note_not_sick" class="form-control"
+                                    #note_not_sick="ngModel"   pattern="[0-9]{1,3}" maxlength="3"
+                                      placeholder=" Note " required [(ngModel)]="score.note_not_sick" /></b>
+                                      <div *ngIf="note_not_sick.invalid && (note_not_sick.dirty || note_not_sick.touched)" class="alert alert-danger">
+                                        <div *ngIf="note_not_sick.errors.required">
+                                         Ce champ est obligatoire et doit être un nombre 
+                                        </div>
+                                        <div *ngIf="note_not_sick.errors.pattern">
+                                         Ce champ doit être un nombre de trois chiffres maximum
+                                        </div>
+                                        
+                                        </div>    
+                                    </th>
+                            </tr>
+                            <tr>
+                                <th><b>HYPERTENSION</b></th>
+                                <th><b><input type="number"  min="0" max="1000" step="1" name="note_hypertensiong" class="form-control"
+                                    #note_hypertensiong="ngModel"   pattern="[0-9]{1,3}" maxlength="3"
+                                      placeholder=" Note " required [(ngModel)]="score.note_hypertensiong" /></b>
+                                      <div *ngIf="note_hypertensiong.invalid && (note_hypertensiong.dirty || note_hypertensiong.touched)" class="alert alert-danger">
+                                        <div *ngIf="note_hypertensiong.errors.required">
+                                         Ce champ est obligatoire et doit être un nombre 
+                                        </div>
+                                        <div *ngIf="note_hypertensiong.errors.pattern">
+                                         Ce champ doit être un nombre de trois chiffres maximum
+                                        </div>
+                                        
+                                        </div>    
+                                    
+                                    </th>
+                            </tr>
+                            <tr>
+                                <th><b>DIABETES</b></th>
+                                <th><b><input type="number" min="0" max="1000" step="1" name="note_diabetes" class="form-control"
+                                    #note_diabetes="ngModel"   pattern="[0-9]{1,3}" maxlength="3"
+                                      placeholder=" Note " required [(ngModel)]="score.note_diabetes" /></b>
+                                      <div *ngIf="note_diabetes.invalid && (note_diabetes.dirty || note_diabetes.touched)" class="alert alert-danger">
+                                        <div *ngIf="note_diabetes.errors.required">
+                                         Ce champ est obligatoire et doit être un nombre 
+                                        </div>
+                                        <div *ngIf="note_diabetes.errors.pattern">
+                                         Ce champ doit être un nombre de trois chiffres maximum
+                                        </div>
+                                        
+                                        </div>    
+                                    
+                                    </th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="col-12">
+
+                        <button type="submit" (click)="postScore()" [disabled]="myform.invalid" class="col-12" style="margin-left: 500px;"
+                            class="btn btn-outline-primary ">
+                            Calcul Score</button>
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+
+<br><br>
