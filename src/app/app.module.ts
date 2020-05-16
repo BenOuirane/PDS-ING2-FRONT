@@ -47,11 +47,15 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import { HealthResidentComponent } from './health-resident/health-resident.component';
+import { FailureService } from './services/failure.service';
+import { FailureComponent } from './failure/failure.component';
+
 // @ts-ignore
 import { ProgressWebsocketService } from './services/progress-websocket.service';
 // @ts-ignore
 import { RxStompService  } from '@stomp/ng2-stompjs';
 import { HealthAlertComponent } from './health-alert/health-alert.component';
+
 
 
 
@@ -71,17 +75,14 @@ import { HealthAlertComponent } from './health-alert/health-alert.component';
     IndicatorsComponent,
     MapPrototypeComponent,
     FavoriteFiltersComponent,
-
+    FailureComponent,
     ObjectMapComponent,
     HistoryComponent,
     HealthStateComponent,
     HealthResidentComponent,
     HealthAlertComponent,
-
-
-
-
   ],
+
   imports: [
     BrowserModule,
     FormsModule,
@@ -124,6 +125,7 @@ import { HealthAlertComponent } from './health-alert/health-alert.component';
     CandidateService,
     CommonModule,
     IndicatorsService,
+    FailureService,
 
     {
       provide: LOCALE_ID, useValue: "fr-FR"

@@ -1,7 +1,10 @@
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Observable} from "rxjs";
-export class Failure {
+import { Objects } from './objects';
 
-  id: number;
+export class Failure {
+  idfailure: Number;
+  message: String;
+  begindate: Date;
+  enddate: Date;
+  objects: Objects;
 
 }
