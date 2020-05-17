@@ -77,14 +77,14 @@ export class SendNotificationComponent implements OnInit {
     this.notification.sender = this.user;
     this.notification.type = this.notificationType;
     this.notification.customData = this.notificationData;
-    
+
     this.notificationService.createNotification(this.notification).subscribe(
       data => {
         this.response = "La notification va être envoyée sous peu. Merci à vous."
         $("#title").val("");
         $("#message").val("");
         $("#select_receiver").val("");
-        
+
       },
       error => {
         console.log(error),
@@ -104,6 +104,7 @@ export class SendNotificationComponent implements OnInit {
     $('#notification_full_type').val("empty");
 
     $(".custom_field").css("display", "none");
+
 
     if ($("#notification_type").val() == "medicine_notification") {
       $("#medicine_field").css("display", "block");

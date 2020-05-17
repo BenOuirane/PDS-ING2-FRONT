@@ -2,9 +2,11 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import { refresidentService } from '../refresident.service';
-import { refresident } from '../refresident';
-import { positionService } from '../position.service'
+import { refresidentService } from '../../services/refresident.service';
+import { ResidentService } from '../../services/resident.service';
+import { Resident } from '../../resident';
+import { refresident } from '../../refresident';
+import { positionService } from '../../services/position.service'
 //import { User } from '../user';
 
  
@@ -15,12 +17,13 @@ import { positionService } from '../position.service'
 })
 export class SearchBarComponent implements OnInit {
   refresident: Observable<refresident[]>;
+  resident: Observable<Resident[]>;
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
  @ViewChild('searchInput', {static: false}) searchInput : ElementRef<HTMLInputElement>;
 
-  constructor(private refresidentService: refresidentService, private positionService: positionService) {
+  constructor(private refresidentService: refresidentService, private residentSerive: ResidentService, private positionService: positionService, ) {
     
 
 console.log("start")
@@ -46,8 +49,9 @@ console.log("start")
     console.log(this.searchInput.nativeElement.value);
     let inputValue = this.searchInput.nativeElement.value;
     
-    //this.refresident = this.refresidentService.getUsersById('1');
-    this.refresidentService.getUsersById(inputValue).subscribe(result => {
+    this.refresident = this.refresidentService.getUsersById('1');
+   // this.refresidentService.getUsersById(inputValue).subscribe(result => {
+      this.refresidentService.getUsersById(inputValue).subscribe(result => {
       console.log(result);
     });
 
@@ -59,12 +63,14 @@ console.log("start")
     this.reloadDataById();
   }
 
-  createdata(){
+  /*createdata(){
     console.log("create ref position");
-    this.refresidentService.createPositionData().subscribe(response => {
+   // this.refresidentService.createPositionData().subscribe(response => {
+      this.residentSerive.createPositionData().subscribe(response => {
+
       console.log(response);
     });
-  }
+  }*/
 
   createpositiondata(){
     console.log("create positions ");
@@ -74,3 +80,5 @@ console.log("start")
   }
 }
  
+
+/* MOCKS METHODS TO BE DEACTIVATED NEXT SPRINT */

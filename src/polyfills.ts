@@ -56,8 +56,26 @@ import 'hammerjs';
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
-import 'zone.js/dist/zone';  // Included with Angular CLI.
 
+ // fix IE free script error 
+// (window as any).__Zone_enable_cross_context_check = true;
+ //
+import 'zone.js/dist/zone';  // Included with Angular CLI.
+/*global.Buffer = global.Buffer || require('buffer').Buffer;
+
+(window as any).global = window;
+
+if (!Object.entries) {
+    Object.entries = function( obj ){
+    var ownProps = Object.keys( obj ),
+    i = ownProps.length,
+    resArray = new Array(i);
+    while (i--)
+    resArray[i] = [ownProps [i], obj[ownProps[i]]];
+    
+    return resArray;
+};
+};
 
 /***************************************************************************************************
  * APPLICATION IMPORTS
