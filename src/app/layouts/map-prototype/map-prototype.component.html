@@ -15,13 +15,20 @@
 	<button class="btn btn-elegant btn-rounded btn-sm my-0" type="submit" value="search"   style="margin-left: 0.9rem;">Rechercher</button>
 
 <!--	<button class="btn btn-elegant btn-rounded btn-sm my-0" type="submit" value="search" (click)="loaddata()" style="margin-left: 0.9rem;">Rechercher</button>-->
-	<div *ngIf="patientSearchResult.length==0" class="alert alert-info text-center w-50 m-auto" role="alert">Aucun patient trouvé ! </div>
-	<div *ngIf="patientSearchResult.length==0" class="alert alert-info text-center w-50 m-auto" role="alert">Aucun bracelet trouvé ! </div>
+	<div *ngIf="patientSearchResult" class="alert alert-info text-center w-50 m-auto" role="alert">Aucun patient trouvé ! </div>
+	<div *ngIf="patientSearchResult" class="alert alert-info text-center w-50 m-auto" role="alert">Aucun bracelet trouvé ! </div>
 </form>
   
 
 
+<form class="form-inline md-form mr-auto mb-4" (submit)="onSubmitDate()">
 
+	<div class= "row" style=" margin-left: 1rem;">
+		<input class="form-control mr-sm-2" type="datetime-local" value = "" [(ngModel)]="bracletDate" name="bracletDate"  placeholder="Rechercher un bracelet" aria-label="Search">
+	</div>
+	<button class="btn btn-elegant btn-rounded btn-sm my-0" type="submit" value="search"   style="margin-left: 0.9rem;">Rechercher avec la date</button>
+
+</form>
 
 
 
@@ -30,7 +37,7 @@
 
 <div class="cont col">
 	
-	<h5 class="text-danger">Utilisez les barres de recherches !</h5>
+	<h5 class="text-danger">Utilisez la barre de  recherche !</h5>
 	<div class="d-flex flex-row mb-2 b-5 ">
 
 

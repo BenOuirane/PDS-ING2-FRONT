@@ -30,7 +30,7 @@ import { ObjectMapComponent } from './object-map/object-map.component';
 import { HistoryComponent } from './history/history.component';
 import {IndicatorsComponent} from './indicators/indicators.component';
 import { AuditPathsComponent } from './layouts/audit-paths/audit-paths.component';
-
+import {CacheSumAreaComponent} from './layouts/cache-sum-area/cache-sum-area.component'
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -48,7 +48,7 @@ const routes: Routes = [
   { path: 'updatedata', component: UpdateDatamockComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'track-patients-control-view', component: MapPrototypeComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'audit-path-patients-control-view', component: MapPrototypeComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
-
+  {path: 'cache-sum-area-control-view', component: CacheSumAreaComponent, canActivate: [RoleGuard], data: {expectedRole: 'ADMIN'}},
   { path: 'updatedata', component: UpdateDatamockComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'objects', component: ObjectMapComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'history/:type/:id', component: HistoryComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}}

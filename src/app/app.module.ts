@@ -23,7 +23,6 @@ import {IndicatorsService} from "./indicators.service";
 import { CreateCandidateComponent } from './create-candidate/create-candidate.component';
 import { CandidateService } from './candidate_services/candidate.service';
 import { from } from 'rxjs';
-
 //import { SearchBarComponent } from './layouts/search-bar/search-bar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { UpdateDatamockComponent } from './layouts/update-datamock/update-datamock.component';
@@ -41,6 +40,7 @@ import { HistoryComponent } from './history/history.component';
 import { PopupConfirmationComponent } from './layouts/popup-confirmation/popup-confirmation.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuditPathsComponent } from './layouts/audit-paths/audit-paths.component';
+import { CacheSumAreaComponent } from './layouts/cache-sum-area/cache-sum-area.component';
 
 
 
@@ -64,7 +64,8 @@ import { AuditPathsComponent } from './layouts/audit-paths/audit-paths.component
     ObjectMapComponent,
     HistoryComponent,
     //PopupConfirmationComponent,
-    AuditPathsComponent
+    AuditPathsComponent,
+    CacheSumAreaComponent
 
   ],
   imports: [
