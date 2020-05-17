@@ -47,11 +47,16 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import { HealthResidentComponent } from './health-resident/health-resident.component';
+import { FailureService } from './services/failure.service';
+import { FailureComponent } from './failure/failure.component';
+
 // @ts-ignore
 import { ProgressWebsocketService } from './services/progress-websocket.service';
 // @ts-ignore
 import { RxStompService  } from '@stomp/ng2-stompjs';
 import { HealthAlertComponent } from './health-alert/health-alert.component';
+import { FailureSimulationComponent } from './failure-simulation/failure-simulation.component';
+
 
 import { ListCandidateComponent } from './list-candidate/list-candidate.component';
 import { PriorityCandidateComponent } from './priority-candidate/priority-candidate.component';
@@ -75,21 +80,18 @@ import { NoteProfilesComponent } from './note-profiles/note-profiles.component';
     IndicatorsComponent,
     MapPrototypeComponent,
     FavoriteFiltersComponent,
-
+    FailureComponent,
     ObjectMapComponent,
     HistoryComponent,
     ListCandidateComponent,
     PriorityCandidateComponent,
     NoteProfilesComponent,
-    
     HealthStateComponent,
     HealthResidentComponent,
     HealthAlertComponent,
-
-
-
-
+    FailureSimulationComponent,
   ],
+
   imports: [
     BrowserModule,
     FormsModule,
@@ -108,7 +110,6 @@ import { NoteProfilesComponent } from './note-profiles/note-profiles.component';
     AmazingTimePickerModule,
     MatIconModule,
     FormsModule,
-  
     MatProgressSpinnerModule,
     MatTableModule,
 
@@ -135,6 +136,7 @@ import { NoteProfilesComponent } from './note-profiles/note-profiles.component';
     ScoreService,
     CommonModule,
     IndicatorsService,
+    FailureService,
 
     {
       provide: LOCALE_ID, useValue: "fr-FR"

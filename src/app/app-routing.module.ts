@@ -21,24 +21,22 @@ If he goes on 'http://{localhost} or {172.31.254.61}:4200/',
 we redirect him to the route '/user that calls the UsersListComponent'
  */
 
-
-
-import { ObjectComponent } from './object/object.component'; 
-import { ObjectMapComponent } from './object-map/object-map.component'; 
-import { HistoryComponent } from './history/history.component'; 
 import { ListCandidateComponent } from './list-candidate/list-candidate.component';
 import { PriorityCandidateComponent } from './priority-candidate/priority-candidate.component';
 import { NoteProfilesComponent } from './note-profiles/note-profiles.component';
 import { SearchBarComponent } from './layouts/search-bar/search-bar.component';
 import { UpdateDatamockComponent } from './layouts/update-datamock/update-datamock.component';
-
+import { ObjectComponent } from './object/object.component';
 
 import { MapPrototypeComponent } from './layouts/map-prototype/map-prototype.component';
-
-
-import {IndicatorsComponent} from './indicators/indicators.component';
+import { ObjectMapComponent } from './object-map/object-map.component';
+import { HistoryComponent } from './history/history.component';
+import { IndicatorsComponent } from './indicators/indicators.component';
 import { HealthStateComponent} from './health-state/health-state.component';
-import {HealthResidentComponent} from "./health-resident/health-resident.component";
+import { HealthResidentComponent } from "./health-resident/health-resident.component";
+import { FailureComponent } from './failure/failure.component';
+import { FailureSimulationComponent } from './failure-simulation/failure-simulation.component';
+
 
 
 
@@ -63,6 +61,7 @@ const routes: Routes = [
     component: HealthResidentComponent,
     data: { title: 'Health Resident ' }
   },
+ 
 
 
   { path: 'search', component: SearchBarComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
@@ -73,7 +72,11 @@ const routes: Routes = [
 
   { path: 'updatedata', component: UpdateDatamockComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'objects', component: ObjectMapComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
-  { path: 'history/:userId/:id', component: HistoryComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}}
+  { path: 'history/:userId/:id', component: HistoryComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+  
+  { path: 'pannes', component: FailureComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+  { path: 'pannes/simulation', component: FailureSimulationComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+
 
 ];
 
