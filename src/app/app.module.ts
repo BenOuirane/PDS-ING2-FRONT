@@ -55,6 +55,7 @@ import { ProgressWebsocketService } from './services/progress-websocket.service'
 // @ts-ignore
 import { RxStompService  } from '@stomp/ng2-stompjs';
 import { HealthAlertComponent } from './health-alert/health-alert.component';
+import { FailureSimulationComponent } from './failure-simulation/failure-simulation.component';
 
 
 
@@ -81,6 +82,7 @@ import { HealthAlertComponent } from './health-alert/health-alert.component';
     HealthStateComponent,
     HealthResidentComponent,
     HealthAlertComponent,
+    FailureSimulationComponent,
   ],
 
   imports: [

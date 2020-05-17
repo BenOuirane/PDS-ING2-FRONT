@@ -32,6 +32,7 @@ import {IndicatorsComponent} from './indicators/indicators.component';
 import { HealthStateComponent} from './health-state/health-state.component';
 import {HealthResidentComponent} from "./health-resident/health-resident.component";
 import { FailureComponent } from './failure/failure.component';
+import { FailureSimulationComponent } from './failure-simulation/failure-simulation.component';
 
 
 
@@ -68,6 +69,8 @@ const routes: Routes = [
   { path: 'history/:userId/:id', component: HistoryComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   
   { path: 'pannes', component: FailureComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+  { path: 'pannes/simulation', component: FailureSimulationComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+
 
 ];
 
