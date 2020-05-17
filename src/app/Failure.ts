@@ -3,7 +3,7 @@ import { Objects } from './objects';
 export class Failure {
   idfailure: Number;
   message: String;
-  begindate: Date;
+  begin: Date;
   enddate: Date;
   objects: Objects;
 

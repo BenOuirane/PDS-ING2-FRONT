@@ -2,8 +2,39 @@
     <h2><img src="../../assets/pannes.jpg" alt=""></h2>
     <br />
     <h2>Pannes et comportements suspects</h2>
+    <div>
+        <button (click)="launchSimulation()" class="favorite styled" type="button" 
+            [routerLink]="['simulation']">Résoudre et simuler des fours suspects</button>
+        {{clickMessage}}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Objet connecté</th>
+                    <th>Date de début</th>
+                    <th>Etat de la panne</th>
+                    <th>Message d'erreur</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let failure of failureList">
+                    <td *ngIf="failure.end_date != null">{{failure.objects.objectType}}</td>
+                    <td *ngIf="failure.end_date != null">{{failure.begin_date}}</td>
+                    <td *ngIf="failure.end_date != null"> Résolue </td>
+                    <td *ngIf="failure.end_date != null">{{failure.message}}</td>
+
+
+                    <td class="warning" *ngIf="failure.end_date == null">{{failure.objects.objectType}}</td>
+                    <td class="warning" *ngIf="failure.end_date == null">{{failure.begin_date}}</td>
+                    <td class="warning" *ngIf="failure.end_date == null"> En cours </td>
+                    <td class="warning" *ngIf="failure.end_date == null">{{failure.message}}</td>
+                    <!--button class="favorite styled" *ngIf="failure.end_date == null" type="button" >Résoudre</button-->
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
 
 
 
-    
 </div>

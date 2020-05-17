@@ -11,12 +11,24 @@ import { RouterLink } from '@angular/router';
 })
 export class FailureComponent implements OnInit {
 
-  failureList = new Observable<Array<Failure>>();
+  failureList: Failure[];
+  clickMessage = '';
 
   constructor(private failureService: FailureService/*, router: RouterLink*/) { }
 
   ngOnInit() {
-    this.failureList = this.failureService.getFailures();
+    this.failureService.getFailures().subscribe(data => {
+      this.failureList = data;
+    });
+  }
+
+  launchSimulation() {
+    if (this.clickMessage == 'La simulation se lance!') {
+      this.clickMessage = 'Cliquer une fois ça suffit vous savez';
+    }
+    if (this.clickMessage == '') {
+      this.clickMessage = 'La simulation se lance!';
+    }
   }
 
 }
