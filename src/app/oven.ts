@@ -1,7 +1,7 @@
-import { Objects } from './objects'; 
+import { Objects } from './objects';
 
 export class Oven {
-    idOven : Number; 
+    idOven : Number;
     effectiveTemp : Number;
     programTemp : Number;
     scheduleTime : String;

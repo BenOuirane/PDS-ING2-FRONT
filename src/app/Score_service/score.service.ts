@@ -15,7 +15,7 @@ export class ScoreService {
 
   
  // Url = "http://localhost:8080/api/note";
-     Url = "http://172.31.254.61:8080/api/note";
+   Url = "http://172.31.254.61:8080/api/note";
    private httpheader={headers: new HttpHeaders({'Content-type' : 'application/json'})}
 
   constructor(private http:HttpClient) { }

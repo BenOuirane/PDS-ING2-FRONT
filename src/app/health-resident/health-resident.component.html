@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2><img src="../../assets/medicalFolder.jpg" alt=""> Résident :{{resident.firstName}}  {{resident.lastName}} </h2>
+    </div>
+    <app-health-alert> </app-health-alert>
+    <div class="panel-body">
+
+
+            <div class="example-container mat-elevation-z8">
+              <div class="example-loading-shade"
+                   *ngIf="isLoadingResults">
+                <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+              </div>
+              <div class="button-row">
+                <a mat-flat-button color="primary" [routerLink]="['/health-state']"><mat-icon>list</mat-icon></a>
+              </div>
+              <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>{{resident.firstName}} - {{resident.lastName}}</mat-card-title>
+                  <mat-card-subtitle>{{resident.age}} ans</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <dl>
+                    <dt>Id Room:</dt>
+                    <dd>{{resident.idRoom}}</dd>
+                    <dt>Medical Folder ID:</dt>
+                    <dd>{{resident.idMedicalFolder}}</dd>
+                  </dl>
+                </mat-card-content>
+                <mat-card-actions>
+                  <!--<a mat-flat-button color="primary" [routerLink]="['/product-edit', product._id]"><mat-icon>edit</mat-icon></a>-->
+                  <!--<a mat-flat-button color="warn" (click)="deleteProduct(product._id)"><mat-icon>delete</mat-icon></a>-->
+                </mat-card-actions>
+              </mat-card>
+              <mat-grid-list cols="1" rowHeight="2:1" *ngFor="let i of measurementTypes" >
+                <mat-grid-tile>
+                  <div class="card">
+                    <h2>{{i.name}} - Mesuré en {{i.longFormUnit}}</h2>
+                  </div>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </div>
+
+      </div>
+
+    </div>
+  </div>

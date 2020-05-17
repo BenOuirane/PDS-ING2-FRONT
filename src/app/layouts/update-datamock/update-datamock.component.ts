@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import { refresidentService } from '../refresident.service';
-import { refresident } from '../refresident';
+import { refresidentService } from '../../services/refresident.service';
+import { refresident } from '../../refresident';
 @Component({
   selector: 'app-update-datamock',
   templateUrl: './update-datamock.component.html',

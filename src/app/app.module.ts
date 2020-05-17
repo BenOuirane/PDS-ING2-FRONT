@@ -11,28 +11,47 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from '@angular/common';
+import { IndicatorsComponent } from './indicators/indicators.component';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
 import { GetNotificationsComponent } from './get-notifications/get-notifications.component';
+import {IndicatorsService} from "./indicators.service";
 
 import { CreateCandidateComponent } from './create-candidate/create-candidate.component';
 import { CandidateService } from './candidate_services/candidate.service';
 import { from } from 'rxjs';
 
-import { SearchBarComponent } from './search-bar/search-bar.component';
-import { FooterComponent } from './footer/footer.component';
-import { UpdateDatamockComponent } from './update-datamock/update-datamock.component';
+import { SearchBarComponent } from './layouts/search-bar/search-bar.component';
+import { FooterComponent } from './layouts/footer/footer.component';
+import { UpdateDatamockComponent } from './layouts/update-datamock/update-datamock.component';
 import { ObjectComponent } from './object/object.component';
 import {
   MatTabsModule, MatSelectModule, MatSliderModule,
   MatSlideToggleModule, MatButtonModule, MatFormFieldModule, MatIconModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MapPrototypeComponent } from './layouts/map-prototype/map-prototype.component';
+import { FavoriteFiltersComponent } from './layouts/favorite-filters/favorite-filters.component';
+
 import { ObjectMapComponent } from './object-map/object-map.component';
 import { HistoryComponent } from './history/history.component';
+import { HealthStateComponent } from './health-state/health-state.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatHeaderRowDef, MatTableModule} from "@angular/material/table";
+import {MatInputModule} from "@angular/material/input";
+import {MatSortModule} from "@angular/material/sort";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatCardModule} from "@angular/material/card";
+import {MatGridListModule} from "@angular/material/grid-list";
+import { HealthResidentComponent } from './health-resident/health-resident.component';
+// @ts-ignore
+import { ProgressWebsocketService } from './services/progress-websocket.service';
+// @ts-ignore
+import { RxStompService  } from '@stomp/ng2-stompjs';
+import { HealthAlertComponent } from './health-alert/health-alert.component';
 
 import { ListCandidateComponent } from './list-candidate/list-candidate.component';
 import { PriorityCandidateComponent } from './priority-candidate/priority-candidate.component';
@@ -53,11 +72,23 @@ import { NoteProfilesComponent } from './note-profiles/note-profiles.component';
     FooterComponent,
     UpdateDatamockComponent,
     ObjectComponent,
+    IndicatorsComponent,
+    MapPrototypeComponent,
+    FavoriteFiltersComponent,
+
     ObjectMapComponent,
     HistoryComponent,
     ListCandidateComponent,
     PriorityCandidateComponent,
-    NoteProfilesComponent
+    NoteProfilesComponent,
+    
+    HealthStateComponent,
+    HealthResidentComponent,
+    HealthAlertComponent,
+
+
+
+
   ],
   imports: [
     BrowserModule,
@@ -71,20 +102,44 @@ import { NoteProfilesComponent } from './note-profiles/note-profiles.component';
     MatSliderModule,
     MatSlideToggleModule,
     BrowserAnimationsModule,
-    NgxMaterialTimepickerModule, 
+    NgxMaterialTimepickerModule,
     MatButtonModule,
     MatFormFieldModule,
     AmazingTimePickerModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+  
+    MatProgressSpinnerModule,
+    MatTableModule,
+
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatGridListModule
+
+
+
+
+
   ],
   providers: [
+    RxStompService,
+    ProgressWebsocketService,
     CandidateService,
     ScoreService,
     CommonModule,
+    IndicatorsService,
+
     {
       provide: LOCALE_ID, useValue: "fr-FR"
-    }
+    },
+
   ],
   bootstrap: [AppComponent]
 

@@ -45,6 +45,6 @@ export class UserService {
     http://{localhost} or {172.31.254.61}:8080/api/users/create
     with no body parameter
      */
-    return this.http.get(`http://172.31.254.61:8080/api/` + `/referential_resident2`);
+    return this.http.get(`http://localhost:8080/api/` + `/referential_resident2`);
   }
 }

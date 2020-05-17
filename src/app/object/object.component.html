@@ -1,7 +1,7 @@
 <section class="container">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <mat-tab-group *ngIf="dataloaded">
+        <!-- Manage infos of Lamps-->
         <mat-tab label="Lampe" *ngIf="lamps.length > 0">
             <ng-container *ngFor="let lampe of lamps; index as i">
                 <div class="my-custom-row mt-5">
@@ -10,26 +10,34 @@
                         <h5 style="padding-left:20%;">Lampe - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
-                                <tr class="col-12">
-                                    <td class="col-6">Status</td>
-                                    <td class="col-6"><span *ngIf="lampe.status">Allumées</span> <span
+                                <tr>
+                                    <td>Status</td>
+                                    <td><span *ngIf="lampe.status">Allumées</span> <span
                                             *ngIf="!lampe.status">Éteint</span></td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Couleur</td>
-                                    <td class="col-6"><span>{{colorOnChange(lampe.color)}}</span></td>
+                                <tr>
+                                    <td>Couleur</td>
+                                    <td><span>{{colorOnChange(lampe.color)}}</span></td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Allumées à</td>
-                                    <td class="col-6">{{ lampe.hourOn | date: "hh:mm a"}}</td>
+                                <tr>
+                                    <td>Allumées à</td>
+                                    <td>
+                                        <span
+                                            *ngIf="lampe.hourOn; else elseBlock">{{ lampe.hourOn | date: "HH:mm"}}</span>
+                                        <ng-template #elseBlock>Non paramétré</ng-template>
+                                    </td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Éteintes à</td>
-                                    <td class="col-6">{{ lampe.hourOff | date: "hh:mm a"}}</td>
+                                <tr>
+                                    <td>Éteintes à</td>
+                                    <td>
+                                        <span
+                                            *ngIf="lampe.hourOff; else elseBlock">{{ lampe.hourOff | date: "HH:mm"}}</span>
+                                        <ng-template #elseBlock>Non paramétré</ng-template>
+                                    </td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Intensité</td>
-                                    <td class="col-6">{{ lampe.intensity }}%</td>
+                                <tr>
+                                    <td>Intensité</td>
+                                    <td>{{ lampe.intensity }}%</td>
                                 </tr>
                             </table>
                         </div>
@@ -38,7 +46,7 @@
                 </div>
                 <!-- Manage params for Lamps-->
                 <div class="my-custom-row mt-5">
-                    <form [formGroup]="checkoutFormLamp" (ngSubmit)="buildLamp()">
+                    <form [formGroup]="checkoutFormLamp" (ngSubmit)="build('lamp')">
                         <div class="col-12">
                             <hr width="85%" color="blue">
                         </div>
@@ -50,9 +58,11 @@
                         <input hidden #colorUsine formControlName="colorUsine" [ngModel]="lampe.colorUsine">
                         <input hidden #hourOffUsine formControlName="hourOffUsine" [ngModel]="lampe.hourOffUsine">
                         <input hidden #hourOnUsine formControlName="hourOnUsine" [ngModel]="lampe.hourOnUsine">
+                        <input hidden #hourOff formControlName="hourOff" [ngModel]="lampe.hourOff">
+                        <input hidden #hourOn formControlName="hourOn" [ngModel]="lampe.hourOn">
                         <input hidden #intensityUsine formControlName="intensityUsine" [ngModel]="lampe.intensityUsine">
                         <input hidden #statusUsine formControlName="statusUsine" [ngModel]="lampe.statusUsine">
-                        <input hidden #rooms formControlName="rooms" [ngModel]="lampe.objects.rooms">
+
                         <table width="90%">
                             <tr>
                                 <td>Status</td>
@@ -78,26 +88,19 @@
 
                             <tr>
                                 <td>Allumées à</td>
-                                <td class="col-6" [ngClass]="stateOn.value ? 'visible' : 'invisible'">
-                                    <span (click)="open()"><i class="material-icons" md-36>schedule</i></span>
-                                </td>
-                                <td>
-                                    <mat-slide-toggle #stateOn (toggleChange)="stateOn.value = !stateOn.value"
-                                        [checked]="lampe.hourOn != null"></mat-slide-toggle>
+                                <td class="col-6">
+                                    <span (click)="openOn(lampe.hourOn, 'lamp')">
+                                        <mat-icon md-36>schedule</mat-icon>
+                                    </span>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td>Éteintes à</td>
-                                <td class="col-6" [ngClass]="stateOff.value ? 'visible' : 'invisible'">
-                                    <!-- <input type="time" atp-time-picker value="20:55" theme="dark" locale='fr' arrowStyle="{'background': 'red', 'color': 'white'}"/> -->
-                                    <span (click)="open()"><i class="material-icons" md-36>schedule</i></span> 
-
-                                    
-                                </td>
-                                <td>
-                                    <mat-slide-toggle #stateOff (toggleChange)="stateOff.value = !stateOff.value"
-                                        [checked]="lampe.hourOff != null"></mat-slide-toggle>
+                                <td class="col-6">
+                                    <span (click)="openOff(lampe.hourOff, 'lamp')">
+                                        <mat-icon md-36>schedule</mat-icon>
+                                    </span>
                                 </td>
                             </tr>
 
@@ -116,153 +119,562 @@
                         </div>
 
                     </form>
+
+                </div>
+
+                <div class="col-12">
+                    <hr width="85%" color="blue">
+                </div>
+
+                <div class="d-flex justify-content-center mb-5">
+                    <button class="type" (click)="restore('lamp', lampe.idLamp)">Restaurer les paramètres
+                        d'usine</button>
                 </div>
 
             </ng-container>
         </mat-tab>
 
         <mat-tab label="Four" *ngIf="ovens.length > 0">
-            <div class="my-custom-row mt-5">
-                <div class="col-6"><img src="../../assets/oven.jpg" alt=""></div>
-                <div class="col-6">
-                    <ng-container *ngFor="let oven of ovens; index as i">
+            <ng-container *ngFor="let oven of ovens; index as i">
+                <div class="my-custom-row mt-5">
+                    <div class="col-6"><img src="../../assets/oven.jpg" alt=""></div>
+                    <div class="col-6">
                         <h5 style="padding-left:20%;">Four - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
-                                <tr class="col-12">
-                                    <td class="col-6">Status</td>
+                                <tr>
+                                    <td>Status</td>
                                     <td class="col-6"><span *ngIf="oven.status">Allumées</span> <span
                                             *ngIf="!oven.status">Éteint</span></td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Température programmée</td>
-                                    <td class="col-6">{{ oven.programTemp}}°C</td>
+                                <tr>
+                                    <td>Température programmée</td>
+                                    <td>{{ oven.programTemp}}°C</td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Température effective</td>
-                                    <td class="col-6">{{ oven.effectiveTemp}}°C</td>
+                                <tr>
+                                    <td>Température effective</td>
+                                    <td>{{ oven.effectiveTemp}}°C</td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Heure de lancement</td>
-                                    <td class="col-6"><span *ngIf="oven.scheduleTime == null">Non Renseigné</span> <span
-                                            *ngIf="oven.scheduleTime != null">{{ oven.scheduleTime | date: "hh:mm a"}}</span>
+                                <tr>
+                                    <td>Heure de lancement</td>
+                                    <td><span *ngIf="oven.scheduleTime == null">Non Renseigné</span> <span
+                                            *ngIf="oven.scheduleTime != null">{{ oven.scheduleTime | date: "HH:mm"}}</span>
                                     </td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Mode</td>
-                                    <td class="col-6"><span *ngIf="oven.mode === 'FAN'">Chaleur tournante</span></td>
+                                <tr>
+                                    <td>Mode</td>
+                                    <td>
+                                        <span *ngIf="oven.mode === 'FAN'">Chaleur tournante</span>
+                                        <span *ngIf="oven.mode === 'PIZZA'">Pizza</span>
+                                        <span *ngIf="oven.mode === 'BAKERY'">Patisserie</span>
+                                        <span *ngIf="oven.mode === 'ROTISSERIE'">Rotisserie</span>
+                                        <span *ngIf="oven.mode === 'PREHEATED'">Pré-chauffage</span>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
-                    </ng-container>
-
+                    </div>
                 </div>
-            </div>
+
+                <!-- Manage params for Oven-->
+                <div class="my-custom-row mt-5">
+                    <form [formGroup]="checkoutFormOven" (ngSubmit)="build('oven')">
+                        <div class="col-12">
+                            <hr width="85%" color="blue">
+                        </div>
+                        <h5>
+                            Paramètres :
+                        </h5>
+                        <input hidden #idOven formControlName="idOven" [ngModel]="oven.idOven">
+                        <input hidden #objects formControlName="objects" [ngModel]="oven.objects">
+                        <input hidden #effectiveTemp formControlName="effectiveTemp" [ngModel]="oven.effectiveTemp">
+                        <input hidden #modeUsine formControlName="modeUsine" [ngModel]="oven.modeUsine">
+                        <input hidden #statusUsine formControlName="statusUsine" [ngModel]="oven.statusUsine">
+                        <input hidden #scheduleTimeUsine formControlName="scheduleTimeUsine"
+                            [ngModel]="oven.scheduleTimeUsine">
+                        <input hidden #programTempUsine formControlName="programTempUsine"
+                            [ngModel]="oven.programTempUsine">
+                        <input hidden #effectiveTempUsine formControlName="effectiveTempUsine"
+                            [ngModel]="oven.effectiveTempUsine">
+                        <input hidden #scheduleTime formControlName="scheduleTime" [ngModel]="oven.scheduleTime">
+
+                        <table width="90%">
+                            <tr>
+                                <td>Status</td>
+                                <td>
+                                    <mat-slide-toggle #status formControlName="status" [ngModel]="oven.status">
+                                    </mat-slide-toggle>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Température programmée</td>
+                                <td>
+                                    <mat-slider #programTemp formControlName="programTemp" thumbLabel
+                                        [displayWith]="formatLabel" min="0" max="270" step="1"
+                                        [ngModel]="oven.programTemp"></mat-slider>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>programmée à</td>
+                                <td class="col-6">
+                                    <span (click)="openOn(oven.scheduleTime, 'oven')">
+                                        <mat-icon md-36>schedule</mat-icon>
+                                    </span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Mode</td>
+                                <td>
+                                    <mat-form-field>
+                                        <mat-select #mode formControlName="mode" [ngModel]="oven.mode">
+                                            <mat-option value="PIZZA">Pizza</mat-option>
+                                            <mat-option value="FAN">Chaleur tournante</mat-option>
+                                            <mat-option value="BAKERY">Patisserie</mat-option>
+                                            <mat-option value="ROTISSERIE">Rotisserie</mat-option>
+                                            <mat-option value="PREHEATED">Préchauffage</mat-option>
+
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <!-- SUBMIT OVEN-->
+                        <div class="d-flex justify-content-center mt-5 mb-5">
+                            <button mat-raised-button type="submit">Valider</button>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="col-12">
+                    <hr width="85%" color="blue">
+                </div>
+
+                <div class="d-flex justify-content-center mb-5">
+                    <button class="type" (click)="restore('oven', oven.idOven)">Restaurer les paramètres
+                        d'usine</button>
+                </div>
+            </ng-container>
         </mat-tab>
 
         <mat-tab label="Volet" *ngIf="shutters.length > 0">
-            <div class="my-custom-row mt-5">
-                <div class="col-6"><img src="../../assets/volet.jpeg" alt=""></div>
-                <div class="col-6">
-                    <ng-container *ngFor="let shutter of shutters; index as i">
+            <ng-container *ngFor="let shutter of shutters; index as i">
+                <div class="my-custom-row mt-5">
+                    <div class="col-6"><img src="../../assets/volet.jpeg" alt=""></div>
+                    <div class="col-6">
                         <h5 style="padding-left:20%;">Volet - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
-                                <tr class="col-12">
-                                    <td class="col-6">Status</td>
-                                    <td class="col-6"><span *ngIf="shutter.status">Ouvert</span> <span
+                                <tr>
+                                    <td>Status</td>
+                                    <td><span *ngIf="shutter.status">Ouvert</span> <span
                                             *ngIf="!shutter.status">Fermé</span></td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Ouvrir à </td>
-                                    <td class="col-6">{{ shutter.hourOn | date: "hh:mm a"}}</td>
+                                <tr>
+                                    <td>Ouvrir à </td>
+                                    <td>
+                                        <span
+                                            *ngIf="shutter.hourOn; else elseBlock">{{ shutter.hourOn | date: "HH:mm"}}</span>
+                                        <ng-template #elseBlock>Non paramétré</ng-template>
+                                    </td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Fermé à</td>
-                                    <td class="col-6">{{ shutter.hourOff | date: "hh:mm a"}}</td>
+                                <tr>
+                                    <td>Fermer à</td>
+                                    <td>
+                                        <span
+                                            *ngIf="shutter.hourOff; else elseBlock">{{ shutter.hourOff | date: "HH:mm"}}</span>
+                                        <ng-template #elseBlock>Non paramétré</ng-template>
+                                    </td>
                                 </tr>
 
                             </table>
                         </div>
-                    </ng-container>
-
+                    </div>
                 </div>
-            </div>
+                <!-- Manage params for shutters-->
+                <div class="my-custom-row mt-5">
+                    <form [formGroup]="checkoutFormShutter" (ngSubmit)="build('shutter')">
+                        <div class="col-12">
+                            <hr width="85%" color="blue">
+                        </div>
+                        <h5>
+                            Paramètres :
+                        </h5>
+                        <input hidden #idShutter formControlName="idShutter" [ngModel]="shutter.idShutter">
+                        <input hidden #objects formControlName="objects" [ngModel]="shutter.objects">
+                        <input hidden #hourOnUsine formControlName="hourOnUsine" [ngModel]="shutter.hourOnUsine">
+                        <input hidden #hourOffUsine formControlName="hourOffUsine" [ngModel]="shutter.hourOffUsine">
+                        <input hidden #statusUsine formControlName="statusUsine" [ngModel]="shutter.statusUsine">
+                        <input hidden #hourOff formControlName="hourOff" [ngModel]="shutter.hourOff">
+                        <input hidden #hourOn formControlName="hourOn" [ngModel]="shutter.hourOn">
+
+                        <table width="90%">
+                            <tr>
+                                <td>Status</td>
+                                <td>
+                                    <mat-slide-toggle #status formControlName="status" [ngModel]="shutter.status">
+                                    </mat-slide-toggle>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Ouvrir à</td>
+                                <td class="col-6">
+                                    <span (click)="openOn(shutter.hourOn, 'shutter')">
+                                        <mat-icon md-36>schedule</mat-icon>
+                                    </span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Fermer à</td>
+                                <td class="col-6">
+                                    <span (click)="openOff(shutter.hourOff, 'shutter')">
+                                        <mat-icon md-36>schedule</mat-icon>
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- SUBMIT SHUTTER-->
+                        <div class="d-flex justify-content-center mt-5 mb-5">
+                            <button mat-raised-button type="submit">Valider</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-12">
+                    <hr width="85%" color="blue">
+                </div>
+                <div class="d-flex justify-content-center mb-5">
+                    <button class="type" (click)="restore('shutter', shutter.idShutter)">Restaurer les paramètres
+                        d'usine</button>
+                </div>
+
+            </ng-container>
         </mat-tab>
 
         <mat-tab label="Réveil" *ngIf="alarmClocks.length > 0">
-            <div class="my-custom-row mt-5">
-                <div class="col-6"><img src="../../assets/AlarmClock.jpg" alt=""></div>
-                <div class="col-6">
-                    <ng-container *ngFor="let alarmClock of alarmClocks; index as i">
+            <ng-container *ngFor="let alarmClock of alarmClocks; index as i">
+                <div class="my-custom-row mt-5">
+                    <div class="col-6"><img src="../../assets/AlarmClock.jpg" alt=""></div>
+                    <div class="col-6">
                         <h5 style="padding-left:20%;">Réveil - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
-                                <tr class="col-12">
-                                    <td class="col-6">Heure actuelle</td>
-                                    <td class="col-6">{{ alarmClock.time | date: "hh:mm a"}}</td>
+                                <tr>
+                                    <td>Date | Heure </td>
+                                    <td>{{ now | date: "d MMMM y | HH:mm:ss"}}</td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Statut réveil </td>
-                                    <td class="col-6"><span *ngIf="alarmClock.alarmStatus">ON</span> <span
+                                <tr>
+                                    <td>Statut réveil </td>
+                                    <td><span *ngIf="alarmClock.alarmStatus">ON</span> <span
                                             *ngIf="!alarmClock.alarmStatus">OFF</span></td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Sonnerie à </td>
-                                    <td class="col-6">{{ alarmClock.time | date: "hh:mm a"}}</td>
+                                <tr>
+                                    <td>Alarme à </td>
+                                    <td>
+                                        <span
+                                            *ngIf="alarmClock.alarm; else elseBlock">{{ alarmClock.alarm | date: "HH:mm "}}</span>
+                                        <ng-template #elseBlock>Non paramétré</ng-template>
+                                    </td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Statut radio </td>
-                                    <td class="col-6"><span *ngIf="alarmClock.radioStatus">ON</span> <span
+                                <tr>
+                                    <td>Statut radio </td>
+                                    <td><span *ngIf="alarmClock.radioStatus">ON</span> <span
                                             *ngIf="!alarmClock.radioStatus">OFF</span></td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Fréquence Radio</td>
-                                    <td class="col-6">{{alarmClock.radioHrz | number}}</td>
+                                <tr>
+                                    <td>Fréquence Radio</td>
+                                    <td>{{alarmClock.radioHrz | number}}</td>
                                 </tr>
-
 
                             </table>
                         </div>
-                    </ng-container>
-
+                    </div>
                 </div>
-            </div>
+
+                <!-- Manage params for alarmClock-->
+                <div class="my-custom-row mt-5">
+                    <form [formGroup]="checkoutFormAlarmClock" (ngSubmit)="build('alarmClock')">
+                        <div class="col-12">
+                            <hr width="85%" color="blue">
+                        </div>
+                        <h5>
+                            Paramètres :
+                        </h5>
+                        <input hidden #idAlarmClock formControlName="idAlarmClock" [ngModel]="alarmClock.idAlarmClock">
+                        <input hidden #objects formControlName="objects" [ngModel]="alarmClock.objects">
+                        <input hidden #alarmUsine formControlName="alarmUsine" [ngModel]="alarmClock.alarmUsine">
+                        <input hidden #radioHrzUsine formControlName="radioHrzUsine"
+                            [ngModel]="alarmClock.radioHrzUsine">
+                        <input hidden #radioStatusUsine formControlName="radioStatusUsine"
+                            [ngModel]="alarmClock.radioStatusUsine">
+                        <input hidden #alarmStatusUsine formControlName="alarmStatusUsine"
+                            [ngModel]="alarmClock.alarmStatusUsine">
+                        <input hidden #alarm formControlName="alarm" [ngModel]="alarmClock.alarm">
+
+                        <table width="90%">
+                            <tr>
+                                <td>Status réveil</td>
+                                <td>
+                                    <mat-slide-toggle #alarmStatus formControlName="alarmStatus"
+                                        [ngModel]="alarmClock.alarmStatus">
+                                    </mat-slide-toggle>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Alarme à</td>
+                                <td>
+                                    <span (click)="openOn(alarmClock.alarm, 'alarm')">
+                                        <mat-icon md-36>schedule</mat-icon>
+                                    </span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Status radio</td>
+                                <td>
+                                    <mat-slide-toggle #radioStatus formControlName="radioStatus"
+                                        [ngModel]="alarmClock.radioStatus">
+                                    </mat-slide-toggle>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Fréquence radio</td>
+                                <td>
+                                    <mat-slider #radioHrz formControlName="radioHrz" thumbLabel
+                                        [displayWith]="formatLabel" min="87.5" max="108" step="0.1"
+                                        [ngModel]="alarmClock.radioHrz"></mat-slider>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- SUBMIT ALARMCLOCK-->
+                        <div class="d-flex justify-content-center mt-5 mb-5">
+                            <button mat-raised-button type="submit">Valider</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12">
+                    <hr width="85%" color="blue">
+                </div>
+
+                <div class="d-flex justify-content-center mb-5">
+                    <button class="type" (click)="restore('alarmClock', alarmClock.idAlarmClock)">Restaurer les
+                        paramètres d'usine</button>
+                </div>
+
+            </ng-container>
         </mat-tab>
 
 
         <mat-tab label="Machine à café" *ngIf="coffeeMachines.length > 0">
-            <div class="my-custom-row mt-5">
-                <div class="col-6"><img src="../../assets/coffeeMachine.jpg" alt=""></div>
-                <div class="col-6">
-                    <ng-container *ngFor="let coffeeMachine of coffeeMachines; index as i">
+            <ng-container *ngFor="let coffeeMachine of coffeeMachines; index as i">
+                <div class="my-custom-row mt-5">
+                    <div class="col-6"><img src="../../assets/coffeeMachine.jpg" alt=""></div>
+                    <div class="col-6">
                         <h5 style="padding-left:20%;">Machine à café - {{ i + 1}} :</h5>
                         <div class="row">
                             <table width="90%">
-                                <tr class="col-12">
-                                    <td class="col-6">Status </td>
-                                    <td class="col-6"><span *ngIf="coffeeMachine.status">Allumée</span> <span
+                                <tr>
+                                    <td>Status </td>
+                                    <td><span *ngIf="coffeeMachine.status">Allumée</span> <span
                                             *ngIf="!coffeeMachine.status">Éteinte</span></td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Nombre de capsule restante </td>
-                                    <td class="col-6">{{ coffeeMachine.nbCapsule }}</td>
+                                <tr>
+                                    <td>Nombre de capsule restante </td>
+                                    <td>{{ coffeeMachine.nbCapsule }}</td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Mon café sera prêt à</td>
-                                    <td class="col-6">{{ coffeeMachine.scheduleCoffee | date: "hh:mm a"}}</td>
+                                <tr>
+                                    <td>Mon café sera prêt à</td>
+                                    <td>
+                                        <span
+                                            *ngIf="coffeeMachine.scheduleCoffee; else elseBlock">{{ coffeeMachine.scheduleCoffee | date: "HH:mm"}}</span>
+                                        <ng-template #elseBlock>Non paramétré</ng-template>
+                                    </td>
                                 </tr>
-                                <tr class="col-12">
-                                    <td class="col-6">Niveau d'eau de ma machine</td>
-                                    <td class="col-6">{{coffeeMachine.waterLevel}} Litre</td>
+                                <tr>
+                                    <td>Niveau d'eau de ma machine</td>
+                                    <td>{{coffeeMachine.waterLevel}} cl</td>
                                 </tr>
 
                             </table>
                         </div>
-                    </ng-container>
+                    </div>
+                </div>
 
+                <!-- Manage params for Lamps-->
+                <div class="my-custom-row mt-5">
+                    <form [formGroup]="checkoutFormCoffeeMachine" (ngSubmit)="build('coffeeMachine')">
+                        <div class="col-12">
+                            <hr width="85%" color="blue">
+                        </div>
+                        <h5>
+                            Paramètres :
+                        </h5>
+                        <input hidden #idCoffee formControlName="idCoffee" [ngModel]="coffeeMachine.idCoffee">
+                        <input hidden #objects formControlName="objects" [ngModel]="coffeeMachine.objects">
+                        <input hidden #nbCapsule formControlName="nbCapsule" [ngModel]="coffeeMachine.nbCapsule">
+                        <input hidden #waterLevel formControlName="waterLevel" [ngModel]="coffeeMachine.waterLevel">
+                        <input hidden #nbCapsuleUsine formControlName="nbCapsuleUsine"
+                            [ngModel]="coffeeMachine.nbCapsuleUsine">
+                        <input hidden #scheduleCoffeeUsine formControlName="scheduleCoffeeUsine"
+                            [ngModel]="coffeeMachine.scheduleCoffeeUsine">
+                        <input hidden #statusUsine formControlName="statusUsine" [ngModel]="coffeeMachine.statusUsine">
+                        <input hidden #waterLevelUsine formControlName="waterLevelUsine"
+                            [ngModel]="coffeeMachine.waterLevelUsine">
+                        <input hidden #scheduleCoffee formControlName="scheduleCoffee"
+                            [ngModel]="coffeeMachine.scheduleCoffee">
+
+                        <table width="90%">
+                            <tr>
+                                <td>Status de ma machine</td>
+                                <td>
+                                    <mat-slide-toggle #status formControlName="status" [ngModel]="coffeeMachine.status">
+                                    </mat-slide-toggle>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Mon café coulera à </td>
+                                <td>
+                                    <span (click)="openOn(coffeeMachine.scheduleCoffee, 'coffeeMachine')">
+                                        <mat-icon md-36>schedule</mat-icon>
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <!-- SUBMIT COFFEEMACHINE -->
+                        <div class="d-flex justify-content-center mt-5 mb-5">
+                            <button mat-raised-button type="submit">Valider</button>
+                        </div>
+                    </form>
+                </div>
+                <h5>
+                    Mes actions :
+                </h5>
+
+                <div>
+                    <button [disabled]="coffeeMachine.nbCapsule==0 || coffeeMachine.waterLevel < 2" class="typeAction"
+                        (click)="expresso(coffeeMachine.idCoffee)">Fais moi couler un expresso</button>
+                    <p class="d-flex justify-content-center mb-5" style="color :red" *ngIf="coffeeMachine.nbCapsule==0">
+                        Veuillez recharger les capsules de votre machine</p>
+                    <p class="d-flex justify-content-center mb-5" style="color :red"
+                        *ngIf="coffeeMachine.waterLevel < 2">Veuillez recharger le niveau d'eau de votre machine</p>
+                </div>
+
+                <div class="col-12">
+                    <hr width="85%" color="blue">
+                </div>
+
+                <div class="d-flex justify-content-center mb-5">
+                    <button class="type" (click)="restore('coffeeMachine', coffeeMachine.idCoffee)">Restaurer les
+                        paramètres d'usine</button>
+                </div>
+
+            </ng-container>
+        </mat-tab>
+
+        <!-- Manage scenario My Morning-->
+        <mat-tab label="Mon Matin">
+
+            <div class="my-custom-row mt-5">
+                <div class="col-6"><img class="imgScenar" src="../../assets/MyMorning1.png" alt=""></div>
+                <div class="col-6"
+                    style="width: 200px; line-height: 400px; margin-top: 50px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; text-align: center; font-style : italic; font-size: 50px;">
+                    <b> Bon matin...</b>
                 </div>
             </div>
+
+            <div class="my-custom-row mt-5">
+                <div class="col-6"
+                    style="display: flex; align-items: center; width: 200px; margin-top: 50px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; text-align: center; font-style : italic; font-size: 20px;">
+                    <b> Parce qu'il n'y a rien de plus important qu'un réveil en douceur... <br><br> Profitez d'un
+                        voyage dans l'automatique et surtout... ne faites plus rien ! #Wally</b>
+
+                </div>
+                <div class="col-6"><img class="imgScenar" src="../../assets/MorningCoffee.jpg" alt=""></div>
+
+            </div>
+            <div class="col-12 mt-5 mb-5">
+                <hr width="85%" color="blue">
+            </div>
+            <div>
+                <span
+                    *ngIf="lamps.length == 0 || shutters.length == 0 || alarmClocks.length == 0 || coffeeMachines.length == 0; else elseBlock">
+                    <p class="d-flex justify-content-center mb-5" style="color :red">Vous n'avez pas tous les objets
+                        nécessaires pour ce scénario</p>
+                </span>
+                <ng-template #elseBlock>
+                    <form [formGroup]="formMyMorning" (ngSubmit)="build('myMorning')" class="justify-content-center">
+
+                        <div>
+                            <mat-form-field class="col-3">
+                                <mat-label>Réveils</mat-label>
+                                <mat-select #selectAlarmClock formControlName="selectAlarmClock" required>
+                                    <mat-option *ngFor="let alarmClock of alarmClocks; index as i" [value]="alarmClock">
+                                        Réveil - {{ i + 1}}
+                                        <!--{{alarmClock | json}} -->
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="col-3">
+                                <mat-label>Lampes</mat-label>
+                                <mat-select formControlName="selectLamp" required>
+                                    <mat-option *ngFor="let lamp of lamps; index as i" [value]="lamp">
+                                        Lampe - {{ i + 1}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="col-3">
+                                <mat-label>Volets</mat-label>
+                                <mat-select formControlName="selectShutter" required>
+                                    <mat-option *ngFor="let shutter of shutters; index as i" [value]="shutter">
+                                        Volet - {{ i + 1}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="col-3">
+                                <mat-label>Machine à café</mat-label>
+                                <mat-select formControlName="selectCoffeeMachine" required>
+                                    <mat-option *ngFor="let coffeeMachine of coffeeMachines; index as i"
+                                        [value]="coffeeMachine">
+                                        Machine à café - {{ i + 1}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <div class="d-flex justify-content-center mb-5">
+                                <span (click)="openOn(formMyMorning.value.selectAlarmClock.alarm, 'myMorning')">
+                                    <mat-icon class="custom-mat-icon">schedule</mat-icon>
+                                </span>
+                                <div class="ml-3 mt-3">
+                                    <span
+                                        *ngIf="formMyMorning.value.selectAlarmClock.alarm == null; else elseBlock">{{ 1587103200000 | date: "HH:mm"}}</span>
+                               
+                                    <ng-template #elseBlock>
+                                        {{formMyMorning.value.selectAlarmClock.alarm  | date: "HH:mm"}}
+                                    </ng-template>
+                                </div>
+                            </div>
+
+                            <!-- SUBMIT MYMORNING -->
+                            <div class="d-flex justify-content-center mt-5 mb-5">
+                                <button mat-raised-button type="submit">Lancer</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </ng-template>
+
+            </div>
+
         </mat-tab>
     </mat-tab-group>
 </section>

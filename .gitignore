@@ -45,3 +45,4 @@ testem.log
 .DS_Store
 Thumbs.db
 pds_aled_front.iml
+package-lock.json

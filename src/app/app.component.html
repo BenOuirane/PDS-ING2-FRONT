@@ -17,16 +17,22 @@
             <li id="menu-item-204"
                 class="menu-item">
                 <a [routerLink]="['home']" aria-current="page">Accueil</a></li>
-            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['search']" 
-                >Recherche de résident</a></li>
-            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['notification']" 
+           <!-- <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['search']"
+                >Recherche de résident</a></li>-->
+            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['track-patients-control-view']"
+                    >Consutler la carte</a></li>
+            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['notification']"
                     >Envoyer une notification</a></li>
-            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'RESIDENT'"><a [routerLink]="['object']" 
+            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'RESIDENT'"><a [routerLink]="['object']"
                         >Mes Objets connectés</a></li>
-            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'RESIDENT'"><a [routerLink]="['notifications']" 
+            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'RESIDENT'"><a [routerLink]="['notifications']"
                         >Notifications</a></li>
             <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['listcandidate']" 
                             >Liste-des-candidats</a></li>
+          <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['indicators']"
+          >Indicateurs de la résidence</a></li>
+            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['health-state']"
+                        >Etat de santé</a></li>
 
              <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['prioritycandidate']" 
                                 >Liste-de-priorité</a></li>
@@ -36,15 +42,19 @@
              <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['note']" 
                                     >Score </a></li>            
                         
-            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['objects']" 
+            <li id="menu-item-202" class="menu-item" *ngIf="user.role == 'ADMIN'"><a [routerLink]="['objects']"
                 >Monitorer les objets</a></li>
+
             <li *ngIf="authenticated()" id="menu-item-202" class="menu-item"><a
                 href="" (click)="logout()">Déconnexion</a></li>
 
-               
 
-                   
+
+
         </ul>
+
     </div>
+
 </nav>
+
 <router-outlet></router-outlet>
