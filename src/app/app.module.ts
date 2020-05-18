@@ -93,11 +93,8 @@ import { CurrentAreaDetailComponent } from './layouts/current-area-detail/curren
     //PopupConfirmationComponent,
     AuditPathsComponent,
     CacheSumAreaComponent,
-<<<<<<< HEAD
-=======
     CurrentAreaDetailComponent,
    // NgxPaginationModule
->>>>>>> aled_07_59
 
     FailureSimulationComponent,
   ],
