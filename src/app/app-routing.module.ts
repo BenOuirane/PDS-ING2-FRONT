@@ -31,6 +31,9 @@ import { HistoryComponent } from './history/history.component';
 import {IndicatorsComponent} from './indicators/indicators.component';
 import { HealthStateComponent} from './health-state/health-state.component';
 import {HealthResidentComponent} from "./health-resident/health-resident.component";
+import { FailureComponent } from './failure/failure.component';
+import { FailureSimulationComponent } from './failure-simulation/failure-simulation.component';
+
 
 
 
@@ -54,6 +57,7 @@ const routes: Routes = [
     component: HealthResidentComponent,
     data: { title: 'Health Resident ' }
   },
+ 
 
 
  // { path: 'search', component: SearchBarComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
@@ -63,7 +67,11 @@ const routes: Routes = [
   {path: 'cache-sum-area-control-view', component: CacheSumAreaComponent, canActivate: [RoleGuard], data: {expectedRole: 'ADMIN'}},
   { path: 'updatedata', component: UpdateDatamockComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'objects', component: ObjectMapComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
-  { path: 'history/:type/:id', component: HistoryComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}}
+  { path: 'history/:userId/:id', component: HistoryComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+  
+  { path: 'pannes', component: FailureComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+  { path: 'pannes/simulation', component: FailureSimulationComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+
 
 ];
 

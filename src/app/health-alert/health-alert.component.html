@@ -19,7 +19,7 @@
       <li>Alert on : {{progress.measurementType}} &nbsp; Unit : &nbsp;{{progress.measurementUnit}}</li>
       <li>Thresholds for this resident : MIN = {{progress.measurementTypeMinValue}} &nbsp;  ;  MAX = : &nbsp;{{progress.measurementTypeMaxValue}}</li>
       <li>Last three values reported : </li>
-      <li>{{progress.lastMeasurement_1|datepipe:'short'}} </li>
+      <li>{{progress.lastMeasurement_1|date:'short'}} </li>
       <li>{{progress.lastMeasurement_2 |date:'medium'}} </li>
       <li>{{progress.lastMeasurement_3 |date:'medium'}} </li>
 

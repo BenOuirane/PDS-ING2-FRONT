@@ -16,13 +16,17 @@ import { LampHistoryService } from './historyService/lamp-history.service';
 })
 export class ObjectService {
 
-  //private baseUrl = 'http://localhost:8080/api';
-  private baseUrl = 'http://172.31.254.61:8080/api';
+  private baseUrl = 'http://localhost:8080/api';
+  //private baseUrl = 'http://172.31.254.61:8080/api';
 
   constructor(private http: HttpClient, private router: Router) { }
 
   getObject(room: Room): Observable<Array<Objects>> {
     return this.http.put<Array<Objects>>(`${this.baseUrl}/object/list`, room);
+  }
+
+  getObjectById(id: Number): Observable<Objects> {
+    return this.http.put<Objects>(`${this.baseUrl}/object/id`, id);
   }
 
   scenarioMyMorning(scenarioMyMorning : ScenarioMyMorning) : Observable<ScenarioMyMorning> {

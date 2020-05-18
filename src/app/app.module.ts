@@ -46,6 +46,9 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import { HealthResidentComponent } from './health-resident/health-resident.component';
+import { FailureService } from './services/failure.service';
+import { FailureComponent } from './failure/failure.component';
+
 // @ts-ignore
 import { ProgressWebsocketService } from './services/progress-websocket.service';
 // @ts-ignore
@@ -55,6 +58,8 @@ import { PopupConfirmationComponent } from './layouts/popup-confirmation/popup-c
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuditPathsComponent } from './layouts/audit-paths/audit-paths.component';
 import { CacheSumAreaComponent } from './layouts/cache-sum-area/cache-sum-area.component';
+import { FailureSimulationComponent } from './failure-simulation/failure-simulation.component';
+
 
 
 
@@ -74,7 +79,7 @@ import { CacheSumAreaComponent } from './layouts/cache-sum-area/cache-sum-area.c
     IndicatorsComponent,
     MapPrototypeComponent,
     FavoriteFiltersComponent,
-
+    FailureComponent,
     ObjectMapComponent,
     HistoryComponent,
     HealthStateComponent,
@@ -85,9 +90,11 @@ import { CacheSumAreaComponent } from './layouts/cache-sum-area/cache-sum-area.c
 
     //PopupConfirmationComponent,
     AuditPathsComponent,
-    CacheSumAreaComponent
+    CacheSumAreaComponent,
 
+    FailureSimulationComponent,
   ],
+
   imports: [
     BrowserModule,
     FormsModule,
@@ -127,6 +134,7 @@ import { CacheSumAreaComponent } from './layouts/cache-sum-area/cache-sum-area.c
     CandidateService,
     CommonModule,
     IndicatorsService,
+    FailureService,
 
     {
       provide: LOCALE_ID, useValue: "fr-FR"

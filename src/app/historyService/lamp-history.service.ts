@@ -10,11 +10,15 @@ import { History } from '../historyService/history';
 export class LampHistoryService {
 
   //private baseUrl = 'http://localhost:8080/api';
-  private baseUrl = 'http://172.31.254.61:8080/api';
+  private baseUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient, private router: Router) { }
 
   getHistory(id: Number) : Observable<Array<History>>{
     return this.http.put<Array<History>>(`${this.baseUrl}` + `/history/lamp`, id);
+  }
+
+  getHistoryUsingHoursByDate(id: Number, start : string, end : string) : Observable<Array<Map<Array<String>, number>>>{
+    return this.http.put<Array<Map<Array<String>, number>>>(`${this.baseUrl}` + `/hours/lamp`, {'id': id, 'start': start, 'end' : end });
   }
 }

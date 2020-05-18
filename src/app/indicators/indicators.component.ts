@@ -28,6 +28,8 @@ export class IndicatorsComponent  {
   public monthturnover1: any [] = [];
   public monthturnover2: any [] = [];
   public annualturnover: any [] = [];
+  public year_subscription: any;
+  public month_subscription: any;
 
 
   constructor(private indicatorsService: IndicatorsService) {
