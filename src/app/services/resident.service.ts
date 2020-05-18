@@ -31,8 +31,8 @@ export class ResidentService {
         console.log('service update resident');
         return this.http.post(this.baseUrl+ '/update_resident', null, httpOption);
         }
-  //private baseUrl = 'http://localhost:8080/api';
-  private baseUrl = 'http://172.31.254.61:8080/api';
+  private baseUrl = 'http://localhost:8080/api';
+  //private baseUrl = 'http://172.31.254.61:8080/api';
 
   constructor(private http: HttpClient, private router: Router) { }
 

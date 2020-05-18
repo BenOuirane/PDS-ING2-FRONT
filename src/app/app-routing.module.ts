@@ -21,14 +21,12 @@ If he goes on 'http://{localhost} or {172.31.254.61}:4200/',
 we redirect him to the route '/user that calls the UsersListComponent'
  */
 
-import { ListCandidateComponent } from './list-candidate/list-candidate.component';
-import { PriorityCandidateComponent } from './priority-candidate/priority-candidate.component';
-import { NoteProfilesComponent } from './note-profiles/note-profiles.component';
-//import { SearchBarComponent } from './layouts/search-bar/search-bar.component';
 //import { SearchBarComponent } from './layouts/search-bar/search-bar.component';
 import { UpdateDatamockComponent } from './layouts/update-datamock/update-datamock.component';
 import { ObjectComponent } from './object/object.component';
-
+import { ListCandidateComponent } from './list-candidate/list-candidate.component';
+import { PriorityCandidateComponent } from './priority-candidate/priority-candidate.component';
+import { NoteProfilesComponent } from './note-profiles/note-profiles.component';
 import { MapPrototypeComponent } from './layouts/map-prototype/map-prototype.component';
 import { ObjectMapComponent } from './object-map/object-map.component';
 import { HistoryComponent } from './history/history.component';

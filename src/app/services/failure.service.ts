@@ -12,7 +12,7 @@ export class FailureService {
   constructor(private http: HttpClient, private router: Router) { }
 
  private baseUrl = 'http://localhost:8080/api';
- //private baseUrl = 'http://172.31.254.61:8080/api';
+ ////private baseUrl = 'http://172.31.254.61:8080/api';
 
   getFailures(): Observable<Array<Failure>> {
     return this.http.get<Array<Failure>>(`${this.baseUrl}/failures`);

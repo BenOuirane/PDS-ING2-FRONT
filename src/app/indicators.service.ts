@@ -10,8 +10,9 @@ const httpOptions = {
 @Injectable()
 export class IndicatorsService {
 
-  //private Url = 'http://localhost:8080';
-  private Url = 'http://172.31.254.61:8080';
+  private Url = 'http://localhost:8080';
+  //private Url = 'http://172.31.254.61:8080';
+
 
   constructor(private http: HttpClient) {
   }
