@@ -221,6 +221,18 @@ export class IndicatorsComponent implements OnInit {
       },
       options: {
         legend: { display: false },
+        scales: {
+          yAxes: [{
+            ticks: {
+              min: 0,
+              max: 700000,
+              stepSize: 100000
+            },
+            scaleLabel: {
+              display: true
+            }
+          }],
+        },
         title: {
           display: true,
           text: 'Chiffre d\'affaire annuel (en Euros)  de l\'entreprise '
