@@ -9,8 +9,8 @@ declare var $: any;
   styleUrls: ['./indicators.component.scss']
 })
 
-//export class IndicatorsComponent implements OnInit {
-export class IndicatorsComponent  {
+export class IndicatorsComponent implements OnInit {
+
   
   
  canvas: any;
