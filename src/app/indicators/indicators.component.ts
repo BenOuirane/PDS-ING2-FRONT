@@ -124,7 +124,13 @@ export class IndicatorsComponent implements OnInit {
         datasets: [{
           label: 'Taux ',
           data: this.formula2019,
+<<<<<<< HEAD
          // animateScale: true,
+||||||| merged common ancestors
+          animateScale: true,
+=======
+          //animateScale: true,
+>>>>>>> 8ec14b7c42c609bd3a5f87d0515142e3ce27bb3d
           backgroundColor: [
             'rgba(255, 206, 86, 1)',
             'rgba(127, 0, 255, 1)',
@@ -161,11 +167,23 @@ export class IndicatorsComponent implements OnInit {
       },
       options: {
         responsive: false,
+<<<<<<< HEAD
       //  display: true
+||||||| merged common ancestors
+        display: true
+=======
+        //display: true
+>>>>>>> 8ec14b7c42c609bd3a5f87d0515142e3ce27bb3d
       }
     });
 
+<<<<<<< HEAD
     let chart2 = new Chart(document.getElementById('chart2') as HTMLCanvasElement, {
+||||||| merged common ancestors
+    let chart2 = new Chart(document.getElementById('chart2'), {
+=======
+    /*let chart2 = new Chart(document.getElementById('chart2'), {
+>>>>>>> 8ec14b7c42c609bd3a5f87d0515142e3ce27bb3d
       type: 'bar',
       data: {
         labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre","Octobre", "Novembre", "Decembre"],
@@ -238,7 +256,7 @@ export class IndicatorsComponent implements OnInit {
           text: 'Chiffre d\'affaire annuel (en Euros)  de l\'entreprise '
         }
       }
-    });
+    });*/
 
   }
 
