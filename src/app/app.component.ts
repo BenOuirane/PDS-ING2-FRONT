@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { timer } from 'rxjs';
+import { MatDialog } from '@angular/material';
 import { User } from "./user";
 import { Notification } from "./notification"
 import { NotificationService } from "./notification.service";
+import { PopupConfirmationComponent } from './layouts/popup-confirmation/popup-confirmation.component';
+
 
 
 declare var $: any;
@@ -19,7 +22,7 @@ export class AppComponent {
   numberNotification: number;
   newNotifications: Notification[];
 
-  constructor(private router: Router, private notificationService: NotificationService) {
+  constructor(private router: Router, private notificationService: NotificationService, public dialog: MatDialog) {
     this.numberNotification = 0;
   }
 
@@ -86,6 +89,18 @@ export class AppComponent {
     return localStorage.getItem('user');
   }
 
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PopupConfirmationComponent, {
+      width: '350px',
+      data: "Do you confirm the deletion of this data?"
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        console.log('Yes clicked');
+        // DO SOMETHING
+      }
+    });
   
 }
-
+}

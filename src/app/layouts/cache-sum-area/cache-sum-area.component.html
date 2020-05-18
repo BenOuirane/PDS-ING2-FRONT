@@ -1,0 +1,31 @@
+<div class = "container-fluid" style="margin-top: 7rem;">
+	
+    <form class="form-inline md-form mr-auto mb-4" (submit)="onSubmit()">
+    
+        <div class="col-12">
+            <h2><img src="assets/img/cam.png" alt="cam" style=" height: 90px;
+                margin-right: 30px;">Surveillance des patients</h2>
+                <h6	style="margin-left: 7.58rem; margin-top: -1rem;">Les déplacement du patient</h6>
+        </div>
+
+	<div *ngIf="!this.emptydata" class="alert alert-info text-center w-50 m-auto" role="alert">Aucun patient trouvé ! </div>
+      
+
+<table class="table table-bordered " *ngIf="this.emptydata">
+
+    <tr>
+        <td>Area id </td>
+        <td> Sum visit area </td>
+
+    </tr>
+    <tr *ngFor="let item of data | keyvalue" class="table-active">
+        <td class="table-primary">{{item.key}}  </td>
+        <td class="table-secondary">{{item.value}}</td>
+    </tr>
+    
+
+      
+
+    
+</table>
+

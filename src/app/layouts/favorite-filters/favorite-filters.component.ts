@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { EventEmitter } from 'protractor';
-import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
@@ -13,7 +12,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 export class FavoriteFiltersComponent implements OnInit {
   @Input() type: string;
  // @Input() selectedFavoriteFilterChange: EventEmitter<Filter> = new EventEmitter;
-  @Input() searchFormService: SearchBarComponent
+//  @Input() searchFormService: SearchBarComponent
 
  // dialogFilterDeleteRef: MatDialogRef<DialogBoxComponent>;
   favoriteFilterFormGroup : FormGroup [];

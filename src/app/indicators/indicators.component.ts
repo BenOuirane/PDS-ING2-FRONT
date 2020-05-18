@@ -8,8 +8,12 @@ declare var $: any;
   templateUrl: './indicators.component.html',
   styleUrls: ['./indicators.component.scss']
 })
-export class IndicatorsComponent implements OnInit {
-  canvas: any;
+
+//export class IndicatorsComponent implements OnInit {
+export class IndicatorsComponent  {
+  
+  /*
+ canvas: any;
   ctx: any;
   public residence: any;
   public failure: any;
@@ -32,7 +36,7 @@ export class IndicatorsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.indicatorsService.getObjects()
+   this.indicatorsService.getObjects()
       .subscribe(data => {
         this.objects = data;
       }, err => {
@@ -300,5 +304,7 @@ export class IndicatorsComponent implements OnInit {
     }
 
   }
-
+*/
 }
+
+  

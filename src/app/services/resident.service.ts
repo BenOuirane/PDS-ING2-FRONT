@@ -9,6 +9,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ResidentService {
+  createPositionData() {
+    throw new Error("Method not implemented.");
+  }
   
     createResidentData(): Observable<any>{
       let header = new HttpHeaders({'Content-Type': 'application/json'})
@@ -28,7 +31,7 @@ export class ResidentService {
         console.log('service update resident');
         return this.http.post(this.baseUrl+ '/update_resident', null, httpOption);
         }
- // private baseUrl = 'http://localhost:8080/api';
+  //private baseUrl = 'http://localhost:8080/api';
   private baseUrl = 'http://172.31.254.61:8080/api';
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -44,7 +47,7 @@ export class ResidentService {
         params: httpParams,
         headers: new HttpHeaders({'Content-Type': 'application/json'})
       };
-      return this.http.get<any>(this.baseUrl + `//resident/singleton/`+id_resident, httpOption);
+      return this.http.get<any>(this.baseUrl + `/resident/singleton/`+id_resident, httpOption);
 
 }
 
