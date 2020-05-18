@@ -165,7 +165,9 @@ export class IndicatorsComponent implements OnInit {
       }
     });
 
-    /*let chart2 = new Chart(document.getElementById('chart2'), {
+    this.canvas = document.getElementById('chart2') ;
+    this.ctx = this.canvas.getContext('2d');
+    let chart2 = new Chart(this.ctx, {
       type: 'bar',
       data: {
         labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre","Octobre", "Novembre", "Decembre"],
@@ -186,7 +188,9 @@ export class IndicatorsComponent implements OnInit {
       }
     });
 
-    let chart3 = new Chart(document.getElementById('chart3'), {
+    this.canvas = document.getElementById('chart3') ;
+    this.ctx = this.canvas.getContext('2d');
+    let chart3 = new Chart(this.ctx, {
       type: 'bar',
       data: {
         labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre","Octobre", "Novembre", "Decembre"],
@@ -207,7 +211,9 @@ export class IndicatorsComponent implements OnInit {
       }
     });
 
-    let chart4 = new Chart(document.getElementById('chart4'), {
+    this.canvas = document.getElementById('chart4') ;
+    this.ctx = this.canvas.getContext('2d');
+    let chart4 = new Chart(this.ctx, {
       type: 'bar',
       data: {
         labels: ["2019", "2020"],
@@ -238,7 +244,7 @@ export class IndicatorsComponent implements OnInit {
           text: 'Chiffre d\'affaire annuel (en Euros)  de l\'entreprise '
         }
       }
-    });*/
+    });
 
   }
 
