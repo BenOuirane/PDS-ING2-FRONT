@@ -39,6 +39,7 @@ import { FailureSimulationComponent } from './failure-simulation/failure-simulat
 
 import { AuditPathsComponent } from './layouts/audit-paths/audit-paths.component';
 import {CacheSumAreaComponent} from './layouts/cache-sum-area/cache-sum-area.component'
+import { CurrentAreaDetailComponent } from './layouts/current-area-detail/current-area-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -60,11 +61,11 @@ const routes: Routes = [
  
 
 
- // { path: 'search', component: SearchBarComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'updatedata', component: UpdateDatamockComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'track-patients-control-view', component: MapPrototypeComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'audit-path-patients-control-view', component: MapPrototypeComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   {path: 'cache-sum-area-control-view', component: CacheSumAreaComponent, canActivate: [RoleGuard], data: {expectedRole: 'ADMIN'}},
+  {path: 'current-area-detail-control-view', component: CurrentAreaDetailComponent, canActivate: [RoleGuard], data: {expectedRole: 'ADMIN'}},
   { path: 'updatedata', component: UpdateDatamockComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'objects', component: ObjectMapComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'history/:userId/:id', component: HistoryComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},

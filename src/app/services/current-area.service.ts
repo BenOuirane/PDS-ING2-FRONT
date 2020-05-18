@@ -13,8 +13,8 @@ import { Bracelet } from '../layouts/models/bracelet';
 })
 export class CurrentAreaService {
 
-  private baseUrl1 = 'http://localhost:8080/api';
-  private baseUrl = 'http://172.31.254.61:8080/api';
+  private baseUrl = 'http://localhost:8080/api';
+ // private baseUrl = 'http://172.31.254.61:8080/api';
   
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -23,10 +23,11 @@ export class CurrentAreaService {
   }
 
   getSumCurrentArea(id: number): Observable<Bracelet>{
-    console.log("HEllo "+id)
-    //error id not working
-    return this.http.get<Bracelet>(`${this.baseUrl1}` + `/currentlocation/sum/`+ id);
+       return this.http.get<Bracelet>(`${this.baseUrl}` + `/currentlocation/sum/`+ id);
   }
 
+  getAllCurrentArea(){
+    return this.http.get<CurrentArea[]>(`${this.baseUrl}` + `/currentlocations/`);
+  }
 
 }

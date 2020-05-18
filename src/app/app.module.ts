@@ -60,7 +60,9 @@ import { AuditPathsComponent } from './layouts/audit-paths/audit-paths.component
 import { CacheSumAreaComponent } from './layouts/cache-sum-area/cache-sum-area.component';
 import { FailureSimulationComponent } from './failure-simulation/failure-simulation.component';
 
+import { CurrentAreaDetailComponent } from './layouts/current-area-detail/current-area-detail.component';
 
+//import {NgxPaginationModule} from 'ngx-pagination'; 
 
 
 @NgModule({
@@ -91,6 +93,11 @@ import { FailureSimulationComponent } from './failure-simulation/failure-simulat
     //PopupConfirmationComponent,
     AuditPathsComponent,
     CacheSumAreaComponent,
+<<<<<<< HEAD
+=======
+    CurrentAreaDetailComponent,
+   // NgxPaginationModule
+>>>>>>> aled_07_59
 
     FailureSimulationComponent,
   ],

@@ -34,34 +34,24 @@ export class MapPrototypeComponent implements OnInit {
   areas: Observable<Area>[];
   refresident: Observable<refresident[]>;
   bracletID: string;
+  currentarea : any
   bracletDate: string = new Date().toISOString().slice(0, 16);
   myControl = new FormControl();
 
- // @ViewChild('mapAreaInput', {static: false}) mapAreaInput : ElementRef<HTMLInputElement>;
+ 
   @ViewChild('searchInput', {static: false}) searchInput : ElementRef<HTMLInputElement>;
 constructor(private router:Router,private BraceletService: BraceletService,private currentAreaService : CurrentAreaService, private refresidentService: refresidentService){
-    console.log("Start here")
-    //console.log(this.reloadDataById)
-    console.log("end here")
+ 
 }  
   onSubmit() {
     console.log("search1 : "+this.bracletID)
     this.reloadDataSumById(this.bracletID);
-
-  /*  this.BraceletService.getBraceletById(this.bracletID).subscribe((value) => {
-      value = JSON.stringify(value)
-      console.log(value);
-  }, (error) => {
-      console.log(error);
-  }, () => {
-     });
-*/
+    this.onSubmitDetail();
   }
   
   reloadDataById() {
     console.log(this.searchInput.nativeElement.value);
     let inputValue = this.searchInput.nativeElement.value;
-    //this.refresident = this.refresidentService.getUsersById('1');
     this.refresidentService.getUsersById(inputValue).subscribe(result => {
       console.log(result);
     });
@@ -74,13 +64,9 @@ constructor(private router:Router,private BraceletService: BraceletService,priva
 reloadDataSumById(id){
   console.log("reloadDataSumById")
   console.log(id);
-
-
   this.currentAreaService.getSumCurrentArea(id).subscribe((value) => {
-    // value = JSON.stringify(value)
     console.log(value);
     localStorage.setItem('getSumCurrentAreaList', JSON.stringify(value));
-    //this.router.navigate(['/heroes', { id: itemId }]);
     this.router.navigate(['/cache-sum-area-control-view']);
 
 }, (error) => {
@@ -90,14 +76,25 @@ reloadDataSumById(id){
 
 }
 
-/*
-   methodCompliquee(v: string) {
-///
-  }
-*/
+onSubmitDetail(){
+  console.log("Getting data")
+  this.currentAreaService.getAllCurrentArea().subscribe((value) => {
+    console.log(value);
+    localStorage.setItem('getAllCurrentArea', JSON.stringify(value));
+    this.router.navigate(['/current-area-detail-control-view']);
+  
+}, (error) => {
+  console.log(error);
+}, () => {
+ });
 
+}
+
+
+//TODO
 onSubmitDate(){
   console.log(this.bracletDate)
 }
+
 
 }
