@@ -1,24 +1,47 @@
 <div class = "container-fluid" style="margin-top: 7rem;">
 	
-<form class="form-inline md-form mr-auto mb-4">
+<form class="form-inline md-form mr-auto mb-4" (submit)="onSubmit()">
 
 	<div class="col-12">
 		<h2><img src="assets/img/cam.png" alt="cam" style=" height: 90px;
 			margin-right: 30px;">Surveillance des patients</h2>
 			<h6	style="margin-left: 7.58rem; margin-top: -1rem;">Voici le plan de l'établissement</h6>
 	</div>
-	
-	<search-bar></search-bar>
-	<button class="btn btn-elegant btn-rounded btn-sm my-0" type="submit" value="search" (click)="loaddata()" style="margin-left: 0.9rem;">Rechercher</button>
-	
-	<div *ngIf="patientSearchResult.length==0" class="alert alert-info text-center w-50 m-auto" role="alert">Aucun patient trouvé ! </div>
-	<div *ngIf="patientSearchResult.length==0" class="alert alert-info text-center w-50 m-auto" role="alert">Aucun bracelet trouvé ! </div>
-  </form>
-  
+	<div class= "row" style=" margin-left: 1rem;">
+		<input class="form-control mr-sm-2" type="text" value = "" [(ngModel)]="bracletID"name="bracletID"  placeholder="Rechercher un bracelet" aria-label="Search">
+	</div>
+	<button class="btn btn-elegant btn-rounded btn-sm my-0" type="submit" value="search"   style="margin-left: 0.9rem;">Rechercher</button>
+	<div *ngIf="patientSearchResult" class="alert alert-info text-center w-50 m-auto" role="alert">Aucun patient trouvé ! </div>
+	<div *ngIf="patientSearchResult" class="alert alert-info text-center w-50 m-auto" role="alert">Aucun bracelet trouvé ! </div>
+</form>
+
+<form class="form-inline md-form mr-auto mb-4" (submit)="onSubmitDetail()">
+	<div class= "row" style=" margin-left: 1rem;">
+		
+		<button class="btn" type="submit1" value="search1" class="btn btn-primary btn-block"  style="margin-left: 0rem;">Consulter tous les déplacements </button>
+	</div>
+</form>
+
+<form class="form-inline md-form mr-auto mb-4" (submit)="onSubmitDate()">
+
+	<div class= "row" style=" margin-left: 1rem; margin-top:1rem" >
+		<input class="form-control mr-sm-2" type="datetime-local" value = "" [(ngModel)]="bracletDate" name="bracletDate"  placeholder="Rechercher un bracelet" aria-label="Search">
+	</div>
+	<button class="btn btn-elegant btn-rounded btn-sm my-0" type="submit" value="search"   style="margin-left: 0.9rem;">Rechercher avec la date</button>
+
+</form>
+
+
+
+
+
+
 <div class="cont col">
 	
-	<h5 class="text-danger">Veuillez sélectionner un emplacement !</h5>
+	<h5 class="text-danger">Utilisez la barre de  recherche !</h5>
 	<div class="d-flex flex-row mb-2 b-5 ">
+
+
 		<div class=chambre>Chambre 1</div>
 		<div class=chambre>Chambre 2</div>
 		<div class=chambre>Chambre 3</div>
@@ -53,18 +76,7 @@
 	</div>
 	  
 </div>
-	<div class="col-11 col-md-3 room-summary">
-		
-			
-		
-
-
-	</div>
-
-
-
-
-
+	
 <app-footer></app-footer>
 <ng-template #messageTmpl>
 	<h4 class="text-center mb-4">Vue synthètique des patients</h4>

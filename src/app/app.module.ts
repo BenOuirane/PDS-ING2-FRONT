@@ -23,14 +23,13 @@ import {IndicatorsService} from "./indicators.service";
 import { CreateCandidateComponent } from './create-candidate/create-candidate.component';
 import { CandidateService } from './candidate_services/candidate.service';
 import { from } from 'rxjs';
-
-import { SearchBarComponent } from './layouts/search-bar/search-bar.component';
+//import { SearchBarComponent } from './layouts/search-bar/search-bar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { UpdateDatamockComponent } from './layouts/update-datamock/update-datamock.component';
 import { ObjectComponent } from './object/object.component';
 import {
   MatTabsModule, MatSelectModule, MatSliderModule,
-  MatSlideToggleModule, MatButtonModule, MatFormFieldModule, MatIconModule
+  MatSlideToggleModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatDialogModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MapPrototypeComponent } from './layouts/map-prototype/map-prototype.component';
@@ -55,8 +54,13 @@ import { ProgressWebsocketService } from './services/progress-websocket.service'
 // @ts-ignore
 import { RxStompService  } from '@stomp/ng2-stompjs';
 import { HealthAlertComponent } from './health-alert/health-alert.component';
+import { PopupConfirmationComponent } from './layouts/popup-confirmation/popup-confirmation.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuditPathsComponent } from './layouts/audit-paths/audit-paths.component';
+import { CacheSumAreaComponent } from './layouts/cache-sum-area/cache-sum-area.component';
 import { FailureSimulationComponent } from './failure-simulation/failure-simulation.component';
 
+import { CurrentAreaDetailComponent } from './layouts/current-area-detail/current-area-detail.component';
 
 import { ListCandidateComponent } from './list-candidate/list-candidate.component';
 import { PriorityCandidateComponent } from './priority-candidate/priority-candidate.component';
@@ -72,7 +76,7 @@ import { NoteProfilesComponent } from './note-profiles/note-profiles.component';
     SendNotificationComponent,
     GetNotificationsComponent,
     CreateCandidateComponent,
-    SearchBarComponent,
+   //SearchBarComponent,
     HomeComponent,
     FooterComponent,
     UpdateDatamockComponent,
@@ -89,6 +93,15 @@ import { NoteProfilesComponent } from './note-profiles/note-profiles.component';
     HealthStateComponent,
     HealthResidentComponent,
     HealthAlertComponent,
+
+
+
+    //PopupConfirmationComponent,
+    AuditPathsComponent,
+    CacheSumAreaComponent,
+    CurrentAreaDetailComponent,
+   // NgxPaginationModule
+
     FailureSimulationComponent,
   ],
 
@@ -122,12 +135,9 @@ import { NoteProfilesComponent } from './note-profiles/note-profiles.component';
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
-    MatGridListModule
-
-
-
-
-
+    MatGridListModule,
+    NgbModule,
+    MatDialogModule
   ],
   providers: [
     RxStompService,

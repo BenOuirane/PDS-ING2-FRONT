@@ -24,7 +24,8 @@ we redirect him to the route '/user that calls the UsersListComponent'
 import { ListCandidateComponent } from './list-candidate/list-candidate.component';
 import { PriorityCandidateComponent } from './priority-candidate/priority-candidate.component';
 import { NoteProfilesComponent } from './note-profiles/note-profiles.component';
-import { SearchBarComponent } from './layouts/search-bar/search-bar.component';
+//import { SearchBarComponent } from './layouts/search-bar/search-bar.component';
+//import { SearchBarComponent } from './layouts/search-bar/search-bar.component';
 import { UpdateDatamockComponent } from './layouts/update-datamock/update-datamock.component';
 import { ObjectComponent } from './object/object.component';
 
@@ -40,6 +41,9 @@ import { FailureSimulationComponent } from './failure-simulation/failure-simulat
 
 
 
+import { AuditPathsComponent } from './layouts/audit-paths/audit-paths.component';
+import {CacheSumAreaComponent} from './layouts/cache-sum-area/cache-sum-area.component'
+import { CurrentAreaDetailComponent } from './layouts/current-area-detail/current-area-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -64,12 +68,11 @@ const routes: Routes = [
  
 
 
-  { path: 'search', component: SearchBarComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
-
- // todto be deleted for next releases, once the mocks are done !!
   { path: 'updatedata', component: UpdateDatamockComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'track-patients-control-view', component: MapPrototypeComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
-
+  { path: 'audit-path-patients-control-view', component: MapPrototypeComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
+  {path: 'cache-sum-area-control-view', component: CacheSumAreaComponent, canActivate: [RoleGuard], data: {expectedRole: 'ADMIN'}},
+  {path: 'current-area-detail-control-view', component: CurrentAreaDetailComponent, canActivate: [RoleGuard], data: {expectedRole: 'ADMIN'}},
   { path: 'updatedata', component: UpdateDatamockComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'objects', component: ObjectMapComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
   { path: 'history/:userId/:id', component: HistoryComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN'}},
