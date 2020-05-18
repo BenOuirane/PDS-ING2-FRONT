@@ -12,7 +12,7 @@ declare var $: any;
 //export class IndicatorsComponent implements OnInit {
 export class IndicatorsComponent  {
   
-  /*
+  
  canvas: any;
   ctx: any;
   public residence: any;
@@ -306,7 +306,7 @@ export class IndicatorsComponent  {
     }
 
   }
-*/
+
 }
 
   
