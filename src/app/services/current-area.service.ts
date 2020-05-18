@@ -14,7 +14,7 @@ import { Bracelet } from '../layouts/models/bracelet';
 export class CurrentAreaService {
 
   private baseUrl = 'http://localhost:8080/api';
- // private baseUrl = 'http://172.31.254.61:8080/api';
+ // //private baseUrl = 'http://172.31.254.61:8080/api';
   
   constructor(private http: HttpClient, private router: Router) { }
 

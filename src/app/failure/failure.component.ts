@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FailureService } from '../services/failure.service';
-import { Failure } from '../failure';
+import { Failure } from '../Failure';
 import { Observable } from 'rxjs';
 import { RouterLink } from '@angular/router';
 
