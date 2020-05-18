@@ -7,23 +7,24 @@
 			margin-right: 30px;">Surveillance des patients</h2>
 			<h6	style="margin-left: 7.58rem; margin-top: -1rem;">Voici le plan de l'établissement</h6>
 	</div>
-
 	<div class= "row" style=" margin-left: 1rem;">
 		<input class="form-control mr-sm-2" type="text" value = "" [(ngModel)]="bracletID"name="bracletID"  placeholder="Rechercher un bracelet" aria-label="Search">
-	<!--<input class="form-control mr-sm-2" type="text" value = "" #searchInput placeholder="Rechercher un patient" aria-label="Search">-->
 	</div>
 	<button class="btn btn-elegant btn-rounded btn-sm my-0" type="submit" value="search"   style="margin-left: 0.9rem;">Rechercher</button>
-
-<!--	<button class="btn btn-elegant btn-rounded btn-sm my-0" type="submit" value="search" (click)="loaddata()" style="margin-left: 0.9rem;">Rechercher</button>-->
 	<div *ngIf="patientSearchResult" class="alert alert-info text-center w-50 m-auto" role="alert">Aucun patient trouvé ! </div>
 	<div *ngIf="patientSearchResult" class="alert alert-info text-center w-50 m-auto" role="alert">Aucun bracelet trouvé ! </div>
 </form>
-  
 
+<form class="form-inline md-form mr-auto mb-4" (submit)="onSubmitDetail()">
+	<div class= "row" style=" margin-left: 1rem;">
+		
+		<button class="btn" type="submit1" value="search1" class="btn btn-primary btn-block"  style="margin-left: 0rem;">Consulter tous les déplacements </button>
+	</div>
+</form>
 
 <form class="form-inline md-form mr-auto mb-4" (submit)="onSubmitDate()">
 
-	<div class= "row" style=" margin-left: 1rem;">
+	<div class= "row" style=" margin-left: 1rem; margin-top:1rem" >
 		<input class="form-control mr-sm-2" type="datetime-local" value = "" [(ngModel)]="bracletDate" name="bracletDate"  placeholder="Rechercher un bracelet" aria-label="Search">
 	</div>
 	<button class="btn btn-elegant btn-rounded btn-sm my-0" type="submit" value="search"   style="margin-left: 0.9rem;">Rechercher avec la date</button>

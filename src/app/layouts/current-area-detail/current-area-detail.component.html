@@ -1,0 +1,37 @@
+<div class = "container-fluid" style="margin-top: 7rem;">
+	
+    <form class="form-inline md-form mr-auto mb-4" (submit)="onSubmit()">
+    
+        <div class="col-12">
+            <h2><img src="assets/img/cam.png" alt="cam" style=" height: 90px;
+                margin-right: 30px;">Surveillance des patients</h2>
+                <h6	style="margin-left: 7.58rem; margin-top: -1rem;">Les déplacement du patient</h6>
+                <span class="glyphicon glyphicon-list-alt"></span> Voici la liste !
+        </div>
+
+        
+    <div *ngIf="!this.emptydata" class="alert alert-info text-center w-50 m-auto" role="danger">Aucune donnée trouvée ! </div>
+    
+<table class="table table-bordered " *ngIf="this.emptydata">
+
+    <tr>
+
+        <td>Bracelet Id</td>
+        <td>Area Id</td>    
+        <td>Date</td>    
+    </tr>
+    <ng-container *ngFor="let item of dataArray ;let i = index;">
+        <tr  class="table-active" *ngIf="i<varI">
+            <ng-container >
+                <td class="table-primary">{{item['braceletId']}}  </td>
+                <td class="table-secondary">{{item['areaId']}}</td>
+                <td class="table-secondary">{{item['createdOn']}}</td>
+               
+            </ng-container>
+            
+        </tr>
+
+    </ng-container>
+</table>
+
+<input type="button" (click)="showmore()" value="Show more" class="btn btn-primary btn-block">

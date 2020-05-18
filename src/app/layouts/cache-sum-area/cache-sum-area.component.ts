@@ -10,9 +10,7 @@ export class CacheSumAreaComponent implements OnInit {
   data : any;
   emptydata:any= true;
   constructor() { 
-    console.log("hiii")
-
-    this.data = JSON.parse(localStorage.getItem("getSumCurrentAreaList"));
+      this.data = JSON.parse(localStorage.getItem("getSumCurrentAreaList"));
     console.log("koko"+ JSON.stringify(this.data))
     
     if(JSON.stringify(this.data) == "{}"){

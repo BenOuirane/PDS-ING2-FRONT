@@ -41,7 +41,9 @@ import { PopupConfirmationComponent } from './layouts/popup-confirmation/popup-c
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuditPathsComponent } from './layouts/audit-paths/audit-paths.component';
 import { CacheSumAreaComponent } from './layouts/cache-sum-area/cache-sum-area.component';
+import { CurrentAreaDetailComponent } from './layouts/current-area-detail/current-area-detail.component';
 
+//import {NgxPaginationModule} from 'ngx-pagination'; 
 
 
 @NgModule({
@@ -65,7 +67,9 @@ import { CacheSumAreaComponent } from './layouts/cache-sum-area/cache-sum-area.c
     HistoryComponent,
     //PopupConfirmationComponent,
     AuditPathsComponent,
-    CacheSumAreaComponent
+    CacheSumAreaComponent,
+    CurrentAreaDetailComponent,
+   // NgxPaginationModule
 
   ],
   imports: [
